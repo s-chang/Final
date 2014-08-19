@@ -95,6 +95,9 @@
     <ClCompile Include="Light.cpp">
       <Filter>Source Files\Engine\Light</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Engine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h">
@@ -141,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Source Files\Engine\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files\Engine\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

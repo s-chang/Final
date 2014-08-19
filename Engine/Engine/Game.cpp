@@ -41,7 +41,7 @@ void Game::update(MSG &msg)
 
 	Engine::Sound::instance()->update();
 	Engine::RawInput::instance()->getMSG(msg);
-
+	Engine::Input::instance()->update();
 	
 	this->msg = msg;
 	//Delete from here
@@ -52,7 +52,15 @@ void Game::update(MSG &msg)
 		y = 0;
 	mesh1.setRotate(mesh1.getRotate().x, y, mesh1.getRotate().z);
 
-	
+	if(Engine::Input::instance()->push_button(DIK_W))
+	{
+		mesh1.setTranslate(mesh1.getTranslate().x , mesh1.getTranslate().y, mesh1.getTranslate().z + 1.0f);
+	}
+
+	if(Engine::Input::instance()->push_button(DIK_S))
+	{
+		mesh1.setTranslate(mesh1.getTranslate().x, mesh1.getTranslate().y, mesh1.getTranslate().z - 1.0f);
+	}
 	//mesh1.update();
 	//test2.update();
 	/*static float x = 0.0f;
@@ -121,6 +129,7 @@ void Game::shutdown()
 	Engine::Text::instance()->shutdown();
 	Engine::Sound::instance()->shutdown();
 	Engine::Graphics::instance()->shutdown();
+	Engine::Input::instance()->shutdown();
 }
 
 void Game::reset()

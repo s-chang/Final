@@ -2,6 +2,7 @@
 #include "CWindow.h"
 #include "DX.h"
 #include "Timer.h"
+#include "Input.h"
 #include "Game.h"
 
 #include <fstream>
@@ -25,6 +26,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPTSTR lpCmdLin
 
 	//Init DirectX
 	Engine::DX::instance()->init(myhWnd, window);
+
+	//Init Dinput
+	Engine::Input::instance()->init(myInstance, myhWnd);
 	
 
 	//create game here
