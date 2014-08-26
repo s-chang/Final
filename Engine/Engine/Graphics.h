@@ -57,7 +57,7 @@ namespace Engine
 		void loadMesh();
 		pBuffer adjBuffer;
 		
-		Camera camera;
+		
 		Light light;
 
 		ID3DXBuffer*	m_EffectError;
@@ -82,7 +82,7 @@ namespace Engine
 		Return:		void
 		Description: initializes the graphics class
 		*/
-		void init();
+		void init(Camera *cam, Light *light);
 
 		/**
 		Name:		render
@@ -90,7 +90,7 @@ namespace Engine
 		Return:		void
 		Description: Renders the Drawable object to the screen
 		*/
-		void render(Drawable object);
+		void render(Drawable object, Camera *cam);
 
 		/**
 		Name:		shutdown

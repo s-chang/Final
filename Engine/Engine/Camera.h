@@ -10,6 +10,7 @@ typedef D3DXVECTOR3 dxVec3;
 typedef D3DXMATRIX  dxMatrix;
 
 
+
 class Camera
 {
 private:
@@ -24,14 +25,16 @@ private:
 	float m_near;
 	float m_far;
 
+	int width, height;
+
 public:
 
 	Camera();
 	~Camera();
 
-	void init();
+	void init(int width, int height);
 
-	void setProj(int width, int height);
+	void setProj();
 
 
 	void setLookAt(float x, float y, float z);

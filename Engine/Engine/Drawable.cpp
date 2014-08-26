@@ -83,6 +83,12 @@ bool Drawable::checkOn(float x, float y, int scale)
 		y < (translate.y + (height / scale)) && y > (translate.y -  (height / scale)));
 }
 
+bool Drawable::checkOnZ(float x, float z, int scale)
+{
+	return (x < (translate.x + (width / scale)) && x > (translate.x - (width/ scale)) &&
+		z < (translate.z + (height / scale)) && z > (translate.z - (height / scale)));
+}
+
 void Drawable::setColor(dColor a_color)
 {
 	color = a_color;

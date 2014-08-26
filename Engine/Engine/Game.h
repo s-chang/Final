@@ -2,6 +2,15 @@
 
 #include "TestObj.h"
 #include <queue>
+#include "Camera.h"
+#include "Floor.h"
+
+enum{
+TITLE,
+TOWERFLOOR,
+
+
+};
 
 
 class Game
@@ -19,14 +28,19 @@ private:
 	};
 
 	std::queue<TextData> textQ;*/
-	
-	TestObj test1;
-	TestObj test2;
 
-	TestObj mesh1;
 
-	
+	//TestObj mesh1;
+
+	int game_state;
+
+	//Camera tempCam;
+
+	Floor floor;
+	std::queue<Drawable>* drawQ;
 	void reset();
+
+	Camera *cam;
 
 	MSG msg;
 	

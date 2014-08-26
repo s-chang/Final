@@ -27,16 +27,15 @@ Engine::Graphics* Engine::Graphics::instance()
 	return &instance;
 }
 
-void Engine::Graphics::init()
+void Engine::Graphics::init(Camera *cam, Light *light)
 {
 	load();
 	loadMesh();
-	camera.init();
-	camera.setProj(800,600);
-	
 
-	light.defaultInit();
-	light.setLight();
+
+
+	//light.defaultInit();
+	//light.setLight();
 
 	//TODO: create a shader manager
 #ifdef _DEBUG
@@ -48,17 +47,17 @@ void Engine::Graphics::init()
 		L"Shader.fx", 0, 0, 0, 0, &m_Effect, &m_ErrorEffect);
 #endif
 
-	m_Effect->SetFloatArray("eyePos", (float*)camera.getEyePos(), 3);
-	m_Effect->SetFloatArray("lightPos", (float*)light.getPosition(), 3);
-	m_Effect->SetFloatArray("ambientLight", (float*)light.getAmbient(), 3);
-	m_Effect->SetFloatArray("specularLight", (float*)light.getSpecular(), 3);
-	m_Effect->SetFloatArray("diffuseLight", (float*)light.getDiffuse(), 3);
-	m_Effect->SetFloatArray("lightAttenuation", (float*)&D3DXVECTOR3(light.getAttenuation0(), light.getAttenuation1(), light.getAttenuation2()), 3);
+	m_Effect->SetFloatArray("eyePos", (float*)cam->getEyePos(), 3);
+	m_Effect->SetFloatArray("lightPos", (float*)light->getPosition(), 3);
+	m_Effect->SetFloatArray("ambientLight", (float*)light->getAmbient(), 3);
+	m_Effect->SetFloatArray("specularLight", (float*)light->getSpecular(), 3);
+	m_Effect->SetFloatArray("diffuseLight", (float*)light->getDiffuse(), 3);
+	m_Effect->SetFloatArray("lightAttenuation", (float*)&D3DXVECTOR3(light->getAttenuation0(), light->getAttenuation1(), light->getAttenuation2()), 3);
 
 
 }
 
-void Engine::Graphics::render(Drawable object)
+void Engine::Graphics::render(Drawable object, Camera *cam)
 {
 	D3DXMATRIX transMat, scaleMat, rotMat, worldMat;
 
@@ -88,8 +87,8 @@ void Engine::Graphics::render(Drawable object)
 
 	if(object.get3D())
 	{
-		camera.setLookAt(object.getTranslate().x, object.getTranslate().y, object.getTranslate().z);
-		camera.setProj(800,600);
+		//camera.setLookAt(object.getTranslate().x, object.getTranslate().y, object.getTranslate().z);
+		//camera.setProj(800,600);
 
 		D3DXMATRIX WIT;		
 
@@ -110,7 +109,7 @@ void Engine::Graphics::render(Drawable object)
 
 			D3DXMatrixInverse(&WIT, 0, &worldMat);
 			D3DXMatrixTranspose(&WIT, &WIT);
-			m_Effect->SetMatrix("worldViewProjMat", &(worldMat * camera.getView() * camera.getProjection()));
+			m_Effect->SetMatrix("worldViewProjMat", &(worldMat * cam->getView() * cam->getProjection()));
 			m_Effect->SetMatrix("worldInverseTransposeMat", &WIT);
 			m_Effect->SetMatrix("worldMat", &worldMat);
 

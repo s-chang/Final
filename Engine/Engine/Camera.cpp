@@ -7,18 +7,21 @@ Camera::Camera()
 Camera::~Camera()
 {}
 
-void Camera::init()
+void Camera::init(int width, int height)
 {
-	m_eyePos = dxVec3(5.0f, 5.0f, -10.0f);
+	m_eyePos = dxVec3(0.0f, 0.0f, -10.0f);
 	m_lookAt = dxVec3(0.0f, 0.0f, 0.0f);
 	m_upVec = dxVec3(0.0f, 1.0f, 0.0f);
 
 	m_degrees = 45.0f;
 	m_near = 1.0f;
 	m_far = 100.0f;
+
+	this->width = width;
+	this->height = height;
 }
 
-void Camera::setProj(int width, int height)
+void Camera::setProj()
 {
 	//Calculate the view matrix 
 	D3DXMatrixLookAtLH( &m_viewMat,

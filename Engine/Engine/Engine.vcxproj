@@ -76,6 +76,7 @@
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DX.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DX.h" />
     <ClInclude Include="EngineHeaders.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
@@ -108,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BGM.txt" />
+    <Text Include="DMap.txt" />
     <Text Include="Meshes.txt" />
     <Text Include="SoundEffects.txt" />
     <Text Include="Textures2D.txt" />

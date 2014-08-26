@@ -144,6 +144,8 @@ public:
 	*/
 	bool checkOn(float x, float y, int scale);
 
+	bool checkOnZ(float x, float z, int scale);
+
 	/**
 	Name:			setColor
 	Parameters:		D3DCOLOR a_color - the new color
@@ -268,4 +270,7 @@ public:
 	void set3D(bool arg){ is3D = arg;}
 	void setHasTexture(bool arg) {hasTexture = arg;}
 	bool getHasTexture(){return hasTexture;}
+
+	void setWidth(int width) {this->width = width;}
+	void setHeight(int height) {this->height = height;}
 };

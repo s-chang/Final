@@ -3,11 +3,7 @@
 
 Game::Game()
 {
-	//while(!drawQ.empty()) 
-	//	drawQ.pop();
-	/*while(!textQ.empty())
-		textQ.pop();*/
-	//RECT r;
+	game_state = TOWERFLOOR;
 	
 }
 
@@ -16,23 +12,21 @@ Game::~Game()
 
 void Game::init()
 {
-	//DELETE  ->
-	test1.init();
-	test1.setHandle("block");
 
-	test2.init();
-	test2.setHandle("FFT");
 
-	mesh1.init();
-	//mesh1.setScale(0.5f, 0.5f, 0.5f);
-	mesh1.setHandle("1wayC");
-	mesh1.set3D(true);
-	mesh1.setHasTexture(false);
+	//mesh1.init();
+	//mesh1.setScale(1.0f, 1.0f, 1.0f);
+	//mesh1.setHandle("grem");
+	//mesh1.set3D(true);
+	//mesh1.setHasTexture(false);
+
+	floor.init();
+	cam = floor.getCamera();
+	//cam = &tempCam;
+	//cam->init(800,600);
+	//cam->setProj();
 	
-
-	//-> HERE
-
-	Engine::Graphics::instance()->init();
+	Engine::Graphics::instance()->init(cam, floor.getLight());
 	Engine::Sound::instance()->init();
 	Engine::Text::instance()->init();
 }
@@ -45,43 +39,36 @@ void Game::update(MSG &msg)
 	Engine::Input::instance()->update();
 	
 	this->msg = msg;
-	//Delete from here
-	test1.update();
-
-	float y = mesh1.getRotate().y + Engine::Timer::instance()->getDT() * 5.0f;
-	if( y > 360)
-		y = 0;
-	mesh1.setRotate(mesh1.getRotate().x, y, mesh1.getRotate().z);
-
-	if(Engine::Input::instance()->push_button(DIK_W))
-	{
-		mesh1.setTranslate(mesh1.getTranslate().x , mesh1.getTranslate().y, mesh1.getTranslate().z + 1.0f);
-	}
-
-	if(Engine::Input::instance()->push_button(DIK_S))
-	{
-		mesh1.setTranslate(mesh1.getTranslate().x, mesh1.getTranslate().y, mesh1.getTranslate().z - 1.0f);
-	}
-	//mesh1.update();
-	//test2.update();
-	/*static float x = 0.0f;
-
-	x += Engine::Timer::instance()->getDT();
-
-	if(x >= 3.0f)
-	{
-		x = 0.0f;
-
-		if(Engine::DX::instance()->isWindowed())
-			Engine::DX::instance()->fullscreen();
-		else
-			Engine::DX::instance()->windowed();
-		
-
-	}*/
 	
-	//TO here
+	
+	switch(game_state)
+	{
+	case TITLE:
+		break;
+	case TOWERFLOOR:
+		{
+			cam = floor.getCamera();
+			/*float y = mesh1.getRotate().y + Engine::Timer::instance()->getDT() * 5.0f;
+			if( y > 360)
+				y = 0;
+			mesh1.setRotate(mesh1.getRotate().x, y, mesh1.getRotate().z);
 
+			if(Engine::Input::instance()->push_button(DIK_W))
+			{
+				mesh1.setTranslate(mesh1.getTranslate().x , mesh1.getTranslate().y, mesh1.getTranslate().z + 1.0f);
+			}
+
+			if(Engine::Input::instance()->push_button(DIK_S))
+			{
+				mesh1.setTranslate(mesh1.getTranslate().x, mesh1.getTranslate().y, mesh1.getTranslate().z - 1.0f);
+			}
+
+			drawQ.push(mesh1);*/
+			floor.update();
+			drawQ = floor.getDrawQ();
+			break;
+		}
+	}	
 }
 
 void Game::render()
@@ -95,18 +82,14 @@ void Game::render()
 		{
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
-				//while(!drawQ.empty())
-			//	{
-			//		Engine::Graphics::instance()->render(drawQ.front());
-			//		drawQ.pop();
-			//	}
-				//DELETE --->
-				//Engine::Graphics::instance()->render(test1);
-				//Engine::Graphics::instance()->render(test2);
-
-				Engine::Graphics::instance()->render(mesh1);
-
-				//---->Here
+				
+				
+				while(!drawQ->empty())
+				{
+					Engine::Graphics::instance()->render(drawQ->front(), cam);
+					drawQ->pop();
+				}
+				
 				Engine::DX::instance()->getSprite()->End();
 
 				/*while(!textQ.empty())

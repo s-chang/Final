@@ -51,6 +51,9 @@
     <Filter Include="Source Files\Engine\Light">
       <UniqueIdentifier>{0ab04e52-cae5-47f9-9c2b-0a2febdb140e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Floor">
+      <UniqueIdentifier>{5409dc0f-888e-4dd4-986a-58794de793be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Source Files\Game\Floor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +154,9 @@
     <ClInclude Include="Input.h">
       <Filter>Source Files\Engine\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Source Files\Game\Floor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Textures2D.txt">
@@ -160,6 +169,9 @@
       <Filter>Source Files\Asset</Filter>
     </Text>
     <Text Include="Meshes.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="DMap.txt">
       <Filter>Source Files\Asset</Filter>
     </Text>
   </ItemGroup>
