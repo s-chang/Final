@@ -120,8 +120,13 @@ void Engine::Graphics::render(Drawable object)
 				m_Effect->SetValue("diffuseMaterial", &tempMesh->getMeshMaterial()[i].Diffuse, sizeof(D3DXCOLOR));
 				m_Effect->SetValue("specularMaterial", &tempMesh->getMeshMaterial()[i].Specular, sizeof(D3DXCOLOR));
 				m_Effect->SetFloat("specularPower", tempMesh->getMeshMaterial()[i].Power);
-				m_Effect->SetTexture("tex", tempMesh->getMeshTexture()[i]);
-				m_Effect->SetBool("isTex", true);
+				
+				if(object.getHasTexture())
+				{
+					m_Effect->SetTexture("tex", tempMesh->getMeshTexture()[i]);
+					m_Effect->SetBool("isTex", true);
+				}else
+					m_Effect->SetBool("isTex", false);
 
 				m_Effect->CommitChanges();
 				tempMesh->getMesh()->DrawSubset(i);

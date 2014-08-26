@@ -38,6 +38,8 @@ class Drawable
 	bool is3D;
 	//draw the object
 	bool draw;
+	//
+	bool hasTexture;
 
 	std::string handle;
 
@@ -264,4 +266,6 @@ public:
 	std::string getHandle();
 
 	void set3D(bool arg){ is3D = arg;}
+	void setHasTexture(bool arg) {hasTexture = arg;}
+	bool getHasTexture(){return hasTexture;}
 };

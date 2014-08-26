@@ -11,7 +11,7 @@ Drawable::Drawable()
 	is3D = false;
 	rect.bottom = rect.left = rect.right = rect.top = 0;
 	draw = true;
-	
+	hasTexture = true;
 }
 
 Drawable::~Drawable()

@@ -25,8 +25,9 @@ void Game::init()
 
 	mesh1.init();
 	//mesh1.setScale(0.5f, 0.5f, 0.5f);
-	mesh1.setHandle("grem");
+	mesh1.setHandle("1wayC");
 	mesh1.set3D(true);
+	mesh1.setHasTexture(false);
 	
 
 	//-> HERE
