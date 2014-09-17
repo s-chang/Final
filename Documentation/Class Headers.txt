@@ -1,0 +1,167 @@
+struct ClassStats
+{
+	std::string name;		
+	int xp, level, health, maxHealth;
+	int strength, agility, vitality, intelligence, resist;	
+	
+};
+
+struct ItemStats
+{
+	std::string name;
+	int health, str, agi, vit, int, res;
+};
+
+class Entity
+{
+	private:
+		ClassStats stats;
+		
+		Equippable * weapon;
+		Equippable * armor;
+		Equippable * accessory1;
+		Equippable * accessory2;
+
+		std::vector<Command*> skills;
+
+		Command *one;
+		Command *two;
+		Command *three;
+		Command *four;
+		
+	public:
+		Entity();
+		~Entity();		
+
+		virtual void init();
+		virtual void update();
+		virtual void render();
+		virtual void shutdown();
+		virtual void reset();
+		virtual void save();
+		virtual void load();
+
+		virtual void setLevel(int num);
+		virtual void levelUp();
+		virtual void adjustHealth();
+		
+		ClassStats getStats();
+		
+		Equippable getWeapon();
+		Equippable getArmor();
+		Equippable getAcc1();
+		Equippable getAcc2();
+
+		void setWeapon(Equippable *weapon);
+		void setArmor(Equippable *armor);
+		void setAcc1(Equippable *acc1);
+		void setAcc2(Equippable *acc2);
+						
+};
+
+
+
+class Equippable
+{
+	private:
+		ItemStats stats;
+
+	public:
+		Equippable();
+		~Equippable();
+		
+		virtual void init();
+		
+		ItemStats getStats();						
+
+};
+
+
+
+
+class EquippableFactory
+{
+	private:
+		EquippableFactory();
+
+	public:
+		~EquippableFactory();
+		static EquippableFactory *instance();
+		
+		void loadFactory();
+		Equippable *getEquippable(std::string name);
+
+};
+
+class EntityFactory
+{
+	private:
+		EntityFactory();
+	public:
+		~EntityFactory();
+		static EntityFactory *instance();
+		
+		void loadFactory();
+		Entity *getEntity(std::string name);
+};
+
+
+class Command
+{
+	private:
+		std::string name;
+		
+	public:
+		Command();
+		~Command();
+		
+		std::string getName();
+
+		virtual int action();	
+
+};
+
+class CommandFactory
+{
+	private:
+		CommandFactory();
+
+	public:
+		~CommandFactory();
+
+		static CommandFactory *instance();
+		
+		void loadFactory();
+		Command *getCommand(std::string name);
+};
+
+class Skills
+{
+	private:
+		std::string name;
+		std::string type;
+				
+		
+	public:
+		Skills();
+		~Skills();
+
+		std::string getName();
+		std::string getType();
+		
+										
+		
+
+};
+
+class SKillFactory
+{
+	private:
+		SkillFactory();
+	public:
+		~SkillFactory();
+		static SkillFactory* instance();
+
+		void loadFactory();
+		Skill *getSkill(std::string name);
+};
