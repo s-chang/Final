@@ -2,14 +2,14 @@ struct ClassStats
 {
 	std::string name;		
 	int xp, level, health, maxHealth;
-	int strength, agility, vitality, intelligence, resist;	
+	int attack, magic, defense, resist, speed;	
 	
 };
 
 struct ItemStats
 {
 	std::string name;
-	int health, str, agi, vit, int, res;
+	int health, atk, mag, def, res, spd;
 };
 
 class Entity
