@@ -1,6 +1,5 @@
 #pragma once
 
-#include "TestObj.h"
 #include <queue>
 #include "Camera.h"
 #include "Floor.h"

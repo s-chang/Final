@@ -54,6 +54,57 @@
     <Filter Include="Source Files\Game\Floor">
       <UniqueIdentifier>{5409dc0f-888e-4dd4-986a-58794de793be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\GameState Manager">
+      <UniqueIdentifier>{1a3b5432-f229-46a3-87d7-e995bf4d913a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player">
+      <UniqueIdentifier>{79c465dc-273a-483e-8b51-dcc96be175d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player\Inventory">
+      <UniqueIdentifier>{87cc4df3-385f-4e11-83a6-4ae3086d1ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player\Characters">
+      <UniqueIdentifier>{60c03b39-a8d9-4425-be09-53e18cacee7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates">
+      <UniqueIdentifier>{4a953790-6447-40b8-93d3-9c26907b0f3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Battle">
+      <UniqueIdentifier>{1b67e692-c63b-439c-925b-8787725b9cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\StatusMenu">
+      <UniqueIdentifier>{e93f080d-d8f7-4800-bf9a-5fe2b83b1e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Tower">
+      <UniqueIdentifier>{0079fbb8-458c-4ef8-b1f5-54f58a6a4451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Tavern">
+      <UniqueIdentifier>{5a3aa798-b2ab-4d32-aff3-d8240b6853b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Shop">
+      <UniqueIdentifier>{1ecf96ec-616e-42a4-8e54-1ee6f8bdb957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Town">
+      <UniqueIdentifier>{29be509d-4aa3-443c-bd38-2b9338dcfdbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\StartMenu">
+      <UniqueIdentifier>{30183b6b-1fac-48e8-a01e-bcb3569def17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entity">
+      <UniqueIdentifier>{6471c052-82cb-421e-8e9b-bfe234bc37b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Enemies">
+      <UniqueIdentifier>{09dc51bf-22cc-4577-b89b-841e0b05e49b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Options">
+      <UniqueIdentifier>{bf233b20-ee3a-4232-bc26-6af6c0a787cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Credits">
+      <UniqueIdentifier>{d60237f9-9f4a-4f02-818f-ced2eec0e18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\NewGame">
+      <UniqueIdentifier>{b906551a-18a4-4779-b915-f729d30896e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,9 +134,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="TestObj.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="RawInput.cpp">
       <Filter>Source Files\Engine\Input</Filter>
     </ClCompile>
@@ -103,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="Floor.cpp">
       <Filter>Source Files\Game\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\Game\GameState Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Source Files\Game\Gamestates\StartMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Town.cpp">
+      <Filter>Source Files\Game\Gamestates\Town</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,9 +193,6 @@
     <ClInclude Include="EngineHeaders.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestObj.h">
-      <Filter>Source Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="RawInput.h">
       <Filter>Source Files\Engine\Input</Filter>
     </ClInclude>
@@ -156,6 +210,21 @@
     </ClInclude>
     <ClInclude Include="Floor.h">
       <Filter>Source Files\Game\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Source Files\Game\GameState Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="StartMenu.h">
+      <Filter>Source Files\Game\Gamestates\StartMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Source Files\Game\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="gamestates.h">
+      <Filter>Source Files\Game\Gamestates</Filter>
+    </ClInclude>
+    <ClInclude Include="Town.h">
+      <Filter>Source Files\Game\Gamestates\Town</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
