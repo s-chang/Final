@@ -1,14 +1,14 @@
 #pragma once
-#include "GameState.h"
-class Town :
+#include "gamestate.h"
+class NewGame :
 	public GameState
 {
 private:
 
-	Town(void);
+	NewGame(void);
 public:
-	static Town* instance();
-	~Town(void);
+	static NewGame* instance();
+	~NewGame(void);
 
 	void init();
 	void shutdown();

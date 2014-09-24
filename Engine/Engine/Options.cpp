@@ -1,31 +1,44 @@
-#include "StartMenu.h"
+#include "Options.h"
 
-StartMenu::StartMenu(void) : GameState()
+
+Options::Options(void)
+	:GameState()
 {
 }
 
-StartMenu* StartMenu::instance()
-{
-	static StartMenu menu;
-	return &menu;
-}
 
-StartMenu::~StartMenu(void)
+Options::~Options(void)
 {
 }
 
-void StartMenu::init()
+Options* Options::instance()
 {
-	bg.setHandle("startMenu");
+	static Options op;
+	return &op;
+}
+
+void Options::init()
+{
+	bg.setHandle("options");
 	bg.setTranslate(300,180,0);
-	bg.setScale(.77,.55,0);
+	bg.setScale(.7,.5,0);
+
+	box.setHandle("blueBox");
+	box.setTranslate(160,460,0);
+	box.setScale(.7,.7,0);
+	
 	RData uiData[] = {
-		{0, 0, 120, 500, 150, 280},
-		{245, 0, 340, 500, 150, 350},
-		{121, 0, 230, 500, 150, 420},
-		{345, 0, 460, 300, 150, 500},
+		{0, 0, 30, 200, 165, 70},		// credits
+		{40, 50, 60, 120, 305, 170},	// -
+		{35, 130, 65, 250, 495, 170},	// +
+		{0, 0, 0, 0, 0, 0},	// TODO: Fullscreen
+		{0, 0, 0, 0, 0, 0},	// TODO: window
+		{0, 0, 0, 0, 0, 0},	// TODO: keyboard
+		{0, 0, 0, 0, 0, 0},	// TODO: controller
+		{225, 0, 250, 200, 170, 465},	// back
+
 	};
-	for(int i = 0; i < MENU_BUTTON_CNT; i++) {
+	for(int i = 0; i < OPBUTTONS; i++) {
 		Drawable temp;
 		RECT rect;
 		// NewGame
@@ -36,46 +49,44 @@ void StartMenu::init()
 		temp.setTranslate( uiData[i].x, uiData[i].y, 0);
 		temp.setRect(rect);
 		buttons[i]= temp;
-		buttons[i].setHandle("menuButtons");
+		buttons[i].setHandle("opButtons");
 		//buttons[i].setTranslate(300,180,0);
-		buttons[i].setScale(.5,.5,0);
+		buttons[i].setScale(.4,.8,0);
 	}
-
-	// TODO: if we are initing the start menu or reiniting it we also need to reset entire game
-
 }
 
-void StartMenu::shutdown()
+void Options::shutdown()
 {
 }
 
-int StartMenu::update()
+int Options::update()
 {
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
-
+	
 	int _x = c->cursorPos.x;
 	int _y = c->cursorPos.y;
 
-	for(int i = 0; i < MENU_BUTTON_CNT; i++)
+	for(int i = 0; i < OPBUTTONS; i++)
 	{
-		if(i==1) i = 2; // REMOVE : when Continue is implemented
-		if(buttons[i].checkOn(_x,_y,3)) {
+		if(i>2) i = 7; // REMOVE : when Continue is implemented
+		if(buttons[i].checkOn(_x,_y,4,1)) {
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
-			// check for mouse click AND GO TO CORRECT STATE
 			if(input->check_mouse_button(0)){
 				if(!input->check_button_down(DIK_9)){
 					input->set_button(DIK_9,true);
 					switch(i)
 					{
-					case 0: // newgame
-						return NEWGAME;
-					case 1: //continue
-						return CONTINUE;
-					case 2: // Options
-						return OPTIONS;
-					case 3: // Quit
-						exit(1);
+					case 0: // credits TODO: run credits
+						break;
+					case 1: // - TODO: lower volume
+					case 2: // + TODO: raise volume
+					case 3: // TODO: Fullscreen
+					case 4: // TODO: window
+					case 5: // TODO: keyboard
+					case 6: // TODO: controller
+					case 7: // back
+						return RETURN;
 					default:
 						break;
 					}
@@ -84,10 +95,11 @@ int StartMenu::update()
 		}
 		else
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+			
 	}
 	return 0;
 }
-void StartMenu::render()
+void Options::render()
 {
 	if(!Engine::DX::instance()->getDevice())
 		return;
@@ -100,10 +112,10 @@ void StartMenu::render()
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
 				g->Draw2DObject(bg);
+				g->Draw2DObject(box);
 				for(auto &button: buttons){
 					g->Draw2DObject(button);
 				}
-
 				// draw cursor last
 				g->drawCursor();
 				Engine::DX::instance()->getSprite()->End();

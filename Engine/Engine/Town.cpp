@@ -5,6 +5,11 @@ Town::Town(void) : GameState()
 {
 }
 
+Town* Town::instance()
+{
+	static Town t;
+	return &t;
+}
 
 Town::~Town(void)
 {

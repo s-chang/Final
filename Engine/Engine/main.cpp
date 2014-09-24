@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "Input.h"
 #include "Game.h"
+#include <vld.h>
 
 #include <fstream>
 
@@ -11,7 +12,7 @@
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 
-	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	HWND myhWnd = NULL;
 	HINSTANCE myInstance = hInstance;

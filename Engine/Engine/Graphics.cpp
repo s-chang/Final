@@ -1,6 +1,7 @@
 #include "Graphics.h"
 #include <fstream>
 #include "DX.h"
+#include "Cursor.h"
 
 //helper function
 std::wstring string2wstring( const std::string word)
@@ -330,4 +331,52 @@ Mesh* Engine::Graphics::getMesh(const std::string handle)
 	}
 
 	//TODO: return error mesh if no mesh is found.
+}
+
+void Engine::Graphics::Draw2DObject(Drawable & object){
+	D3DXMATRIX transMat, scaleMat, rotMat, worldMat;
+
+	D3DXMatrixIdentity(&transMat);
+	D3DXMatrixIdentity(&scaleMat);
+	D3DXMatrixIdentity(&rotMat);
+	D3DXMatrixIdentity(&worldMat);
+
+	D3DXMatrixScaling(&scaleMat, object.getScale().x, object.getScale().y, object.getScale().z);
+	D3DXMatrixTranslation(&transMat, object.getTranslate().x, object.getTranslate().y, object.getTranslate().z);
+	D3DXMatrixRotationYawPitchRoll(&rotMat, D3DXToRadian(object.getRotate().y),D3DXToRadian(object.getRotate().x), D3DXToRadian(object.getRotate().z));
+	D3DXMatrixMultiply(&scaleMat, &scaleMat, &rotMat);
+	D3DXMatrixMultiply(&worldMat, &scaleMat, &transMat);
+
+	Engine::DX::instance()->getSprite()->SetTransform(&worldMat);
+
+	Engine::DX::instance()->getSprite()->Draw(
+		getTexture(object.getHandle()),
+		object.getIsSpriteSheet() ? &object.getRect() : 0,
+		object.getIsSpriteSheet() ? &dVec3(object.getWidth() * 0.5f, object.getHeight() * 0.5f, 0.0f) : &dVec3(getInfo(object.getHandle()).Width *0.5f, getInfo(object.getHandle()).Height *0.5f, 0.0f),
+		0,
+		object.getColor());
+}
+
+void Engine::Graphics::drawCursor(){
+	Cursor* c = Engine::Cursor::instance();
+
+	D3DXMATRIX transMat, scaleMat, rotMat, worldMat;
+
+	D3DXMatrixIdentity(&transMat);
+	D3DXMatrixIdentity(&scaleMat);
+	D3DXMatrixIdentity(&rotMat);
+	D3DXMatrixIdentity(&worldMat);
+
+	D3DXMatrixScaling(&scaleMat, 1, 1, 1);
+	D3DXMatrixTranslation(&transMat, c->cursorPos.x, c->cursorPos.y, 0);
+	D3DXMatrixRotationYawPitchRoll(&rotMat, 0,0, 0);
+	D3DXMatrixMultiply(&scaleMat, &scaleMat, &rotMat);
+	D3DXMatrixMultiply(&worldMat, &scaleMat, &transMat);
+
+	Engine::DX::instance()->getSprite()->SetTransform(&worldMat);
+
+	Engine::DX::instance()->getSprite()->Draw(
+		getTexture(c->handle), 0,
+		&dVec3(getInfo(c->handle).Width *0.5f, getInfo(c->handle).Height *0.5f, 0.0f), 0,
+		D3DCOLOR_ARGB(255,255,255,255));
 }

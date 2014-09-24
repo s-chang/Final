@@ -143,6 +143,7 @@ public:
 					For 2D objects.
 	*/
 	bool checkOn(float x, float y, int scale);
+	bool checkOn(float x, float y, int scalex, int scaley);
 
 	bool checkOnZ(float x, float z, int scale);
 

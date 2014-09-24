@@ -1,2 +1,8 @@
 block.png block
 FFT.jpg FFT
+cursor.png cursor
+menuButtons.png menuButtons
+title.png startMenu
+optionButtons.png opButtons
+back.png blueBox
+Options.png options

@@ -161,6 +161,15 @@
     <ClCompile Include="Town.cpp">
       <Filter>Source Files\Game\Gamestates\Town</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Source Files\Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Options.cpp">
+      <Filter>Source Files\Game\Gamestates\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="NewGame.cpp">
+      <Filter>Source Files\Game\Gamestates\NewGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h">
@@ -225,6 +234,15 @@
     </ClInclude>
     <ClInclude Include="Town.h">
       <Filter>Source Files\Game\Gamestates\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Source Files\Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Options.h">
+      <Filter>Source Files\Game\Gamestates\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGame.h">
+      <Filter>Source Files\Game\Gamestates\NewGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

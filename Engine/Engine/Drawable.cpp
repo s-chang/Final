@@ -70,6 +70,10 @@ void Drawable::setRect(RECT r)
 	rect.top = r.top;
 	rect.right = r.right;
 	rect.left = r.left;
+
+	height = r.bottom - r.top;
+	width = r.right - r.left;
+	isSpritesheet = true;
 }
 
 RECT Drawable::getRect()
@@ -81,6 +85,11 @@ bool Drawable::checkOn(float x, float y, int scale)
 {
 	return (x < (translate.x + (width / scale)) && x > (translate.x -  (width / scale)) &&
 		y < (translate.y + (height / scale)) && y > (translate.y -  (height / scale)));
+}
+bool Drawable::checkOn(float x, float y, int scalex, int scaley)
+{
+	return (x < (translate.x + (width / scalex)) && x > (translate.x -  (width / scalex)) &&
+		y < (translate.y + (height / scaley)) && y > (translate.y -  (height / scaley)));
 }
 
 bool Drawable::checkOnZ(float x, float z, int scale)

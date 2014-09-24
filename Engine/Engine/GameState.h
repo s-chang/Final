@@ -1,4 +1,17 @@
 #pragma once
+#include "EngineHeaders.h"
+enum GameStates
+{
+	STARTMENU = 1, 
+	OPTIONS, NEWGAME, CONTINUE,
+	TOWN, INN, SHOP, TAVERN,
+	TOWER, BATTLE, STATUSMENU, RETURN,
+};
+
+struct RData{
+	int t, l, b, r;
+	float x, y;
+};
 
 class GameState
 {

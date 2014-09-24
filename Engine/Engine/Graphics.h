@@ -99,6 +99,8 @@ namespace Engine
 		Description: Release pointer objects from memory.
 		*/
 		void shutdown();
-		
+
+		void Draw2DObject(Drawable & object);
+		void drawCursor();
 	};
 };

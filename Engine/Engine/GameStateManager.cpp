@@ -14,9 +14,13 @@ void GameStateManager::init()
 {
 	while(!states.empty())
 		states.pop();
-	StartMenu* newmenu = NULL;
-	newmenu->init();
-	states.push(newmenu);
+	states.push(StartMenu::instance());
+	states.top()->init();
+
+	//init all states (battle will init on state change)
+	Options::instance()->init();
+	NewGame::instance()->init();
+	Town::instance()->init();
 }
 void GameStateManager::shutdown()
 {
@@ -26,6 +30,7 @@ void GameStateManager::shutdown()
 
 void GameStateManager::update()
 {
+	
 	int stateChange = states.top()->update();
 	switch(stateChange)
 	{
@@ -33,26 +38,29 @@ void GameStateManager::update()
 		init();
 		break;
 	case OPTIONS: // push options onto stack
+		states.push(Options::instance());
 		break;
 	case NEWGAME: // empty stack and start new game
-		states.pop();
+		//states.pop();
 		break;
 	case TOWN: // empty stack and start town
 		break;
 	case INN: // push inn onto stack
 		break;
-	case SHOP:// push inn onto stack
+	case SHOP: // push inn onto stack
 		break;
-	case TAVERN:// push inn onto stack
+	case TAVERN: // push inn onto stack
 		break;
-	case TOWER:// push inn onto stack
+	case TOWER: // push inn onto stack
 		break;
-	case BATTLE:// push inn onto stack
+	case BATTLE: // push inn onto stack
 		break;
 	case STATUSMENU: // push status window onto stack
 		break;
-	case RETURN:// pop once to return to previous state
+	case RETURN: // pop once to return to previous state
 		states.pop();
+		break;
+	default:
 		break;
 	}
 
