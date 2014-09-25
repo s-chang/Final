@@ -16,7 +16,7 @@ namespace Engine
 	class Text
 	{
 	private:
-		pFont font;
+
 		RECT rect;
 
 		wchar_t buffer[MAX_BUFFER];
@@ -26,7 +26,7 @@ namespace Engine
 
 	public:
 		~Text();
-
+		pFont font;
 		static Text* instance();
 
 		void init();
@@ -59,7 +59,7 @@ namespace Engine
 		Return:		void
 		Description: Draws the given text at the location of top and left in the given color
 		*/
-		void render(long top, long left, wchar_t word[MAX_BUFFER], dColor color);
+		void render(long top, long left, wchar_t* word, dColor color);
 
 		/**
 		Name:		setColor

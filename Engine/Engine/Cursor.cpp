@@ -4,7 +4,7 @@
 Engine::Cursor::Cursor(void)
 {
 	handle = "cursor";
-	cursorPos.x = 300;
+	cursorPos.x = 400;
 	cursorPos.y = 300;
 }
 

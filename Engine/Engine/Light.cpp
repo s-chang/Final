@@ -15,8 +15,8 @@ void Light::defaultInit()
 	light.Ambient = dXColor(0.3f, 0.3f, 0.3f, 1.0f);
 	light.Diffuse = dXColor(1.0f, 1.0f, 1.0f, 1.0f);
 	light.Specular = dXColor(0.1f, 0.1f, 0.1f, 1.0f);
-	light.Type = D3DLIGHT_DIRECTIONAL;
-	light.Position = D3DXVECTOR3(0.0f, 15.0f, -5.0f);
+	light.Type = D3DLIGHT_POINT;
+	light.Position = D3DXVECTOR3(20.0f, 50.0f, 30.0f);
 	light.Direction = D3DXVECTOR3(0.0f, -1.0f, -1.0f);
 	light.Range = 500.0f;
 	light.Attenuation0 = 1.0f;
@@ -30,6 +30,12 @@ void Light::setLight()
 {
 	Engine::DX::instance()->getDevice()->SetLight(0, &light);
 	Engine::DX::instance()->getDevice()->LightEnable(0, b_light);
+}
+
+void Light::setLight(int index)
+{
+	Engine::DX::instance()->getDevice()->SetLight(0, &light);
+	Engine::DX::instance()->getDevice()->LightEnable(index, b_light);
 }
 
 void Light::toggleLight(bool on_off)

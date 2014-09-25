@@ -6,3 +6,6 @@ title.png startMenu
 optionButtons.png opButtons
 back.png blueBox
 Options.png options
+mediumBox.png mBox
+helpBox.png helpBar
+statusWindow.png statusWindow

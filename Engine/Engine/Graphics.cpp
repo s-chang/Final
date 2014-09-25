@@ -97,6 +97,7 @@ void Engine::Graphics::render(Drawable object, Camera *cam)
 		m_Effect->Begin(&numPasses, 0);
 
 		Mesh *tempMesh = getMesh(object.getHandle());
+		 
 
 		for(UINT i = 0; i < numPasses; i++)
 		{

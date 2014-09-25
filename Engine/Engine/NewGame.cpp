@@ -31,4 +31,5 @@ int NewGame::update()
 
 void NewGame::render()
 {
+	// TODO: opening cutscene
 }

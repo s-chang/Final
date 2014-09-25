@@ -6,3 +6,4 @@ testbox.x testbox
 testbox2.x testbox2
 1Room.x 1room
 4Room.x 4room
+Town.x town

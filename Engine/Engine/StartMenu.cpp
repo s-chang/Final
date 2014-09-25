@@ -75,7 +75,7 @@ int StartMenu::update()
 					case 2: // Options
 						return OPTIONS;
 					case 3: // Quit
-						exit(1);
+						exit(1); // change exit method
 					default:
 						break;
 					}

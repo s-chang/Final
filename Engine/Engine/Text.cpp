@@ -56,7 +56,7 @@ void Engine::Text::render(long top, long left)
 }
 
 
-void Engine::Text::render(long top, long left, wchar_t words[256], dColor color)
+void Engine::Text::render(long top, long left, wchar_t* words, dColor color)
 {
 	rect.top = top;
 	rect.left = left;

@@ -105,6 +105,9 @@
     <Filter Include="Source Files\Game\Gamestates\NewGame">
       <UniqueIdentifier>{b906551a-18a4-4779-b915-f729d30896e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Inn">
+      <UniqueIdentifier>{0744f778-ee1d-491a-a548-8407ad3897f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

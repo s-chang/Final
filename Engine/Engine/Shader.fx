@@ -114,8 +114,8 @@ float4 PS(VS_OUT vsOut): COLOR
 	float A = lightAttenuation.x + lightAttenuation.y * d + lightAttenuation.z * d * d;
 	
 	// Sum all of the terms together and copy diffuse alpha
-	return float4( ambient + (diffuse + spec) / A, diffuseMaterial.a);
-	
+	//return float4( ambient + (diffuse + spec) / A, diffuseMaterial.a);
+	return float4( diffuse + spec + texColor, diffuseMaterial.a);
 }
 
 // Technique and Passes

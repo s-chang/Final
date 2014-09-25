@@ -38,5 +38,6 @@ public:
 	float getAttenuation2();
 
 	void setLight();
+	void setLight(int index);
 	void toggleLight(bool on_off);
 };

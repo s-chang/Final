@@ -41,9 +41,12 @@ void GameStateManager::update()
 		states.push(Options::instance());
 		break;
 	case NEWGAME: // empty stack and start new game
-		//states.pop();
+		states.pop();
+		states.push(NewGame::instance());
 		break;
 	case TOWN: // empty stack and start town
+		states.pop();
+		states.push(Town::instance());
 		break;
 	case INN: // push inn onto stack
 		break;
