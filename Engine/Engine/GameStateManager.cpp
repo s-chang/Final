@@ -21,6 +21,10 @@ void GameStateManager::init()
 	Options::instance()->init();
 	NewGame::instance()->init();
 	Town::instance()->init();
+	Inn::instance()->init();
+	Shop::instance()->init();
+	Tavern::instance()->init();
+
 }
 void GameStateManager::shutdown()
 {
@@ -49,14 +53,17 @@ void GameStateManager::update()
 		states.push(Town::instance());
 		break;
 	case INN: // push inn onto stack
+		states.push(Inn::instance());
 		break;
-	case SHOP: // push inn onto stack
+	case SHOP: // push Shop onto stack
+		states.push(Shop::instance());
 		break;
-	case TAVERN: // push inn onto stack
+	case TAVERN: // push Tavern onto stack
+		states.push(Tavern::instance());
 		break;
-	case TOWER: // push inn onto stack
+	case TOWER: // push Tower onto stack
 		break;
-	case BATTLE: // push inn onto stack
+	case BATTLE: // push battle onto stack
 		break;
 	case STATUSMENU: // push status window onto stack
 		break;

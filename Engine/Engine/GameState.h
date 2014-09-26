@@ -8,11 +8,6 @@ enum GameStates
 	TOWER, BATTLE, STATUSMENU, RETURN,
 };
 
-struct RData{
-	int t, l, b, r;
-	float x, y;
-};
-
 class GameState
 {
 private:

@@ -49,6 +49,8 @@ void Town::init()
 	cam.setProj();
 
 	Engine::Graphics::instance()->init(&cam,&light);
+	goToFloor = 1;
+	tutorial = true;
 }
 
 void Town::shutdown()
@@ -127,11 +129,9 @@ void Town::render()
 				//	|| (_x > -3 && _x < 1)//Shop 
 				//	|| (_x > 25 && _x < 29)//Tavern 
 				//	)
-					g->Draw2DObject(helpBar);
+				g->Draw2DObject(helpBar);
 				if(player.getTranslate().x > 48)
-				g->Draw2DObject(mBox);
-				// draw cursor last
-				g->drawCursor();
+					g->Draw2DObject(mBox);
 				Engine::DX::instance()->getSprite()->End();
 
 				////////////////////////////////////////
@@ -145,10 +145,11 @@ void Town::render()
 				rect.top = 200;
 				wchar_t tbuffer[64];
 
+				Engine::Cursor* c = Engine::Cursor::instance();
 				//debug code player position
-				swprintf_s(tbuffer, 64,L"(%f,%f)",player.getTranslate().x,player.getTranslate().z);
+				swprintf_s(tbuffer, 64,L"(%f,%f)",c->cursorPos.x,c->cursorPos.y);
 				Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 				rect.left = 20;
 				rect.top = 45;
@@ -174,11 +175,43 @@ void Town::render()
 						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 				}
 
-				//if(     _x < -39 //end of town
-				//	|| (_x > -32 && _x < -28)//INN 
-				//	|| (_x > -3 && _x < 1)//Shop 
-				//	|| (_x > 25 && _x < 29)//Tavern 
-				//	)
+				// Enter Tower/Floor Selection
+				if(player.getTranslate().x > 48){
+					rect.left = 500;
+					rect.top = 230;
+					t->font->DrawText(0, L"Are You Prepared To", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					rect.top += 30;
+					t->font->DrawText(0, L"Enter The Tower?", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					rect.top += 30;
+					t->font->DrawText(0, L"   Select Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					rect.top += 40;
+					t->font->DrawText(0, L"      First Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+					//if(player.clearedFifth()){
+					//	rect.top += 40;
+					//	t->font->DrawText(0, L"      Fifth Floor", -1, &rect, 
+					//		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					//}
+					//if(player.clearedTenth()){
+					//	rect.top += 40;
+					//	t->font->DrawText(0, L"      Tenth Floor", -1, &rect, 
+					//		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					//}
+
+				}
+			}
+
+			//////////////////////////////////////////////////
+			// Cursor
+			//////////////////////////////////////////////////
+
+			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK))){
+				g->drawCursor();
+				Engine::DX::instance()->getSprite()->End();
 			}
 		}
 		Engine::DX::instance()->getDevice()->EndScene();

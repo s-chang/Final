@@ -1,25 +1,24 @@
-#include "Options.h"
+#include "Shop.h"
 
 
-Options::Options(void)
-	:GameState()
+Shop::Shop(void)
 {
 }
 
 
-Options::~Options(void)
+Shop::~Shop(void)
 {
 }
 
-Options* Options::instance()
+Shop* Shop::instance()
 {
-	static Options op;
-	return &op;
+	static Shop s;
+	return &s;
 }
 
-void Options::init()
+void Shop::init()
 {
-	bg.setHandle("options");
+	//bg.setHandle("options");
 	bg.setTranslate(300,180,0);
 	bg.setScale(.7,.5,0);
 
@@ -28,17 +27,10 @@ void Options::init()
 	box.setScale(.7,.7,0);
 	
 	RData uiData[] = {
-		{0, 0, 30, 200, 165, 70},		// credits
-		{40, 50, 60, 120, 305, 170},	// -
-		{35, 130, 65, 250, 495, 170},	// +
-		{0, 0, 0, 0, 0, 0},	// TODO: Fullscreen
-		{0, 0, 0, 0, 0, 0},	// TODO: window
-		{0, 0, 0, 0, 0, 0},	// TODO: keyboard
-		{0, 0, 0, 0, 0, 0},	// TODO: controller
 		{225, 0, 250, 200, 170, 465},	// back
 
 	};
-	for(int i = 0; i < OPBUTTONS; i++) {
+	for(int i = 0; i < SHOP_BUTTONS; i++) {
 		Drawable temp;
 		RECT rect;
 		// NewGame
@@ -55,11 +47,11 @@ void Options::init()
 	}
 }
 
-void Options::shutdown()
+void Shop::shutdown()
 {
 }
 
-int Options::update()
+int Shop::update()
 {
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
@@ -67,7 +59,7 @@ int Options::update()
 	int _x = c->cursorPos.x;
 	int _y = c->cursorPos.y;
 
-	for(int i = 0; i < OPBUTTONS; i++)
+	for(int i = 0; i < SHOP_BUTTONS; i++)
 	{
 		if(i>2) i = 7; // REMOVE : when Continue is implemented
 		if(buttons[i].checkOn(_x,_y,4,1)) {
@@ -77,16 +69,7 @@ int Options::update()
 					input->set_button(DIK_9,true);
 					switch(i)
 					{
-					case 0: // credits TODO: run credits
-						break;
-					case 1: // - TODO: lower volume
-					case 2: // + TODO: raise volume
-						break;
-					case 3: // TODO: Fullscreen
-					case 4: // TODO: window
-					case 5: // TODO: keyboard
-					case 6: // TODO: controller
-					case 7: // back
+					case 0: // BACK 
 						return RETURN;
 					default:
 						break;
@@ -100,7 +83,7 @@ int Options::update()
 	}
 	return 0;
 }
-void Options::render()
+void Shop::render()
 {
 	if(!Engine::DX::instance()->getDevice())
 		return;

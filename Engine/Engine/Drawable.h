@@ -15,6 +15,11 @@ Description:  The Drawable class holds all of the information needed for the Gra
 typedef D3DXVECTOR3 dVec3;
 typedef D3DCOLOR dColor;
 
+struct RData{
+	int t, l, b, r;
+	float x, y;
+};
+
 class Drawable
 {
 	//Transform vectors

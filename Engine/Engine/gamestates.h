@@ -5,4 +5,7 @@
 #include "Options.h"
 #include "NewGame.h"
 #include "Town.h"
+#include "Inn.h"
+#include "Shop.h"
+#include "Tavern.h"
 //#include "

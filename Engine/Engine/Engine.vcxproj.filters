@@ -69,26 +69,11 @@
     <Filter Include="Source Files\Game\Gamestates">
       <UniqueIdentifier>{4a953790-6447-40b8-93d3-9c26907b0f3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Gamestates\Battle">
-      <UniqueIdentifier>{1b67e692-c63b-439c-925b-8787725b9cd5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\Gamestates\StatusMenu">
-      <UniqueIdentifier>{e93f080d-d8f7-4800-bf9a-5fe2b83b1e52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game\Gamestates\Tower">
       <UniqueIdentifier>{0079fbb8-458c-4ef8-b1f5-54f58a6a4451}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Gamestates\Tavern">
-      <UniqueIdentifier>{5a3aa798-b2ab-4d32-aff3-d8240b6853b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\Gamestates\Shop">
-      <UniqueIdentifier>{1ecf96ec-616e-42a4-8e54-1ee6f8bdb957}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game\Gamestates\Town">
       <UniqueIdentifier>{29be509d-4aa3-443c-bd38-2b9338dcfdbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\Gamestates\StartMenu">
-      <UniqueIdentifier>{30183b6b-1fac-48e8-a01e-bcb3569def17}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game\Entity">
       <UniqueIdentifier>{6471c052-82cb-421e-8e9b-bfe234bc37b0}</UniqueIdentifier>
@@ -96,17 +81,35 @@
     <Filter Include="Source Files\Game\Enemies">
       <UniqueIdentifier>{09dc51bf-22cc-4577-b89b-841e0b05e49b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Gamestates\Options">
-      <UniqueIdentifier>{bf233b20-ee3a-4232-bc26-6af6c0a787cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game\Gamestates\Credits">
       <UniqueIdentifier>{d60237f9-9f4a-4f02-818f-ced2eec0e18c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game\Gamestates\NewGame">
       <UniqueIdentifier>{b906551a-18a4-4779-b915-f729d30896e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Gamestates\Inn">
+    <Filter Include="Source Files\Game\Gamestates\Town\Shop">
+      <UniqueIdentifier>{1ecf96ec-616e-42a4-8e54-1ee6f8bdb957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Town\Inn">
       <UniqueIdentifier>{0744f778-ee1d-491a-a548-8407ad3897f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Town\Tavern">
+      <UniqueIdentifier>{5a3aa798-b2ab-4d32-aff3-d8240b6853b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Menus">
+      <UniqueIdentifier>{29d54229-26f9-457a-b857-ee9ab20536b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Menus\Options">
+      <UniqueIdentifier>{bf233b20-ee3a-4232-bc26-6af6c0a787cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Menus\StartMenu">
+      <UniqueIdentifier>{30183b6b-1fac-48e8-a01e-bcb3569def17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Menus\StatusMenu">
+      <UniqueIdentifier>{e93f080d-d8f7-4800-bf9a-5fe2b83b1e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Gamestates\Tower\Battle">
+      <UniqueIdentifier>{1b67e692-c63b-439c-925b-8787725b9cd5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +162,7 @@
       <Filter>Source Files\Game\GameState Manager</Filter>
     </ClCompile>
     <ClCompile Include="StartMenu.cpp">
-      <Filter>Source Files\Game\Gamestates\StartMenu</Filter>
+      <Filter>Source Files\Game\Gamestates\Menus\StartMenu</Filter>
     </ClCompile>
     <ClCompile Include="Town.cpp">
       <Filter>Source Files\Game\Gamestates\Town</Filter>
@@ -168,10 +171,19 @@
       <Filter>Source Files\Engine\Input</Filter>
     </ClCompile>
     <ClCompile Include="Options.cpp">
-      <Filter>Source Files\Game\Gamestates\Options</Filter>
+      <Filter>Source Files\Game\Gamestates\Menus\Options</Filter>
     </ClCompile>
     <ClCompile Include="NewGame.cpp">
       <Filter>Source Files\Game\Gamestates\NewGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Inn.cpp">
+      <Filter>Source Files\Game\Gamestates\Town\Inn</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Source Files\Game\Gamestates\Town\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Tavern.cpp">
+      <Filter>Source Files\Game\Gamestates\Town\Tavern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,7 +239,7 @@
       <Filter>Source Files\Game\GameState Manager</Filter>
     </ClInclude>
     <ClInclude Include="StartMenu.h">
-      <Filter>Source Files\Game\Gamestates\StartMenu</Filter>
+      <Filter>Source Files\Game\Gamestates\Menus\StartMenu</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Source Files\Game\Gamestates</Filter>
@@ -242,10 +254,19 @@
       <Filter>Source Files\Engine\Input</Filter>
     </ClInclude>
     <ClInclude Include="Options.h">
-      <Filter>Source Files\Game\Gamestates\Options</Filter>
+      <Filter>Source Files\Game\Gamestates\Menus\Options</Filter>
     </ClInclude>
     <ClInclude Include="NewGame.h">
       <Filter>Source Files\Game\Gamestates\NewGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Inn.h">
+      <Filter>Source Files\Game\Gamestates\Town\Inn</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Source Files\Game\Gamestates\Town\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Tavern.h">
+      <Filter>Source Files\Game\Gamestates\Town\Tavern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

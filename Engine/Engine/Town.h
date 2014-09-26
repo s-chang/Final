@@ -10,6 +10,9 @@ private:
 	Drawable helpBar,
 			 mBox;
 
+	int goToFloor;
+	bool tutorial;
+
 	Camera cam;
 	Light light;
 
@@ -23,5 +26,7 @@ public:
 
 	int update(); 
 	void render();
+	
+	int getFloor(){return goToFloor;} 
 };
 
