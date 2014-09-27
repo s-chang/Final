@@ -185,6 +185,12 @@
     <ClCompile Include="Tavern.cpp">
       <Filter>Source Files\Game\Gamestates\Town\Tavern</Filter>
     </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
+    </ClCompile>
+    <ClCompile Include="Battle.cpp">
+      <Filter>Source Files\Game\Gamestates\Tower\Battle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h">
@@ -267,6 +273,12 @@
     </ClInclude>
     <ClInclude Include="Tavern.h">
       <Filter>Source Files\Game\Gamestates\Town\Tavern</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="Battle.h">
+      <Filter>Source Files\Game\Gamestates\Tower\Battle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -60,7 +60,10 @@ void Town::shutdown()
 int Town::update()
 {
 
-	if(Engine::Input::instance()->push_button(DIK_W))
+	Engine::Input* input = Engine::Input::instance();
+	Engine::Cursor* c = Engine::Cursor::instance();
+
+	if(input->push_button(DIK_W))
 	{		
 		int _x = player.getTranslate().x;
 
@@ -75,7 +78,7 @@ int Town::update()
 		}
 	}
 
-	if(Engine::Input::instance()->push_button(DIK_A))
+	if(input->push_button(DIK_A))
 	{
 		player.setTranslate(player.getTranslate().x - 0.1f , 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 90.0f, player.getRotate().z );
@@ -85,7 +88,7 @@ int Town::update()
 			cam.setEyePos(cam.getEyePos().x - 0.1f, cam.getEyePos().y, cam.getEyePos().z );
 	}
 
-	if(Engine::Input::instance()->push_button(DIK_D))
+	if(input->push_button(DIK_D))
 	{
 		player.setTranslate(player.getTranslate().x + 0.1f, 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 270.0f, player.getRotate().z );
@@ -99,6 +102,29 @@ int Town::update()
 	cam.setLookAt(player.getTranslate().x, 5.0f, player.getTranslate().z);
 	cam.setProj();
 
+	if(input->check_mouse_button(0)){
+		if(player.getTranslate().x > 48){
+			// test case first floor
+			if(c->cursorPos.x > 551 && c->cursorPos.x <650
+				&& c->cursorPos.y > 347 && c->cursorPos.y < 367){
+					goToFloor = 1;
+					return TOWER;
+			}
+			if(c->cursorPos.x > 551 && c->cursorPos.x <650
+				&& c->cursorPos.y > 390 && c->cursorPos.y < 410
+				/*&& player.clearedFifth()*/){
+					goToFloor = 5;
+					return TOWER;
+			}
+			if(c->cursorPos.x > 551 && c->cursorPos.x <660
+				&& c->cursorPos.y > 427 && c->cursorPos.y < 447
+				/*&& player.clearedTenth()*/){
+					goToFloor = 10;
+					return TOWER;
+			}
+
+		}
+	}
 	return 0;
 }
 void Town::render()
@@ -107,7 +133,7 @@ void Town::render()
 		return;
 
 	Engine::Graphics* g = Engine::Graphics::instance();
-	
+
 	if(SUCCEEDED(Engine::DX::instance()->getDevice()->Clear(0,0, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DXCOLOR(0.0f, 0.3f, 1.0f, 1.0f), 1.0f, 0)))
 	{
 		if(SUCCEEDED(Engine::DX::instance()->getDevice()->BeginScene()))
@@ -187,19 +213,34 @@ void Town::render()
 					rect.top += 30;
 					t->font->DrawText(0, L"   Select Floor", -1, &rect, 
 						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-					rect.top += 40;
-					t->font->DrawText(0, L"      First Floor", -1, &rect, 
-						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+					rect.top += 40;
+					if(c->cursorPos.x > 551 && c->cursorPos.x <650
+						&& c->cursorPos.y > 347 && c->cursorPos.y < 367)
+						t->font->DrawText(0, L"      First Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+					else
+						t->font->DrawText(0, L"      First Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 					//if(player.clearedFifth()){
-					//	rect.top += 40;
-					//	t->font->DrawText(0, L"      Fifth Floor", -1, &rect, 
-					//		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					rect.top += 40;
+					if(c->cursorPos.x > 551 && c->cursorPos.x <650
+						&& c->cursorPos.y > 390 && c->cursorPos.y < 410)
+						t->font->DrawText(0, L"      Fifth Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+					else
+						t->font->DrawText(0, L"      Fifth Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 					//}
 					//if(player.clearedTenth()){
-					//	rect.top += 40;
-					//	t->font->DrawText(0, L"      Tenth Floor", -1, &rect, 
-					//		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					rect.top += 40;
+					if(c->cursorPos.x > 551 && c->cursorPos.x <660
+						&& c->cursorPos.y > 427 && c->cursorPos.y < 447)
+						t->font->DrawText(0, L"      Tenth Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+					else
+						t->font->DrawText(0, L"      Tenth Floor", -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 					//}
 
 				}

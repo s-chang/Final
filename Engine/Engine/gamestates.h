@@ -8,4 +8,6 @@
 #include "Inn.h"
 #include "Shop.h"
 #include "Tavern.h"
+#include "Tower.h"
+#include "Battle.h"
 //#include "

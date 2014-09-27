@@ -17,7 +17,7 @@ void GameStateManager::init()
 	states.push(StartMenu::instance());
 	states.top()->init();
 
-	//init all states (battle will init on state change)
+	//init all states (Tower/battle will init on state change)
 	Options::instance()->init();
 	NewGame::instance()->init();
 	Town::instance()->init();
@@ -62,8 +62,12 @@ void GameStateManager::update()
 		states.push(Tavern::instance());
 		break;
 	case TOWER: // push Tower onto stack
+		states.push(Tower::instance());
+		states.top()->init();
 		break;
 	case BATTLE: // push battle onto stack
+		states.push(Battle::instance());
+		states.top()->init();
 		break;
 	case STATUSMENU: // push status window onto stack
 		break;

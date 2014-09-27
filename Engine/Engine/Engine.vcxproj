@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CWindow.cpp" />
@@ -99,9 +100,11 @@
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Battle.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CWindow.h" />
@@ -128,6 +131,7 @@
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tower.h" />
     <ClInclude Include="Town.h" />
   </ItemGroup>
   <ItemGroup>
