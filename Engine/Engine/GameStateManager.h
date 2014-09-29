@@ -1,5 +1,6 @@
 #pragma once
 #include "gamestates.h"
+#include "Entities.h"
 #include <stack>
 
 

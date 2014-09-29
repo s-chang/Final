@@ -9,3 +9,4 @@ Options.png options
 mediumBox.png mBox
 helpBox.png helpBar
 statusWindow.png statusWindow
+BattleScreen.png bWindow

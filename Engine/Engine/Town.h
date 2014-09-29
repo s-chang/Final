@@ -14,8 +14,6 @@ private:
 	bool tutorial;
 
 	Camera cam;
-	Light light;
-
 	Town(void);
 public:
 	static Town* instance();

@@ -85,6 +85,14 @@ int StartMenu::update()
 		else
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
 	}
+
+
+	///////////////////////////////////////////////
+	// debug instaswitch to battle
+	///////////////////////////////////////////////
+	if(input->push_button(DIK_B))
+		return BATTLE;
+
 	return 0;
 }
 void StartMenu::render()

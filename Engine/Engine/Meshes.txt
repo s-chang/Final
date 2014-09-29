@@ -1,4 +1,6 @@
 Grem.x grem
+kylen.x lenn
+Lazarus.x laz
 MistDragon.x dragon
 skybox.x skybox
 test.x test
@@ -7,3 +9,5 @@ testbox2.x testbox2
 1Room.x 1room
 4Room.x 4room
 Town.x town
+battlePlatform.x bPlat
+Slime.x slime

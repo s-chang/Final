@@ -1,0 +1,75 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////// stats output
+				Lenn* grem = Lenn::instance();
+				Engine::Text* text = Engine::Text::instance();
+				Stats* gStats = grem->getStats();
+				std::string name = grem->getName();
+
+#define NEW_LINE 25
+
+				if(name == "Grem")
+					text->font->DrawText(0, L"Name: Grem", -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+				else if(name == "Lenn")
+					text->font->DrawText(0, L"Name: Lenn", -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+				else if(name == "Lazarus")
+					text->font->DrawText(0, L"Name: Lazarus", -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Level:	%d",gStats->level);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Health:	%d/%d",gStats->health, gStats->maxHealth);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				if(name == "Grem")
+					swprintf_s(tbuffer, 64,L"Rage:	%d/%d",grem->getResource(),grem->getMaxResource());
+				else if(name == "Lenn")
+					swprintf_s(tbuffer, 64,L"Stamina:	%d/%d",grem->getResource(),grem->getMaxResource());
+				else if(name == "Lazarus")
+					swprintf_s(tbuffer, 64,L"Mana:	%d/%d",grem->getResource(),grem->getMaxResource());
+
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Attack:	%d",gStats->attack);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Magic:	%d",gStats->magic);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Defense:	%d",gStats->defense);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Resist:	%d",gStats->resist);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"Speed:	%d",gStats->speed);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"XP:	%d",gStats->xp);
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				rect.top += NEW_LINE;
+				swprintf_s(tbuffer, 64,L"XP to Level:	%d",grem->getXpToLevel());
+				text->font->DrawText(0, tbuffer, -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+				///////////////////////////////////////////////////////////////////////////////////////////////////// end stats

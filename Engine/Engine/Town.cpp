@@ -40,15 +40,12 @@ void Town::init()
 	mBox.setHandle("mBox");
 	mBox.setTranslate(600,300,0);
 
-	light.defaultInit();
-	light.setLight();
-
 	cam.init(800,600);
 	cam.setEyePos(-42,10,-22.7);
 	cam.setLookAt(player.getTranslate().x, -3.75f, player.getTranslate().z);
 	cam.setProj();
 
-	Engine::Graphics::instance()->init(&cam,&light);
+	//Engine::Graphics::instance()->init(&cam,&light);
 	goToFloor = 1;
 	tutorial = true;
 }

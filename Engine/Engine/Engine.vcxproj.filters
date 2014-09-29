@@ -111,6 +111,18 @@
     <Filter Include="Source Files\Game\Gamestates\Tower\Battle">
       <UniqueIdentifier>{1b67e692-c63b-439c-925b-8787725b9cd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Player\Characters\Grem">
+      <UniqueIdentifier>{66ace463-b8f9-4ada-bae2-109b6c6dc955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player\Characters\Laz">
+      <UniqueIdentifier>{9a8c5319-1629-4a4d-beeb-732a3393a21f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Player\Characters\Lenn">
+      <UniqueIdentifier>{31cc055b-5adb-44af-9485-da9f8fd5e9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Enemies\Slime">
+      <UniqueIdentifier>{c0a4cd1e-984c-4088-bb69-6610463dd29b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,6 +202,21 @@
     </ClCompile>
     <ClCompile Include="Battle.cpp">
       <Filter>Source Files\Game\Gamestates\Tower\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Grem.cpp">
+      <Filter>Source Files\Game\Player\Characters\Grem</Filter>
+    </ClCompile>
+    <ClCompile Include="Lenn.cpp">
+      <Filter>Source Files\Game\Player\Characters\Lenn</Filter>
+    </ClCompile>
+    <ClCompile Include="Laz.cpp">
+      <Filter>Source Files\Game\Player\Characters\Laz</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Source Files\Game\Enemies\Slime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +306,24 @@
     </ClInclude>
     <ClInclude Include="Battle.h">
       <Filter>Source Files\Game\Gamestates\Tower\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Source Files\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Grem.h">
+      <Filter>Source Files\Game\Player\Characters\Grem</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities.h">
+      <Filter>Source Files\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Lenn.h">
+      <Filter>Source Files\Game\Player\Characters\Lenn</Filter>
+    </ClInclude>
+    <ClInclude Include="Laz.h">
+      <Filter>Source Files\Game\Player\Characters\Laz</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Source Files\Game\Enemies\Slime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

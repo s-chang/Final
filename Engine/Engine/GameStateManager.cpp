@@ -25,6 +25,11 @@ void GameStateManager::init()
 	Shop::instance()->init();
 	Tavern::instance()->init();
 
+	//init characters
+	Grem::instance()->init();
+	Lenn::instance()->init();
+	Laz::instance()->init();
+
 }
 void GameStateManager::shutdown()
 {
