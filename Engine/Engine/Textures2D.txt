@@ -10,3 +10,9 @@ mediumBox.png mBox
 helpBox.png helpBar
 statusWindow.png statusWindow
 BattleScreen.png bWindow
+Tavern.png tavern
+Store.png shop
+Inn.png inn
+gremConcept.png gremFullPic
+lennConcept.png lennFullPic
+lazConcept.png lazFullPic

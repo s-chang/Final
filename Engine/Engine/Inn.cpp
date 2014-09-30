@@ -18,9 +18,9 @@ Inn* Inn::instance()
 
 void Inn::init()
 {
-	//bg.setHandle("options");
+	bg.setHandle("inn");
 	bg.setTranslate(300,180,0);
-	bg.setScale(.7,.5,0);
+	bg.setScale(.8,.6,0);
 
 	box.setHandle("blueBox");
 	box.setTranslate(160,460,0);

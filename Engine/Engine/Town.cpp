@@ -170,9 +170,9 @@ void Town::render()
 
 				Engine::Cursor* c = Engine::Cursor::instance();
 				//debug code player position
-				swprintf_s(tbuffer, 64,L"(%f,%f)",c->cursorPos.x,c->cursorPos.y);
+				/*swprintf_s(tbuffer, 64,L"(%f,%f)",c->cursorPos.x,c->cursorPos.y);
 				Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));*/
 
 				rect.left = 20;
 				rect.top = 45;
