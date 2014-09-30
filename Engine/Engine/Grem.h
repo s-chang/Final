@@ -34,5 +34,6 @@ public:
 	int getResource() { return rage; }
 	int getMaxResource() { return rageMax; }
 	int getXpToLevel(){ return xpToLevel; }
+	std::string getCommand(int index){ return commands[index]; };
 };
 

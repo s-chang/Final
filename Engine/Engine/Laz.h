@@ -33,5 +33,6 @@ public:
 	int getResource() { return mana; }
 	int getMaxResource() { return manaMax; }
 	int getXpToLevel(){ return xpToLevel; }
+	std::string getCommand(int index){ return commands[index]; };
 };
 

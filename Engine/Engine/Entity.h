@@ -14,6 +14,7 @@ protected:
 	std::string name;
 	Drawable mesh;
 	Stats stats;
+	bool alive;
 	
 public:
 	Entity(void);
@@ -27,5 +28,14 @@ public:
 	Drawable * getMesh();
 	Stats* getStats();
 	std::string getName();
+
+	bool isAlive();
+	bool operator()(Entity* l, Entity* r);
+
+	// character specific
+	virtual int getResource(){ return 0; };
+	virtual int getMaxResource(){ return 0; };
+	virtual std::string getCommand(int index){ return 0; };
+	//virtual void printList(int type);
 };
 

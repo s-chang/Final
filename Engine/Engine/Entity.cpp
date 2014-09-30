@@ -2,6 +2,7 @@
 
 Entity::Entity(void)
 {
+	alive = true;
 }
 
 Entity::~Entity(void)
@@ -29,4 +30,12 @@ Stats* Entity::getStats()
 std::string Entity::getName() 
 { 
 	return name; 
+}
+bool Entity::isAlive()
+{
+	return alive;
+}
+bool Entity::operator()(Entity* l, Entity* r)
+{ 
+	return l->getStats()->speed > r->getStats()->speed;
 }

@@ -1,7 +1,7 @@
 #include "Slime.h"
 
 
-Slime::Slime(void)
+Slime::Slime(void) : Entity()
 {
 }
 
@@ -19,7 +19,7 @@ void Slime::init()
 	mesh.setHandle("slime");
 	mesh.set3D(true);
 	mesh.setTranslate(0,0,0);
-	mesh.setRotate(mesh.getRotate().x, 0.0f, mesh.getRotate().z );
+	mesh.setRotate(0.0f, 0.0f,0.0f );
 
 	Stats temp ={
 		//int xp given upon death, level, health, maxHealth;

@@ -33,5 +33,6 @@ public:
 	int getResource() { return stamina; }
 	int getMaxResource() { return staminaMax; }
 	int getXpToLevel(){ return xpToLevel; }
+	std::string getCommand(int index){ return commands[index]; };
 };
 

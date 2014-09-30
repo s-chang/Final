@@ -21,7 +21,7 @@ void Grem::init()
 	name = "Grem";
 
 	mesh.init();
-	mesh.setScale(1.0f, 1.0f, 1.0f);
+	mesh.setScale(1.2f, 1.2f, 1.2f);
 	mesh.setHandle("grem");
 	mesh.set3D(true);
 	mesh.setTranslate(0,0,0);
@@ -40,9 +40,9 @@ void Grem::init()
 	stats = temp;
 
 	commands[0] = "Fight";
-	commands[0] = "NONE";
-	commands[0] = "Item";
-	commands[0] = "Run";
+	commands[1] = "NONE";
+	commands[2] = "Item";
+	commands[3] = "Run";
 
 }
 
