@@ -123,6 +123,27 @@
     <Filter Include="Source Files\Game\Enemies\Slime">
       <UniqueIdentifier>{c0a4cd1e-984c-4088-bb69-6610463dd29b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Item">
+      <UniqueIdentifier>{fbfd1b53-cd6d-4482-8ef0-d9a9e2c5c662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Spear">
+      <UniqueIdentifier>{3b8e16bf-c734-43de-ba76-43824566c8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Staff">
+      <UniqueIdentifier>{c2dd951d-02c5-4e2f-9dda-67a734ece6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Dagger">
+      <UniqueIdentifier>{ba35d75d-75a9-450d-ba45-1fa59b491109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Armor">
+      <UniqueIdentifier>{f4b30ab6-57e1-41cc-94e2-faea2568f262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Accessory">
+      <UniqueIdentifier>{797ae3c3-95ae-4905-b664-efadb6c48eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Runes">
+      <UniqueIdentifier>{92199e72-33a2-4ada-9eb7-047555421deb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -217,6 +238,33 @@
     </ClCompile>
     <ClCompile Include="Slime.cpp">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Source Files\Game\Item\Spear</Filter>
+    </ClCompile>
+    <ClCompile Include="Equippable.cpp">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Staff.cpp">
+      <Filter>Source Files\Game\Item\Staff</Filter>
+    </ClCompile>
+    <ClCompile Include="Accessory.cpp">
+      <Filter>Source Files\Game\Item\Accessory</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Source Files\Game\Item\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="Dagger.cpp">
+      <Filter>Source Files\Game\Item\Dagger</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Rune.cpp">
+      <Filter>Source Files\Game\Item\Runes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +373,33 @@
     <ClInclude Include="Slime.h">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Source Files\Game\Item\Spear</Filter>
+    </ClInclude>
+    <ClInclude Include="Equippable.h">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Staff.h">
+      <Filter>Source Files\Game\Item\Staff</Filter>
+    </ClInclude>
+    <ClInclude Include="Accessory.h">
+      <Filter>Source Files\Game\Item\Accessory</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Source Files\Game\Item\Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="Dagger.h">
+      <Filter>Source Files\Game\Item\Dagger</Filter>
+    </ClInclude>
+    <ClInclude Include="Rune.h">
+      <Filter>Source Files\Game\Item\Runes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Textures2D.txt">
@@ -340,6 +415,15 @@
       <Filter>Source Files\Asset</Filter>
     </Text>
     <Text Include="DMap.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Spear.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Dagger.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Staff.txt">
       <Filter>Source Files\Asset</Filter>
     </Text>
   </ItemGroup>

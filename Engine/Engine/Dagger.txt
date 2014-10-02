@@ -1,0 +1,8 @@
+Chipped Dagger,Dagger,A worn out broken dagger.,1,0,5,5,0,0,0,100,0,
+Knife,Dagger,A sturdy dagger used for cutting.,3,0,10,5,0,0,0,200,0,
+Sting,Dagger,A light and easy to use dagger.,6,0,20,10,0,0,0,400,0,
+Needle,Dagger,A dagger used for piercing enemies.,12,0,40,15,0,0,0,800,0,
+Dagger,Dagger,A dagger.,15,0,50,15,0,0,0,1600,0,
+Night's Bane,Dagger,Camouflaged blade of an ancient thief.,15,0,60,20,0,0,0,3200,0,
+Shiv of Titans,Dagger,A primaeval weapon.,18,0,80,50,0,0,30,0,0,
+Death and Deceit,Dagger,Name says it all.,20,0,60,40,0,0,0,0,0
