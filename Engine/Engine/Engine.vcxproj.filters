@@ -129,6 +129,30 @@
     <Filter Include="Source Files\Game\Item">
       <UniqueIdentifier>{803934db-e892-4447-97d3-710752903138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Item\Spear">
+      <UniqueIdentifier>{ddf5e502-a47b-4438-9662-0ce1e44f8064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Dagger">
+      <UniqueIdentifier>{34ba6b4d-c3f0-4866-a8b2-a7cbfbf9be49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Staff">
+      <UniqueIdentifier>{ecc5cc58-deeb-4223-8d0f-7f28846ab1c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Equipable">
+      <UniqueIdentifier>{78a410b6-f142-425e-a520-92bb25587c96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Armor">
+      <UniqueIdentifier>{5cf8e6fb-8b60-4778-99bd-33dee9f20eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Accessory">
+      <UniqueIdentifier>{c4fd5efe-eab0-4fe8-8623-1cc82036cb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Item Factory">
+      <UniqueIdentifier>{819f7998-a475-4f5b-ac4e-249ad2c1e84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item\Rune">
+      <UniqueIdentifier>{995cb2d3-119a-4ce2-b863-c3e7ae490180}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -229,6 +253,33 @@
     </ClCompile>
     <ClCompile Include="BattleCommand.cpp">
       <Filter>Source Files\Game\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Source Files\Game\Item\Spear</Filter>
+    </ClCompile>
+    <ClCompile Include="Dagger.cpp">
+      <Filter>Source Files\Game\Item\Dagger</Filter>
+    </ClCompile>
+    <ClCompile Include="Staff.cpp">
+      <Filter>Source Files\Game\Item\Staff</Filter>
+    </ClCompile>
+    <ClCompile Include="Equippable.cpp">
+      <Filter>Source Files\Game\Item\Equipable</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Source Files\Game\Item\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="Accessory.cpp">
+      <Filter>Source Files\Game\Item\Accessory</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Game\Item\Item Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Rune.cpp">
+      <Filter>Source Files\Game\Item\Rune</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +394,33 @@
     <ClInclude Include="BattleCommand.h">
       <Filter>Source Files\Game\Skills</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files\Game\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Spear.h">
+      <Filter>Source Files\Game\Item\Spear</Filter>
+    </ClInclude>
+    <ClInclude Include="Dagger.h">
+      <Filter>Source Files\Game\Item\Dagger</Filter>
+    </ClInclude>
+    <ClInclude Include="Staff.h">
+      <Filter>Source Files\Game\Item\Staff</Filter>
+    </ClInclude>
+    <ClInclude Include="Equippable.h">
+      <Filter>Source Files\Game\Item\Equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Source Files\Game\Item\Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="Accessory.h">
+      <Filter>Source Files\Game\Item\Accessory</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Source Files\Game\Item\Item Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Rune.h">
+      <Filter>Source Files\Game\Item\Rune</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Textures2D.txt">
@@ -358,6 +436,15 @@
       <Filter>Source Files\Asset</Filter>
     </Text>
     <Text Include="DMap.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Spear.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Dagger.txt">
+      <Filter>Source Files\Asset</Filter>
+    </Text>
+    <Text Include="Staff.txt">
       <Filter>Source Files\Asset</Filter>
     </Text>
   </ItemGroup>
