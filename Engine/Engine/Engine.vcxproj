@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="BattleCommand.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Drawable.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="RawInput.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="StartMenu.cpp" />
@@ -111,6 +113,7 @@
   <ItemGroup>
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="BattleCommand.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Drawable.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="RawInput.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="Skill.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="StartMenu.h" />

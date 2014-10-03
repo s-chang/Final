@@ -123,6 +123,12 @@
     <Filter Include="Source Files\Game\Enemies\Slime">
       <UniqueIdentifier>{c0a4cd1e-984c-4088-bb69-6610463dd29b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Skills">
+      <UniqueIdentifier>{e2a9d7ea-2c2f-4c1b-b501-e1e1c8ac58b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Item">
+      <UniqueIdentifier>{803934db-e892-4447-97d3-710752903138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -217,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="Slime.cpp">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Source Files\Game\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleCommand.cpp">
+      <Filter>Source Files\Game\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +336,12 @@
     </ClInclude>
     <ClInclude Include="Slime.h">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Source Files\Game\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleCommand.h">
+      <Filter>Source Files\Game\Skills</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
