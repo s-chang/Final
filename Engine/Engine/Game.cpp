@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "EngineHeaders.h"
+#include "ItemFactory.h"
 
 Game::Game()
 {
@@ -16,6 +17,8 @@ void Game::init()
 	Engine::Graphics::instance()->init(cam, floor.getLight());
 	Engine::Sound::instance()->init();
 	Engine::Text::instance()->init();
+	ItemFactory::instance()->loadFactory();
+
 	gsm.init();
 }
 

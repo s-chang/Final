@@ -1,0 +1,8 @@
+Splintered Staff,Staff,A worn down walking staff.,1,0,5,5,0,0,0,100,0,
+Rod,Staff,A jewel adorned staff.,3,0,3,10,0,0,0,200,0,
+Staff,Staff,A staff.,6,0,15,20,0,0,0,400,0,
+Rod of Light,Staff,A staff capable of manipulating light.,9,0,20,40,0,0,0,800,0,
+Staff of Wisdom,Staff,Staff of sages.,12,0,25,50,0,0,0,1600,0,
+Iron Staff,Staff,Staff made out of iron.,15,0,60,40,0,0,0,3200,0,
+Staff of the Ancients,Staff,Really, really old staff.,18,0,50,80,0,0,0,0,0,
+Save the Queen,Staff,Just do it.,20,0,40,100,0,0,0,0,0

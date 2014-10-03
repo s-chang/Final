@@ -76,14 +76,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Accessory.cpp" />
+    <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BattleCommand.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CWindow.cpp" />
+    <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DX.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Equippable.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
@@ -91,6 +95,8 @@
     <ClCompile Include="Grem.cpp" />
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Laz.cpp" />
     <ClCompile Include="Lenn.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -99,10 +105,13 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="RawInput.cpp" />
+    <ClCompile Include="Rune.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Spear.cpp" />
+    <ClCompile Include="Staff.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -111,16 +120,20 @@
     <ClCompile Include="Town.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Accessory.h" />
+    <ClInclude Include="Armor.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="BattleCommand.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CWindow.h" />
+    <ClInclude Include="Dagger.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DX.h" />
     <ClInclude Include="EngineHeaders.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Equippable.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
@@ -130,6 +143,8 @@
     <ClInclude Include="Grem.h" />
     <ClInclude Include="Inn.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="Laz.h" />
     <ClInclude Include="Lenn.h" />
     <ClInclude Include="Light.h" />
@@ -138,10 +153,13 @@
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="RawInput.h" />
+    <ClInclude Include="Rune.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Spear.h" />
+    <ClInclude Include="Staff.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
@@ -151,9 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="BGM.txt" />
+    <Text Include="Dagger.txt" />
     <Text Include="DMap.txt" />
     <Text Include="Meshes.txt" />
     <Text Include="SoundEffects.txt" />
+    <Text Include="Spear.txt" />
+    <Text Include="Staff.txt" />
     <Text Include="Textures2D.txt" />
   </ItemGroup>
   <ItemGroup>
