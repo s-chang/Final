@@ -147,6 +147,7 @@ int StatusMenu::update()
 	case SKILLS:
 	case STATUS:
 	case STAT_OPTIONS:
+		break;
 	}
 	return 0;
 }
