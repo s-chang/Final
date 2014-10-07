@@ -119,7 +119,6 @@ int Town::update()
 					goToFloor = 10;
 					return TOWER;
 			}
-
 		}
 	}
 
