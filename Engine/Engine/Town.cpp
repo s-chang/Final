@@ -122,6 +122,11 @@ int Town::update()
 
 		}
 	}
+
+	if(input->push_button(DIK_G))
+	{
+		return STATUSMENU;
+	}
 	return 0;
 }
 void Town::render()

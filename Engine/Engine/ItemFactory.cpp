@@ -110,35 +110,35 @@ Item *ItemFactory::getItem(std::string name)
 
 	if(name == "Splintered Staff")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Rod")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Staff")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Rod of Light")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Staff of Wisdom")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Iron Staff")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Staff of the Ancients")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 	if(name == "Save the Queen")
 	{
-		return new Dagger(searchItem(name).getStats());
+		return new Staff(searchItem(name).getStats());
 	}
 
 	return new Item();

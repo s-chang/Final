@@ -48,6 +48,8 @@ class Drawable
 
 	std::string handle;
 
+	wchar_t* additionalText;
+
 public:
 	Drawable();
 	~Drawable();
@@ -279,4 +281,7 @@ public:
 
 	void setWidth(int width) {this->width = width;}
 	void setHeight(int height) {this->height = height;}
+
+	void setText(wchar_t* word){ additionalText = word; }
+	wchar_t *getPlainText(){return additionalText;   }
 };

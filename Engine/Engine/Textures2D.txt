@@ -16,3 +16,7 @@ Inn.png inn
 gremConcept.png gremFullPic
 lennConcept.png lennFullPic
 lazConcept.png lazFullPic
+gremPortrait.png gremPortrait
+lennPortrait.png lennPortrait
+lazPortrait.png lazPortrait
+statusMain.png statusMain

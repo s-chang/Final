@@ -281,6 +281,12 @@
     <ClCompile Include="Rune.cpp">
       <Filter>Source Files\Game\Item\Rune</Filter>
     </ClCompile>
+    <ClCompile Include="StatusMenu.cpp">
+      <Filter>Source Files\Game\Gamestates\Menus\StatusMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorGenerator.cpp">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h">
@@ -420,6 +426,12 @@
     </ClInclude>
     <ClInclude Include="Rune.h">
       <Filter>Source Files\Game\Item\Rune</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusMenu.h">
+      <Filter>Source Files\Game\Gamestates\Menus\StatusMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGenerator.h">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

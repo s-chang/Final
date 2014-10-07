@@ -89,6 +89,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Equippable.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="FloorGenerator.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Spear.cpp" />
     <ClCompile Include="Staff.cpp" />
     <ClCompile Include="StartMenu.cpp" />
+    <ClCompile Include="StatusMenu.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -135,6 +137,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Equippable.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="FloorGenerator.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Spear.h" />
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StartMenu.h" />
+    <ClInclude Include="StatusMenu.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />
