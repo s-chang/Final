@@ -305,6 +305,7 @@
     <ClCompile Include="Rune.cpp">
       <Filter>Source Files\Game\Item\Rune</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="BattleCommand.cpp">
       <Filter>Source Files\Game\Commands/Skills\BattleCommands</Filter>
     </ClCompile>
@@ -319,6 +320,13 @@
     </ClCompile>
     <ClCompile Include="Run.cpp">
       <Filter>Source Files\Game\Commands/Skills\BattleCommands\Run</Filter>
+=======
+    <ClCompile Include="StatusMenu.cpp">
+      <Filter>Source Files\Game\Gamestates\Menus\StatusMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorGenerator.cpp">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +462,7 @@
     <ClInclude Include="Rune.h">
       <Filter>Source Files\Game\Item\Rune</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="BattleCommand.h">
       <Filter>Source Files\Game\Commands/Skills\BattleCommands</Filter>
     </ClInclude>
@@ -471,6 +480,13 @@
     </ClInclude>
     <ClInclude Include="Run.h">
       <Filter>Source Files\Game\Commands/Skills\BattleCommands\Run</Filter>
+=======
+    <ClInclude Include="StatusMenu.h">
+      <Filter>Source Files\Game\Gamestates\Menus\StatusMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGenerator.h">
+      <Filter>Source Files\Game\Gamestates\Tower</Filter>
+>>>>>>> origin/master
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
 #include "Timer.h"
 #include "Input.h"
 #include "Game.h"
-#include <vld.h>
+//#include <vld.h>
 
 #include <fstream>
 

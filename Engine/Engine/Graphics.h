@@ -42,8 +42,7 @@ namespace Engine
 		
 		void load();
 		
-		pDirectTexture getTexture(const std::string handle);
-		iInfo getInfo(const std::string handle);
+		
 
 
 		struct MeshStorage
@@ -102,5 +101,8 @@ namespace Engine
 
 		void Draw2DObject(Drawable & object);
 		void drawCursor();
+
+		pDirectTexture getTexture(const std::string handle);
+		iInfo getInfo(const std::string handle);
 	};
 };

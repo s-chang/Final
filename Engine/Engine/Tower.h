@@ -1,11 +1,15 @@
 #pragma once
 #include "gamestate.h"
 #include "town.h"
+#include "Drawable.h"
+
 class Tower :
 	public GameState
 {
 private:
 	int currentFloor;
+
+	Drawable player;
 
 	Tower(void);
 public:

@@ -24,11 +24,14 @@ void GameStateManager::init()
 	Inn::instance()->init();
 	Shop::instance()->init();
 	Tavern::instance()->init();
+	StatusMenu::instance()->init();
 
 	//init characters
 	Grem::instance()->init();
 	Lenn::instance()->init();
 	Laz::instance()->init();
+
+	
 
 }
 void GameStateManager::shutdown()
@@ -41,6 +44,7 @@ void GameStateManager::update()
 {
 	
 	int stateChange = states.top()->update();
+	
 	switch(stateChange)
 	{
 	case STARTMENU: // reinitialize
@@ -75,6 +79,7 @@ void GameStateManager::update()
 		states.top()->init();
 		break;
 	case STATUSMENU: // push status window onto stack
+		states.push(StatusMenu::instance());
 		break;
 	case RETURN: // pop once to return to previous state
 		states.pop();
