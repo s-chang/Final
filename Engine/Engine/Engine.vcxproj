@@ -88,6 +88,7 @@
     <ClCompile Include="DX.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Equippable.cpp" />
+    <ClCompile Include="Fight.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemCMD.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Laz.cpp" />
     <ClCompile Include="Lenn.cpp" />
@@ -105,6 +107,7 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="RawInput.cpp" />
+    <ClCompile Include="Run.cpp" />
     <ClCompile Include="Rune.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Skill.cpp" />
@@ -125,6 +128,7 @@
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="BattleCommand.h" />
+    <ClInclude Include="CommandList.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Dagger.h" />
@@ -134,6 +138,7 @@
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Equippable.h" />
+    <ClInclude Include="Fight.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
@@ -144,6 +149,7 @@
     <ClInclude Include="Inn.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemCMD.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="Laz.h" />
     <ClInclude Include="Lenn.h" />
@@ -153,6 +159,7 @@
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="RawInput.h" />
+    <ClInclude Include="Run.h" />
     <ClInclude Include="Rune.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Skill.h" />

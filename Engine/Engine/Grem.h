@@ -1,6 +1,10 @@
 #pragma once
 #include "entity.h"
 #include <vector>
+#include "CommandList.h"
+#include "Spear.h"
+#
+
 class Grem :
 	public Entity
 {
@@ -8,23 +12,21 @@ private:
 
 	int rage, rageMax;
 	int xpToLevel;
-	/*Equippable * weapon;
-	Equippable * armor;
-	Equippable * accessory1;
-	Equippable * accessory2;
+	
+	Spear* weapon;
+	Armor* armor;
+	Accessory* acc1,
+			 * acc2;
+	Rune* rune1,
+		* rune2;
 
-	std::vector<Command*> skills;
-
-	Command *one;
-	Command *two;
-	Command *three;
-	Command *four;*/
-
-	std::string commands[4];
-	std::vector<std::string> skills;
-
+	BattleCommand* commands[4];
+	
 	Grem(void);
 public:
+	std::vector<BattleCommand*> availableCommands;
+	std::vector<std::string> skills;
+
 	static Grem* instance();
 	~Grem(void);
 
@@ -34,6 +36,9 @@ public:
 	int getResource() { return rage; }
 	int getMaxResource() { return rageMax; }
 	int getXpToLevel(){ return xpToLevel; }
-	std::string getCommand(int index){ return commands[index]; };
+	BattleCommand* getCommand(int index){ return commands[index]; };
+	ItemStats* getItemStatsForSlot(int whatSlot);
+	void addXP(int amount);
+	void adjustResource(int amount);
 };
 

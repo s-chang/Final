@@ -11,8 +11,6 @@ struct ItemStats
 	int level;
 	int price;
 	int xp;
-
-
 };
 
 class Item

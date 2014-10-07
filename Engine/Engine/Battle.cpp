@@ -19,6 +19,12 @@ Battle* Battle::instance()
 void Battle::init()
 {
 	int floor = Tower::instance()->getFloor();
+	activeCMD = NULL;
+	renderNames = true;
+	randAI = 0;
+	dmg = -1;
+	escape = false;
+	returnable = 0;
 
 	bWindow.init();
 	bWindow.setScale(0.788f, 0.59f, 1.0f);
@@ -37,6 +43,10 @@ void Battle::init()
 	cam.setLookAt(0,0,0);
 	cam.setProj();
 
+	all.push_back(Grem::instance());
+	all.push_back(Lenn::instance());
+	all.push_back(Laz::instance());
+
 	Drawable * d;
 	Entity* e = Lenn::instance();
 	d = e->getMesh();
@@ -54,6 +64,17 @@ void Battle::init()
 	d->setTranslate(7.7f,0.0f,3.7f);
 	d->setRotate(0.0f,135.0f,0.0f);
 
+	int top = 440;
+	int left = 360;
+	for(int i = 0; i< 4; i++){
+		Grem::instance()->getCommand(i)->setRect(top,left);
+		Lenn::instance()->getCommand(i)->setRect(top,left);
+		Laz::instance()->getCommand(i)->setRect(top,left);
+		top+=35;
+	}
+
+	enemies.clear();
+
 	Slime temp;
 	struct Pos{
 		float x; float z;
@@ -67,16 +88,22 @@ void Battle::init()
 
 	for(int i = 0; i < 3/*num_enemies*/; i++){
 		temp.init();
-		int randLevel = rand() %3+(floor-1);
-		if (randLevel < 1) randLevel = 1;
-		temp.setLevel(randLevel);
-
+		if(floor > 1){
+			int randLevel = rand() %3+(floor-1);
+			if (randLevel < 1) randLevel = 1;
+			temp.setLevel(randLevel);
+		} else 
+			temp.setLevel(1);
 		d = temp.getMesh();
 		d->setTranslate(enemyPos[i].x,0.0f,enemyPos[i].z);
 		d->setRotate(0.0f,315.0f,0.0f);
 
 		enemies.push_back(temp);
 	}
+	for(int i = 0; i < 3/*num_enemies*/; i++){
+		all.push_back(&enemies[i]);
+	}
+
 	turnOrder.COUNTER = 0;
 	turnOrder.ENEMY_COUNT = enemies.size();
 	whosTurn = Turn::PLAYER_TURN;
@@ -89,27 +116,41 @@ void Battle::shutdown()
 
 int Battle::update()
 {
+	//check win/loss
+	bool allEnemiesDead = true;
+	bool allAlliesDead = true;
+
+	for(auto &unit: all){
+		if (unit->isNPC()){
+			if(unit->getStats()->health > 0)
+				allEnemiesDead = false;
+		}
+		else{
+			if(unit->getStats()->health > 0)
+				allAlliesDead = false;
+		}
+	}
+
+	if(allEnemiesDead)
+		whosTurn = Turn::WIN;
+	if(allAlliesDead)
+		whosTurn = Turn::LOSE;
+	if(escape)
+		whosTurn = Turn::ESCAPE;
+
+	renderNames = true;
 	if(whosTurn == Turn::PLAYER_TURN){
-		switch(turnOrder.COUNTER)
-		{
-		case 0: // Grem
-			Battle::updatePlayerTurn(Grem::instance());
-			break;
-		case 1: // Lenn
-			Battle::updatePlayerTurn(Lenn::instance());
-			break;
-		case 2: // Laz
-			Battle::updatePlayerTurn(Laz::instance());
-			break;
-		default:
+		if(turnOrder.COUNTER < 3)
+			updatePlayerTurn(all[turnOrder.COUNTER]);
+		else{
 			turnOrder.COUNTER = 0;
-			break;
+			whosTurn = Turn::ENEMY_TURN;
 		}
 	} 
 	else if (whosTurn == Turn::ENEMY_TURN) {
 		updateEnemyTurn();
 	}
-	return 0;
+	return returnable;
 }
 void Battle::render()  
 {
@@ -151,91 +192,50 @@ void Battle::render()
 				//text
 				////////////////////////////////////////
 
+				if(renderNames)
+					renderNamesHelthResource();
+				//enemies
+				RECT rect;
+				rect.left = 20;
+				rect.top = 450;
+
+				wchar_t tbuffer[64];
+				std::string tempString;
+				std::wstring tempWS = L"";
 				Engine::Text* t = Engine::Text::instance();
 
-				RECT rect;
-				rect.left = 470;
-				rect.top = 450;
-				wchar_t tbuffer[64];
+				for(auto &enemy: enemies){
+					if(enemy.isAlive()){
+						tempString = enemy.getName();
+						tempWS = std::wstring(tempString.begin(),tempString.end());
+						t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-				// draw names, health, resource
-				///////////////////////////////////////////////////////////////////////////////// Grem 
-				Grem* grem = Grem::instance();
-				std::string tempString = grem->getName();
-				std::wstring tempWS = L"";
+						swprintf_s(tbuffer, 64,L"%d/%d",enemy.getStats()->health,enemy.getStats()->maxHealth);
+						rect.left = 100;
+						t->font->DrawText(0, tbuffer, -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					}
+					rect.top += 45;
+					rect.left = 20;
+				}
 
-				tempWS = std::wstring(tempString.begin(),tempString.end());
-				t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-				rect.left = 560;
-				swprintf_s(tbuffer, 64,L"%d/%d",grem->getStats()->health,grem->getStats()->maxHealth);
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				rect.left = 670;
-				swprintf_s(tbuffer, 64,L"%d/%d",grem->getResource(),grem->getMaxResource());
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				///////////////////////////////////////////////////////////////////////////////////
-				rect.left = 470;
-				rect.top += 45;
-				//////////////////////////////////////////////////////////////////////////////////Lenn
-				Lenn* lenn = Lenn::instance();
-				tempString = lenn->getName();
-				//tempWS = L"";
-
-				tempWS = std::wstring(tempString.begin(),tempString.end());
-				t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-				rect.left = 560;
-				swprintf_s(tbuffer, 64,L"%d/%d",lenn->getStats()->health,lenn->getStats()->maxHealth);
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				rect.left = 670;
-				swprintf_s(tbuffer, 64,L"%d/%d",lenn->getResource(),lenn->getMaxResource());
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				//////////////////////////////////////////////////////////////////////////////////////
-				rect.left = 470;
-				rect.top += 45;
-				//////////////////////////////////////////////////////////////////////////////////Laz
-				Laz* laz = Laz::instance();
-				tempString = laz->getName();
-				//tempWS = L"";
-
-
-				tempWS = std::wstring(tempString.begin(),tempString.end());
-				t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-				rect.left = 560;
-				swprintf_s(tbuffer, 64,L"%d/%d",laz->getStats()->health,laz->getStats()->maxHealth);
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				rect.left = 670;
-				swprintf_s(tbuffer, 64,L"%d/%d",laz->getResource(),laz->getMaxResource());
-				t->font->DrawText(0, tbuffer, -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				//////////////////////////////////////////////////////////////////////////////////////
-
-
+				if(dmg >=0 && whosTurn == Turn::PLAYER_TURN){
+					RECT rect;
+					rect.left = Engine::Cursor::instance()->cursorPos.x+120;
+					rect.top = Engine::Cursor::instance()->cursorPos.y - 20;
+					wchar_t tbuffer[64]; 
+					swprintf_s(tbuffer, 64,L"%d",dmg);
+					Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
+				}
 
 				if(whosTurn == Turn::PLAYER_TURN){
-					switch(turnOrder.COUNTER)
-					{
-					case 0: // Grem
-						Battle::renderPlayerTurn(Grem::instance());
-						break;
-					case 1: // Lenn
-						Battle::renderPlayerTurn(Lenn::instance());
-						break;
-					case 2: // Laz
-						Battle::renderPlayerTurn(Laz::instance());
-						break;
-					default:
+					if(turnOrder.COUNTER < 3)
+						renderPlayerTurn(all[turnOrder.COUNTER]);
+					else{
 						turnOrder.COUNTER = 0;
-						break;
+						whosTurn = Turn::ENEMY_TURN;
 					}
 				} 
 				else if (whosTurn == Turn::ENEMY_TURN) {
@@ -261,27 +261,85 @@ void Battle::render()
 }
 
 
-void Battle::updatePlayerTurn(Entity* )
+void Battle::updatePlayerTurn(Entity* e)
 {
+	if(!e->isAlive()){
+		turnOrder.COUNTER++;
+		return;
+	}
 	switch(turnStatus)
 	{
 	case TURN_STATUS::START:
-
+		for(int i = 0; i<4; i++){
+			e->getCommand(i)->checkOn();
+			if(Engine::Input::instance()->check_mouse_button(0) 
+				&& e->getCommand(i)->isOn())
+			{
+				activeCMD = e->getCommand(i);
+				turnStatus = TURN_STATUS::CMD;
+				break;
+			}
+		}
 		break;
-	case TURN_STATUS::OPEN_WINDOW:
-
-		break;
-	case TURN_STATUS::SELECTION:
-
+	case TURN_STATUS::CMD:
+		activeCMD->update();
 		break;
 	case TURN_STATUS::END:
-
+		Sleep(1000);
+		dmg = -1;
+		turnOrder.COUNTER++;
+		turnStatus = TURN_STATUS::START;
 		break;
 	}
 }
 void Battle::updateEnemyTurn()
 {
+	if(turnOrder.COUNTER >= turnOrder.ENEMY_COUNT){
+		whosTurn = Turn::PLAYER_TURN;
+		turnOrder.COUNTER = 0;
+		turnStatus = TURN_STATUS::START;
+		return;
+	}
 
+	Entity * thisGuy = &enemies[turnOrder.COUNTER];
+	if(!thisGuy->isAlive()){
+		turnOrder.COUNTER++;
+		return;
+	}
+	
+	Entity* player = NULL;
+	int atk = 0;
+	int def = 0;
+
+	switch(turnStatus)
+	{
+	case TURN_STATUS::START:
+		
+		randAI = rand()%3;
+		player = all[randAI];
+
+		while(!player->isAlive()){
+			randAI = rand()%3;
+			player = all[randAI];
+		}
+
+		atk = thisGuy->getStats()->attack;
+		def = player->getStats()->defense + player->getItemStatsForSlot(SLOT::ARMOR)->def;
+
+		dmg = atk - def;
+		if(dmg < 0)
+			dmg = 0;
+
+		player->adjustHealth(-dmg);
+		turnStatus = TURN_STATUS::END;
+		break;
+	case TURN_STATUS::END:
+		Sleep(1000);
+		dmg = -1;
+		turnOrder.COUNTER++;
+		turnStatus = TURN_STATUS::START;
+		break;
+	}
 }
 
 void Battle::renderPlayerTurn(Entity* e)
@@ -300,29 +358,185 @@ void Battle::renderPlayerTurn(Entity* e)
 	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
 		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	rect.left = 360;
-	rect.top = 440;
-	
 	// command window 
 	for(int i=0; i<4; i++){
-		tempString = e->getCommand(i);
+		BattleCommand* tempCMD = e->getCommand(i);
+		tempString = tempCMD->getName();
 		if(tempString != "NONE"){
-		tempWS = std::wstring(tempString.begin(),tempString.end());
-		if(c->cursorPos.x > rect.left+15 && c->cursorPos.x < rect.left + 100
-			&& c->cursorPos.y > rect.top+20 && c->cursorPos.y < rect.top + 40 )
-			t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
-		else
-			t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			tempWS = std::wstring(tempString.begin(),tempString.end());
+			if(tempCMD->isOn()){
+				t->font->DrawText(0, tempWS.c_str(), -1, &tempCMD->getRect(), 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+
+				// help text
+				rect.left = 50;
+				rect.top = 7;
+				tempString = tempCMD->helpText();
+				tempWS = std::wstring(tempString.begin(),tempString.end());
+				t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			}
+			else
+				t->font->DrawText(0, tempWS.c_str(), -1, &tempCMD->getRect(), 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
-		rect.top += 35;
 	}
+	if(turnStatus == TURN_STATUS::CMD)
+		activeCMD->text();
 }
 void Battle::renderEnemyTurn()
 {
+	if(turnOrder.COUNTER >= turnOrder.ENEMY_COUNT)
+		return;
+	Engine::Text* t = Engine::Text::instance();
+	Engine::Cursor* c = Engine::Cursor::instance();
+
+	RECT rect;
+	rect.left = 50;
+	rect.top = 385;
+
+	std::string tempString = enemies[turnOrder.COUNTER].getName();
+	std::wstring tempWS = L"";
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.left = 550;
+	wchar_t tbuffer[64]; 
+	swprintf_s(tbuffer, 64,L"%d",dmg);
+
+	switch( randAI )
+	{
+	case 0:
+		rect.top = 450;
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
+		break;
+	case 1:
+		rect.top = 495;
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
+		break;
+	case 2:
+		rect.top = 540;
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
+		break;
+	}
+}
+
+
+void Battle::renderNamesHelthResource()
+{
+	Engine::Text* t = Engine::Text::instance();
+
+	RECT rect;
+	rect.left = 470;
+	rect.top = 450;
+	wchar_t tbuffer[64];
+	// draw names, health, resource
+	///////////////////////////////////////////////////////////////////////////////// Grem 
+	Grem* grem = Grem::instance();
+	std::string tempString = grem->getName();
+	std::wstring tempWS = L"";
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.left = 560;
+	swprintf_s(tbuffer, 64,L"%d/%d",grem->getStats()->health,grem->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	rect.left = 670;
+	swprintf_s(tbuffer, 64,L"%d/%d",grem->getResource(),grem->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	///////////////////////////////////////////////////////////////////////////////////
+	rect.left = 470;
+	rect.top += 45;
+	//////////////////////////////////////////////////////////////////////////////////Lenn
+	Lenn* lenn = Lenn::instance();
+	tempString = lenn->getName();
+	//tempWS = L"";
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.left = 560;
+	swprintf_s(tbuffer, 64,L"%d/%d",lenn->getStats()->health,lenn->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	rect.left = 670;
+	swprintf_s(tbuffer, 64,L"%d/%d",lenn->getResource(),lenn->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//////////////////////////////////////////////////////////////////////////////////////
+	rect.left = 470;
+	rect.top += 45;
+	//////////////////////////////////////////////////////////////////////////////////Laz
+	Laz* laz = Laz::instance();
+	tempString = laz->getName();
+	//tempWS = L"";
+
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.left = 560;
+	swprintf_s(tbuffer, 64,L"%d/%d",laz->getStats()->health,laz->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	rect.left = 670;
+	swprintf_s(tbuffer, 64,L"%d/%d",laz->getResource(),laz->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//////////////////////////////////////////////////////////////////////////////////////
+
+	
 }
 
 void Battle::BattleOver()
 {
+	Engine::Text* t = Engine::Text::instance();
+
+	RECT rect;
+	rect.left = 20;
+	rect.top = 7;
+	wchar_t tbuffer[64];
+	int totalxp = 0;
+
+	if(turnOrder.COUNTER > 0){
+		Sleep(1000);
+		returnable = RETURN;
+	}
+	switch(whosTurn)
+	{
+	case Turn::WIN:
+		turnOrder.COUNTER++;
+		for(auto &enemy: enemies)
+			totalxp += enemy.getStats()->xp;
+		Grem::instance()->addXP(totalxp);
+		Lenn::instance()->addXP(totalxp);
+		Laz::instance()->addXP(totalxp);
+		swprintf_s(tbuffer, 64,L"You are victorious earning %d XP",totalxp);
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+		break;
+	case Turn::LOSE:
+		turnOrder.COUNTER++;
+		swprintf_s(tbuffer, 64,L"You've been wrecked",totalxp);
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+		break;
+	case Turn::ESCAPE:
+		turnOrder.COUNTER++;
+		swprintf_s(tbuffer, 64,L"You Escape...");
+		t->font->DrawText(0, tbuffer, -1, &rect, 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+		break;
+	}
 }

@@ -123,9 +123,6 @@
     <Filter Include="Source Files\Game\Enemies\Slime">
       <UniqueIdentifier>{c0a4cd1e-984c-4088-bb69-6610463dd29b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game\Skills">
-      <UniqueIdentifier>{e2a9d7ea-2c2f-4c1b-b501-e1e1c8ac58b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game\Item">
       <UniqueIdentifier>{803934db-e892-4447-97d3-710752903138}</UniqueIdentifier>
     </Filter>
@@ -152,6 +149,39 @@
     </Filter>
     <Filter Include="Source Files\Game\Item\Rune">
       <UniqueIdentifier>{995cb2d3-119a-4ce2-b863-c3e7ae490180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills">
+      <UniqueIdentifier>{e2a9d7ea-2c2f-4c1b-b501-e1e1c8ac58b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\BattleCommands">
+      <UniqueIdentifier>{04bdba80-e16d-4fba-a28e-c82865c5a9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills">
+      <UniqueIdentifier>{aa482d0d-a271-4316-bbfe-a7acb04463b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills\Rage">
+      <UniqueIdentifier>{194f294d-2867-464a-a321-4273c835b44d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills\Subtlety">
+      <UniqueIdentifier>{d01728dd-56c9-409a-a5be-0139ce264905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills\Eliminate">
+      <UniqueIdentifier>{660c2482-d6e4-4295-9cf1-1da8dc50e363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills\Elemental">
+      <UniqueIdentifier>{e120c181-0465-4cd9-bc86-0509f3aa8db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\Skills\Dark">
+      <UniqueIdentifier>{ddfaad31-392b-44a2-b432-e539b3d50200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\BattleCommands\Fight">
+      <UniqueIdentifier>{d610fa28-f452-4255-b1c6-7aae1c554ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\BattleCommands\Run">
+      <UniqueIdentifier>{a832cf21-daae-4851-8e8e-ac9f90188a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Commands/Skills\BattleCommands\ItemCMD">
+      <UniqueIdentifier>{47297668-4cee-4a8d-a623-5aa05c7aa4f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -248,12 +278,6 @@
     <ClCompile Include="Slime.cpp">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
     </ClCompile>
-    <ClCompile Include="Skill.cpp">
-      <Filter>Source Files\Game\Skills</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleCommand.cpp">
-      <Filter>Source Files\Game\Skills</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Game\Item</Filter>
     </ClCompile>
@@ -280,6 +304,21 @@
     </ClCompile>
     <ClCompile Include="Rune.cpp">
       <Filter>Source Files\Game\Item\Rune</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleCommand.cpp">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Source Files\Game\Commands/Skills\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight.cpp">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\Fight</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemCMD.cpp">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\ItemCMD</Filter>
+    </ClCompile>
+    <ClCompile Include="Run.cpp">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\Run</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,12 +427,6 @@
     <ClInclude Include="Slime.h">
       <Filter>Source Files\Game\Enemies\Slime</Filter>
     </ClInclude>
-    <ClInclude Include="Skill.h">
-      <Filter>Source Files\Game\Skills</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleCommand.h">
-      <Filter>Source Files\Game\Skills</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Source Files\Game\Item</Filter>
     </ClInclude>
@@ -420,6 +453,24 @@
     </ClInclude>
     <ClInclude Include="Rune.h">
       <Filter>Source Files\Game\Item\Rune</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleCommand.h">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Source Files\Game\Commands/Skills\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandList.h">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Fight.h">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\Fight</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCMD.h">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\ItemCMD</Filter>
+    </ClInclude>
+    <ClInclude Include="Run.h">
+      <Filter>Source Files\Game\Commands/Skills\BattleCommands\Run</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

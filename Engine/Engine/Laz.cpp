@@ -7,6 +7,16 @@ Laz::Laz(void) : Entity()
 
 Laz::~Laz(void)
 {
+	while(!availableCommands.empty()){
+		delete availableCommands.back();
+		availableCommands.pop_back();
+	}
+	delete weapon;
+	delete armor;
+	delete acc1;
+	delete acc2;
+	delete rune1;
+	delete rune2;
 }
 
 Laz* Laz::instance()
@@ -38,10 +48,30 @@ void Laz::init()
 	};
 	stats = temp;
 
-	commands[0] = "Fight";
-	commands[1] = "NONE";
-	commands[2] = "Item";
-	commands[3] = "Run";
+	BattleCommand* newCommand = new BattleCommand();
+	availableCommands.push_back(newCommand);
+	newCommand = new Fight();
+	availableCommands.push_back(newCommand);
+	newCommand = new ItemCMD();
+	availableCommands.push_back(newCommand);
+	newCommand = new Run();
+	availableCommands.push_back(newCommand);
+
+	commands[0] = availableCommands[1];
+	commands[1] = availableCommands[0];
+	commands[2] = availableCommands[2];
+	commands[3] = availableCommands[3];
+
+	weapon = (Staff*)ItemFactory::instance()->getItem("Splintered Staff");
+	ItemStats armorStats;
+	armorStats.def = 5;
+	armor = new Armor();
+	armor->setStats(armorStats);
+
+	acc1 = NULL;
+	acc2 = NULL;
+	rune1 = NULL;
+	rune2 = NULL;
 
 }
 
@@ -65,3 +95,36 @@ void Laz::levelUp()
 	}
 	
 }
+
+ItemStats* Laz::getItemStatsForSlot( int slot)
+{
+	switch(slot)
+	{
+	case SLOT::WEAPON:
+		return &weapon->getStats();
+	case SLOT::ARMOR:
+		return &armor->getStats();
+	case SLOT::ACC1:
+		return &acc1->getStats();
+	case SLOT::ACC2:
+		return &acc2->getStats();
+	case SLOT::RUNE1:
+		return &rune1->getStats();
+	case SLOT::RUNE2:
+		return &rune2->getStats();
+	}
+}
+void Laz::addXP(int amount)
+{
+	stats.xp += amount;
+	if(stats.xp >= xpToLevel)
+		levelUp();
+};
+void Laz::adjustResource(int amount)
+{
+	mana += amount;
+	if(mana <=0 )
+		mana = 0;
+	if (mana >= manaMax)
+		mana = manaMax;
+};

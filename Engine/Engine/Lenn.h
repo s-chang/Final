@@ -1,5 +1,7 @@
 #pragma once
 #include "entity.h"
+#include "CommandList.h"
+#include "Dagger.h"
 #include <vector>
 class Lenn :
 	public Entity
@@ -7,23 +9,21 @@ class Lenn :
 private:
 	int stamina, staminaMax;
 	int xpToLevel;
-	/*Equippable * weapon;
-	Equippable * armor;
-	Equippable * accessory1;
-	Equippable * accessory2;
 
-	std::vector<Command*> skills;
+	Dagger* weapon;
+	Armor* armor;
+	Accessory* acc1,
+			 * acc2;
+	Rune* rune1,
+		* rune2;
 
-	Command *one;
-	Command *two;
-	Command *three;
-	Command *four;*/
-
-	std::string commands[4];
-	std::vector<std::string> skills;
+	BattleCommand* commands[4];
 
 	Lenn(void);
 public:
+	std::vector<BattleCommand*> availableCommands;
+	std::vector<std::string> skills;
+
 	static Lenn* instance();
 	~Lenn(void);
 
@@ -33,6 +33,9 @@ public:
 	int getResource() { return stamina; }
 	int getMaxResource() { return staminaMax; }
 	int getXpToLevel(){ return xpToLevel; }
-	std::string getCommand(int index){ return commands[index]; };
+	BattleCommand* getCommand(int index){ return commands[index]; };
+	ItemStats* getItemStatsForSlot(int whatSlot);
+	void addXP(int amount);
+	void adjustResource(int amount);
 };
 

@@ -3,6 +3,7 @@
 
 Slime::Slime(void) : Entity()
 {
+	npc = true;
 }
 
 

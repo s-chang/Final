@@ -9,7 +9,7 @@ struct Turn{
 		PLAYER_TURN = 0,
 		ENEMY_TURN = 1,
 		// battleOver?
-		LOSE = 2, WIN = 3,
+		LOSE = 2, WIN = 3, ESCAPE = 4,
 		// Counters
 		PLAYER_COUNT = 3;
 	int ENEMY_COUNT,
@@ -19,7 +19,7 @@ struct TURN_STATUS
 {
 	//turn status: start, openwindow, selection, end;
 	static const int
-		START = 0, OPEN_WINDOW = 1, SELECTION = 2, END = 3;
+		START = 0, CMD = 1, END = 2;
 };
 
 class Battle :
@@ -30,12 +30,7 @@ private:
 
 	Drawable platform;
 	Drawable bWindow;
-	//Drawable player;
-
-	std::vector<Slime> enemies;
-	int whosTurn, turnStatus;
-	Turn turnOrder;
-	//std::vector<Entity*> entityList;
+	int returnable;
 
 	void updatePlayerTurn(Entity*);
 	void updateEnemyTurn();
@@ -43,10 +38,23 @@ private:
 	void renderPlayerTurn(Entity*);
 	void renderEnemyTurn();
 
+	void renderNamesHelthResource();
+
 	void BattleOver();
 
 	Battle(void);
+
 public:
+	int whosTurn, turnStatus;
+	Turn turnOrder;
+	std::vector<Slime> enemies;
+	std::vector<Entity*> all;
+	BattleCommand* activeCMD;
+	bool renderNames;
+	int dmg;
+	int randAI;
+	bool escape;
+
 	static Battle* instance();
 	~Battle(void);
 

@@ -3,6 +3,7 @@
 Entity::Entity(void)
 {
 	alive = true;
+	npc = false;
 }
 
 Entity::~Entity(void)
@@ -18,6 +19,10 @@ void Entity::setLevel(int num)
 void Entity::adjustHealth(int amount)
 {
 	stats.health += amount;
+	if(stats.health <=0){
+		stats.health = 0;
+		alive = false;
+	}
 }
 Drawable * Entity::getMesh() 
 { 
@@ -34,6 +39,10 @@ std::string Entity::getName()
 bool Entity::isAlive()
 {
 	return alive;
+}
+bool Entity::isNPC()
+{
+	return npc;
 }
 bool Entity::operator()(Entity* l, Entity* r)
 { 
