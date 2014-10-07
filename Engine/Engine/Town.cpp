@@ -123,10 +123,12 @@ int Town::update()
 		}
 	}
 
-	if(input->push_button(DIK_G))
-	{
-		return STATUSMENU;
-	}
+	if(input->push_button(DIK_G)){
+		if(!input->check_button_down(DIK_G)){
+			input->set_button(DIK_G,true);
+			return STATUSMENU;
+		}
+	} else input->set_button(DIK_G,false);
 	return 0;
 }
 void Town::render()

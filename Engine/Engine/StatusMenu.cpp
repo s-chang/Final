@@ -89,6 +89,13 @@ void StatusMenu::shutdown()
 
 int StatusMenu::update()
 {
+	Engine::Input* input = Engine::Input::instance();
+	if(input->push_button(DIK_G)){
+		if(!input->check_button_down(DIK_G)){
+			input->set_button(DIK_G,true);
+			return RETURN;
+		}
+	} else input->set_button(DIK_G,false);
 
 	switch(status_state)
 	{
