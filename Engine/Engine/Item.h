@@ -17,6 +17,7 @@ class Item
 {
 private:
 	ItemStats stats;
+	int amount;
 
 public:
 	Item();
@@ -29,5 +30,6 @@ public:
 	void setStats(ItemStats itemStats);
 
 
-
+	void setAmount(int num);
+	int getAmount();
 };

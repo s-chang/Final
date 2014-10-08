@@ -179,9 +179,11 @@
     <ClInclude Include="Town.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Armor.txt" />
     <Text Include="BGM.txt" />
     <Text Include="Dagger.txt" />
     <Text Include="DMap.txt" />
+    <Text Include="Item.txt" />
     <Text Include="Meshes.txt" />
     <Text Include="SoundEffects.txt" />
     <Text Include="Spear.txt" />

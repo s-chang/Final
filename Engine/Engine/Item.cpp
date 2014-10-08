@@ -40,3 +40,13 @@ void Item::setStats(ItemStats itemStats)
 	stats.price = itemStats.price;
 	stats.xp = itemStats.xp;
 }
+
+void Item::setAmount(int num)
+{
+	amount = num;
+}
+
+int Item::getAmount()
+{
+	return amount;
+}

@@ -326,6 +326,12 @@
     <Text Include="Textures2D.txt">
       <Filter>Assets</Filter>
     </Text>
+    <Text Include="Item.txt">
+      <Filter>Assets</Filter>
+    </Text>
+    <Text Include="Armor.txt">
+      <Filter>Assets</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

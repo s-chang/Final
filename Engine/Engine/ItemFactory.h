@@ -7,6 +7,7 @@
 #include "Accessory.h"
 #include "Armor.h"
 #include "Dagger.h"
+#include "Rune.h"
 #include <string>
 #include <vector>
 
@@ -17,6 +18,8 @@ private:
 	std::vector<Item> itemlist;
 
 	Item searchItem(std::string name);
+
+	void loadList(const std::string filename);
 
 public:
 	static ItemFactory *instance();

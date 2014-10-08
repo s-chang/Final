@@ -27,136 +27,56 @@ Item ItemFactory::searchItem(std::string name)
 
 Item *ItemFactory::getItem(std::string name)
 {
-	if(name == "Weathered Spear")
+	Item temp(searchItem(name).getStats());
+
+	if(temp.getStats().type == "Spear")
 	{
-		return new Spear(searchItem(name).getStats());
+		return new Spear(temp.getStats());
 	}
 
-	if(name == "Short Spear")
+	if(temp.getStats().type == "Dagger")
 	{
-		
-		return new Spear(searchItem(name).getStats());
+		return new Dagger(temp.getStats());
 	}
 
-	if(name == "Spear")
+	if(temp.getStats().type == "Staff")
 	{
-		return new Spear(searchItem(name).getStats());
+		return new Staff(temp.getStats());
 	}
 
-	if(name == "Harpoon")
+	if(temp.getStats().type == "Armor")
 	{
-		return new Spear(searchItem(name).getStats());
+		return new Armor(temp.getStats());
 	}
 
-	if(name == "Lance")
+	if(temp.getStats().type == "Rune")
 	{
-		return new Spear(searchItem(name).getStats());
+		return new Rune(temp.getStats());
 	}
 
-	if(name == "Gae Bolg")
+	if(temp.getStats().type == "Items")
 	{
-		return new Spear(searchItem(name).getStats());
+		return new Item(temp.getStats());
 	}
 
-	if(name == "Luin of Celtchar")
+	if(temp.getStats().type == "Accessory")
 	{
-		return new Spear(searchItem(name).getStats());
-	}
-
-	if(name == "Gungnir")
-	{
-		return new Spear(searchItem(name).getStats());
-	}
-
-	if(name == "Chipped Dagger")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Knife")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Sting")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Needle")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Dagger")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Night's Bane")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Shiv of Titans")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Death and Deceit")
-	{
-		return new Dagger(searchItem(name).getStats());
-	}
-
-	if(name == "Splintered Staff")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Rod")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Staff")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Rod of Light")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Staff of Wisdom")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Iron Staff")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Staff of the Ancients")
-	{
-		return new Staff(searchItem(name).getStats());
-	}
-	if(name == "Save the Queen")
-	{
-		return new Staff(searchItem(name).getStats());
+		return new Accessory(temp.getStats());
 	}
 
 	return new Item();
 
-
 }
 
-void ItemFactory::loadFactory()
+void ItemFactory::loadList(const std::string filename)
 {
 	ItemStats tempStats;
 
-
-	std::ifstream file("Spear.txt");
-
+	std::ifstream file(filename);
 	while(std::getline(file, tempStats.name, ','))
 	{
 		std::string tempInt;
-		
+
 		std::getline(file, tempStats.type, ',');
 		std::getline(file, tempStats.description, ',');
 
@@ -169,111 +89,39 @@ void ItemFactory::loadFactory()
 		std::getline(file, tempInt, ',');
 		tempStats.atk = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt, ',');
+		std::getline(file, tempInt, ',');
 		tempStats.mag = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt, ',');
+		std::getline(file, tempInt, ',');
 		tempStats.def = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt, ',');
+		std::getline(file, tempInt, ',');
 		tempStats.res = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt, ',');
+		std::getline(file, tempInt, ',');
 		tempStats.spd = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt, ',');
+		std::getline(file, tempInt, ',');
 		tempStats.price = (int)atoi(tempInt.c_str());
 
-			std::getline(file, tempInt);
+		std::getline(file, tempInt);
 		tempStats.xp = (int)atoi(tempInt.c_str());
-		
+
 
 		itemlist.push_back(Item(tempStats));
 	}
 
 	file.close();
 
-	std::ifstream file2("Dagger.txt");
+}
 
-	while(std::getline(file2, tempStats.name, ','))
-	{
-		std::string tempInt;
-		
-		std::getline(file2, tempStats.type, ',');
-		std::getline(file2, tempStats.description, ',');
+void ItemFactory::loadFactory()
+{
 
-		std::getline(file2, tempInt, ',');
-		tempStats.level = (int)atoi(tempInt.c_str());
-
-		std::getline(file2, tempInt, ',');
-		tempStats.health = (int)atoi(tempInt.c_str());
-
-		std::getline(file2, tempInt, ',');
-		tempStats.atk = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt, ',');
-		tempStats.mag = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt, ',');
-		tempStats.def = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt, ',');
-		tempStats.res = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt, ',');
-		tempStats.spd = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt, ',');
-		tempStats.price = (int)atoi(tempInt.c_str());
-
-			std::getline(file2, tempInt);
-		tempStats.xp = (int)atoi(tempInt.c_str());
-		
-
-		itemlist.push_back(Item(tempStats));
-	}
-
-	file2.close();
-
-	std::ifstream file3("Staff.txt");
-
-	while(std::getline(file3, tempStats.name, ','))
-	{
-		std::string tempInt;
-		
-		std::getline(file3, tempStats.type, ',');
-		std::getline(file3, tempStats.description, ',');
-
-		std::getline(file3, tempInt, ',');
-		tempStats.level = (int)atoi(tempInt.c_str());
-
-		std::getline(file3, tempInt, ',');
-		tempStats.health = (int)atoi(tempInt.c_str());
-
-		std::getline(file3, tempInt, ',');
-		tempStats.atk = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt, ',');
-		tempStats.mag = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt, ',');
-		tempStats.def = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt, ',');
-		tempStats.res = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt, ',');
-		tempStats.spd = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt, ',');
-		tempStats.price = (int)atoi(tempInt.c_str());
-
-			std::getline(file3, tempInt);
-		tempStats.xp = (int)atoi(tempInt.c_str());
-		
-
-		itemlist.push_back(Item(tempStats));
-	}
-
-	file3.close();
+	loadList("Spear.txt");
+	loadList("Dagger.txt");
+	loadList("Staff.txt");
+	loadList("Item.txt");
+	loadList("Armor.txt");
+	
 }

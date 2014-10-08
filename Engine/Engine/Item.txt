@@ -1,0 +1,3 @@
+Potion,Item,Restores 30% HP.,0,30,0,0,0,0,0,0,0,
+Ether,Item,Retores 30% resources.,0,30,0,0,0,0,0,0,0,
+Revive,Item,Revive a fallen character with 25% HP.,0,25,0,0,0,0,0,0,0
