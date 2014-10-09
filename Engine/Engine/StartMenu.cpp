@@ -108,8 +108,10 @@ void StartMenu::render()
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
 				g->Draw2DObject(bg);
-				for(auto &button: buttons){
-					g->Draw2DObject(button);
+
+				for(int i = 0; i < MENU_BUTTON_CNT; i++){
+					if(i==1) i = 2; // REMOVE : when Continue is implemented
+					g->Draw2DObject(buttons[i]);
 				}
 
 				// draw cursor last

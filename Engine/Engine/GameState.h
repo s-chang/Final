@@ -38,3 +38,10 @@ struct STATUS_STATE{
 		STATUS = 5,
 		OPTIONS = 6;
 };
+
+// x,y,t,l,b,r,name
+struct SCDATA {
+		float x,y;
+		int t,l,b,r;
+		wchar_t * name;
+	};

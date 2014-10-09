@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+
 class Slime :
 	public Entity
 {

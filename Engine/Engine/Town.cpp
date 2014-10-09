@@ -128,6 +128,14 @@ int Town::update()
 			return STATUSMENU;
 		}
 	} else input->set_button(DIK_G,false);
+
+
+	///////////////////////////////////////////////
+	// debug instaswitch to battle
+	///////////////////////////////////////////////
+	if(input->push_button(DIK_B))
+		return BATTLE;
+
 	return 0;
 }
 void Town::render()

@@ -54,7 +54,7 @@ Item *ItemFactory::getItem(std::string name)
 		return new Rune(temp.getStats());
 	}
 
-	if(temp.getStats().type == "Items")
+	if(temp.getStats().type == "Item")
 	{
 		return new Item(temp.getStats());
 	}

@@ -1,6 +1,6 @@
 #pragma once
 #include "gamestate.h"
-#include "Entities.h"
+#include "Player.h"
 #include <vector>
 
 struct Turn{

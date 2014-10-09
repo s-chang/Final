@@ -2,6 +2,7 @@
 #include "statusStates.h"
 #include "Options.h"
 
+
 StatMenuManager::StatMenuManager()
 {}
 
@@ -22,6 +23,10 @@ void StatMenuManager::init()
 	statusState.push(StatusMain::instance());
 	statusState.top()->init();
 
+	InventoryScreen::instance()->init();
+	EquipScreen::instance()->init();
+	SkillsMenu::instance()->init();
+	StatusScreen::instance()->init();
 }
 
 void StatMenuManager::shutdown()
@@ -56,12 +61,17 @@ int StatMenuManager::update()
 		statusState.push(StatusMain::instance());
 		break;
 	case STATUS_STATE::INVENTORY:
+		// InventoryScreen::instance()->setBool(true);
+		statusState.push(InventoryScreen::instance());
 		break;
 	case STATUS_STATE::EQUIP:
+		statusState.push(EquipScreen::instance());
 		break;
 	case STATUS_STATE::SKILLS:
+		statusState.push(SkillsMenu::instance());
 		break;
 	case STATUS_STATE::STATUS:
+		statusState.push(StatusScreen::instance());
 		break;
 	case STATUS_STATE::OPTIONS:
 		statusState.push(Options::instance());

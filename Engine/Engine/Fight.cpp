@@ -1,5 +1,5 @@
 #include "Fight.h"
-
+#include "Battle.h"
 
 Fight::Fight(void) : BattleCommand()
 {

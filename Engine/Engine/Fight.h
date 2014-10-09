@@ -1,6 +1,6 @@
 #pragma once
 #include "battlecommand.h"
-#include "Battle.h"
+
 class Fight :
 	public BattleCommand
 {

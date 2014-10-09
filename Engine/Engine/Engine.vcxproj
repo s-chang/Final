@@ -88,6 +88,7 @@
     <ClCompile Include="DX.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Equippable.cpp" />
+    <ClCompile Include="EquipScreen.cpp" />
     <ClCompile Include="Fight.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="FloorGenerator.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="Grem.cpp" />
     <ClCompile Include="Inn.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InventoryScreen.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemCMD.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -107,11 +109,13 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="Options.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RawInput.cpp" />
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Rune.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SkillsMenu.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spear.cpp" />
@@ -119,6 +123,7 @@
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="StatusMain.cpp" />
     <ClCompile Include="StatMenuManager.cpp" />
+    <ClCompile Include="StatusScreen.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -141,6 +146,7 @@
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Equippable.h" />
+    <ClInclude Include="EquipScreen.h" />
     <ClInclude Include="Fight.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="FloorGenerator.h" />
@@ -152,6 +158,7 @@
     <ClInclude Include="Grem.h" />
     <ClInclude Include="Inn.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InventoryScreen.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemCMD.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -162,11 +169,13 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Options.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RawInput.h" />
     <ClInclude Include="Run.h" />
     <ClInclude Include="Rune.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="SkillsMenu.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Spear.h" />
@@ -174,6 +183,7 @@
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="StatusMain.h" />
     <ClInclude Include="StatMenuManager.h" />
+    <ClInclude Include="StatusScreen.h" />
     <ClInclude Include="statusStates.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />

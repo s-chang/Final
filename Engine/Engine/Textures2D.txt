@@ -20,3 +20,7 @@ gremPortrait.png gremPortrait
 lennPortrait.png lennPortrait
 lazPortrait.png lazPortrait
 statusMain.png statusMain
+statusScreen.png statScreen
+equipScreen.png equipScreen
+inventoryScreen.png invScreen
+commandScreen.png commandWindow

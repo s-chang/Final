@@ -56,6 +56,7 @@ public:
 	virtual int getMaxResource(){ return 0; };
 	virtual BattleCommand* getCommand(int index){ return 0; };
 	virtual ItemStats* getItemStatsForSlot(int whatSlot){ return 0; };
+	virtual int getXpToLevel(){ return 0; };
 	//virtual void printList(int type);
 };
 

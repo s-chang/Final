@@ -1,9 +1,7 @@
 #pragma once
 #include "entity.h"
-#include <vector>
 #include "CommandList.h"
 #include "Spear.h"
-#
 
 class Grem :
 	public Entity

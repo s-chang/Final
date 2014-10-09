@@ -26,11 +26,8 @@ void GameStateManager::init()
 	Tavern::instance()->init();
 	StatMenuManager::instance()->init();
 
-	//init characters
-	Grem::instance()->init();
-	Lenn::instance()->init();
-	Laz::instance()->init();
-
+	//init player
+	Player::instance()->init();
 	
 
 }

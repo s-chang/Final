@@ -98,10 +98,10 @@
       <Filter>Game\Player\Characters\Lenn</Filter>
     </ClCompile>
     <ClCompile Include="Floor.cpp">
-      <Filter>Game\Floorstuff\Floor</Filter>
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClCompile>
     <ClCompile Include="FloorGenerator.cpp">
-      <Filter>Game\Floorstuff\FloorGenerator</Filter>
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
     </ClCompile>
     <ClCompile Include="Fight.cpp">
       <Filter>Game\Commands/Skills\Commands\Fight</Filter>
@@ -144,6 +144,21 @@
     </ClCompile>
     <ClCompile Include="StatMenuManager.cpp">
       <Filter>Game\GameStates\Menus\StatusMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryScreen.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipScreen.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillsMenu.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusScreen.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,10 +274,10 @@
       <Filter>Game\Player\Characters\Grem</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h">
-      <Filter>Game\Floorstuff\Floor</Filter>
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClInclude>
     <ClInclude Include="FloorGenerator.h">
-      <Filter>Game\Floorstuff\FloorGenerator</Filter>
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
     </ClInclude>
     <ClInclude Include="Fight.h">
       <Filter>Game\Commands/Skills\Commands\Fight</Filter>
@@ -308,6 +323,21 @@
     </ClInclude>
     <ClInclude Include="statusStates.h">
       <Filter>Game\GameStates\Menus\StatusMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryScreen.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipScreen.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillsMenu.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusScreen.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -469,18 +499,6 @@
     <Filter Include="Game\Player\Characters\Lazarus">
       <UniqueIdentifier>{c670e170-6477-441b-8947-3a08f467314d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Player\Inventory">
-      <UniqueIdentifier>{11b862dd-3713-41cb-a5a8-6d7f12009296}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Floorstuff">
-      <UniqueIdentifier>{08b26178-a913-4e87-8a9e-3980df689a2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Floorstuff\Floor">
-      <UniqueIdentifier>{58e59aec-7771-47a7-8950-421b272425bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Floorstuff\FloorGenerator">
-      <UniqueIdentifier>{2ffe381e-f0a0-420f-b7e1-c6f406815ff0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Commands/Skills\Commands\Fight">
       <UniqueIdentifier>{3dee60bb-7ae3-4eac-9206-bea1d06e01c7}</UniqueIdentifier>
     </Filter>
@@ -531,6 +549,15 @@
     </Filter>
     <Filter Include="Game\GameStates\Menus\StatusMenu\StatusMain">
       <UniqueIdentifier>{1524d660-d397-4958-b7d9-d57c005d407f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Tower\Floorstuff">
+      <UniqueIdentifier>{08b26178-a913-4e87-8a9e-3980df689a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Tower\Floorstuff\Floor">
+      <UniqueIdentifier>{58e59aec-7771-47a7-8950-421b272425bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Tower\Floorstuff\FloorGenerator">
+      <UniqueIdentifier>{2ffe381e-f0a0-420f-b7e1-c6f406815ff0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 #include "StatusMain.h"
-
+#include "Player.h"
 
 StatusMain::StatusMain(void)
 {
@@ -62,11 +62,7 @@ void StatusMain::init()
 	//init status commands
 	//100x50
 	// status command data
-	struct SCDATA {
-		float x,y;
-		int t,l,b,r;
-		wchar_t * name;
-	};
+	
 
 	SCDATA scdata[] = {
 		{700.0f, 95.0f,70,650,120,800,L"Inventory"}, //0 inve
@@ -196,6 +192,18 @@ void StatusMain::render()
 			{
 				Engine::Text::instance()->render(status_commands[i].getRect().top, status_commands[i].getRect().left, status_commands[i].getPlainText(), status_commands[i].getColor());
 			}
+
+			RECT rect;
+			rect.left = 650;
+			rect.top = 355;
+			wchar_t tbuffer[64];
+			swprintf_s(tbuffer, 64,L"Gold \n   %d",Player::instance()->getGold());
+			Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+			//////////////////////////////////////////////
+			// Cursor
+			//////////////////////////////////////////////
 
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK))){
 				Engine::Graphics::instance()->drawCursor();

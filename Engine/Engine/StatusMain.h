@@ -9,9 +9,7 @@ private:
 	Drawable background;
 	std::vector<Drawable> portraits;
 	std::vector<Drawable> names;
-	std::vector<Drawable> hp_resource;
 	std::vector<Drawable> status_commands;
-	std::vector<Drawable> gold_playtime;
 
 	void setMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world, Drawable &object);
 	void resetMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world);

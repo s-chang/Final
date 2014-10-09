@@ -29,7 +29,6 @@ public:
 	ItemStats getStats();
 	void setStats(ItemStats itemStats);
 
-
 	void setAmount(int num);
 	int getAmount();
 };

@@ -512,7 +512,9 @@ void Battle::BattleOver()
 	if(turnOrder.COUNTER > 0){
 		Sleep(1000);
 		returnable = RETURN;
+		return;
 	}
+
 	switch(whosTurn)
 	{
 	case Turn::WIN:

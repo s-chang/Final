@@ -24,7 +24,7 @@ void Slime::init()
 
 	Stats temp ={
 		//int xp given upon death, level, health, maxHealth;
-		10,1,35,35,
+		13,1,35,35,
 		//int attack, magic, defense, resist, speed;	
 		15, 15, 10, 10, 5,
 	};
