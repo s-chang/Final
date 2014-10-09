@@ -61,9 +61,6 @@
     <ClCompile Include="StartMenu.cpp">
       <Filter>Game\GameStates\Menus\StartMenu</Filter>
     </ClCompile>
-    <ClCompile Include="StatusMenu.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu</Filter>
-    </ClCompile>
     <ClCompile Include="Options.cpp">
       <Filter>Game\GameStates\Menus\Options</Filter>
     </ClCompile>
@@ -142,6 +139,12 @@
     <ClCompile Include="ItemFactory.cpp">
       <Filter>Game\Items\ItemFactory</Filter>
     </ClCompile>
+    <ClCompile Include="StatusMain.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
+    </ClCompile>
+    <ClCompile Include="StatMenuManager.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -218,9 +221,6 @@
     </ClInclude>
     <ClInclude Include="StartMenu.h">
       <Filter>Game\GameStates\Menus\StartMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="StatusMenu.h">
-      <Filter>Game\GameStates\Menus\StatusMenu</Filter>
     </ClInclude>
     <ClInclude Include="Options.h">
       <Filter>Game\GameStates\Menus\Options</Filter>
@@ -299,6 +299,15 @@
     </ClInclude>
     <ClInclude Include="ItemFactory.h">
       <Filter>Game\Items\ItemFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusMain.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
+    </ClInclude>
+    <ClInclude Include="StatMenuManager.h">
+      <Filter>Game\GameStates\Menus\StatusMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="statusStates.h">
+      <Filter>Game\GameStates\Menus\StatusMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -507,6 +516,21 @@
     </Filter>
     <Filter Include="Game\Items\ItemFactory">
       <UniqueIdentifier>{bdf317ef-9866-44fb-a486-84f23fba37c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\Inventory">
+      <UniqueIdentifier>{30a3a921-4c8f-43d6-85c9-fa56cdba66be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\Equip">
+      <UniqueIdentifier>{a0dc6ab0-0ff5-44df-92b3-e156093fc9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\Status">
+      <UniqueIdentifier>{a0b2aa83-5ddc-4c36-a749-7185e5e5b993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\Skills">
+      <UniqueIdentifier>{cbb5a3d2-8147-44cc-a0b4-a8f878ebc3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\StatusMain">
+      <UniqueIdentifier>{1524d660-d397-4958-b7d9-d57c005d407f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

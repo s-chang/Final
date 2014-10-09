@@ -117,7 +117,8 @@
     <ClCompile Include="Spear.cpp" />
     <ClCompile Include="Staff.cpp" />
     <ClCompile Include="StartMenu.cpp" />
-    <ClCompile Include="StatusMenu.cpp" />
+    <ClCompile Include="StatusMain.cpp" />
+    <ClCompile Include="StatMenuManager.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -171,7 +172,9 @@
     <ClInclude Include="Spear.h" />
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StartMenu.h" />
-    <ClInclude Include="StatusMenu.h" />
+    <ClInclude Include="StatusMain.h" />
+    <ClInclude Include="StatMenuManager.h" />
+    <ClInclude Include="statusStates.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />

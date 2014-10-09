@@ -29,3 +29,12 @@ public:
 	virtual void render() = 0;
 };
 
+struct STATUS_STATE{
+	static const int 
+		MAIN = 1,
+		INVENTORY = 2,
+		EQUIP = 3,
+		SKILLS = 4,
+		STATUS = 5,
+		OPTIONS = 6;
+};

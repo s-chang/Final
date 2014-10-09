@@ -1,25 +1,22 @@
-#include "StatusMenu.h"
-#include "Graphics.h"
-#include "Text.h"
+#include "StatusMain.h"
 
-StatusMenu::StatusMenu()
-{}
 
-StatusMenu::~StatusMenu()
-{}
-
-StatusMenu *StatusMenu::instance()
+StatusMain::StatusMain(void)
 {
-	static StatusMenu menu;
-	return &menu;
-
 }
 
-void StatusMenu::init()
+
+StatusMain::~StatusMain(void)
 {
-	status_state = STAT_MAIN;
+}
 
-
+StatusMain* StatusMain::instance()
+{
+	static StatusMain menu;
+	return &menu;
+}
+void StatusMain::init()
+{
 	//Init background image
 	background.init();
 	background.setHandle("statusMain");
@@ -34,7 +31,7 @@ void StatusMenu::init()
 	portraits.push_back(temp);
 
 	temp.setHandle("lennPortrait");
-	temp.setTranslate(80.0f, 295.0f, 0.0f);
+	temp.setTranslate(80.0f, 293.0f, 0.0f);
 	portraits.push_back(temp);
 
 	temp.setHandle("lazPortrait");
@@ -64,102 +61,82 @@ void StatusMenu::init()
 
 	//init status commands
 	//100x50
+	// status command data
+	struct SCDATA {
+		float x,y;
+		int t,l,b,r;
+		wchar_t * name;
+	};
+
+	SCDATA scdata[] = {
+		{700.0f, 95.0f,70,650,120,800,L"Inventory"}, //0 inve
+		{700.0f, 145.0f,120,650,170,800,L"Equip"},
+		{700.0f, 195.0f,170,650,220,800,L"Skills"},
+		{700.0f, 245.0f,220,650,270,800,L"Status"},
+		{700.0f, 295.0f,270,650,320,800,L"Options"},
+	};
 	Drawable tempCommands;
 	RECT tempR;
-	tempCommands.setTranslate(700.0f, 95.0f,0.0f);
-	tempR.left = 650;
-	tempR.right = 800;
-	tempR.top = 70;
-	tempR.bottom = 120;
-	tempCommands.init();
-	tempCommands.setText(L"Inventory");
-	tempCommands.setRect(tempR);
-	status_commands.push_back(tempCommands);
-
-	
-
-
-
-}
-
-void StatusMenu::shutdown()
-{
-
-}
-
-int StatusMenu::update()
-{
-	Engine::Input* input = Engine::Input::instance();
-	if(input->push_button(DIK_G)){
-		if(!input->check_button_down(DIK_G)){
-			input->set_button(DIK_G,true);
-			return RETURN;
-		}
-	} else input->set_button(DIK_G,false);
-
-	switch(status_state)
-	{
-	case STAT_MAIN:
-		{
-			for(unsigned int i = 0; i < status_commands.size(); i++)
-			{
-				if(status_commands[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
-					Engine::Cursor::instance()->cursorPos.y, 3))
-				{
-					status_commands[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
-					//check for mouse click 
-					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON))
-					{
-						if(!Engine::Input::instance()->check_button_down(DIK_9))
-						{
-							Engine::Input::instance()->set_button(DIK_9, true);
-
-							switch(i+1)
-							{
-							case ITEM:
-								status_state = ITEM;
-								break;
-							case EQUIP:
-								status_state = EQUIP;
-								break;
-							case SKILLS:
-								status_state = SKILLS;
-								break;
-							case STATUS:
-								status_state = STATUS;
-								break;
-							case STAT_OPTIONS:
-								status_state = STAT_OPTIONS;
-								break;
-							case BACK:
-								status_state = STAT_MAIN;
-								return RETURN;
-								break;
-							}
-						}//end if
-						
-					}//end if
-					else
-						Engine::Input::instance()->set_button(DIK_9, false);
-				}//end if
-				else
-					status_commands[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
-			}//end for loop
-
-
-		}//end STAT_MAIN
-		break;
-	case ITEM:
-	case EQUIP:
-	case SKILLS:
-	case STATUS:
-	case STAT_OPTIONS:
-		break;
+	 
+	for(int i = 0; i<sizeof(scdata)/sizeof(scdata[0]); i++){
+		tempCommands.setTranslate(scdata[i].x,scdata[i].y,0.0f);
+		tempR.left = scdata[i].l;
+		tempR.right = scdata[i].r;
+		tempR.top = scdata[i].t;
+		tempR.bottom = scdata[i].b;
+		tempCommands.init();
+		tempCommands.setText(scdata[i].name);
+		tempCommands.setRect(tempR);
+		status_commands.push_back(tempCommands);
 	}
+}
+
+void StatusMain::shutdown()
+{
+
+}
+
+int StatusMain::update()
+{
+	for(unsigned int i = 0; i < status_commands.size(); i++)
+	{
+		if(status_commands[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3))
+		{
+			status_commands[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+
+			if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON))
+			{
+				if(!Engine::Input::instance()->check_button_down(DIK_9))
+				{
+					Engine::Input::instance()->set_button(DIK_9, true);
+
+					switch(i)
+					{
+					case 0: //inventory
+						return STATUS_STATE::INVENTORY;
+					case 1: //equip
+						return STATUS_STATE::EQUIP;
+					case 2: //skills
+						return STATUS_STATE::SKILLS;
+					case 3: //status
+						return STATUS_STATE::STATUS;
+					case 4: //Options
+						return STATUS_STATE::OPTIONS;
+					}
+				}
+
+			}
+			else Engine::Input::instance()->set_button(DIK_9, false);
+		}
+		else
+			status_commands[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+	}
+
 	return 0;
 }
 
-void StatusMenu::render()
+void StatusMain::render()
 {
 	if(!Engine::DX::instance()->getDevice())
 		return;
@@ -173,16 +150,16 @@ void StatusMenu::render()
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
 				D3DXMATRIX transMat, scaleMat, rotMat, worldMat;
-				
+
 				resetMatrices(transMat, scaleMat, rotMat, worldMat);
 				//Render the background
 				setMatrices(transMat, scaleMat, rotMat, worldMat, background);
-			
+
 				Engine::DX::instance()->getSprite()->Draw(
 					Engine::Graphics::instance()->getTexture(background.getHandle()),
 					0, 
 					&D3DXVECTOR3(Engine::Graphics::instance()->getInfo(background.getHandle()).Width * 0.5f,
-								 Engine::Graphics::instance()->getInfo(background.getHandle()).Height * 0.5f, 0.0f),
+					Engine::Graphics::instance()->getInfo(background.getHandle()).Height * 0.5f, 0.0f),
 					0, 
 					background.getColor());
 
@@ -197,20 +174,18 @@ void StatusMenu::render()
 						Engine::Graphics::instance()->getTexture(portraits[i].getHandle()),
 						0, 
 						&D3DXVECTOR3(Engine::Graphics::instance()->getInfo(portraits[i].getHandle()).Width * 0.5f,
-								 Engine::Graphics::instance()->getInfo(portraits[i].getHandle()).Height * 0.5f, 0.0f),
+						Engine::Graphics::instance()->getInfo(portraits[i].getHandle()).Height * 0.5f, 0.0f),
 						0, 
 						portraits[i].getColor());
-						
+
 				}
 
-				Engine::Graphics::instance()->drawCursor();
 
-				
 				Engine::DX::instance()->getSprite()->End();
 			}//End Begin
 
 
-				//Draw Text
+			//Draw Text
 			for(int i = 0; i < MAX_CHARACTERS; i++)
 			{
 				Engine::Text::instance()->render((long)names[i].getTranslate().y, (long)names[i].getTranslate().x, names[i].getPlainText(), names[i].getColor());
@@ -221,7 +196,11 @@ void StatusMenu::render()
 			{
 				Engine::Text::instance()->render(status_commands[i].getRect().top, status_commands[i].getRect().left, status_commands[i].getPlainText(), status_commands[i].getColor());
 			}
-		
+
+			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK))){
+				Engine::Graphics::instance()->drawCursor();
+				Engine::DX::instance()->getSprite()->End();
+			}
 
 		}//End BeginScene
 		Engine::DX::instance()->getDevice()->EndScene();
@@ -229,19 +208,20 @@ void StatusMenu::render()
 	Engine::DX::instance()->getDevice()->Present(0,0,0,0);
 }
 
-void StatusMenu::setMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world, Drawable &object)
-{
-		D3DXMatrixScaling(&scale, object.getScale().x, object.getScale().y, object.getScale().z);
-		D3DXMatrixTranslation(&translate, object.getTranslate().x, object.getTranslate().y, object.getTranslate().z);
-		D3DXMatrixRotationYawPitchRoll(&rotate, D3DXToRadian(object.getRotate().y),D3DXToRadian(object.getRotate().x), D3DXToRadian(object.getRotate().z));
-		D3DXMatrixMultiply(&scale, &scale, &rotate);
-		D3DXMatrixMultiply(&world, &scale, &translate);
 
-		Engine::DX::instance()->getSprite()->SetTransform(&world);
+void StatusMain::setMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world, Drawable &object)
+{
+	D3DXMatrixScaling(&scale, object.getScale().x, object.getScale().y, object.getScale().z);
+	D3DXMatrixTranslation(&translate, object.getTranslate().x, object.getTranslate().y, object.getTranslate().z);
+	D3DXMatrixRotationYawPitchRoll(&rotate, D3DXToRadian(object.getRotate().y),D3DXToRadian(object.getRotate().x), D3DXToRadian(object.getRotate().z));
+	D3DXMatrixMultiply(&scale, &scale, &rotate);
+	D3DXMatrixMultiply(&world, &scale, &translate);
+
+	Engine::DX::instance()->getSprite()->SetTransform(&world);
 
 }
 
-void StatusMenu::resetMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world)
+void StatusMain::resetMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMATRIX &rotate, D3DXMATRIX &world)
 {
 	D3DXMatrixIdentity(&translate);
 	D3DXMatrixIdentity(&scale);

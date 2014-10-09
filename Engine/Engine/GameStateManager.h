@@ -8,8 +8,8 @@
 class GameStateManager
 {
 private:
-
 	std::stack<GameState*> states;
+
 public:
 	GameStateManager(void);
 	~GameStateManager(void);

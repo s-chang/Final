@@ -10,5 +10,5 @@
 #include "Tavern.h"
 #include "Tower.h"
 #include "Battle.h"
-#include "StatusMenu.h"
+#include "StatMenuManager.h"
 //#include "
