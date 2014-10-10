@@ -31,7 +31,6 @@ void Engine::Text::setText(LPCWSTR text)
 	swprintf_s(buffer, 256, text);
 }
 
-#include <string>
 void Engine::Text::setText(int text)
 {
 
@@ -61,6 +60,15 @@ void Engine::Text::render(long top, long left, wchar_t* words, dColor color)
 	rect.top = top;
 	rect.left = left;
 	font->DrawText(0, words, -1, &rect, DT_TOP|DT_LEFT|DT_NOCLIP, color);
+}
+
+void Engine::Text::render(long top, long left, std::string word, dColor color)
+{
+	rect.top = top;
+	rect.left = left;
+	std::wstring tempWS = L"";
+	tempWS = std::wstring(word.begin(),word.end());
+	font->DrawText(0, tempWS.c_str() , -1, &rect, DT_TOP|DT_LEFT|DT_NOCLIP, color);
 }
 
 void Engine::Text::setColor(dColor color)

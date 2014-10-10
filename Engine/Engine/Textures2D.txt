@@ -24,3 +24,6 @@ statusScreen.png statScreen
 equipScreen.png equipScreen
 inventoryScreen.png invScreen
 commandScreen.png commandWindow
+ShopOpen.png shopWindow
+TavernOpen.png tavernWindow
+ShopWindow.png secondWindow

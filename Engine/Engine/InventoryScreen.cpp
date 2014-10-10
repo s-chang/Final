@@ -1,5 +1,5 @@
 #include "InventoryScreen.h"
-
+#include "Player.h"
 
 InventoryScreen::InventoryScreen(void)
 {
@@ -17,7 +17,6 @@ InventoryScreen* InventoryScreen::instance()
 }
 void InventoryScreen::init()
 {
-	getNewList = true;
 	//Init background image
 	background.init();
 	background.setHandle("invScreen");
@@ -26,6 +25,8 @@ void InventoryScreen::init()
 
 	SCDATA scdata[] = {
 		{100.0f, 580.0f, 555,50,595,200,L"Back"},
+		{300.0f, 80.0f, 55,250,95,400,L"Use"},
+		{500.0f, 80.0f, 55,450,95,600,L"Sort"}
 	};
 	Drawable tempCommands;
 	RECT tempR;
@@ -53,11 +54,6 @@ int InventoryScreen::update()
 {
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
-	
-	if(getNewList){
-		//get list or items
-		getNewList = false;
-	}
 	
 	for(unsigned int i = 0; i < buttons.size(); i++)
 	{
@@ -119,6 +115,15 @@ void InventoryScreen::render()
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
 						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
 				}
+				for(unsigned int i = 0; i < items.size(); i++)
+				{
+					if( items[i].getPlainText() == L"Handle"){
+						displayItem(i);
+					}
+					else
+						Engine::Text::instance()->render(items[i].getRect().top, 
+							items[i].getRect().left, items[i].getPlainText(), items[i].getColor());
+				}
 
 			}
 
@@ -136,3 +141,66 @@ void InventoryScreen::render()
 	Engine::DX::instance()->getDevice()->Present(0,0,0,0);
 }
 
+void InventoryScreen::setList()
+{
+	items.clear();
+	SCDATA scdata = {300.0f, 180.0f, 155,250,195,400,L"NONE"};
+	Drawable tempCommands;
+	RECT tempR;
+
+	std::vector<Item*>* tempInventory = Player::instance()->getInventory();
+	if(tempInventory->empty()){
+		tempCommands.setTranslate(scdata.x,scdata.y,0.0f);
+		tempR.left = scdata.l;
+		tempR.right = scdata.r;
+		tempR.top = scdata.t;
+		tempR.bottom = scdata.b;
+		tempCommands.init();
+		tempCommands.setText(scdata.name);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+
+	scdata.y -= 30;
+	scdata.t -= 30;
+	scdata.b -= 30;
+
+	for(int i = 0; i < tempInventory->size(); i++){
+		if(i%3 == 0){
+			scdata.y += 30;
+			scdata.t += 30;
+			scdata.b += 30;
+
+			scdata.x = 300.0f - 170;
+			scdata.l = 250 - 170;
+			scdata.r = 400 - 170;
+		}
+
+		tempCommands.setTranslate(scdata.x+=170,scdata.y,0.0f);
+		tempR.left = scdata.l+=170;
+		tempR.right = scdata.r+=170;
+		tempR.top = scdata.t;
+		tempR.bottom = scdata.b;
+		tempCommands.init();
+		tempCommands.setText(L"Handle");
+		tempCommands.setHandle(tempInventory->at(i)->getStats().name);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+
+}
+void InventoryScreen::displayItem(int index)
+{
+	Item* item = Player::instance()->getInventory()->at(index);
+	wchar_t tbuffer[64];
+	RECT rect = items[index].getRect();
+
+	Engine::Text::instance()->render(rect.top, rect.left, 
+		items[index].getHandle(), items[index].getColor());
+	if(item->getStats().type == "Item" && item->getAmount() > 1){
+		swprintf_s(tbuffer, 64,L"%d",item->getAmount());
+		rect.left +=70;
+		Engine::Text::instance()->font->DrawText(0,tbuffer, -1, &rect, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, items[index].getColor());
+	}
+}

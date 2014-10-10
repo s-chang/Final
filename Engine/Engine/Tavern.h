@@ -1,15 +1,25 @@
 #pragma once
 #include "gamestate.h"
 
-#define TAVERN_BUTTONS 1
+struct TAVERN_STATE
+{
+	static const int 
+		OPEN = 0,
+		RUMORS = 1,
+		TUTORIALS = 2,
+		DISPLAY = 3;
+};
 
 class Tavern :
 	public GameState
 {
 private:
-	Drawable bg,
-			 box;
-	Drawable buttons[TAVERN_BUTTONS];
+	int state;
+	Drawable bg;
+	Drawable openWindow;
+	Drawable secondWindow;
+
+	std::vector<Drawable> buttons;
 
 	Tavern(void);
 public:

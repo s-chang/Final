@@ -38,7 +38,7 @@ void Player::init()
 	Item* potion = ItemFactory::instance()->getItem("Potion");
 	potion->setAmount(1);
 	inventory.push_back(potion);
-
+	
 	Item* ether = ItemFactory::instance()->getItem("Ether");
 	ether->setAmount(1);
 	inventory.push_back(ether);
@@ -59,11 +59,15 @@ void Player::addItem(Item item)
 	else {
 		for(int i = 0; i < inventory.size(); i++) {
 			if(item.getStats().name == inventory[i]->getStats().name){
-				inventory[i]->setAmount(inventory[i]->getAmount() +item.getAmount());
-				return;
+				if(inventory[i]->getAmount() +item.getAmount() < 100){
+					inventory[i]->setAmount(inventory[i]->getAmount() +item.getAmount());
+					return;
+				}
 			}
 		}
 	}
+	if(inventory.size() < INVENTORY_CAP)
+		inventory.push_back(&item);
 }
 
 void Player::removeItem(Item item)

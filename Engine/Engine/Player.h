@@ -1,6 +1,8 @@
 #pragma once
 #include "Entities.h"
 
+#define INVENTORY_CAP 39
+
 class Player
 {
 private:

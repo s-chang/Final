@@ -36,6 +36,7 @@ public:
 	int getXpToLevel(){ return xpToLevel; }
 	BattleCommand* getCommand(int index){ return commands[index]; };
 	ItemStats* getItemStatsForSlot(int whatSlot);
+	Item* getItem(int slot);
 	void addXP(int amount);
 	void adjustResource(int amount);
 };

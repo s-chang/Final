@@ -22,29 +22,36 @@ void Tavern::init()
 	bg.setTranslate(300,180,0);
 	bg.setScale(.8,.6,0);
 
-	box.setHandle("blueBox");
-	box.setTranslate(160,460,0);
-	box.setScale(.7,.7,0);
-	
-	RData uiData[] = {
-		{225, 0, 250, 200, 170, 465},	// back
+	openWindow.setHandle("tavernWindow");
+	openWindow.setTranslate(300,180,0);
+	openWindow.setScale(.8,.6,0);
+	//openWindow.setColor(D3DCOLOR_ARGB(100,255,255,255));
 
+	secondWindow.setHandle("secondWindow");
+	secondWindow.setTranslate(300,180,0);
+	secondWindow.setScale(.8,.6,0);
+	secondWindow.setColor(D3DCOLOR_ARGB(200,255,255,255));
+	
+	SCDATA scdata[] = {
+		{100.0f, 470.0f, 445,50,485,200,L"Tutorials"},
+		{100.0f, 510.0f, 485,50,525,200,L"Rumors"},
+		{100.0f, 550.0f, 525,50,565,200,L"Back"},
 	};
-	for(int i = 0; i < TAVERN_BUTTONS; i++) {
-		Drawable temp;
-		RECT rect;
-		// NewGame
-		rect.top = uiData[i].t; 
-		rect.left = uiData[i].l;
-		rect.bottom =  uiData[i].b; 
-		rect.right =  uiData[i].r;
-		temp.setTranslate( uiData[i].x, uiData[i].y, 0);
-		temp.setRect(rect);
-		buttons[i]= temp;
-		buttons[i].setHandle("opButtons");
-		//buttons[i].setTranslate(300,180,0);
-		buttons[i].setScale(.4,.8,0);
+	Drawable tempCommands;
+	RECT tempR;
+
+	for(int i = 0; i<sizeof(scdata)/sizeof(scdata[0]); i++){
+		tempCommands.setTranslate(scdata[i].x,scdata[i].y,0.0f);
+		tempR.left = scdata[i].l;
+		tempR.right = scdata[i].r;
+		tempR.top = scdata[i].t;
+		tempR.bottom = scdata[i].b;
+		tempCommands.init();
+		tempCommands.setText(scdata[i].name);
+		tempCommands.setRect(tempR);
+		buttons.push_back(tempCommands);
 	}
+	state = TAVERN_STATE::OPEN;
 }
 
 void Tavern::shutdown()
@@ -59,28 +66,36 @@ int Tavern::update()
 	int _x = c->cursorPos.x;
 	int _y = c->cursorPos.y;
 
-	for(int i = 0; i < TAVERN_BUTTONS; i++)
-	{
-		if(i>2) i = 7; // REMOVE : when Continue is implemented
-		if(buttons[i].checkOn(_x,_y,4,1)) {
-			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
-			if(input->check_mouse_button(0)){
-				if(!input->check_button_down(DIK_9)){
-					input->set_button(DIK_9,true);
-					switch(i)
-					{
-					case 0: // BACK 
-						return RETURN;
-					default:
-						break;
+	for(unsigned int i = 0; i < buttons.size(); i++){
+		if(buttons[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						Engine::Input::instance()->set_button(DIK_9, true);
+
+						switch(i)
+						{
+						case 0: //Tutorials
+							state = TAVERN_STATE::TUTORIALS;
+							break;
+						case 1: //Rumors
+							state = TAVERN_STATE::RUMORS;
+							break;
+						case 2: //BACK
+							state = TAVERN_STATE::OPEN;
+							return GameStates::RETURN;
+							break;
+						}
 					}
 				}
-			} else input->set_button(DIK_9,false);
+				else Engine::Input::instance()->set_button(DIK_9, false);
 		}
 		else
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
-			
 	}
+
 	return 0;
 }
 void Tavern::render()
@@ -96,15 +111,24 @@ void Tavern::render()
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
 				g->Draw2DObject(bg);
-				g->Draw2DObject(box);
-				for(auto &button: buttons){
-					g->Draw2DObject(button);
-				}
-				// draw cursor last
-				g->drawCursor();
+				g->Draw2DObject(openWindow);
+				if(state > TAVERN_STATE::RUMORS)
+					g->Draw2DObject(secondWindow);
+
 				Engine::DX::instance()->getSprite()->End();
 
 				//Engine::Text::instance()->render(0,0);
+				for(unsigned int i = 0; i < buttons.size(); i++)
+				{
+					Engine::Text::instance()->render(buttons[i].getRect().top, 
+						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
+				}
+			}
+
+			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
+			{
+				g->drawCursor();
+				Engine::DX::instance()->getSprite()->End();
 			}
 		}
 		Engine::DX::instance()->getDevice()->EndScene();

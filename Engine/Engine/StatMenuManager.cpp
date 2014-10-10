@@ -49,6 +49,14 @@ int StatMenuManager::update()
 		}
 	} else input->set_button(DIK_G,false);
 
+	if(input->check_mouse_button(1)){
+		if(!input->check_button_down(DIK_9)){
+			input->set_button(DIK_9,true);
+			// empty stack except mainmenu
+			statusState.pop();
+		}
+	} else input->set_button(DIK_9,false);
+
 	if(statusState.empty())
 		statusState.push(StatusMain::instance());
 	int switch_on = statusState.top()->update();
@@ -61,10 +69,11 @@ int StatMenuManager::update()
 		statusState.push(StatusMain::instance());
 		break;
 	case STATUS_STATE::INVENTORY:
-		// InventoryScreen::instance()->setBool(true);
+		InventoryScreen::instance()->setList();
 		statusState.push(InventoryScreen::instance());
 		break;
 	case STATUS_STATE::EQUIP:
+		EquipScreen::instance()->setState(0);
 		statusState.push(EquipScreen::instance());
 		break;
 	case STATUS_STATE::SKILLS:

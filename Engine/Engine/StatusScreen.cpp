@@ -85,13 +85,13 @@ int StatusScreen::update()
 					{
 					case 0: //back
 						return GameStates::RETURN;
-					case 1: //back
+					case 1: //Grem 0
 						who = 0;
 						break;
-					case 2: //back
+					case 2: //Lenn 1
 						who = 1;
 						break;
-					case 3: //back
+					case 3: //Laz 2
 						who = 2;
 						break;
 					}

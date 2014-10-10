@@ -63,10 +63,7 @@ void Laz::init()
 	commands[3] = availableCommands[3];
 
 	weapon = (Staff*)ItemFactory::instance()->getItem("Splintered Staff");
-	ItemStats armorStats;
-	armorStats.def = 5;
-	armor = new Armor();
-	armor->setStats(armorStats);
+	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 
 	acc1 = NULL;
 	acc2 = NULL;
@@ -114,6 +111,31 @@ ItemStats* Laz::getItemStatsForSlot( int slot)
 		return &rune2->getStats();
 	}
 }
+Item* Laz::getItem(int slot)
+{
+	switch(slot)
+	{
+	case SLOT::WEAPON:
+		if(weapon)	return weapon;
+		else		return NULL;
+	case SLOT::ARMOR:
+		if(armor)	return armor;
+		else		return NULL;
+	case SLOT::ACC1:
+		if(acc1)	return acc1;
+		else		return NULL;
+	case SLOT::ACC2:
+		if(acc2)	return acc2;
+		else		return NULL;
+	case SLOT::RUNE1:
+		if(rune1)	return rune1;
+		else		return NULL;
+	case SLOT::RUNE2:
+		if(rune2)	return rune2;
+		else		return NULL;
+	}
+}
+
 void Laz::addXP(int amount)
 {
 	stats.xp += amount;

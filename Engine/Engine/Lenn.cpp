@@ -63,11 +63,7 @@ void Lenn::init()
 	commands[3] = availableCommands[3];
 
 	weapon = (Dagger*)ItemFactory::instance()->getItem("Chipped Dagger");
-	ItemStats armorStats;
-	armorStats.def = 5;
-	armor = new Armor();
-	armor->setStats(armorStats);
-
+	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 	acc1 = NULL;
 	acc2 = NULL;
 	rune1 = NULL;
@@ -110,6 +106,31 @@ ItemStats* Lenn::getItemStatsForSlot( int slot)
 		return &rune1->getStats();
 	case SLOT::RUNE2:
 		return &rune2->getStats();
+	}
+}
+
+Item* Lenn::getItem(int slot)
+{
+	switch(slot)
+	{
+	case SLOT::WEAPON:
+		if(weapon)	return weapon;
+		else		return NULL;
+	case SLOT::ARMOR:
+		if(armor)	return armor;
+		else		return NULL;
+	case SLOT::ACC1:
+		if(acc1)	return acc1;
+		else		return NULL;
+	case SLOT::ACC2:
+		if(acc2)	return acc2;
+		else		return NULL;
+	case SLOT::RUNE1:
+		if(rune1)	return rune1;
+		else		return NULL;
+	case SLOT::RUNE2:
+		if(rune2)	return rune2;
+		else		return NULL;
 	}
 }
 

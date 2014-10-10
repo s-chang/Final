@@ -5,6 +5,7 @@
 #include <stdio.h>
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
+#include <string>
 
 #define MAX_BUFFER 256
 
@@ -60,6 +61,7 @@ namespace Engine
 		Description: Draws the given text at the location of top and left in the given color
 		*/
 		void render(long top, long left, wchar_t* word, dColor color);
+		void render(long top, long left, std::string word, dColor color);
 
 		/**
 		Name:		setColor

@@ -7,7 +7,6 @@ private:
 	Drawable background;
 	std::vector<Drawable> buttons;
 	std::vector<Drawable> items;
-	bool getNewList;
 
 	InventoryScreen(void);
 public:
@@ -20,6 +19,6 @@ public:
 	int update();
 	void render();
 
-	void resetList();
-	void setBool(bool);
+	void setList();
+	void displayItem(int index);
 };
