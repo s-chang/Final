@@ -45,7 +45,7 @@ void Grem::init()
 		//int xp, level, health, maxHealth;
 		0,1,30,30,
 		//int attack, magic, defense, resist, speed;	
-		18,12,12,6,4,
+		18,12,8,6,4,
 	};
 	stats = temp;
 

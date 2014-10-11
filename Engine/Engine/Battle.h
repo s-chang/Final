@@ -41,6 +41,7 @@ private:
 	void renderNamesHelthResource();
 
 	void BattleOver();
+	void checkWinLoss();
 
 	Battle(void);
 

@@ -13,6 +13,8 @@ private:
 	std::vector<Entity*> team;
 	std::vector<Item*> inventory;
 	int gold;
+	bool completedFifth;
+	bool completedTenth;
 
 	Player(void);
 public:
@@ -22,11 +24,17 @@ public:
 	void init();
 	void shutdown();
 
-	void addItem(Item);
+	void addItem(Item*);
 	void removeItem(Item);
 	std::vector<Item*>* getInventory();
 
 	void adjustGold(int amount);
 	int getGold();
+
+	void fifthComplete();
+	bool hasCompletedFifth();
+
+	void tenthComplete();
+	bool hasCompletedtenth();
 };
 

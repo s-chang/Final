@@ -51,7 +51,32 @@ void Shop::init()
 		tempCommands.setRect(tempR);
 		buttons.push_back(tempCommands);
 	}
+
+	SCDATA tabData = {70.0f, 180.0f, 155,20,195,200,L"Spears"};
+	wchar_t* names[] = {
+		{L"Spears"},
+		{L"Daggers"},
+		{L"Staves"},
+		{L"Armor"},
+		{L"Accessories"},
+		{L"Runes"},
+		{L"Consumables"},
+		};
+
+	for(int i = 0; i < TABS; i++){
+		tempCommands.setTranslate(tabData.x,tabData.y+=30,0.0f);
+		tempR.left = tabData.l;
+		tempR.right = tabData.r;
+		tempR.top = tabData.t+=30;
+		tempR.bottom = tabData.b+=30;
+		tempCommands.init();
+		tempCommands.setText(names[i]);
+		tempCommands.setRect(tempR);
+		tabs.push_back(tempCommands);
+	}
+
 	state = SHOP_STATE::OPEN;
+	help = false;
 }
 
 void Shop::shutdown()
@@ -118,12 +143,36 @@ void Shop::render()
 
 				Engine::DX::instance()->getSprite()->End();
 
-				// text
+				if(!help){
+					RECT rect;
+					rect.top = 50;
+					rect.left = 70;
+					switch(state)
+					{
+					case SHOP_STATE::OPEN:
+						Engine::Text::instance()->font->DrawText(0,L"Welcome! What can I do for you?", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case SHOP_STATE::BUY:
+					case SHOP_STATE::DISPLAY_ITEMS:
+						Engine::Text::instance()->font->DrawText(0,L"What are ya' buyin'?", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case SHOP_STATE::SELL:
+						Engine::Text::instance()->font->DrawText(0,L"What are ya' sellin'?", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+	
 				for(unsigned int i = 0; i < buttons.size(); i++)
-				{
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
 						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
-				}
+
+				if(state != SHOP_STATE::SELL && (state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS))
+					for(unsigned int i = 0; i < tabs.size(); i++)
+						Engine::Text::instance()->render(tabs[i].getRect().top, 
+							tabs[i].getRect().left, tabs[i].getPlainText(), tabs[i].getColor());
 			}
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{

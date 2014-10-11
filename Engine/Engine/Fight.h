@@ -4,6 +4,9 @@
 class Fight :
 	public BattleCommand
 {
+	std::vector<Drawable> enemyList;
+
+	// old
 	int enemyHighlight;
 	int top,left;
 	RECT r2;

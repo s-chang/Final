@@ -15,12 +15,16 @@ class Tavern :
 {
 private:
 	int state;
+	bool help;
+	bool rewarded;
+
 	Drawable bg;
 	Drawable openWindow;
 	Drawable secondWindow;
 
 	std::vector<Drawable> buttons;
 
+	void reward();
 	Tavern(void);
 public:
 	static Tavern* instance();

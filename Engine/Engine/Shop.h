@@ -1,6 +1,8 @@
 #pragma once
 #include "gamestate.h"
 
+#define TABS 7 
+
 struct SHOP_STATE
 {
 	static const int 
@@ -15,6 +17,7 @@ class Shop :
 {
 private:
 	int state;
+	bool help;
 	Drawable bg;
 	Drawable openWindow;
 	Drawable ItemWindow;

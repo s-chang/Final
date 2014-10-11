@@ -47,27 +47,29 @@ void Player::init()
 	revive->setAmount(1);
 	inventory.push_back(revive);
 
+	completedFifth = false;
+	completedTenth = true;
 }
 void Player::shutdown()
 {
 }
 
-void Player::addItem(Item item)
+void Player::addItem(Item* item)
 {
 	if(inventory.empty())
-		inventory.push_back(&item);
+		inventory.push_back(item);
 	else {
 		for(int i = 0; i < inventory.size(); i++) {
-			if(item.getStats().name == inventory[i]->getStats().name){
-				if(inventory[i]->getAmount() +item.getAmount() < 100){
-					inventory[i]->setAmount(inventory[i]->getAmount() +item.getAmount());
+			if(item->getStats().name == inventory[i]->getStats().name){
+				if(inventory[i]->getAmount() +item->getAmount() < 100){
+					inventory[i]->setAmount(inventory[i]->getAmount() +item->getAmount());
 					return;
 				}
 			}
 		}
 	}
 	if(inventory.size() < INVENTORY_CAP)
-		inventory.push_back(&item);
+		inventory.push_back(item);
 }
 
 void Player::removeItem(Item item)
@@ -108,4 +110,25 @@ void Player::adjustGold(int amount)
 int Player::getGold()
 {
 	return gold;
+}
+
+void Player::fifthComplete()
+{
+	completedFifth = true;
+}
+
+bool Player::hasCompletedFifth()
+{
+	return completedFifth;
+}
+
+
+void Player::tenthComplete()
+{
+	completedTenth = true;
+}
+
+bool Player::hasCompletedtenth()
+{
+	return completedTenth;
 }

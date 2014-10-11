@@ -4,12 +4,6 @@
 Fight::Fight(void) : BattleCommand()
 {
 	name = "Fight";
-	help = "Use basic attack on an enemy";
-	enemyHighlight = -1;
-	top = 450;
-	left = 20;
-	r2.top = top;
-	r2.left = left;
 }
 
 
@@ -19,6 +13,23 @@ Fight::~Fight(void)
 
 void Fight::init()
 {
+	enemyList.clear();
+	int num_enemies = Battle::instance()->turnOrder.ENEMY_COUNT;
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scdata = { 70.0f, 445.0f, 420, 20, 460, 170, L"Slime"};
+
+	for(int i = 0; i < num_enemies; i++){
+		tempCommands.setTranslate(scdata.x,scdata.y+=30,0.0f);
+		tempR.left = scdata.l;
+		tempR.right = scdata.r;
+		tempR.top = scdata.t+=30;
+		tempR.bottom = scdata.b+=30;
+		tempCommands.init();
+		tempCommands.setText(scdata.name);
+		tempCommands.setRect(tempR);
+		enemyList.push_back(tempCommands);
+	}
 }
 
 void Fight::update()
@@ -33,44 +44,37 @@ void Fight::update()
 		help = "Use basic attack on an enemy";
 		return;
 	}
-	if(c->cursorPos.x > left+15 && c->cursorPos.x < left+100){
+	
+	for(unsigned int i = 0; i < enemyList.size(); i++){
+		if(enemyList[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				enemyList[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
 
-		if(c->cursorPos.y > top+15 && c->cursorPos.y < top+40){
-			enemyHighlight = 0;
-			r2.top = top;
-		}
-		else if(c->cursorPos.y > top+60 && c->cursorPos.y < top+100)
-		{
-			enemyHighlight = 1;
-			r2.top = top + 45;
-		}
-		else if(c->cursorPos.y > top+105 && c->cursorPos.y < top+145){
-			enemyHighlight = 2;
-			r2.top = top + 90;
-		}
-	}
-	else
-		enemyHighlight = -1;
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						Engine::Input::instance()->set_button(DIK_9, true);
+						if(b->enemies[i].isAlive()){
+							// if the enemy highlighted is alive then do dmg calculations
+							Entity* player = b->all[b->turnOrder.COUNTER];
+							Entity* enemy = &b->enemies[i];
+							int atk = player->getStats()->attack + player->getItemStatsForSlot(SLOT::WEAPON)->atk;
+							int def = enemy->getStats()->defense;
+							int dmg = atk - def;
+							if(dmg < 0)
+								dmg = 0;
+							enemy->adjustHealth(-dmg);
 
-	if(input->check_mouse_button(0)){
-		if(enemyHighlight >=0 && enemyHighlight <=3){
-			if(b->enemies[enemyHighlight].isAlive()){
-				// if the enemy highlighted is alive then do dmg calculations
-				Entity* player = b->all[b->turnOrder.COUNTER];
-				Entity* enemy = &b->enemies[enemyHighlight];
-				int atk = player->getStats()->attack + player->getItemStatsForSlot(SLOT::WEAPON)->atk;
-				int def = enemy->getStats()->defense;
-				int dmg = atk - def;
-				if(dmg < 0)
-					dmg = 0;
-				enemy->adjustHealth(-dmg);
-				
-				b->dmg = dmg;
-				b->turnStatus = TURN_STATUS::END;
+							b->dmg = dmg;
+							b->turnStatus = TURN_STATUS::END;
 
-				help = "Use basic attack on an enemy";
-			}
+							help = "Use basic attack on an enemy";
+						}
+					}
+				}
+				else Engine::Input::instance()->set_button(DIK_9, false);
 		}
+		else
+			enemyList[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
 	}
 }
 
@@ -80,17 +84,10 @@ void Fight::render()
 
 void Fight::text()
 {
-	if(enemyHighlight >=0 && enemyHighlight <=3){
-		Entity* e = &Battle::instance()->enemies[enemyHighlight];
-		if(e->isAlive()){
-		std::string tempString = e->getName();
-		std::wstring tempWS = L"";
-		tempWS = std::wstring(tempString.begin(),tempString.end());
-
-		Engine::Text* t = Engine::Text::instance();
-		t->font->DrawText(0, tempWS.c_str(), -1, &r2, 
-			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
-		}
+	for(unsigned int i = 0; i < enemyList.size(); i++){
+		if(Battle::instance()->enemies[i].isAlive())
+			Engine::Text::instance()->render(enemyList[i].getRect().top, 
+				enemyList[i].getRect().left, enemyList[i].getPlainText(), enemyList[i].getColor());
 	}
 }
 

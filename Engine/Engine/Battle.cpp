@@ -81,12 +81,15 @@ void Battle::init()
 	};
 
 	Pos enemyPos[] = {
-		{-2.2f,8.8f},
 		{-8.8f,8.8f},
 		{-8.8f,2.5f},
+		{-2.2f,8.8f},
+		{-2.2f,2.5f},
 	};
 
-	for(int i = 0; i < 3/*num_enemies*/; i++){
+	int num_enemies = rand()%3+2;
+	if(num_enemies>4) num_enemies = 4;
+	for(int i = 0; i < num_enemies; i++){
 		temp.init();
 		if(floor > 1){
 			int randLevel = rand() %3+(floor-1);
@@ -100,7 +103,7 @@ void Battle::init()
 
 		enemies.push_back(temp);
 	}
-	for(int i = 0; i < 3/*num_enemies*/; i++){
+	for(int i = 0; i < num_enemies; i++){
 		all.push_back(&enemies[i]);
 	}
 
@@ -117,26 +120,7 @@ void Battle::shutdown()
 int Battle::update()
 {
 	//check win/loss
-	bool allEnemiesDead = true;
-	bool allAlliesDead = true;
-
-	for(auto &unit: all){
-		if (unit->isNPC()){
-			if(unit->getStats()->health > 0)
-				allEnemiesDead = false;
-		}
-		else{
-			if(unit->getStats()->health > 0)
-				allAlliesDead = false;
-		}
-	}
-
-	if(allEnemiesDead)
-		whosTurn = Turn::WIN;
-	if(allAlliesDead)
-		whosTurn = Turn::LOSE;
-	if(escape)
-		whosTurn = Turn::ESCAPE;
+	checkWinLoss();
 
 	renderNames = true;
 	if(whosTurn == Turn::PLAYER_TURN){
@@ -216,7 +200,7 @@ void Battle::render()
 						t->font->DrawText(0, tbuffer, -1, &rect, 
 							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 					}
-					rect.top += 45;
+					rect.top += 30;
 					rect.left = 20;
 				}
 
@@ -276,6 +260,7 @@ void Battle::updatePlayerTurn(Entity* e)
 				&& e->getCommand(i)->isOn())
 			{
 				activeCMD = e->getCommand(i);
+				activeCMD->init();
 				turnStatus = TURN_STATUS::CMD;
 				break;
 			}
@@ -541,4 +526,28 @@ void Battle::BattleOver()
 				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		break;
 	}
+}
+
+void Battle::checkWinLoss()
+{
+	bool allEnemiesDead = true;
+	bool allAlliesDead = true;
+
+	if(Grem::instance()->isAlive())
+		allAlliesDead = false;
+	if(Lenn::instance()->isAlive())
+		allAlliesDead = false;
+	if(Laz::instance()->isAlive())
+		allAlliesDead = false;
+
+	for(int i = 0; i<turnOrder.ENEMY_COUNT; i++)
+		if(enemies[i].isAlive())
+			allEnemiesDead = false;
+
+	if(allEnemiesDead)
+		whosTurn = Turn::WIN;
+	if(allAlliesDead)
+		whosTurn = Turn::LOSE;
+	if(escape)
+		whosTurn = Turn::ESCAPE;
 }

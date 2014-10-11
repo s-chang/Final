@@ -1,5 +1,5 @@
 #include "Tavern.h"
-
+#include "Player.h"
 
 Tavern::Tavern(void)
 {
@@ -52,6 +52,8 @@ void Tavern::init()
 		buttons.push_back(tempCommands);
 	}
 	state = TAVERN_STATE::OPEN;
+	help = false;
+	rewarded = false;
 }
 
 void Tavern::shutdown()
@@ -82,6 +84,8 @@ int Tavern::update()
 							break;
 						case 1: //Rumors
 							state = TAVERN_STATE::RUMORS;
+							if(Player::instance()->hasCompletedtenth())
+								reward();
 							break;
 						case 2: //BACK
 							state = TAVERN_STATE::OPEN;
@@ -117,7 +121,34 @@ void Tavern::render()
 
 				Engine::DX::instance()->getSprite()->End();
 
-				//Engine::Text::instance()->render(0,0);
+				if(!help){
+					RECT rect;
+					rect.top = 50;
+					rect.left = 70;
+					switch(state)
+					{
+					case TAVERN_STATE::OPEN:
+						Engine::Text::instance()->font->DrawText(0,L"Yo, What can I get you!", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case TAVERN_STATE::TUTORIALS:
+					case TAVERN_STATE::DISPLAY:
+						Engine::Text::instance()->font->DrawText(0,L"Needing some help?", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					case TAVERN_STATE::RUMORS:
+						if(Player::instance()->hasCompletedtenth()){
+							Engine::Text::instance()->font->DrawText(0,L"Someone heard you slayed The Beast and left you a reward!\n Check your inventory", -1, &rect, 
+								DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+							rewarded = true;
+						}
+						else 
+							Engine::Text::instance()->font->DrawText(0,L"Sorry nothin new check back later.", -1, &rect, 
+								DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+						break;
+					}
+				}
+
 				for(unsigned int i = 0; i < buttons.size(); i++)
 				{
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
@@ -134,4 +165,19 @@ void Tavern::render()
 		Engine::DX::instance()->getDevice()->EndScene();
 	}
 	Engine::DX::instance()->getDevice()->Present(0,0,0,0);
+}
+
+void Tavern::reward()
+{
+	if(rewarded)
+		return;
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Luin of Celtchar"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Gungnir"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Shiv of Titans"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Death and Deceit"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Ancient's Staff"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Save the Queen"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Falcon Cloak"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Tarkappe"));
+	Player::instance()->addItem(ItemFactory::instance()->getItem("Green Armor"));
 }
