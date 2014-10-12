@@ -36,5 +36,7 @@ public:
 
 	void tenthComplete();
 	bool hasCompletedtenth();
+
+	bool checkDeath();
 };
 

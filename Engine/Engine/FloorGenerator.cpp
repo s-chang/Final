@@ -1607,7 +1607,7 @@ void FloorGenerator::assignLeft(bool room)
 					if(room)
 						pushRoom(posX, posY-1, roomthreeR, room);
 					else
-						pushRoom(posX, posY-1, threeR, room);
+						pushCor(posX, posY-1, threeR, room);
 				}else
 					assignLeft(room);
 			}

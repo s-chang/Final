@@ -93,6 +93,7 @@
     <ClCompile Include="Equippable.cpp" />
     <ClCompile Include="EquipScreen.cpp" />
     <ClCompile Include="Fight.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="FloorCorridor.cpp" />
     <ClCompile Include="FloorGenerator.cpp" />
     <ClCompile Include="FloorRoom.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Equippable.h" />
     <ClInclude Include="EquipScreen.h" />
     <ClInclude Include="Fight.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="FloorCorridor.h" />
     <ClInclude Include="FloorGenerator.h" />
     <ClInclude Include="FloorRoom.h" />

@@ -6,7 +6,7 @@ private:
 	unsigned char icon;
 	int x, y;
 	bool type;
-
+	
 public:
 	Corridor();
 	~Corridor();

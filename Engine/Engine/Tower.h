@@ -2,25 +2,37 @@
 #include "gamestate.h"
 #include "town.h"
 #include "Drawable.h"
+#include "Camera.h"
 
 class Tower :
 	public GameState
 {
 private:
 	int currentFloor;
+	float playerX, playerZ;
+
+	bool enterFromTown;
+	int towerstate;
 
 	Drawable player;
+	Camera cam;
+
+	unsigned int stepCounter;
+
+	bool bossLevel5;
+	bool bossLevel10;
+	bool bossLevel15;
 
 	Tower(void);
 public:
 	static Tower* instance();
 	~Tower(void);
 
-	void init();
-	void shutdown();
+	virtual void init();
+	virtual void shutdown();
 
-	int update(); 
-	void render();
+	virtual int update(); 
+	virtual void render();
 
 	int getFloor() { return currentFloor; };
 };
