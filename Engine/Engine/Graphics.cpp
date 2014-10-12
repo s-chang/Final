@@ -28,16 +28,17 @@ Engine::Graphics* Engine::Graphics::instance()
 	return &instance;
 }
 
-void Engine::Graphics::init(Camera *cam, Light *light)
+void Engine::Graphics::init()
 {
 	load();
 	loadMesh();
 
+	light.defaultInit();
+	light.setLight();
 
-
-	//light.defaultInit();
-	//light.setLight();
-
+	cam.init(800,600);	
+	cam.setProj();
+	
 	//TODO: create a shader manager
 #ifdef _DEBUG
 	D3DXCreateEffectFromFile(Engine::DX::instance()->getDevice(),
@@ -48,14 +49,13 @@ void Engine::Graphics::init(Camera *cam, Light *light)
 		L"Shader.fx", 0, 0, 0, 0, &m_Effect, &m_ErrorEffect);
 #endif
 
-	m_Effect->SetFloatArray("eyePos", (float*)cam->getEyePos(), 3);
-	m_Effect->SetFloatArray("lightPos", (float*)light->getPosition(), 3);
-	m_Effect->SetFloatArray("ambientLight", (float*)light->getAmbient(), 3);
-	m_Effect->SetFloatArray("specularLight", (float*)light->getSpecular(), 3);
-	m_Effect->SetFloatArray("diffuseLight", (float*)light->getDiffuse(), 3);
-	m_Effect->SetFloatArray("lightAttenuation", (float*)&D3DXVECTOR3(light->getAttenuation0(), light->getAttenuation1(), light->getAttenuation2()), 3);
-
-
+	m_Effect->SetFloatArray("eyePos", (float*)cam.getEyePos(), 3);
+	m_Effect->SetFloatArray("lightPos", (float*)light.getPosition(), 3);
+	m_Effect->SetFloatArray("ambientLight", (float*)light.getAmbient(), 3);
+	m_Effect->SetFloatArray("specularLight", (float*)light.getSpecular(), 3);
+	m_Effect->SetFloatArray("diffuseLight", (float*)light.getDiffuse(), 3);
+	m_Effect->SetFloatArray("lightAttenuation", (float*)&D3DXVECTOR3(light.getAttenuation0(), light.getAttenuation1(), light.getAttenuation2()), 3);
+	
 }
 
 void Engine::Graphics::render(Drawable object, Camera *cam)

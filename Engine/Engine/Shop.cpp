@@ -19,17 +19,17 @@ Shop* Shop::instance()
 void Shop::init()
 {
 	bg.setHandle("shop");
-	bg.setTranslate(300,180,0);
-	bg.setScale(.8,.6,0);
+	bg.setTranslate(300.0f,180.0f,0.0f);
+	bg.setScale(.8f,.6f,0.0f);
 
 	openWindow.setHandle("shopWindow");
 	openWindow.setTranslate(300,180,0);
-	openWindow.setScale(.8,.6,0);
+	openWindow.setScale(.8f,.6f,0.0f);
 	//openWindow.setColor(D3DCOLOR_ARGB(100,255,255,255));
 
 	ItemWindow.setHandle("secondWindow");
 	ItemWindow.setTranslate(300,180,0);
-	ItemWindow.setScale(.8,.6,0);
+	ItemWindow.setScale(.8f,.6f,0.0f);
 	ItemWindow.setColor(D3DCOLOR_ARGB(200,255,255,255));
 	
 	SCDATA scdata[] = {
@@ -88,8 +88,8 @@ int Shop::update()
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
 	
-	int _x = c->cursorPos.x;
-	int _y = c->cursorPos.y;
+	int _x = (int)c->cursorPos.x;
+	int _y = (int)c->cursorPos.y;
 
 	for(unsigned int i = 0; i < buttons.size(); i++){
 		if(buttons[i].checkOn(Engine::Cursor::instance()->cursorPos.x,

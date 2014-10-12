@@ -86,7 +86,7 @@ void Laz::levelUp()
 	stats.xp = 0;
 	manaMax += 10;
 	mana = manaMax; 
-	xpToLevel += (float) xpToLevel * 0.3;
+	xpToLevel += (int)((float) xpToLevel * 0.3f);
 	if(stats.level == 20)
 		xpToLevel = 0;
 	}

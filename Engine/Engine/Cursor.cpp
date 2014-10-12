@@ -18,7 +18,7 @@ Engine::Cursor::~Cursor(void)
 {
 }
 
-void Engine::Cursor::update(float x, float y)
+void Engine::Cursor::update(long x, long y)
 {
 	cursorPos.x += x;
 	cursorPos.y += y;

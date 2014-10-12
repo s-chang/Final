@@ -59,7 +59,7 @@ void Player::addItem(Item* item)
 	if(inventory.empty())
 		inventory.push_back(item);
 	else {
-		for(int i = 0; i < inventory.size(); i++) {
+		for(unsigned int i = 0; i < inventory.size(); i++) {
 			if(item->getStats().name == inventory[i]->getStats().name){
 				if(inventory[i]->getAmount() +item->getAmount() < 100){
 					inventory[i]->setAmount(inventory[i]->getAmount() +item->getAmount());
@@ -77,7 +77,7 @@ void Player::removeItem(Item item)
 	if(inventory.empty())
 		return;
 	else {
-		for(int i = 0; i < inventory.size(); i++) {
+		for(unsigned int i = 0; i < inventory.size(); i++) {
 			if(item.getStats().name == inventory[i]->getStats().name){
 				// check amount to remove if amount brings  total amount of item to 0 or lower remove and delete item
 				int amtToRemove = item.getAmount();

@@ -85,7 +85,7 @@ void Grem::levelUp()
 	stats.resist += 4;
 	stats.speed += 3;
 	stats.xp = 0;
-	xpToLevel += (float) xpToLevel * 0.3;
+	xpToLevel += (int)((float) xpToLevel * 0.3f);
 	if(stats.level == 20)
 		xpToLevel = 0;
 	}

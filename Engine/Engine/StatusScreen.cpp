@@ -129,7 +129,7 @@ void StatusScreen::render()
 
 				g->Draw2DObject(background);
 
-				if(who >= 0 && who < portraits.size())
+				if(who >= 0 && who < (int)portraits.size())
 					g->Draw2DObject(portraits[who]);
 
 				Engine::DX::instance()->getSprite()->End();

@@ -22,7 +22,7 @@ namespace Engine
 	public:
 		~Cursor();
 		static Cursor* instance();
-		void update(float x, float y);
+		void update(long x, long y);
 		D3DXVECTOR2		cursorPos;
 		std::string handle;
 	};

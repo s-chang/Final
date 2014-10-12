@@ -206,8 +206,8 @@ void Battle::render()
 
 				if(dmg >=0 && whosTurn == Turn::PLAYER_TURN){
 					RECT rect;
-					rect.left = Engine::Cursor::instance()->cursorPos.x+120;
-					rect.top = Engine::Cursor::instance()->cursorPos.y - 20;
+					rect.left = (long)Engine::Cursor::instance()->cursorPos.x+120;
+					rect.top = (long)Engine::Cursor::instance()->cursorPos.y - 20;
 					wchar_t tbuffer[64]; 
 					swprintf_s(tbuffer, 64,L"%d",dmg);
 					Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 

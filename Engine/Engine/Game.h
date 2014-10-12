@@ -2,7 +2,7 @@
 
 #include <queue>
 #include "Camera.h"
-#include "Floor.h"
+
 #include "GameStateManager.h"
 
 enum{
@@ -15,7 +15,7 @@ class Game
 {
 private:
 	//int game_state;
-	Floor floor;
+
 	void reset();
 	Camera *cam;
 
