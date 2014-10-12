@@ -169,6 +169,9 @@
     <ClCompile Include="CorridorFactory.cpp">
       <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -358,6 +361,9 @@
       <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClInclude>
     <ClInclude Include="CorridorFactory.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
       <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClInclude>
   </ItemGroup>

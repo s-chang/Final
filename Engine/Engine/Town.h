@@ -12,7 +12,7 @@ private:
 
 	int goToFloor;
 	bool tutorial;
-
+	
 	Camera cam;
 	Town(void);
 public:

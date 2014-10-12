@@ -132,3 +132,10 @@ bool Player::hasCompletedtenth()
 {
 	return completedTenth;
 }
+
+bool Player::checkDeath()
+{
+	if(grem->isAlive() || lenn->isAlive() || laz->isAlive())
+		return false;
+	return true;
+}

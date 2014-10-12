@@ -9,6 +9,13 @@ FloorCorridor::~FloorCorridor()
 void FloorCorridor::init(std::string handle)
 {
 	info.setHandle(handle);
+	info.set3D(true);
+	info.setHasTexture(true);
+}
+
+void FloorCorridor::set3D(bool arg)
+{
+	info.set3D(arg);
 }
 
 
@@ -30,4 +37,14 @@ void FloorCorridor::setRotate(D3DXVECTOR3 rotate)
 void FloorCorridor::setColor(D3DCOLOR color)
 {
 	info.setColor(color);
+}
+
+Drawable FloorCorridor::getInfo()
+{
+	return info;
+}
+
+void FloorCorridor::setHandle(std::string name)
+{
+	info.setHandle(name);
 }
