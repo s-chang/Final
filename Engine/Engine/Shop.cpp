@@ -1,5 +1,5 @@
 #include "Shop.h"
-
+#include "Player.h"
 
 Shop::Shop(void)
 {
@@ -63,7 +63,7 @@ void Shop::init()
 		{L"Consumables"},
 		};
 
-	for(int i = 0; i < TABS; i++){
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
 		tempCommands.setTranslate(tabData.x,tabData.y+=30,0.0f);
 		tempR.left = tabData.l;
 		tempR.right = tabData.r;
@@ -77,6 +77,8 @@ void Shop::init()
 
 	state = SHOP_STATE::OPEN;
 	help = false;
+	insufficientFunds = false;
+	helpText = "";
 }
 
 void Shop::shutdown()
@@ -85,42 +87,48 @@ void Shop::shutdown()
 
 int Shop::update()
 {
-	Engine::Cursor* c = Engine::Cursor::instance();
-	Engine::Input* input = Engine::Input::instance();
-	
-	int _x = c->cursorPos.x;
-	int _y = c->cursorPos.y;
-
-	for(unsigned int i = 0; i < buttons.size(); i++){
-		if(buttons[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
-			Engine::Cursor::instance()->cursorPos.y, 3)){
-				buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
-
-				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
-					if(!Engine::Input::instance()->check_button_down(DIK_9)){
-						Engine::Input::instance()->set_button(DIK_9, true);
-
-						switch(i)
-						{
-						case 0: //BUY
-							state = SHOP_STATE::BUY;
-							break;
-						case 1: //SELL
-							state = SHOP_STATE::SELL;
-							break;
-						case 2: //BACK
-							state = SHOP_STATE::OPEN;
-							return GameStates::RETURN;
-							break;
-						}
-					}
-				}
-				else Engine::Input::instance()->set_button(DIK_9, false);
-		}
-		else
-			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+	switch(checkList(buttons))
+	{
+	case 0: //BUY
+		state = SHOP_STATE::BUY;
+		break;
+	case 1: //SELL
+		state = SHOP_STATE::SELL;
+		break;
+	case 2: //BACK
+		state = SHOP_STATE::OPEN;
+		return GameStates::RETURN;
+		break;
 	}
-	
+
+	if(state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS){
+		switch(checkList(tabs))
+		{
+		case 0:// Spears 
+			Spears();
+			break;
+		case 1:// Daggers 
+			Daggers();
+			break;
+		case 2:// Staves 
+			Staves();
+			break;
+		case 3:// Armor 
+			Armor();
+			break;
+		case 4:// Accessories
+			Accessories();
+			break; 
+		case 5:// Runes 
+			Runes(); 
+			break;
+		case 6:// Consumables 
+			Consumables();
+			break;
+		}
+		checkItems();
+	}
+
 	return 0;
 }
 void Shop::render()
@@ -142,11 +150,11 @@ void Shop::render()
 					g->Draw2DObject(ItemWindow);
 
 				Engine::DX::instance()->getSprite()->End();
+				RECT rect;
+				rect.top = 50;
+				rect.left = 70;
+				if(!help && !insufficientFunds) {
 
-				if(!help){
-					RECT rect;
-					rect.top = 50;
-					rect.left = 70;
 					switch(state)
 					{
 					case SHOP_STATE::OPEN:
@@ -164,15 +172,38 @@ void Shop::render()
 						break;
 					}
 				}
-	
+				if(help)
+					displayItemStats(ItemFactory::instance()->getItem(helpText));
+				if (insufficientFunds && !help)
+					Engine::Text::instance()->font->DrawText(0,L"Insufficient Funds.", -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+				rect.top = 550;
+				rect.left = 550;
+				wchar_t tbuffer[64];
+				swprintf_s(tbuffer, 64,L"Your Gold %d",Player::instance()->getGold());
+				Engine::Text::instance()->font->DrawText(0,tbuffer, -1, &rect, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
 				for(unsigned int i = 0; i < buttons.size(); i++)
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
-						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
+					buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
 
-				if(state != SHOP_STATE::SELL && (state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS))
+				if(state != SHOP_STATE::SELL && (state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS)){
 					for(unsigned int i = 0; i < tabs.size(); i++)
 						Engine::Text::instance()->render(tabs[i].getRect().top, 
 							tabs[i].getRect().left, tabs[i].getPlainText(), tabs[i].getColor());
+					for(unsigned int i = 0; i < items.size(); i++) {
+						Engine::Text::instance()->render(items[i].getRect().top, 
+						items[i].getRect().left, items[i].getHandle(), items[i].getColor());
+						RECT tempR = items[i].getRect();
+						tempR.left += 170;
+						Item* item = ItemFactory::instance()->getItem(items[i].getHandle());
+						swprintf_s(tbuffer, 64,L"%d",item->getStats().price);
+						delete item;
+						Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &tempR, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					}
+				}
 			}
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
@@ -183,4 +214,327 @@ void Shop::render()
 		Engine::DX::instance()->getDevice()->EndScene();
 	}
 	Engine::DX::instance()->getDevice()->Present(0,0,0,0);
+}
+
+
+void Shop::checkItems()
+{
+	bool idkHelp = false;
+	for(unsigned int i = 0; i < items.size(); i++){
+		if(items[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				items[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+				idkHelp = true;
+				helpText = items[i].getHandle();
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						Engine::Input::instance()->set_button(DIK_9, true);
+						Item* item = ItemFactory::instance()->getItem(items[i].getHandle());
+						if(Player::instance()->getGold() >= item->getStats().price){
+							insufficientFunds = false;
+							item->setAmount(1);
+							Player::instance()->addItem(item);
+							Player::instance()->adjustGold(-item->getStats().price);
+						} //else helpText = 
+						else
+							insufficientFunds = true;
+					}
+				}
+				else Engine::Input::instance()->set_button(DIK_9, false);
+		}
+		else {
+			items[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+		}
+	}
+	help = idkHelp;
+}
+
+int Shop::checkList(std::vector<Drawable>& list)
+{
+	int returnable = 99;
+	for(unsigned int i = 0; i < list.size(); i++){
+		if(list[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				list[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						Engine::Input::instance()->set_button(DIK_9, true);
+						returnable = i;
+					}
+				}
+				else Engine::Input::instance()->set_button(DIK_9, false);
+		}
+		else
+			list[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+	}
+	return returnable;
+}
+
+
+void Shop::Spears()
+{
+	std::string names[] = {
+		"Weathered Spear",
+		"Short Spear",
+		"Spear",
+		"Harpoon",
+		"Lance",
+		"Gae Bolg",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Daggers()
+{
+	std::string names[] = {
+		"Chipped Dagger",
+		"Knife",
+		"Sting",
+		"Needle",
+		"Dagger",
+		"Night's Bane",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Staves()
+{
+	std::string names[] = {
+		"Splintered Staff",
+		"Rod",
+		"Staff",
+		"Rod of Light",
+		"Staff of Wisdom",
+		"Iron Staff",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Armor()
+{
+	std::string names[] = {
+		"Clothes",
+		"Leather Armor",
+		"Chain Mail",
+		"Enchanted Robe",
+		"Plate Armor",
+		"Dragon Armor",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Accessories()
+{
+	std::string names[] = {
+		"NONE",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Runes()
+{
+	std::string names[] = {
+		"NONE",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+void Shop::Consumables()
+{
+	std::string names[] = {
+		"Potion",
+		"Ether",
+		"Revive",
+		};
+
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	for(int i = 0; i < sizeof(names)/sizeof(names[0]); i++){
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(names[i]);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
+
+void Shop::displayItemStats(Item* item)
+{
+	Engine::Text* t = Engine::Text::instance();
+	RECT tempR;
+	tempR.top = 50;
+	tempR.left = 70;
+
+	wchar_t tbuffer[64];
+	std::string tempString;
+	std::wstring tempWS = L"";
+
+	// write name and description and any stat thats not 0;
+
+	// name
+	tempString = item->getStats().name;
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	// description
+	tempR.top += 30;
+	tempString = item->getStats().description;
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//stats
+	// only if it's not rune or accessory
+	//if(item->getStats().type != "Accessory" ||){
+	/////// Attack
+	tempR.top += 30;
+	int stat = item->getStats().atk;
+	if(stat){
+		swprintf_s(tbuffer, 64,L"Atk %d",stat);
+		t->font->DrawText(0, tbuffer, -1, &tempR, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	///////
+
+	/////// magic
+	tempR.left += 100;
+	stat = item->getStats().mag;
+	if(stat){
+		swprintf_s(tbuffer, 64,L"Mag %d",stat);
+		t->font->DrawText(0, tbuffer, -1, &tempR, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	///////
+
+	/////// Defense
+	tempR.left += 100;
+	stat = item->getStats().def;
+	if(stat){
+		swprintf_s(tbuffer, 64,L"Def %d",stat);
+		t->font->DrawText(0, tbuffer, -1, &tempR, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	///////
+
+	/////// resist
+	tempR.left += 100;
+	stat = item->getStats().res;
+	if(stat){
+		swprintf_s(tbuffer, 64,L"Res %d",stat);
+		t->font->DrawText(0, tbuffer, -1, &tempR, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	///////
+
+	/////// speed
+	tempR.left += 100;
+	stat = item->getStats().spd;
+	if(stat){
+		swprintf_s(tbuffer, 64,L"Spd %d",stat);
+		t->font->DrawText(0, tbuffer, -1, &tempR, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	///////
+	//}
+
+	delete item;
 }

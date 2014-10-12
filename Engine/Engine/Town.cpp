@@ -77,22 +77,22 @@ int Town::update()
 
 	if(input->push_button(DIK_A))
 	{
-		player.setTranslate(player.getTranslate().x - 0.1f , 0.0f, player.getTranslate().z );
+		player.setTranslate(player.getTranslate().x - Engine::Timer::instance()->getDT()*20 , 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 90.0f, player.getRotate().z );
 		if(player.getTranslate().x < -40)
 			player.setTranslate(-40,0,-7.7);
 		else 
-			cam.setEyePos(cam.getEyePos().x - 0.1f, cam.getEyePos().y, cam.getEyePos().z );
+			cam.setEyePos(cam.getEyePos().x - Engine::Timer::instance()->getDT()*18, cam.getEyePos().y, cam.getEyePos().z );
 	}
 
 	if(input->push_button(DIK_D))
 	{
-		player.setTranslate(player.getTranslate().x + 0.1f, 0.0f, player.getTranslate().z );
+		player.setTranslate(player.getTranslate().x + Engine::Timer::instance()->getDT()*20, 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 270.0f, player.getRotate().z );
 		if(player.getTranslate().x > 49)
 			player.setTranslate(49,0,-7.7);
 		else
-			cam.setEyePos(cam.getEyePos().x + 0.1f, cam.getEyePos().y, cam.getEyePos().z );
+			cam.setEyePos(cam.getEyePos().x + Engine::Timer::instance()->getDT()*18, cam.getEyePos().y, cam.getEyePos().z );
 
 	}
 	cam.setEyePos(cam.getEyePos().x, 10.0f, cam.getEyePos().z);

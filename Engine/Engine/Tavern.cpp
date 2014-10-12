@@ -128,7 +128,7 @@ void Tavern::render()
 					switch(state)
 					{
 					case TAVERN_STATE::OPEN:
-						Engine::Text::instance()->font->DrawText(0,L"Yo, What can I get you!", -1, &rect, 
+						Engine::Text::instance()->font->DrawText(0,L"Yo, What can I get you?", -1, &rect, 
 							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 						break;
 					case TAVERN_STATE::TUTORIALS:

@@ -31,6 +31,7 @@ private:
 	Drawable platform;
 	Drawable bWindow;
 	int returnable;
+	float timer;
 
 	void updatePlayerTurn(Entity*);
 	void updateEnemyTurn();

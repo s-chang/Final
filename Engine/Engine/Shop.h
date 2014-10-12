@@ -1,7 +1,6 @@
 #pragma once
 #include "gamestate.h"
-
-#define TABS 7 
+#include "Item.h"
 
 struct SHOP_STATE
 {
@@ -17,7 +16,10 @@ class Shop :
 {
 private:
 	int state;
-	bool help;
+	bool help,
+		insufficientFunds;
+	std::string helpText;
+
 	Drawable bg;
 	Drawable openWindow;
 	Drawable ItemWindow;
@@ -26,7 +28,17 @@ private:
 	std::vector<Drawable> tabs;
 	std::vector<Drawable> items;
 
-	void setItems();
+	void Spears();
+	void Daggers();
+	void Staves();
+	void Armor();
+	void Accessories();
+	void Runes(); 
+	void Consumables();
+
+	void checkItems();
+	int checkList(std::vector<Drawable>&);
+	void displayItemStats(Item* item);
 
 	Shop(void);
 public:

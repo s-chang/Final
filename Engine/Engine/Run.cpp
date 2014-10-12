@@ -19,10 +19,10 @@ void Run::init()
 
 void Run::update()
 {
-	//if(rand()%100 > 20)
+	if(rand()%100 > 20)
 		Battle::instance()->escape = true;
-	//else
-		//Battle::instance()->turnStatus = TURN_STATUS::END;
+	else
+		Battle::instance()->turnStatus = TURN_STATUS::END;
 }
 
 void Run::render()

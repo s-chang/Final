@@ -26,6 +26,8 @@ void Battle::init()
 	escape = false;
 	returnable = 0;
 
+	timer = 0.0f;
+
 	bWindow.init();
 	bWindow.setScale(0.788f, 0.59f, 1.0f);
 	bWindow.setHandle("bWindow");
@@ -206,8 +208,8 @@ void Battle::render()
 
 				if(dmg >=0 && whosTurn == Turn::PLAYER_TURN){
 					RECT rect;
-					rect.left = Engine::Cursor::instance()->cursorPos.x+120;
-					rect.top = Engine::Cursor::instance()->cursorPos.y - 20;
+					rect.left = 320;
+					rect.top = 500;
 					wchar_t tbuffer[64]; 
 					swprintf_s(tbuffer, 64,L"%d",dmg);
 					Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
@@ -270,11 +272,16 @@ void Battle::updatePlayerTurn(Entity* e)
 		activeCMD->update();
 		break;
 	case TURN_STATUS::END:
-		Sleep(1000);
-		dmg = -1;
-		turnOrder.COUNTER++;
-		turnStatus = TURN_STATUS::START;
+		timer += Engine::Timer::instance()->getDT();
+		if(timer > 1)
+		{
+			timer = 0.0f;
+			dmg = -1;
+			turnOrder.COUNTER++;
+			turnStatus = TURN_STATUS::START;
+		}
 		break;
+
 	}
 }
 void Battle::updateEnemyTurn()
@@ -291,7 +298,7 @@ void Battle::updateEnemyTurn()
 		turnOrder.COUNTER++;
 		return;
 	}
-	
+
 	Entity* player = NULL;
 	int atk = 0;
 	int def = 0;
@@ -299,7 +306,7 @@ void Battle::updateEnemyTurn()
 	switch(turnStatus)
 	{
 	case TURN_STATUS::START:
-		
+
 		randAI = rand()%3;
 		player = all[randAI];
 
@@ -319,10 +326,14 @@ void Battle::updateEnemyTurn()
 		turnStatus = TURN_STATUS::END;
 		break;
 	case TURN_STATUS::END:
-		Sleep(1000);
-		dmg = -1;
-		turnOrder.COUNTER++;
-		turnStatus = TURN_STATUS::START;
+		timer += Engine::Timer::instance()->getDT();
+		if(timer > 1)
+		{
+			timer = 0.0f;
+			dmg = -1;
+			turnOrder.COUNTER++;
+			turnStatus = TURN_STATUS::START;
+		}
 		break;
 	}
 }
@@ -481,7 +492,7 @@ void Battle::renderNamesHelthResource()
 		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 	//////////////////////////////////////////////////////////////////////////////////////
 
-	
+
 }
 
 void Battle::BattleOver()
@@ -495,8 +506,13 @@ void Battle::BattleOver()
 	int totalxp = 0;
 
 	if(turnOrder.COUNTER > 0){
-		Sleep(1000);
-		returnable = RETURN;
+		timer += Engine::Timer::instance()->getDT();
+		if(timer > 1.0f)
+		{
+			//Sleep(1000);
+			timer = 0.0f;
+			returnable = RETURN;
+		}
 		return;
 	}
 
@@ -511,19 +527,19 @@ void Battle::BattleOver()
 		Laz::instance()->addXP(totalxp);
 		swprintf_s(tbuffer, 64,L"You are victorious earning %d XP",totalxp);
 		t->font->DrawText(0, tbuffer, -1, &rect, 
-				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		break;
 	case Turn::LOSE:
 		turnOrder.COUNTER++;
 		swprintf_s(tbuffer, 64,L"You've been wrecked",totalxp);
 		t->font->DrawText(0, tbuffer, -1, &rect, 
-				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		break;
 	case Turn::ESCAPE:
 		turnOrder.COUNTER++;
 		swprintf_s(tbuffer, 64,L"You Escape...");
 		t->font->DrawText(0, tbuffer, -1, &rect, 
-				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		break;
 	}
 }
