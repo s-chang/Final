@@ -42,7 +42,7 @@ void StartMenu::init()
 	}
 
 	// TODO: if we are initing the start menu or reiniting it we also need to reset entire game
-
+	
 }
 
 void StartMenu::shutdown()
