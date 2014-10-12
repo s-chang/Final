@@ -88,6 +88,7 @@
     <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DX.cpp" />
+    <ClCompile Include="Elemental.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Equippable.cpp" />
     <ClCompile Include="EquipScreen.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RageCMD.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Rune.cpp" />
@@ -127,6 +129,7 @@
     <ClCompile Include="StatusMain.cpp" />
     <ClCompile Include="StatMenuManager.cpp" />
     <ClCompile Include="StatusScreen.cpp" />
+    <ClCompile Include="Subtlety.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -147,6 +150,7 @@
     <ClInclude Include="Dagger.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DX.h" />
+    <ClInclude Include="Elemental.h" />
     <ClInclude Include="EngineHeaders.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Entity.h" />
@@ -176,6 +180,7 @@
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RageCMD.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Roomtype.h" />
     <ClInclude Include="Run.h" />
@@ -192,6 +197,7 @@
     <ClInclude Include="StatMenuManager.h" />
     <ClInclude Include="StatusScreen.h" />
     <ClInclude Include="statusStates.h" />
+    <ClInclude Include="Subtlety.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />

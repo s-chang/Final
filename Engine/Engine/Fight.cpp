@@ -4,6 +4,7 @@
 Fight::Fight(void) : BattleCommand()
 {
 	name = "Fight";
+	help = "Use basic attack on an enemy";
 }
 
 

@@ -1,18 +1,13 @@
 #pragma once
 #include "battlecommand.h"
-
-class Fight :
+class Elemental :
 	public BattleCommand
 {
-	std::vector<Drawable> enemyList;
-
-	// old
-	int top,left;
-	RECT r2;
+private:
+	std::vector<BattleCommand*> skillList;
 public:
-	Fight(void);
-	~Fight(void);
-
+	Elemental(void);
+	~Elemental(void);
 	void init();
 	void update();
 	void render();

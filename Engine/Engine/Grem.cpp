@@ -1,5 +1,5 @@
 #include "Grem.h"
-
+#include "Skill.h"
 
 Grem::Grem(void) : Entity()
 {
@@ -57,9 +57,11 @@ void Grem::init()
 	availableCommands.push_back(newCommand);
 	newCommand = new Run();
 	availableCommands.push_back(newCommand);
+	newCommand = new RageCMD();
+	availableCommands.push_back(newCommand);
 
 	commands[0] = availableCommands[1];
-	commands[1] = availableCommands[0];
+	commands[1] = availableCommands[4];
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
@@ -147,4 +149,14 @@ void Grem::adjustResource(int amount)
 		rage = 0;
 	if (rage >= rageMax)
 		rage = rageMax;
+};
+
+void Grem::getSkills(std::vector<BattleCommand*>& skillList, int type)
+{
+	for(int i = 0; i < skills.size(); i++){
+		Skill * skill = (Skill*)skills[i];
+		if(skill->getType() == type){
+			skillList.push_back(skill);
+		}
+	}
 };

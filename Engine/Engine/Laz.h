@@ -22,7 +22,7 @@ private:
 	Laz(void);
 public:
 	std::vector<BattleCommand*> availableCommands;
-	std::vector<std::string> skills;
+	std::vector<BattleCommand*> skills;
 
 	static Laz* instance();
 	~Laz(void);
@@ -38,5 +38,6 @@ public:
 	Item* getItem(int slot);
 	void addXP(int amount);
 	void adjustResource(int amount);
+	void getSkills(std::vector<BattleCommand*>& skillList, int type);
 };
 

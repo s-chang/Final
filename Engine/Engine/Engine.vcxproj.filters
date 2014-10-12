@@ -169,6 +169,15 @@
     <ClCompile Include="CorridorFactory.cpp">
       <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClCompile>
+    <ClCompile Include="RageCMD.cpp">
+      <Filter>Game\Commands/Skills\Commands\Rage</Filter>
+    </ClCompile>
+    <ClCompile Include="Subtlety.cpp">
+      <Filter>Game\Commands/Skills\Commands\Subtlety</Filter>
+    </ClCompile>
+    <ClCompile Include="Elemental.cpp">
+      <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -359,6 +368,15 @@
     </ClInclude>
     <ClInclude Include="CorridorFactory.h">
       <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="RageCMD.h">
+      <Filter>Game\Commands/Skills\Commands\Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="Subtlety.h">
+      <Filter>Game\Commands/Skills\Commands\Subtlety</Filter>
+    </ClInclude>
+    <ClInclude Include="Elemental.h">
+      <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -573,6 +591,42 @@
     </Filter>
     <Filter Include="Game\GameStates\Tower\Floorstuff\FloorGenerator">
       <UniqueIdentifier>{2ffe381e-f0a0-420f-b7e1-c6f406815ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\Commands\Rage">
+      <UniqueIdentifier>{cebb9893-2dab-4b10-b7fe-dcc0325734c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\Commands\Subtlety">
+      <UniqueIdentifier>{2466ef58-de42-4aab-96a2-9525b8d88649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\Commands\Elemental">
+      <UniqueIdentifier>{6b8f9c87-fe95-4249-a016-4e497f7ea08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Rage">
+      <UniqueIdentifier>{3df6a591-af85-49f5-8f6d-d0e0b204ccd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Elemental">
+      <UniqueIdentifier>{e3848eeb-f1e3-4cf9-ae63-c8a380febd91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Subtlety">
+      <UniqueIdentifier>{711a1cf4-23cf-4c58-a8ee-1d4d62a1c7a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Rage\Jump">
+      <UniqueIdentifier>{1b57ee97-ec30-4c97-9279-d94f83c7cf99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Subtlety\Steal">
+      <UniqueIdentifier>{03a85386-cd9c-4c6d-b704-8509749c1f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Elemental\Wind">
+      <UniqueIdentifier>{9ba810ad-40f1-4d16-8d13-2564930847e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Elemental\Fire">
+      <UniqueIdentifier>{0892c0ae-8e3c-4ef9-9bb7-64720fddc337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Rage\Charge">
+      <UniqueIdentifier>{3ed848e3-b7ff-414b-9302-eadd90f98c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands/Skills\skills\Subtlety\Mug">
+      <UniqueIdentifier>{2763e0d7-2016-44ab-80da-4425a811e278}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

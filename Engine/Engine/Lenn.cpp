@@ -1,4 +1,5 @@
 #include "Lenn.h"
+#include "Skill.h"
 
 Lenn::Lenn(void) : Entity()
 {
@@ -56,9 +57,11 @@ void Lenn::init()
 	availableCommands.push_back(newCommand);
 	newCommand = new Run();
 	availableCommands.push_back(newCommand);
+	newCommand = new Subtlety();
+	availableCommands.push_back(newCommand);
 
 	commands[0] = availableCommands[1];
-	commands[1] = availableCommands[0];
+	commands[1] = availableCommands[4];
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
@@ -147,4 +150,14 @@ void Lenn::adjustResource(int amount)
 		stamina = 0;
 	if (stamina >= staminaMax)
 		stamina = staminaMax;
+};
+
+void Lenn::getSkills(std::vector<BattleCommand*>& skillList, int type)
+{
+	for(int i = 0; i < skills.size(); i++){
+		Skill * skill = (Skill*)skills[i];
+		if(skill->getType() == type){
+			skillList.push_back(skill);
+		}
+	}
 };

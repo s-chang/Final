@@ -67,7 +67,7 @@ void Battle::init()
 	d->setRotate(0.0f,135.0f,0.0f);
 
 	int top = 440;
-	int left = 360;
+	int left = 350;
 	for(int i = 0; i< 4; i++){
 		Grem::instance()->getCommand(i)->setRect(top,left);
 		Lenn::instance()->getCommand(i)->setRect(top,left);
@@ -524,9 +524,12 @@ void Battle::BattleOver()
 			totalxp += enemy.getStats()->xp;
 		//static bool idkLevel = true;
 		if(turnOrder.COUNTER == 0){
-			Grem::instance()->addXP(totalxp);
-			Lenn::instance()->addXP(totalxp);
-			Laz::instance()->addXP(totalxp);
+			if(Grem::instance()->isAlive())
+				Grem::instance()->addXP(totalxp);
+			if(Lenn::instance()->isAlive())
+				Lenn::instance()->addXP(totalxp);
+			if(Laz::instance()->isAlive())
+				Laz::instance()->addXP(totalxp);
 			Player::instance()->adjustGold(totalxp);
 		}
 		
