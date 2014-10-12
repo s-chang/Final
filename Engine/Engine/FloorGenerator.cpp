@@ -1,3245 +1,2006 @@
-//#include "FloorGenerator.h"
-//
-//FloorGenerator::FloorGenerator()
-//{
-//
-//}
-//
-//FloorGenerator::~FloorGenerator()
-//{}
-//
-//FloorGenerator *FloorGenerator::instance()
-//{
-//	FloorGenerator map;
-//	return &map;
-//}
-//
-//void FloorGenerator::init()
-//{
-//	map = new char*[LIMIT];
-//	for(int i = 0; i < LIMIT; i++)
-//		map[i] = new char[LIMIT];
-//
-//	onewayD = 'D'; onewayU = 'U';	 onewayL = 'L'; onewayR = 'R';
-//	twowayH = 'H'; twowayV = 'V';
-//	twowayDR = 'Z';twowayUR = 'X'; twowayDL = 'C';twowayUL = 'B';
-//	threewayD = '1'; threewayU = '2';threewayL = '3';threewayR = '4';
-//	fourway = '5';
-//	
-//	roomoneD = 'd';roomoneU = 'u';roomoneL = 'l';roomoneR = 'r';
-//	roomtwoH = 'h';roomtwoV = 'v';
-//	roomtwoDR = 'z';roomtwoUR = 'x';roomtwoDL = 'c';roomtwoUL = 'b';
-//	roomthreeD = '!';roomthreeU = '@';roomthreeL = '#';roomthreeR = '$';
-//	roomfour = '%';
-//	blank = ' ';
-//}
-//
-//bool FloorGenerator::checkLeft(int posX, int posY)
-//{
-//	if(map[posX][posY] == onewayR ||
-//		map[posX ][posY] == twowayH ||
-//		map[posX ][posY] == twowayDR ||
-//		map[posX ][posY] == twowayUR ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY] == threewayU ||
-//		map[posX ][posY] == threewayR ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneR ||
-//		map[posX ][posY ] == roomtwoH ||
-//		map[posX ][posY ] == roomtwoUR ||
-//		map[posX ][posY ] == roomtwoDR ||
-//		map[posX ][posY] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeU ||
-//		map[posX ][posY ] == roomthreeR ||
-//		map[posX ][posY ] == roomfour ||
-//		map[posX ][posY ] == ' '
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//}
-//
-//bool FloorGenerator::checkLeft2(int posX, int posY)
-//{
-//	if(map[posX][posY] == onewayR ||
-//		map[posX ][posY] == twowayH ||
-//		map[posX ][posY] == twowayDR ||
-//		map[posX ][posY] == twowayUR ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY] == threewayU ||
-//		map[posX ][posY] == threewayR ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneR ||
-//		map[posX ][posY ] == roomtwoH ||
-//		map[posX ][posY ] == roomtwoUR ||
-//		map[posX ][posY ] == roomtwoDR ||
-//		map[posX ][posY] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeU ||
-//		map[posX ][posY ] == roomthreeR ||
-//		map[posX ][posY ] == roomfour
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//
-//}
-//
-//bool FloorGenerator::checkUp(int posX, int posY)
-//{
-//	
-//	if(
-//		map[posX ][posY] == onewayD ||
-//		map[posX ][posY] == twowayV ||
-//		map[posX ][posY ] == twowayDR ||
-//		map[posX ][posY ] == twowayDL ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY ] == threewayL ||
-//		map[posX ][posY ] == threewayR ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneD ||
-//		map[posX ][posY ] == roomtwoV ||
-//		map[posX ][posY ] == roomtwoDL ||
-//		map[posX ][posY ] == roomtwoDR ||
-//		map[posX ][posY ] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeL ||
-//		map[posX ][posY ] == roomthreeR ||
-//		map[posX ][posY ] == roomfour ||
-//		map[posX ][posY ] == blank
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//
-//
-//
-//}
-//bool FloorGenerator::checkUp2(int posX, int posY)
-//{
-//	if(
-//		map[posX ][posY] == onewayD ||
-//		map[posX ][posY] == twowayV ||
-//		map[posX ][posY ] == twowayDR ||
-//		map[posX ][posY ] == twowayDL ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY ] == threewayL ||
-//		map[posX ][posY ] == threewayR ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneD ||
-//		map[posX ][posY ] == roomtwoV ||
-//		map[posX ][posY ] == roomtwoDL ||
-//		map[posX ][posY ] == roomtwoDR ||
-//		map[posX ][posY ] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeL ||
-//		map[posX ][posY ] == roomthreeR ||
-//		map[posX ][posY ] == roomfour 
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//
-//
-//}
-//
-//bool FloorGenerator::checkRight(int posX, int posY)
-//{
-//	if(map[posX ][posY ] == onewayL ||
-//		map[posX ][posY] == twowayH ||
-//		map[posX ][posY] == twowayDL ||
-//		map[posX ][posY ] == twowayUL ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY ] == threewayU ||
-//		map[posX ][posY ] == threewayL ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneL ||
-//		map[posX ][posY ] == roomtwoH ||
-//		map[posX ][posY ] == roomtwoUL ||
-//		map[posX ][posY ] == roomtwoDL ||
-//		map[posX ][posY ] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeU ||
-//		map[posX ][posY ] == roomthreeL ||
-//		map[posX ][posY ] == roomfour ||
-//		map[posX ][posY ] == blank
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//}
-//bool FloorGenerator::checkRight2(int posX, int posY)
-//{
-//	if(map[posX ][posY ] == onewayL ||
-//		map[posX ][posY] == twowayH ||
-//		map[posX ][posY] == twowayDL ||
-//		map[posX ][posY ] == twowayUL ||
-//		map[posX ][posY ] == threewayD ||
-//		map[posX ][posY ] == threewayU ||
-//		map[posX ][posY ] == threewayL ||
-//		map[posX ][posY ] == fourway ||
-//		map[posX ][posY ] == roomoneL ||
-//		map[posX ][posY ] == roomtwoH ||
-//		map[posX ][posY ] == roomtwoUL ||
-//		map[posX ][posY ] == roomtwoDL ||
-//		map[posX ][posY ] == roomthreeD ||
-//		map[posX ][posY ] == roomthreeU ||
-//		map[posX ][posY ] == roomthreeL ||
-//		map[posX ][posY ] == roomfour
-//		)
-//	{
-//		return true;
-//	}else
-//		return false;
-//}
-//
-//bool FloorGenerator::checkDown(int posX, int posY)
-//{
-//	if(
-//		map[posX][posY] == onewayU ||
-//		map[posX][posY] == twowayV ||
-//		map[posX][posY] == twowayUR ||
-//		map[posX][posY] == twowayUL ||
-//		map[posX][posY] == threewayU ||
-//		map[posX][posY] == threewayL ||
-//		map[posX][posY] == threewayR ||
-//		map[posX][posY] == fourway ||
-//		map[posX][posY] == roomoneU ||
-//		map[posX][posY] == roomtwoV ||
-//		map[posX][posY] == roomtwoUR ||
-//		map[posX][posY] == roomtwoUL ||
-//		map[posX][posY] == threewayU ||
-//		map[posX][posY] == threewayL ||
-//		map[posX][posY] == threewayR ||
-//		map[posX][posY] == roomfour ||
-//		map[posX][posY] == ' '
-//
-//		)
-//		return true;
-//	else
-//		return false;
-//}
-//bool FloorGenerator::checkDown2(int posX, int posY)
-//{
-//	if(
-//		map[posX][posY] == onewayU ||
-//		map[posX][posY] == twowayV ||
-//		map[posX][posY] == twowayUR ||
-//		map[posX][posY] == twowayUL ||
-//		map[posX][posY] == threewayU ||
-//		map[posX][posY] == threewayL ||
-//		map[posX][posY] == threewayR ||
-//		map[posX][posY] == fourway ||
-//		map[posX][posY] == roomoneU ||
-//		map[posX][posY] == roomtwoV ||
-//		map[posX][posY] == roomtwoUR ||
-//		map[posX][posY] == roomtwoUL ||
-//		map[posX][posY] == threewayU ||
-//		map[posX][posY] == threewayL ||
-//		map[posX][posY] == threewayR ||
-//		map[posX][posY] == roomfour 
-//
-//		)
-//		return true;
-//	else
-//		return false;
-//}
-//
-//void FloorGenerator::assignUpR(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//
-//	switch(temp)
-//	{
-//	case 0: 
-//		//onewayD
-//		{
-//			if(posX -2 <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if(!checkUp2(posX-2, posY) &&
-//				!checkLeft2(posX-1, posY-1) &&
-//				!checkRight2(posX-1, posY+1)
-//				)
-//			{
-//				map[posX - 1][posY] = onewayD; 								 
-//			}
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 1: 
-//		{
-//			//twowayV
-//			if((posX - 2) != 0)
-//			{
-//				if(checkUp(posX-2, posY) &&
-//					!checkLeft2( posX-1, posY-1) &&
-//					!checkRight2( posX-1, posY+1)
-//					)
-//				{
-//					map[posX - 1][posY] = twowayV; 
-//					nextRC(currentroom, posX, posY ); 
-//					nextRC(twowayV, posX-1, posY);
-//				}else
-//					nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX - 2) <= 0)
-//			{
-//				nextRC(currentroom, posX, posY); 
-//				break;
-//			}
-//			break;
-//		}
-//	case 2:
-//		{
-//			//threewayD
-//
-//			//cannot place this piece if the left or right areas are the edges
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			//check for existing left and right areas and see if they are compatible
-//			if(
-//				checkLeft(posX-1, posY-1)
-//				//checkAvailable(map, posX - 1, posY - 1, tempholder)
-//
-//				&&
-//				checkRight(posX-1, posY+1)
-//				//checkAvailable(map, posX-1, posY+1, tempholder2)
-//				&& 
-//				!checkUp2(posX-2, posY)
-//				)
-//			{
-//				map[posX - 1][posY] = threewayD;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayD, posX-1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//
-//			break;
-//		}
-//	case 3:
-//		//threewayL
-//		{
-//			//check the left and top to see if they are at the edge
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			//check for existing left and top areas and see if they are compatible
-//			if( 
-//				checkLeft(posX-1, posY-1)
-//				&&
-//				checkUp(posX-2, posY)
-//
-//				&&
-//				!checkRight2(posX-1, posY+1)
-//
-//				)
-//			{
-//				map[posX - 1][posY] = threewayL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayL, posX-1, posY);
-//				break;
-//			}else
-//				nextRC(roomfour, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 4:
-//		//threewayR
-//		{
-//			//check the top and right areas if they are on the edge
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing top and right areas and see if they are compatible
-//			if( checkUp( posX-2, posY)
-//				&&
-//				checkRight( posX-1, posY+1)
-//				&&
-//				!checkLeft2( posX-1, posY-1)
-//				)
-//			{
-//				map[posX -1][posY] = threewayR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayR, posX-1, posY);
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 5:
-//		//fourway
-//		{
-//			//cannot place this piece if the left, right, or up areas are the edges
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft(posX-1, posY-1)
-//				&&
-//				checkRight(posX-1, posY+1)
-//				&&
-//				checkUp(posX-2, posY)								
-//				)
-//			{
-//				map[posX - 1][posY] = fourway;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(fourway, posX-1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 6:
-//		//twowayDR
-//		{
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing right area and see if it is compatible
-//			if(
-//				!checkLeft2(posX-1, posY-1)
-//				&&
-//				checkRight(posX-1, posY+1)
-//				&&
-//				!checkUp2(posX-2, posY)	
-//
-//				)
-//			{
-//				map[posX - 1][posY] = twowayDR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayDR, posX-1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//	case 7:
-//		//twowayDL
-//		{
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft( posX-1, posY-1)
-//				&&
-//				!checkRight2( posX-1, posY+1)
-//				&&
-//				!checkUp2( posX-2, posY)
-//				)
-//			{
-//				map[posX - 1][posY] = twowayDL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayDL, posX-1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	}
-//
-//
-//}
-//void FloorGenerator::assignUpC(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//
-//	int room = rand() % 2;
-//
-//	switch(temp)
-//	{
-//	case 0: 
-//		//onewayD
-//		{
-//			if(posX -2 <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if(!checkUp2(posX-2, posY) &&
-//				!checkLeft2( posX-1, posY-1) &&
-//				!checkRight2(posX-1, posY+1)
-//				)
-//			{
-//				if(room)
-//					map[posX - 1][posY] = onewayD;
-//				else
-//					map[posX -1][posY] = roomoneD;
-//			}
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 1: 
-//		{
-//			//twowayV
-//			if((posX - 2) <= 0)
-//			{
-//				if(checkUp( posX-2, posY) &&
-//					!checkLeft2( posX-1, posY-1) &&
-//					!checkRight2( posX-1, posY+1)
-//					)
-//				{
-//					if(room)
-//					{
-//						map[posX - 1][posY] = twowayV; 
-//						nextRC(currentroom, posX, posY); 
-//						nextRC(twowayV, posX-1, posY);
-//					}else
-//					{
-//						map[posX - 1][posY] = roomtwoV; 
-//						nextRC(currentroom, posX, posY); 
-//						nextRC(roomtwoV, posX-1, posY);
-//					}
-//				}else
-//					nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX - 2) <= 0)
-//			{
-//				nextRC(currentroom, posX, posY); 
-//				break;
-//			}
-//			break;
-//		}
-//	case 2:
-//		{
-//			//threewayD
-//
-//			//cannot place this piece if the left or right areas are the edges
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			//check for existing left and right areas and see if they are compatible
-//			if(
-//				checkLeft( posX-1, posY-1)
-//				//checkAvailable(floor, posX - 1, posY - 1, tempholder)
-//
-//				&&
-//				checkRight( posX-1, posY+1)
-//				//checkAvailable(floor, posX-1, posY+1, tempholder2)
-//				&& 
-//				!checkUp2( posX-2, posY)
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX - 1][posY] = threewayD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayD, posX-1, posY);
-//				}else
-//				{
-//					map[posX - 1][posY] = roomthreeD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeD, posX-1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//
-//			break;
-//		}
-//	case 3:
-//		//threewayL
-//		{
-//			//check the left and top to see if they are at the edge
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			//check for existing left and top areas and see if they are compatible
-//			if( 
-//				checkLeft( posX-1, posY-1)
-//				&&
-//				checkUp(posX-2, posY)
-//
-//				&&
-//				!checkRight2( posX-1, posY+1)
-//
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX - 1][posY] = threewayL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayL, posX-1, posY);
-//				}else
-//				{
-//					map[posX - 1][posY] = roomthreeL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeL, posX-1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 4:
-//		//threewayR
-//		{
-//			//check the top and right areas if they are on the edge
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing top and right areas and see if they are compatible
-//			if( checkUp( posX-2, posY)
-//				&&
-//				checkRight( posX-1, posY+1)
-//				&&
-//				!checkLeft2( posX-1, posY-1)
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX -1][posY] = threewayR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayR, posX-1, posY);
-//				}else
-//				{
-//					map[posX -1][posY] = roomthreeR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeR, posX-1, posY);
-//				}
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 5:
-//		//fourway
-//		{
-//			//cannot place this piece if the left, right, or up areas are the edges
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if((posX - 2) == 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft( posX-1, posY-1)
-//				&&
-//				checkRight( posX-1, posY+1)
-//				&&
-//				checkUp( posX-2, posY)								
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX - 1][posY] = fourway;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(fourway, posX-1, posY);
-//				}else
-//				{
-//					map[posX - 1][posY] = roomfour;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomfour, posX-1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 6:
-//
-//		//twowayDR
-//		{
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing right area and see if it is compatible
-//			if(
-//				!checkLeft2(posX-1, posY-1)
-//				&&
-//				checkRight( posX-1, posY+1)
-//				&&
-//				!checkUp2( posX-2, posY)	
-//
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX - 1][posY] = twowayDR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDR, posX-1, posY);
-//				}else
-//				{
-//					map[posX - 1][posY] = twowayDR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDR, posX-1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//	case 7:
-//		//twowayDL
-//		{
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft( posX-1, posY-1)
-//				&&
-//				!checkRight2( posX-1, posY+1)
-//				&&
-//				!checkUp2( posX-2, posY)
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX - 1][posY] = twowayDL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDL, posX-1, posY);
-//				}else
-//				{
-//					map[posX - 1][posY] = twowayDL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDL, posX-1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	}
-//}
-//
-//
-//void FloorGenerator::assignDownR(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//	switch(temp)
-//	{
-//	case 0:
-//		{
-//			if(posX + 2 >= LIMIT -1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			//onewayU
-//			if(!checkLeft2( posX+1, posY-1) &&
-//				!checkRight2( posX+1, posY+1) &&
-//				!checkDown2( posX+2, posY)
-//				)
-//			{
-//				map[posX + 1][posY] = onewayU; 
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayV
-//		{
-//			if(posX + 2 >= LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY); 
-//				break;
-//			}
-//			
-//			if(checkDown( posX+2, posY) &&
-//				!checkLeft2( posX+1, posY-1) &&
-//				!checkRight2( posX+1, posY+1)
-//				)
-//			{
-//				map[posX + 1][posY] = twowayV;
-//				nextRC(currentroom, posX, posY); 
-//				nextRC(twowayV, posX+1, posY);
-//				}else
-//					nextRC(currentroom, posX, posY);							 
-//
-//				break;
-//			
-//
-//		
-//			break;							
-//
-//		}
-//
-//	case 2:
-//		//twowayUL
-//		{
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft( posX+1, posY-1) &&
-//				!checkRight2( posX+1, posY+1) &&
-//				!checkDown2( posX+2, posY)
-//				)
-//			{
-//				map[posX + 1][posY] = twowayUL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayUL, posX+1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayUR
-//
-//		{
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing right area and see if it is compatible
-//			if(
-//				checkRight( posX+1, posY+1) &&
-//				!checkLeft2( posX+1, posY-1) &&
-//				!checkDown2( posX +2, posY)
-//				)
-//			{
-//				map[posX + 1][posY] = twowayUR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayUR, posX+1, posY);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 4:
-//		//threewayU
-//		if((posY - 1) == 0) 
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posY + 1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		//check left and right areas
-//		if(checkLeft( posX+1, posY-1)
-//			&&
-//			checkRight( posX+1, posY+1) &&
-//			!checkDown2( posX+2, posY)
-//			){
-//
-//				map[posX + 1][posY] = threewayU;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayU, posX+1, posY);
-//				break;
-//		}else
-//			nextRC(currentroom, posX, posY);
-//
-//		break;
-//
-//	case 5:
-//		//threewayL
-//		if((posY -1) == 0)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posX+1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(checkLeft(posX+1, posY-1) &&
-//			!checkRight2( posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			map[posX+1][posY] = threewayL;
-//			nextRC(currentroom, posX, posY);
-//			nextRC(threewayL, posX+1, posY);
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//
-//		break;
-//	case 6:
-//		//threewayR
-//
-//		if((posY+1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posX +1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(!checkLeft2( posX+1, posY-1) &&
-//			checkRight( posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			map[posX+1][posY] = threewayR;
-//			nextRC(currentroom, posX, posY);
-//			nextRC(threewayR, posX+1, posY);
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		if( ((posY+1) == LIMIT-1) ||
-//			((posY-1) == 0) ||
-//			((posX+1) == LIMIT-1)
-//			)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(checkLeft( posX+1, posY-1) &&
-//			checkRight( posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			map[posX+1][posY] = fourway;
-//			nextRC(currentroom, posX, posY);
-//			nextRC(fourway, posX+1, posY);
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//
-//
-//		break;
-//
-//
-//	}//end switch
-//
-//}
-//void FloorGenerator::assignDownC(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//	int room = rand() % 2;
-//	switch(temp)
-//	{
-//	case 0:
-//		{
-//			if(posX +2 >= LIMIT -1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			//onewayU
-//			if(!checkLeft2(posX+1, posY-1) &&
-//				!checkRight2(posX+1, posY+1) &&
-//				!checkDown2(posX+2, posY)
-//				)
-//			{
-//				if(room)
-//					map[posX + 1][posY] = onewayU; 
-//				else
-//					map[posX + 1][posY] = roomoneU; 
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayV
-//		{
-//			
-//			if(posX + 2 >= LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY); 
-//				break;
-//			}
-//				if(checkDown(posX+2, posY) &&
-//					!checkLeft2(posX+1, posY-1) &&
-//					!checkRight2( posX+1, posY+1)
-//					)
-//				{
-//					if(room)
-//					{
-//						map[posX + 1][posY] = twowayV;
-//						nextRC(currentroom, posX, posY); 
-//						nextRC(twowayV, posX+1, posY);
-//					}else
-//					{
-//						map[posX + 1][posY] = roomtwoV;
-//						nextRC(currentroom, posX, posY); 
-//						nextRC(roomtwoV, posX+1, posY);
-//					}
-//				}else
-//					nextRC(currentroom, posX, posY);							 
-//
-//				break;
-//			
-//
-//			break;							
-//
-//		}
-//
-//	case 2:
-//		//twowayUL
-//		{
-//			if((posY - 1) == 0) 
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing left area and see if it is compatible
-//			if(
-//				checkLeft(posX+1, posY-1) &&
-//				!checkRight2(posX+1, posY+1) &&
-//				!checkDown2( posX+2, posY)
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX + 1][posY] = twowayUL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayUL, posX+1, posY);
-//				}else
-//				{
-//					map[posX + 1][posY] = roomtwoUL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoUL, posX+1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayUR
-//
-//		{
-//			if((posY + 1) == LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			//check for existing right area and see if it is compatible
-//			if(
-//				checkRight( posX+1, posY+1) &&
-//				!checkLeft2( posX+1, posY-1) &&
-//				!checkDown2( posX +2, posY)
-//				)
-//			{
-//				if(room)
-//				{
-//					map[posX + 1][posY] = twowayUR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayUR, posX+1, posY);
-//				}else
-//				{
-//					map[posX + 1][posY] = roomtwoUR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoUR, posX+1, posY);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 4:
-//		//threewayU
-//		if((posY - 1) == 0) 
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posY + 1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		//check left and right areas
-//		if(checkLeft( posX+1, posY-1)
-//			&&
-//			checkRight( posX+1, posY+1) &&
-//			!checkDown2( posX+2, posY)
-//			){
-//				if(room)
-//				{
-//					map[posX + 1][posY] = threewayU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayU, posX+1, posY);
-//				}else
-//				{
-//					map[posX + 1][posY] = roomthreeU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeU, posX+1, posY);
-//				}
-//				break;
-//		}else
-//			nextRC(currentroom, posX, posY);
-//
-//		break;
-//
-//	case 5:
-//		//threewayL
-//		if((posY -1) == 0)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posX+1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(checkLeft(posX+1, posY-1) &&
-//			!checkRight2( posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			if(room)
-//			{
-//				map[posX+1][posY] = threewayL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayL, posX+1, posY);
-//			}else
-//			{
-//				map[posX+1][posY] = roomthreeL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(roomthreeL, posX+1, posY);
-//			}
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//
-//		break;
-//	case 6:
-//		//threewayR
-//
-//		if((posY+1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if((posX +1) == LIMIT-1)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(!checkLeft2( posX+1, posY-1) &&
-//			checkRight(posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			if(room)
-//			{
-//				map[posX+1][posY] = threewayR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayR, posX+1, posY);
-//			}else
-//			{
-//				map[posX+1][posY] = roomthreeR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(roomthreeR, posX+1, posY);
-//			}
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		if( ((posY+1) == LIMIT-1) ||
-//			((posY-1) == 0) ||
-//			((posX+1) == LIMIT-1)
-//			)
-//		{
-//			nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//
-//		if(checkLeft( posX+1, posY-1) &&
-//			checkRight( posX+1, posY+1) &&
-//			checkDown( posX+2, posY)
-//			)
-//		{
-//			if(room)
-//			{
-//				map[posX+1][posY] = fourway;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(fourway, posX+1, posY);
-//			}else
-//			{
-//				map[posX+1][posY] = roomfour;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(roomfour, posX+1, posY);
-//			}
-//			break;
-//		}else
-//		{
-//			nextRC(currentroom, posX, posY);
-//		}
-//
-//
-//		break;
-//
-//
-//	}//end switch
-//}
-//
-//void FloorGenerator::assignLeftR(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//
-//	switch(temp)
-//	{
-//	case 0:
-//		//onewayR
-//		{
-//			if(posY-2 <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if( !checkUp2(posX-1, posY-1) &&
-//				!checkDown2( posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//			{
-//				map[posX][posY-1] = onewayR;
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayH
-//		{
-//			if( (posY-2) <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2( posX-1, posY-1) &&
-//				!checkDown2( posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//			{
-//				map[posX][posY-1] = twowayH;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayH, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 2:
-//		//twowayUR
-//		{
-//			if( (posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY-1) &&
-//				!checkDown2( posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = twowayUR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayUR, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayDR
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				!checkLeft2(posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = twowayDR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayDR, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//		}
-//		break;
-//	case 4:
-//		//threewayU
-//		{
-//			if( (posX-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				!checkDown2(posX+1, posY-1) &&
-//				checkLeft(posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = threewayU;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayU, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 5:
-//		//threewayD
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posY-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(!checkUp2( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = threewayD;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayD, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 6:
-//		//threewayR
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				!checkLeft2(posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = threewayR;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayR, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( (posY-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				checkDown(posX+1, posY-1) &&
-//				checkLeft(posX, posY-2))
-//
-//			{
-//				map[posX][posY-1] = fourway;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(fourway, posX, posY-1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	}//end switch
-//
-//}
-//void FloorGenerator::assignLeftC(int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//	int room = rand() % 2;
-//	switch(temp)
-//	{
-//	case 0:
-//		//onewayR
-//		{
-//			if(posY-2 <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//			if( !checkUp2(posX-1, posY-1) &&
-//				!checkDown2(posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//			{
-//				if(room)
-//					map[posX][posY-1] = onewayR;
-//				else
-//					map[posX][posY-1] = roomoneR;
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayH
-//		{
-//			if( (posY-2) <= 0)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2(posX-1, posY-1) &&
-//				!checkDown2(posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = twowayH;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayH, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomtwoH;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoH, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 2:
-//		//twowayUR
-//		{
-//			if( (posX-1 <= 0))
-//			{
-//				nextRC(roomfour, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp(posX-1, posY-1) &&
-//				!checkDown2( posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = twowayUR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayUR, posX, posY-1);
-//				}
-//				else
-//				{
-//					map[posX][posY-1] = roomtwoUR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoUR, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayDR
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2(posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = twowayDR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDR, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomtwoDR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoDR, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//
-//	case 4:
-//		//threewayU
-//		{
-//			if( (posX-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				!checkDown2( posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = threewayU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayU, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomthreeU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeU, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 5:
-//		//threewayD
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posY-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(!checkUp2( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = threewayD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayD, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomthreeD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeD, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 6:
-//		//threewayR
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				!checkLeft2( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = threewayR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayR, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomthreeR;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeR, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( (posY-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(checkUp( posX-1, posY-1) &&
-//				checkDown( posX+1, posY-1) &&
-//				checkLeft( posX, posY-2))
-//
-//			{
-//				if(room)
-//				{
-//					map[posX][posY-1] = fourway;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(fourway, posX, posY-1);
-//				}else
-//				{
-//					map[posX][posY-1] = roomfour;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomfour, posX, posY-1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	}//end switch
-//}
-//
-//void FloorGenerator::assignRightR( int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//
-//	switch(temp)
-//	{
-//	case 0:
-//		//onewayR
-//		{
-//			if(posY+1 >= LIMIT-1)
-//			{
-//				break;
-//			}
-//			if( !checkUp2(posX-1, posY+1) &&
-//				!checkDown2(posX+1, posY+1) &&
-//				!checkRight2(posX, posY+2))
-//			{
-//				map[posX][posY+1] = onewayR;
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayH
-//		{
-//			if( (posY+2) >= LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2(posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				map[posX][posY+1] = twowayH;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayH, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 2:
-//		//twowayUL
-//		{
-//			if( (posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			if( checkUp(posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				map[posX][posY+1] = twowayUL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayUL, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayDL
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			if( !checkUp2( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				map[posX][posY+1] = twowayDL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(twowayDL, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//		}
-//		break;
-//	case 4:
-//		//threewayU
-//		{
-//			if( (posX-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				map[posX][posY+1] = threewayU;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayU, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 5:
-//		//threewayD
-//		{
-//			if( (posX+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2( posX-1, posY+1) &&
-//				checkDown2( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				map[posX][posY+1] = threewayD;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayD, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 6:
-//		//threewayL
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				map[posX][posY+1] = threewayL;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(threewayL, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		{
-//			if( (posX + 1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( (posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				checkRight(posX, posY+2))
-//			{
-//				map[posX][posY+1] = fourway;
-//				nextRC(currentroom, posX, posY);
-//				nextRC(fourway, posX, posY+1);
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	}//end switch
-//
-//
-//
-//}
-//void FloorGenerator::assignRightC( int posX, int posY, char currentroom)
-//{
-//	int temp = rand() % 8;
-//	int room = rand() % 2;
-//
-//	switch(temp)
-//	{
-//	case 0:
-//		//onewayR
-//		{
-//			if(posY+1 >= LIMIT-1)
-//			{
-//				break;
-//			}
-//			if( !checkUp2( posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				!checkRight2(posX, posY+2))
-//			{
-//				if(room)
-//					map[posX][posY+1] = onewayR;
-//				else
-//					map[posX][posY+1] = roomoneR;
-//			}
-//			nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 1:
-//		//twowayH
-//		{
-//			if( (posY+2) >= LIMIT-1)
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2( posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				checkRight(posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = twowayH;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayH, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = twowayH;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayH, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//	case 2:
-//		//twowayUL
-//		{
-//			if( (posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			if( checkUp(posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = twowayUL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayUL, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomtwoUL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoUL, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//			break;
-//		}
-//
-//	case 3:
-//		//twowayDL
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//
-//			if( !checkUp2( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = twowayDL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(twowayDL, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomtwoDL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomtwoDL, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//		}
-//		break;
-//	case 4:
-//		//threewayU
-//		{
-//			if( (posX-1 <= 0) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				!checkDown2( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = threewayU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayU, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomthreeU;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeU, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//	case 5:
-//		//threewayD
-//		{
-//			if( (posX+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if(( posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( !checkUp2( posX-1, posY+1) &&
-//				checkDown2( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = threewayD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayD, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomthreeD;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeD, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//			break;
-//		}
-//	case 6:
-//		//threewayL
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				!checkRight2( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = threewayL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(threewayL, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomthreeL;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomthreeL, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//		}
-//		break;
-//	case 7:
-//		//fourway
-//		{
-//			if( (posX+1 >= LIMIT-1))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if((posX-1 <= 0))
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( (posY+1 >= LIMIT-1) )
-//			{
-//				nextRC(currentroom, posX, posY);
-//				break;
-//			}
-//
-//			if( checkUp( posX-1, posY+1) &&
-//				checkDown( posX+1, posY+1) &&
-//				checkRight( posX, posY+2))
-//			{
-//				if(room)
-//				{
-//					map[posX][posY+1] = fourway;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(fourway, posX, posY+1);
-//				}else
-//				{
-//					map[posX][posY+1] = roomfour;
-//					nextRC(currentroom, posX, posY);
-//					nextRC(roomfour, posX, posY+1);
-//				}
-//				break;
-//			}else
-//				nextRC(currentroom, posX, posY);
-//
-//
-//			break;
-//		}
-//
-//	}//end switch
-//
-//
-//}
-//void FloorGenerator::nextRC(const char cor_room, int posX, int posY)
-//{
-//	switch(cor_room)
-//	{
-//	case onewayD:
-//		//check position below for availability
-//		if(posX != LIMIT-1)
-//		{
-//			if(map[posX + 1][posY] == ' ')
-//			{
-//				assignDownC( posX, posY, onewayD);
-//
-//
-//
-//			}//end checking for available
-//
-//		}//end checking down
-//		break;
-//	case onewayU:
-//		
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, onewayU);
-//				}
-//
-//			}//end checking up
-//
-//		break;
-//	case onewayL:
-//		{
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, onewayL);
-//				}
-//			}
-//		break;
-//		}
-//	case onewayR:
-//		{
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, onewayR);
-//			}
-//		break;
-//		}
-//	case twowayH:
-//		{
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, twowayH);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, twowayH);
-//			}
-//		break;
-//		}
-//	case twowayV:
-//		{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, twowayV);
-//				}
-//
-//			}//end checking up
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, twowayV);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//		break;
-//		}
-//	case twowayDL:
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, twowayDL);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, twowayDL);
-//				}
-//			}
-//		break;
-//		}
-//	case twowayDR:
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, twowayDR);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//			
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, twowayDR);
-//			}
-//		break;
-//		}
-//	case twowayUL:
-//			{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, twowayUL);
-//				}
-//
-//			}//end checking up
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, twowayUL);
-//				}
-//			}
-//		break;
-//		}
-//	case twowayUR:
-//		{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, twowayUR);
-//				}
-//
-//			}//end checking up
-//			
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, twowayUR);
-//			}
-//		break;
-//		}
-//	case threewayD:
-//
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, threewayD);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, threewayD);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, threewayD);
-//			}
-//			break;
-//		}
-//	case threewayU:
-//	{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, threewayU);
-//				}
-//
-//			}//end checking up
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, threewayU);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, threewayU);
-//			}
-//			break;
-//		}
-//	case threewayL:
-//{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, threewayL);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, threewayL);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, threewayL);
-//				}
-//			}
-//			break;
-//		}
-//	case threewayR:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, threewayR);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, threewayR);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, threewayR);
-//			}
-//			break;
-//		}
-//	case fourway:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpC( posX, posY, fourway);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownC( posX, posY, fourway);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftC( posX, posY, fourway);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightC( posX, posY, fourway);
-//			}
-//
-//			break;
-//		}
-//
-//	case roomoneD:
-//		//check position below for availability
-//		if(posX != LIMIT-1)
-//		{
-//			if(map[posX + 1][posY] == ' ')
-//			{
-//				assignDownR( posX, posY, roomoneD);
-//
-//
-//
-//			}//end checking for available
-//
-//		}//end checking down
-//		break;
-//	case roomoneU:
-//		
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomoneU);
-//				}
-//
-//			}//end checking up
-//		break;
-//	case roomoneL:
-//		{
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomoneL);
-//				}
-//			}
-//		break;
-//		}
-//	case roomoneR:
-//		{
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomoneR);
-//			}
-//		break;
-//		}
-//	case roomtwoH:
-//		{
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomtwoH);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomtwoH);
-//			}
-//		break;
-//		}
-//	case roomtwoV:
-//		{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomtwoV);
-//				}
-//
-//			}//end checking up
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomtwoV);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//		break;
-//		}
-//
-//	case roomtwoDR:
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomtwoDR);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//			
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomtwoDR);
-//			}
-//		break;
-//		}
-//	case roomtwoDL:
-//
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomtwoDL);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomtwoDL);
-//				}
-//			}
-//		break;
-//		}
-//	case roomtwoUR:
-//		{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomtwoUR);
-//				}
-//
-//			}//end checking up
-//			
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomtwoUR);
-//			}
-//		break;
-//		}
-//	case roomtwoUL:
-//		{
-//			
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomtwoUL);
-//				}
-//
-//			}//end checking up
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomtwoUL);
-//				}
-//			}
-//		break;
-//		}
-//	case roomthreeD:
-//		{
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomthreeD);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomthreeD);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomthreeD);
-//			}
-//			break;
-//		}
-//	case roomthreeU:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomthreeU);
-//				}
-//
-//			}//end checking up
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomthreeU);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomthreeU);
-//			}
-//			break;
-//		}
-//	case roomthreeL:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomthreeL);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomthreeL);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomthreeL);
-//				}
-//			}
-//			break;
-//		}
-//	case roomthreeR:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomthreeR);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomthreeR);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomthreeR);
-//			}
-//			break;
-//		}
-//
-//	case roomfour:
-//		{
-//			//check the position above for availability
-//			if(posX != 0)
-//			{
-//				if(map[posX -1][posY] == ' ')
-//				{
-//					assignUpR( posX, posY, roomfour);
-//				}
-//
-//			}//end checking up
-//
-//			//check position below for availability
-//			if(posX != LIMIT-1)
-//			{
-//				if(map[posX + 1][posY] == ' ')
-//				{
-//					assignDownR( posX, posY, roomfour);
-//
-//
-//
-//				}//end checking for available
-//
-//			}//end checking down
-//
-//			//check position left for availability
-//			if(posY != 0)
-//			{
-//				if(map[posX][posY-1] == ' ')
-//				{
-//					assignLeftR( posX, posY, roomfour);
-//				}
-//			}
-//
-//			//check right position for availability
-//			if(posY != LIMIT-1)
-//			{
-//				if(map[posX][posY+1] == ' ')
-//					assignRightR( posX, posY, roomfour);
-//			}
-//
-//			break;
-//		}//end case roomfour
-//	}//end switch
-//}
-//
-//void FloorGenerator::generateMap()
-//{
-//	int x = rand() %LIMIT;
-//	int y = rand() %LIMIT;
-//
-//	int startroom = rand()% 11 + 1;
-//
-//	if( y == 0 )
-//	{
-//		startroom = rand()%7;
-//		switch(startroom)
-//		{
-//		case 0:	startroom = ROOMONEDOWN;		break;
-//		case 1: startroom = ROOMONEUP; break;
-//		case 2: startroom = ROOMONERIGHT; break;
-//		case 3: startroom = ROOMTWOV; break;
-//		case 4: startroom = ROOMTHREERIGHT; break;
-//		case 5: startroom = ROOMTWODR; break;
-//		case 6: startroom = ROOMTWOUR; break;
-//		}
-//
-//	}
-//
-//	if( y == LIMIT-1 )
-//	{
-//		startroom = rand()%7;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONEDOWN; break;
-//		case 1: startroom = ROOMONEUP; break;
-//		case 2: startroom = ROOMONELEFT; break;
-//		case 3: startroom = ROOMTWOV; break;
-//		case 4: startroom = ROOMTHREELEFT; break;
-//		case 5: startroom = ROOMTWODL; break;
-//		case 6: startroom = ROOMTWOUL; break;
-//		}
-//
-//	}
-//
-//	if( x == 0 )
-//	{
-//		startroom = rand() % 7;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONEDOWN; break;
-//		case 1: startroom = ROOMONELEFT; break;
-//		case 2: startroom = ROOMONERIGHT; break;
-//		case 3: startroom = ROOMTWOH; break;
-//		case 4: startroom = ROOMTHREEDOWN; break;
-//		case 5: startroom = ROOMTWODR; break;
-//		case 6: startroom = ROOMTWODL; break;
-//		}
-//	}
-//
-//	if( x == LIMIT-1)
-//	{
-//		startroom = rand() % 7;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONEUP; break;
-//		case 1: startroom = ROOMONELEFT; break;
-//		case 2: startroom = ROOMONERIGHT; break;
-//		case 3: startroom = ROOMTWOH; break;
-//		case 4: startroom = ROOMTHREEUP; break;
-//		case 5: startroom = ROOMTWOUR; break;
-//		case 6: startroom = ROOMTWOUL; break;
-//		}
-//	}
-//
-//	if( x == 0 && y == 0)
-//	{
-//		startroom = rand() % 3;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONERIGHT; break;
-//		case 1: startroom = ROOMONEDOWN; break;
-//		case 2: startroom = ROOMTWODR; break;
-//		}
-//	}
-//
-//	if(x == 0 && y == LIMIT-1)
-//	{
-//		startroom = rand() % 3;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONELEFT; break;
-//		case 1: startroom = ROOMONEDOWN; break;
-//		case 2: startroom = ROOMTWODL; break;
-//		}
-//	}
-//
-//
-//	if(x == LIMIT-1 && y == 0)
-//	{
-//		startroom = rand() % 3;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONERIGHT; break;
-//		case 1: startroom = ROOMONEUP; break;
-//		case 2: startroom = ROOMTWOUR; break;
-//		}
-//	}
-//
-//	if(x == LIMIT-1 && y == LIMIT-1)
-//	{
-//		startroom = rand() % 3;
-//		switch(startroom)
-//		{
-//		case 0: startroom = ROOMONELEFT; break;
-//		case 1: startroom = ROOMONEUP; break;
-//		case 2: startroom = ROOMTWOUL; break;
-//		}
-//	}
-//	
-//
-//	switch(startroom)
-//	{
-//	case ROOMONEDOWN:
-//		map[x][y] = roomoneD;
-//		nextRC(roomoneD, x, y);
-//		break;
-//	case ROOMONEUP:
-//		map[x][y] = roomoneU;
-//		nextRC(roomoneU, x, y);
-//		break;
-//	case ROOMONELEFT:
-//		map[x][y] = roomoneL;
-//		nextRC(roomoneL, x, y);
-//		break;
-//	case ROOMONERIGHT:
-//		map[x][y] = roomoneR;
-//		nextRC(roomoneR, x, y);
-//		break;
-//	case ROOMTWOH:
-//		map[x][y] = roomtwoH;
-//		nextRC(roomtwoH, x, y);
-//		break;
-//	case ROOMTWOV:
-//		map[x][y] = roomtwoV;
-//		nextRC(roomtwoV, x, y);
-//		break;
-//	case ROOMTHREEDOWN:
-//		map[x][y] = roomthreeD;
-//		nextRC(roomthreeD, x, y);
-//		break;
-//	case ROOMTHREEUP:
-//		map[x][y] = roomthreeU;
-//		nextRC(roomthreeU, x, y);
-//		break;
-//	case ROOMTHREELEFT:
-//		map[x][y] = roomthreeL;
-//		nextRC(roomthreeL, x, y);
-//		break;
-//	case ROOMTHREERIGHT:
-//		map[x][y] = roomthreeR;
-//		nextRC(roomthreeR, x, y);
-//		break;
-//	case ROOMFOUR:
-//		map[x][y] = roomfour;
-//		nextRC(roomfour, x, y);
-//		break;
-//	case ROOMTWODL:
-//		map[x][y] = roomtwoDL;
-//		nextRC(roomtwoDL, x, y);
-//		break;
-//	case ROOMTWODR:
-//		map[x][y] = roomtwoDR;
-//		nextRC(roomtwoDR, x, y);
-//		break;
-//	case ROOMTWOUL:
-//		map[x][y] = roomtwoUL;
-//		nextRC(roomtwoUL, x, y);
-//		break;
-//	case ROOMTWOUR:
-//		map[x][y] = roomtwoUR;
-//		nextRC(roomtwoUR, x, y);
-//		break;
-//	}
-//}
-//
-//void FloorGenerator::resetMap()
-//{
-//	for(int i = 0; i < LIMIT; i++)
-//	{
-//		for(int j = 0; j < LIMIT; j++)
-//		{
-//			map[i][j] = ' ';
-//		}
-//	}
-//}
-//
-//char** FloorGenerator::getMap()
-//{
-//	return map;
-//}
-//
-//void FloorGenerator::shutdown()
-//{
-//	for(int i = 0; i < LIMIT; i++)
-//		delete map[i];
-//
-//	delete [] map;
-//}
+#include "FloorGenerator.h"
+#include <iostream>
+
+FloorGenerator::FloorGenerator()
+{
+	map = 0;
+}
+
+FloorGenerator::FloorGenerator(const FloorGenerator &floor)
+{
+	resetMap();
+	for(int i = 0; i < LIMIT; i++)
+	{
+		for(int j = 0; j < LIMIT; j++)
+		{
+			map[i][j] = floor.map[i][j];
+		}
+	}
+	room_num = floor.room_num;
+	add_room = floor.add_room;
+}
+
+FloorGenerator::~FloorGenerator()
+{}
+
+FloorGenerator *FloorGenerator::instance()
+{
+	static FloorGenerator generator;
+	return &generator;
+}
+
+void FloorGenerator::resetMap()
+{
+	shutdown();
+
+	map = new unsigned char* [LIMIT];
+
+	for(int i = 0; i < LIMIT; i++)
+		map[i] = new unsigned char[LIMIT];
+
+	for(int i = 0; i < LIMIT; i++)
+	{
+		for(int j = 0; j < LIMIT; j++)
+			map[i][j] = ' ';
+	}
+}
+
+void FloorGenerator::shutdown()
+{
+	if(map)
+	{
+		for(int i = 0; i < LIMIT; i++)
+		{
+			delete map[i];
+		}
+
+		delete [] map;
+	}
+}
+
+std::vector<Corridor> FloorGenerator::getCorridor()
+{
+	return corridor;
+}
+
+std::vector<Room> FloorGenerator::getRoom()
+{
+	return rooms;
+}
+
+bool FloorGenerator::checkUp(int posX, int posY)
+{	
+	if( map[posX][posY] == oneD ||
+		map[posX ][posY] == twoV ||
+		map[posX ][posY ] == twoDR ||
+		map[posX ][posY ] == twoDL ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY ] == threeL ||
+		map[posX ][posY ] == threeR ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneD ||
+		map[posX ][posY ] == roomtwoV ||
+		map[posX ][posY ] == roomtwoDL ||
+		map[posX ][posY ] == roomtwoDR ||
+		map[posX ][posY ] == roomthreeD ||
+		map[posX ][posY ] == roomthreeL ||
+		map[posX ][posY ] == roomthreeR ||
+		map[posX ][posY ] == roomfour ||
+		map[posX ][posY ] == blank
+		)		
+		return true;
+	else 
+		return false;
+}
+
+bool FloorGenerator::checkDown(int posX, int posY)
+{
+	if(
+		map[posX][posY] == oneU ||
+		map[posX][posY] == twoV ||
+		map[posX][posY] == twoUR ||
+		map[posX][posY] == twoUL ||
+		map[posX][posY] == threeU ||
+		map[posX][posY] == threeL ||
+		map[posX][posY] == threeR ||
+		map[posX][posY] == four ||
+		map[posX][posY] == roomoneU ||
+		map[posX][posY] == roomtwoV ||
+		map[posX][posY] == roomtwoUR ||
+		map[posX][posY] == roomtwoUL ||
+		map[posX][posY] == roomthreeU ||
+		map[posX][posY] == roomthreeL ||
+		map[posX][posY] == roomthreeR ||
+		map[posX][posY] == roomfour ||
+		map[posX][posY] == ' '
+
+		)
+		return true;
+	else
+		return false;
+}
+
+bool FloorGenerator::checkLeft(int posX, int posY)
+{
+	if(map[posX][posY] == oneR ||
+		map[posX ][posY] == twoH ||
+		map[posX ][posY] == twoDR ||
+		map[posX ][posY] == twoUR ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY] == threeU ||
+		map[posX ][posY] == threeR ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneR ||
+		map[posX ][posY ] == roomtwoH ||
+		map[posX ][posY ] == roomtwoUR ||
+		map[posX ][posY ] == roomtwoDR ||
+		map[posX ][posY] == roomthreeD ||
+		map[posX ][posY ] == roomthreeU ||
+		map[posX ][posY ] == roomthreeR ||
+		map[posX ][posY ] == roomfour ||
+		map[posX ][posY ] == ' '
+		)
+	{
+		return true;
+	}else
+		return false;
+}
+
+bool FloorGenerator::checkRight(int posX, int posY)
+{
+	if(map[posX ][posY ] == oneL ||
+		map[posX ][posY] == twoH ||
+		map[posX ][posY] == twoDL ||
+		map[posX ][posY ] == twoUL ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY ] == threeU ||
+		map[posX ][posY ] == threeL ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneL ||
+		map[posX ][posY ] == roomtwoH ||
+		map[posX ][posY ] == roomtwoUL ||
+		map[posX ][posY ] == roomtwoDL ||
+		map[posX ][posY ] == roomthreeD ||
+		map[posX ][posY ] == roomthreeU ||
+		map[posX ][posY ] == roomthreeL ||
+		map[posX ][posY ] == roomfour ||
+		map[posX ][posY ] == blank
+		)
+	{
+		return true;
+	}else
+		return false;
+}
+
+bool FloorGenerator::checkUp2(int posX, int posY)
+{
+	if( map[posX][posY] == oneD ||
+		map[posX ][posY] == twoV ||
+		map[posX ][posY ] == twoDR ||
+		map[posX ][posY ] == twoDL ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY ] == threeL ||
+		map[posX ][posY ] == threeR ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneD ||
+		map[posX ][posY ] == roomtwoV ||
+		map[posX ][posY ] == roomtwoDL ||
+		map[posX ][posY ] == roomtwoDR ||
+		map[posX ][posY ] == roomthreeD ||
+		map[posX ][posY ] == roomthreeL ||
+		map[posX ][posY ] == roomthreeR ||
+		map[posX ][posY ] == roomfour 
+		)		
+		return true;
+	else 
+		return false;
+}
+
+bool FloorGenerator::checkDown2(int posX, int posY)
+{
+	if(
+		map[posX][posY] == oneU ||
+		map[posX][posY] == twoV ||
+		map[posX][posY] == twoUR ||
+		map[posX][posY] == twoUL ||
+		map[posX][posY] == threeU ||
+		map[posX][posY] == threeL ||
+		map[posX][posY] == threeR ||
+		map[posX][posY] == four ||
+		map[posX][posY] == roomoneU ||
+		map[posX][posY] == roomtwoV ||
+		map[posX][posY] == roomtwoUR ||
+		map[posX][posY] == roomtwoUL ||
+		map[posX][posY] == roomthreeU ||
+		map[posX][posY] == roomthreeL ||
+		map[posX][posY] == roomthreeR ||
+		map[posX][posY] == roomfour 
+
+		)
+		return true;
+	else
+		return false;
+}
+
+bool FloorGenerator::checkLeft2(int posX, int posY)
+{
+	if(map[posX][posY] == oneR ||
+		map[posX ][posY] == twoH ||
+		map[posX ][posY] == twoDR ||
+		map[posX ][posY] == twoUR ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY] == threeU ||
+		map[posX ][posY] == threeR ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneR ||
+		map[posX ][posY ] == roomtwoH ||
+		map[posX ][posY ] == roomtwoUR ||
+		map[posX ][posY ] == roomtwoDR ||
+		map[posX ][posY] == roomthreeD ||
+		map[posX ][posY ] == roomthreeU ||
+		map[posX ][posY ] == roomthreeR ||
+		map[posX ][posY ] == roomfour
+		)
+	{
+		return true;
+	}else
+		return false;
+}
+
+bool FloorGenerator::checkRight2(int posX, int posY)
+{
+	if(map[posX ][posY ] == oneL ||
+		map[posX ][posY] == twoH ||
+		map[posX ][posY] == twoDL ||
+		map[posX ][posY ] == twoUL ||
+		map[posX ][posY ] == threeD ||
+		map[posX ][posY ] == threeU ||
+		map[posX ][posY ] == threeL ||
+		map[posX ][posY ] == four ||
+		map[posX ][posY ] == roomoneL ||
+		map[posX ][posY ] == roomtwoH ||
+		map[posX ][posY ] == roomtwoUL ||
+		map[posX ][posY ] == roomtwoDL ||
+		map[posX ][posY ] == roomthreeD ||
+		map[posX ][posY ] == roomthreeU ||
+		map[posX ][posY ] == roomthreeL ||
+		map[posX ][posY ] == roomfour
+		)
+	{
+		return true;
+	}else
+		return false;
+}
+
+void FloorGenerator::generateMap(int floornum)
+{
+	//start with a clean map.
+	resetMap();
+
+	//Determine how many rooms the floor will have.
+	switch(floornum)
+	{
+	case 1: case 2: case 3: case 4:
+		{
+			room_num = rand() % 2 + 5;
+			break;
+		}	
+	case 6: case 7: case 8: case 9:
+		{
+			room_num = rand() % 2 + 7;
+			break;
+		}	
+	case 11: case 12: case 13: case 14:
+		{
+			room_num = rand() % 2 + 9;
+			break;
+		}
+	case 5: case 10: case 15:
+		{
+			room_num = 2;
+			break;
+		}
+	}
+
+	//Determine the starting point of the first room.
+	Room starting;
+	starting.setX(LIMIT / 2);
+	starting.setY(LIMIT / 2);
+	starting.setTreasure(false);
+	starting.setStairs(false);
+	starting.setType(true);
+	starting.setArrival(true);
+
+	//decrement the amount of rooms
+	room_max = room_num;
+	--room_num;
+
+
+	unsigned char begin = ' ';
+
+	//Determine the starting room
+
+	//15 types of rooms
+	int temp_num = rand() %15;
+
+	switch(temp_num)
+	{
+	case 0: begin = roomoneU; break;
+	case 1: begin = roomoneD; break;
+	case 2: begin = roomoneL; break;
+	case 3: begin = roomoneR; break;
+	case 4: begin = roomtwoH; break;
+	case 5: begin = roomtwoV; break;
+	case 6: begin = roomtwoUR; break;
+	case 7: begin = roomtwoDR; break;
+	case 8: begin = roomtwoDL; break;
+	case 9: begin = roomtwoUL; break;
+	case 10: begin = roomthreeU; break;
+	case 11: begin = roomthreeD; break;
+	case 12: begin = roomthreeL; break;
+	case 13: begin = roomthreeR; break;
+	case 14: begin = roomfour; break;
+	}
+
+	starting.setIcon(begin);
+
+
+	if(floornum == 5 || floornum == 10 || floornum == 15)
+	{
+		starting.setX(LIMIT/2);
+		starting.setY(LIMIT/2);
+		starting.setIcon(roomoneU);
+	}
+
+	map[starting.getX()][starting.getY()] = starting.getIcon();
+	start.push(starting);
+	rooms.push_back(starting);
+
+	addRC(floornum);
+
+	if(!checkValidMap())
+	{
+		while(!checkValidMap())
+		{
+			resetMap();
+			emptyQueue();
+			emptyCor();
+			emptyRoom();
+
+			room_num = room_max - 1;
+
+			map[starting.getX()][starting.getY()] = starting.getIcon();
+			start.push(starting);
+			rooms.push_back(starting);
+			addRC(floornum);
+		}
+	}
+
+	//assign stairs to a room
+	unsigned int stair_num = rand() % (rooms.size() - 1) + 1;
+
+	for(unsigned int i = 0; i < rooms.size(); i++)
+	{
+		//arrival room should always be the first room in the vector
+		if(rooms[i].getArrival())
+			continue;
+		//set the stairs to a room
+		if(i == stair_num)
+			rooms[i].setStairs(true);
+
+		//if the room isn't the arrival room, and the room doesn't have stairs, it can have a treasure
+		if(!rooms[i].getArrival() && !rooms[i].getStairs())
+		{
+			int temp = rand() % 2;
+			if(temp == 1)
+				rooms[i].setTreasure(true);
+		}
+	}	
+}
+
+void FloorGenerator::checkAvailableU(int posX, int posY, bool room)
+{
+	//check position above for edge
+	if(posX-1 >= 0)
+	{
+		//check for availability
+		if(map[posX-1][posY] == ' ')
+		{
+			//determine whether to assign a room or corridor
+			if(room_num != 0 && !room)
+			{
+				int temp = rand() % 2;
+				if(temp == 0)
+					add_room = false;
+				else
+					add_room = true;
+
+				if(add_room)
+				{
+					--room_num; 
+					assignUp(add_room);
+				}//end if
+				else
+					assignUp(add_room);
+			}else  //end if
+			{
+				add_room = false;
+				assignUp(add_room);
+			}//end else
+		}//endif
+	}//endif
+}
+
+void FloorGenerator::checkAvailableD(int posX, int posY, bool room)
+{
+	//check position below for edge
+	if(posX+1  <= LIMIT - 1)
+	{
+		//check for availability
+		if(map[posX+1][posY] == ' ')
+		{
+			//determine whether to assign a room or corridor
+			if(room_num != 0 && !room)
+			{
+				int temp = rand() % 2;
+				if(temp == 0)
+					add_room = false;
+				else
+					add_room = true;
+				if(add_room)
+				{
+					--room_num;
+					assignDown(add_room);
+				}//end if
+				else
+					assignDown(add_room);
+			}else  //end if
+			{
+				add_room = false;
+				assignDown(add_room);
+			}//end else
+		}//endif
+	}//endif
+}
+
+void FloorGenerator::checkAvailableL(int posX, int posY, bool room)
+{
+	//check position to the left for edge
+	if(posY -1 >= 0)
+	{
+		//check for availability
+		if(map[posX][posY-1] == ' ')
+		{
+			//determine whether to assign a room or corridor
+			if(room_num != 0 && !room)
+			{
+				int temp = rand() % 2;
+				if(temp == 0)
+					add_room = false;
+				else
+					add_room = true;
+				if(add_room)
+				{
+					--room_num; 
+					assignLeft(add_room);
+				}//end if
+				else
+					assignLeft(add_room);
+			}else  //end if
+			{
+				add_room = false;
+				assignLeft(add_room);
+			}//end else
+		}//endif
+	}//endif
+}
+
+void FloorGenerator::checkAvailableR(int posX, int posY, bool room)
+{
+	//check position to the right for edge
+	if(posY+1 <= LIMIT-1)
+	{
+		//check for availability
+		if(map[posX][posY+1] == ' ')
+		{
+			//determine whether to assign a room or corridor
+			if(room_num != 0 && !room)
+			{
+				int temp = rand() % 2;
+				if(temp == 0)
+					add_room = false;
+				else
+					add_room = true;
+				if(add_room)
+				{
+					--room_num; 
+					assignRight(add_room);
+				}//end if
+				else
+					assignRight(add_room);
+			}else  //end if
+			{
+				add_room = false;
+				assignRight(add_room);
+			}//end else
+		}//endif
+	}//endif
+}
+
+void FloorGenerator::addRC(int floornum)
+{
+	//Determine whether the floor is fixed or generated
+	if(floornum == 5 || floornum == 10 || floornum == 15)
+	{
+		Corridor next;
+		next.setX(start.front().getX()-1);
+		next.setY(start.front().getY());
+		next.setIcon(twoV);
+		start.pop();
+		map[next.getX()][next.getY()] = next.getIcon(); 
+		corridor.push_back(next);
+
+		Room boss;
+		boss.setX(next.getX() - 1);
+		boss.setY(next.getY());
+		boss.setIcon(roomoneD);
+		boss.setStairs(true);
+		boss.setTreasure(false);
+		--room_num;
+		rooms.push_back(boss);
+
+		map[boss.getX()][boss.getY()] = boss.getIcon();
+
+
+	}//end if
+	else
+	{
+		while(!start.empty())
+		{
+			//use temporary containers
+			int posX = start.front().getX();
+			int posY = start.front().getY();
+			unsigned char icon = start.front().getIcon();
+			bool type = start.front().getType();
+
+			//Check the start queue to determine what to add next
+			switch(icon)
+			{
+			case oneD: case roomoneD:
+				{
+					checkAvailableD(posX, posY, type);
+					start.pop();
+					break;
+				}//end oneD
+			case oneU: case roomoneU:
+				{
+					checkAvailableU(posX, posY, type);
+					start.pop();
+					break;
+				}//end oneU
+			case oneL: case roomoneL:
+				{
+					checkAvailableL(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case oneR: case roomoneR:
+				{
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoH: case roomtwoH:
+				{
+					checkAvailableL(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoV: case roomtwoV:
+				{
+					checkAvailableU(posX, posY, type);
+					checkAvailableD(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoUR: case roomtwoUR:
+				{
+					checkAvailableU(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoDR: case roomtwoDR:
+				{
+					checkAvailableD(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoDL: case roomtwoDL:
+				{
+					checkAvailableD(posX, posY, type);
+					checkAvailableL(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case twoUL: case roomtwoUL:
+				{
+					checkAvailableU(posX, posY, type);
+					checkAvailableL(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case threeU: case roomthreeU:
+				{
+					checkAvailableU(posX, posY, type);
+					checkAvailableL(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case threeD: case roomthreeD:
+				{
+					checkAvailableD(posX, posY, type);
+					checkAvailableL(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case threeL: case roomthreeL:
+				{
+					checkAvailableL(posX, posY, type);
+					checkAvailableD(posX, posY, type);
+					checkAvailableU(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case threeR: case roomthreeR:
+				{
+					checkAvailableR(posX, posY, type);
+					checkAvailableD(posX, posY, type);
+					checkAvailableU(posX, posY, type);
+					start.pop();
+					break;
+				}
+			case four: case roomfour:
+				{
+					checkAvailableL(posX, posY, type);
+					checkAvailableR(posX, posY, type);
+					checkAvailableD(posX, posY, type);
+					checkAvailableU(posX, posY, type);
+					start.pop();
+					break;
+				}
+
+			}//end switch
+		}//end while
+	}//end else
+}
+
+void FloorGenerator::assignUp(bool room)
+{
+	//8 different types of Corridors can be assigned
+	int temp = rand() % 8;
+	int posX = start.front().getX();
+	int posY = start.front().getY();
+
+	const int ONED = 0, TWOV = 1, TWODR = 2, TWODL = 3, THREED = 4, THREEL = 5, THREER = 6, FOUR = 7;
+
+	switch(temp)
+	{
+	case ONED: 
+		{
+			//create temp variables to store checks
+			bool up, left, right;
+
+			//determine whether or not to check for up, left, right due to limits
+			if(posX-2 < 0)
+				up = true;
+			else
+				up = !checkUp2(posX-2, posY);
+
+			if(posY-1 < 0)
+				left = true;
+			else
+				left = !checkLeft2(posX-1, posY-1);
+
+			if(posY+1 > LIMIT-1)
+				right = true;
+			else
+				right = !checkRight2(posX-1, posY+1);
+
+
+			if(up && left && right)					
+			{
+				if(room)
+					pushRoom(posX-1, posY, roomoneD, room);
+				else
+					pushCor(posX-1, posY, oneD, room);
+			}else
+				assignUp(room);
+			break;
+		}
+	case TWOV:
+		{
+			//check for available position above where this piece is placed
+			if(posX - 2 < 0)
+			{
+				//can't push assign a new piece
+				assignUp(room);
+				break;
+			}else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = false;
+				else
+					up = checkUp(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX-1, posY+1);
+
+
+				//check for compatibility
+				if(up && left && right)
+				{
+					//create a twoV corridor to push
+					if(room)
+						pushRoom(posX-1, posY, roomtwoV, room);
+					else
+						pushCor(posX-1, posY, twoV, room);
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	case TWODR:
+		{
+			//check right for availability
+			if((posY+1) > LIMIT-1)
+			{
+				//can't push right, assign a new piece
+				assignUp(room);
+				break;
+			}else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX-1, posY+1);
+
+				//check for existing areas for compatibility
+				if(up && left && right)
+				{
+					if(room)
+						pushRoom(posX-1, posY, roomtwoDR, room);
+					else
+						pushCor(posX-1, posY, twoDR, room);
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	case TWODL:
+		{
+			//Check left for availability
+			if((posY-1) < 0)
+			{
+				//can't assign left, assign a new piece
+				assignUp(room);
+				break;
+			}else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX-1, posY+1);
+
+				//check existing areas for compatibility
+				if(up && left && right)
+				{
+					//push twoDL corridor to the queue
+					if(room)
+						pushRoom(posX-1, posY, roomtwoDL, room);
+					else
+						pushCor(posX-1, posY, twoDL, room);
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	case THREED:
+		{
+			//check left and right for edges
+			if((posY - 1) < 0)
+			{
+				//can't assign left, assign a new piece
+				assignUp(room);
+				break;
+			}
+			else if(posY +1 > LIMIT)
+			{
+				//can't assign right, assign a new piece
+				assignUp(room);
+				break;
+			}
+			else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX-1, posY+1);
+
+				//check for existing areas for compatibility
+				if( up && left && right)
+				{
+					//push threeD corridor onto the queue
+					if(room)
+						pushRoom(posX-1, posY, roomthreeD, room);
+					else
+						pushCor(posX-1, posY, threeD, room);
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	case THREEL:
+		{
+			//check left and top
+			if((posY-1) < 0)
+			{
+				//can't assign left, assign a new piece
+				assignUp(room);
+				break;
+			}
+			if((posX-2) < 0)
+			{
+				assignUp(room);
+				break;
+			}
+			else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = false;
+				else
+					up = checkUp(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX-1, posY+1);
+
+				//check existing areas
+				if(up && left && right)
+				{
+					if(room)
+						pushRoom(posX-1, posY, roomthreeL, room);
+					else
+						pushCor(posX-1, posY, threeL, room);
+					break;
+				}else
+					assignUp(room);
+			}
+
+			break;
+		}
+	case THREER:
+		{
+			//check top and right
+			if((posX-2) < 0)
+			{
+				assignUp(room);
+				break;
+			}else if(posY + 1 > LIMIT-1)
+			{
+				assignUp(room);
+				break;
+			}else
+			{
+
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = false;
+				else
+					up = checkUp(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX-1, posY+1);
+
+				//check top and right for compatibility
+				if(up && left && right)
+				{
+					//push threeR corridor onto the queue
+					if(room)
+						pushRoom(posX-1, posY, roomthreeR, room);
+					else
+						pushCor(posX-1, posY, threeR, room);
+					break;
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	case FOUR:
+		{
+			//check up, left and right
+			if(posY -1 < 0)
+			{
+				assignUp(room);
+				break;
+			}else if(posY+1 > LIMIT-1)
+			{
+				assignUp(room);
+				break;
+			}else if(posX-2 < 0)
+			{
+				assignUp(room);
+				break;
+			}else
+			{
+				//create temp variables to store checks
+				bool up, left, right;
+
+				//determine whether or not to check for up, left, right due to limits
+				if(posX-2 < 0)
+					up = false;
+				else
+					up = checkUp(posX-2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX-1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX-1, posY+1);
+
+				if(up && left && right)
+				{
+					if(room)
+						pushRoom(posX-1, posY, roomfour, room);
+					else
+						pushCor(posX-1, posY, four, room);
+				}else
+					assignUp(room);
+			}
+			break;
+		}
+	}//end switch
+}
+
+void FloorGenerator::assignDown(bool room)
+{
+	int temp = rand() % 8;
+	int posX = start.front().getX();
+	int posY = start.front().getY();
+
+	const int ONEU = 0, TWOV = 1, TWOUL= 2, TWOUR = 3, THREEU = 4, THREEL = 5, THREER = 6, FOUR = 7;
+
+	switch(temp)
+	{
+	case ONEU:
+		{
+			bool down, left, right;
+
+			if(posX+2 > LIMIT-1)
+				down = true;
+			else
+				down = !checkDown2(posX+2, posY);
+
+			if(posY-1 < 0)
+				left = true;
+			else
+				left = !checkLeft2(posX+1, posY-1);
+
+			if(posY+1 > LIMIT-1)
+				right = true;
+			else
+				right = !checkRight2(posX+1, posY+1);
+
+			if(down && left && right)
+			{
+				if(room)
+					pushRoom(posX+1, posY, roomoneU, room);
+				else
+					pushCor(posX+1, posY, oneU, room);
+			}else
+				assignDown(room);
+			break;
+		}
+	case TWOV:
+		{
+			if(posX + 2 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+
+				if(posX+2 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomtwoV, room);
+					else
+						pushCor(posX+1, posY, twoV, room);
+					break;
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	case TWOUL:
+		{
+			if(posY-1 < 0)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+				if(posX+2 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomtwoUL, room);
+					else
+						pushCor(posX+1, posY, twoUL, room);
+
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	case TWOUR:
+		{
+			if(posY+1 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+
+				if(posX+2 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomtwoUR, room);
+					else
+						pushCor(posX+1, posY, twoUR, room);
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	case THREEU:
+		{
+			if(posY-1 < 0)
+			{
+				assignDown(room);
+				break;
+			}else if(posY+1 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+				if(posX+2 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomthreeU, room);
+					else
+						pushCor(posX+1, posY, threeU, room);
+
+				}else
+					assignDown(room);
+
+			}
+			break;
+		}
+	case THREEL:
+		{
+			if(posY-1 < 0)
+			{
+				assignDown(room);
+				break;
+			}else if(posX+2 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+
+				if(posX+2 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomthreeL, room);
+					else
+						pushCor(posX+1, posY, threeL, room);
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	case THREER:
+		{
+			if(posY+1 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else if(posX+2 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+
+				if(posX+2 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomthreeR, room);
+					else
+						pushCor(posX+1, posY, threeR, room);
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	case FOUR:
+		{
+			if(posY+1 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else if(posY-1 < 0)
+			{
+				assignDown(room);
+				break;
+			}else if(posX+2 > LIMIT-1)
+			{
+				assignDown(room);
+				break;
+			}else
+			{
+				bool down, left, right;
+				if(posX+2 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+2, posY);
+
+				if(posY-1 < 0)
+					left = false;
+				else
+					left = checkLeft(posX+1, posY-1);
+
+				if(posY+1 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX+1, posY+1);
+
+				if(down && left && right)
+				{
+					if(room)
+						pushRoom(posX+1, posY, roomfour, room);
+					else
+						pushCor(posX+1, posY, four, room);
+				}else
+					assignDown(room);
+			}
+			break;
+		}
+	}//end switch
+
+}
+
+void FloorGenerator::assignLeft(bool room)
+{
+	int temp = rand() % 8;
+	int posX = start.front().getX();
+	int posY = start.front().getY();
+
+	const int ONER = 0, TWOH = 1, TWOUR= 2, TWODR = 3, THREEU = 4, THREED = 5, THREER = 6, FOUR = 7;
+
+	switch(temp)
+	{
+	case ONER:
+		{
+			bool up, down, left;
+
+			if(posX-1 < 0)
+				up = true;
+			else
+				up = !checkUp2(posX-1, posY-1);
+			if(posX+1 > LIMIT-1)
+				down = true;
+			else
+				down = !checkDown2(posX+1, posY-1);
+			if(posY-2 < 0)
+				left = true;
+			else
+				left = !checkLeft2(posX, posY-2);
+
+			if(up && down && left)
+			{
+				if(room)
+					pushRoom(posX, posY-1, roomoneR, room);
+				else
+					pushCor(posX, posY-1, oneR, room);
+			}else
+				assignLeft(room);
+			break;
+		}
+	case TWOH:
+		{
+			if(posY-2 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = false;
+				else
+					left = checkLeft(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomtwoH, room);
+					else
+						pushCor(posX, posY-1, twoH, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	case TWOUR:
+		{
+			if(posX-1 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomtwoUR, room);
+					else
+						pushCor(posX, posY-1, twoUR, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	case TWODR:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomtwoDR, room);
+					else
+						pushCor(posX, posY-1, twoDR, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	case THREEU:
+		{
+			if(posX-1 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else if(posY-2 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = false;
+				else
+					left = checkLeft(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomthreeU, room);
+					else
+						pushCor(posX, posY-1, threeU, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	case THREED:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignLeft(room);
+				break;
+			}else if(posY-2 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = false;
+				else
+					left = checkLeft(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomthreeD, room);
+					else
+						pushCor(posX, posY-1, threeD, room);
+				}else
+					assignLeft(room);
+			}
+
+			break;
+		}
+	case THREER:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignLeft(room);
+				break;
+			}else if(posX-1 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = true;
+				else
+					left = !checkLeft2(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomthreeR, room);
+					else
+						pushRoom(posX, posY-1, threeR, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	case FOUR:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignLeft(room);
+				break;
+			}else if(posX-1 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else if(posY-2 < 0)
+			{
+				assignLeft(room);
+				break;
+			}else
+			{
+				bool up, down, left;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY-1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY-1);
+				if(posY-2 < 0)
+					left = false;
+				else
+					left = checkLeft(posX, posY-2);
+
+				if(up && down && left)
+				{
+					if(room)
+						pushRoom(posX, posY-1, roomfour, room);
+					else
+						pushCor(posX, posY-1, four, room);
+				}else
+					assignLeft(room);
+			}
+			break;
+		}
+	}
+}
+
+void FloorGenerator::assignRight(bool room)
+{
+	int temp = rand() % 8;
+	int posX = start.front().getX();
+	int posY = start.front().getY();
+
+	const int ONEL = 0, TWOH = 1, TWOUL= 2, TWODL = 3, THREEU = 4, THREED = 5, THREEL = 6, FOUR = 7;
+
+	switch(temp)
+	{
+	case ONEL:
+		{
+			bool up, down, right;
+
+			if(posX-1 < 0)
+				up = true;
+			else
+				up = !checkUp2(posX-1, posY+1);
+			if(posX+1 > LIMIT-1)
+				down = true;
+			else
+				down = !checkDown2(posX+1, posY+1);
+			if(posY+2 > LIMIT-1)
+				right = true;
+			else
+				right = !checkRight2(posX, posY+2);
+
+			if(up && down && right)
+			{
+				if(room)
+					pushRoom(posX, posY+1, roomoneL, room);
+				else
+					pushCor(posX, posY+1, oneL, room);
+			}else
+				assignRight(room);
+
+			break;
+		}
+	case TWOH:
+		{
+			if(posY+2 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomtwoH, room);
+					else
+						pushCor(posX, posY+1, twoH, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case TWOUL:
+		{
+			if(posX-1 < 0)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomtwoUL, room);
+					else
+						pushCor(posX, posY+1, twoUL, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case TWODL:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomtwoDL, room);
+					else
+						pushCor(posX, posY+1, twoDL, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case THREEU:
+		{
+			if(posX-1 < 0)
+			{
+				assignRight(room);
+				break;
+			}else if(posY+2 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = true;
+				else
+					down = !checkDown2(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomthreeU, room);
+					else
+						pushCor(posX, posY+1, threeU, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case THREED:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else if(posY+2 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = true;
+				else
+					up = !checkUp2(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomthreeD, room);
+					else
+						pushCor(posX, posY+1, threeD, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case THREEL:
+		{
+			if(posX+1 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else if(posX-1 < 0)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = true;
+				else
+					right = !checkRight2(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomthreeL, room);
+					else
+						pushCor(posX, posY+1, threeL, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	case FOUR:
+		{
+			if(posX + 1 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else if(posX -1 < 0)
+			{
+				assignRight(room);
+				break;
+			}else if(posY+2 > LIMIT-1)
+			{
+				assignRight(room);
+				break;
+			}else
+			{
+				bool up, down, right;
+
+				if(posX-1 < 0)
+					up = false;
+				else
+					up = checkUp(posX-1, posY+1);
+				if(posX+1 > LIMIT-1)
+					down = false;
+				else
+					down = checkDown(posX+1, posY+1);
+				if(posY+2 > LIMIT-1)
+					right = false;
+				else
+					right = checkRight(posX, posY+2);
+
+				if(up && down && right)
+				{
+					if(room)
+						pushRoom(posX, posY+1, roomfour, room);
+					else
+						pushCor(posX, posY+1, four, room);
+				}else
+					assignRight(room);
+			}
+			break;
+		}
+	}
+}
+
+void FloorGenerator::pushCor(int x, int y, unsigned char icon, bool type)
+{
+	Corridor temp;
+	temp.setIcon(icon);
+	temp.setX(x);
+	temp.setY(y);
+	temp.setType(type);
+	map[temp.getX()][temp.getY()] = temp.getIcon();
+	start.push(temp);
+	corridor.push_back(temp);
+}
+
+void FloorGenerator::pushRoom(int x, int y, unsigned char icon, bool type)
+{
+	Room temp;
+	temp.setIcon(icon);
+	temp.setX(x);
+	temp.setY(y);
+	temp.setType(type);
+	map[temp.getX()][temp.getY()] = temp.getIcon();
+	start.push(temp);
+	rooms.push_back(temp);
+}
+
+bool FloorGenerator::checkValidMap()
+{
+	if(room_num == 0)
+		return true;
+	else
+		return false;
+}
+
+void FloorGenerator::emptyQueue()
+{
+	while(!start.empty())
+		start.pop();
+}
+
+void FloorGenerator::emptyRoom()
+{
+	rooms.clear();
+}
+
+void FloorGenerator::emptyCor()
+{
+	corridor.clear();
+}

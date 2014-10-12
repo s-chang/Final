@@ -165,7 +165,7 @@ void InventoryScreen::setList()
 	scdata.t -= 30;
 	scdata.b -= 30;
 
-	for(int i = 0; i < tempInventory->size(); i++){
+	for(unsigned int i = 0; i < tempInventory->size(); i++){
 		if(i%3 == 0){
 			scdata.y += 30;
 			scdata.t += 30;

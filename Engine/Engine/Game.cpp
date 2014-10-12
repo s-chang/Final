@@ -11,10 +11,9 @@ Game::~Game()
 
 void Game::init()
 {
-	floor.init();
-	cam = floor.getCamera();
+	
 
-	Engine::Graphics::instance()->init(cam, floor.getLight());
+	Engine::Graphics::instance()->init();
 	Engine::Sound::instance()->init();
 	Engine::Text::instance()->init();
 	ItemFactory::instance()->loadFactory();
@@ -25,7 +24,6 @@ void Game::init()
 void Game::update(MSG &msg)
 {
 	Engine::Sound::instance()->update();
-	Engine::RawInput::instance()->getMSG(msg);
 	Engine::Input::instance()->update();
 	Engine::Cursor::instance()->update(Engine::Input::instance()->get_mouseX(),Engine::Input::instance()->get_mouseY());
 

@@ -73,9 +73,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Engine\Input\DirectInput</Filter>
     </ClCompile>
-    <ClCompile Include="RawInput.cpp">
-      <Filter>Engine\Input\RawInput</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Engine\Graphics\Light</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
     </ClCompile>
     <ClCompile Include="Lenn.cpp">
       <Filter>Game\Player\Characters\Lenn</Filter>
-    </ClCompile>
-    <ClCompile Include="Floor.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClCompile>
     <ClCompile Include="FloorGenerator.cpp">
       <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
@@ -159,6 +153,21 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Corridor.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorCorridor.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorRoom.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="CorridorFactory.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +258,6 @@
     <ClInclude Include="Input.h">
       <Filter>Engine\Input\DirectInput</Filter>
     </ClInclude>
-    <ClInclude Include="RawInput.h">
-      <Filter>Engine\Input\RawInput</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Engine\Graphics\Light</Filter>
     </ClInclude>
@@ -272,9 +278,6 @@
     </ClInclude>
     <ClInclude Include="Grem.h">
       <Filter>Game\Player\Characters\Grem</Filter>
-    </ClInclude>
-    <ClInclude Include="Floor.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClInclude>
     <ClInclude Include="FloorGenerator.h">
       <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
@@ -339,15 +342,30 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Roomtype.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Corridor.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorCorridor.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorRoom.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="CorridorFactory.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BGM.txt">
       <Filter>Assets</Filter>
     </Text>
     <Text Include="Dagger.txt">
-      <Filter>Assets</Filter>
-    </Text>
-    <Text Include="DMap.txt">
       <Filter>Assets</Filter>
     </Text>
     <Text Include="Meshes.txt">
@@ -462,9 +480,6 @@
     </Filter>
     <Filter Include="Engine\Input\DirectInput">
       <UniqueIdentifier>{d7a455b3-00bc-4cfd-8586-8e1079a82faf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Input\RawInput">
-      <UniqueIdentifier>{1e872840-651b-4940-a8ad-90bcf2c12ccd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Sound">
       <UniqueIdentifier>{7acd2bc2-917d-440f-b25d-5250226f1342}</UniqueIdentifier>

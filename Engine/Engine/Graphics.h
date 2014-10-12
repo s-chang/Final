@@ -28,6 +28,9 @@ namespace Engine
 	class Graphics
 	{
 	private:
+		Camera cam;
+		Light light;
+
 		struct Storage
 		{
 			pDirectTexture texture;
@@ -40,9 +43,7 @@ namespace Engine
 
 		std::vector<Storage> storage;	
 		
-		void load();
-		
-		
+		void load();		
 
 
 		struct MeshStorage
@@ -56,9 +57,7 @@ namespace Engine
 		void loadMesh();
 		pBuffer adjBuffer;
 		
-		
-		Light light;
-
+				
 		ID3DXBuffer*	m_EffectError;
 		ID3DXEffect*	m_Effect;
 		D3DXHANDLE		m_tech;
@@ -81,7 +80,7 @@ namespace Engine
 		Return:		void
 		Description: initializes the graphics class
 		*/
-		void init(Camera *cam, Light *light);
+		void init();
 
 		/**
 		Name:		render

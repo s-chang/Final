@@ -1,5 +1,5 @@
 #include "CWindow.h"
-#include "RawInput.h"
+
 
 
 CWindow::CWindow()
@@ -60,7 +60,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam)
 		}
 	case WM_KEYDOWN:
 		{
-			Engine::RawInput::instance()->getButton(wparam);
+		
 			switch(wparam)
 			{
 			case VK_ESCAPE:
@@ -71,12 +71,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam)
 			}
 		}
 
-	case WM_MOUSEMOVE:
-		{
-			Engine::RawInput::instance()->setX(lparam);
-			Engine::RawInput::instance()->setY(lparam);
-			Engine::RawInput::instance()->getButton(wparam);
-		}
 	}
 	return DefWindowProc(hWnd, message, wparam, lparam);
 }

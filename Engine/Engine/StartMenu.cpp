@@ -17,8 +17,8 @@ StartMenu::~StartMenu(void)
 void StartMenu::init()
 {
 	bg.setHandle("startMenu");
-	bg.setTranslate(300,180,0);
-	bg.setScale(.77,.55,0);
+	bg.setTranslate(300.0f,180.0f,0.0f);
+	bg.setScale(.77f,.55f,0.0f);
 	RData uiData[] = {
 		{0, 0, 120, 500, 150, 280},
 		{245, 0, 340, 500, 150, 350},
@@ -42,7 +42,7 @@ void StartMenu::init()
 	}
 
 	// TODO: if we are initing the start menu or reiniting it we also need to reset entire game
-
+	
 }
 
 void StartMenu::shutdown()
@@ -54,13 +54,13 @@ int StartMenu::update()
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
 
-	int _x = c->cursorPos.x;
-	int _y = c->cursorPos.y;
+	int _x = (int)c->cursorPos.x;
+	int _y = (int)c->cursorPos.y;
 
 	for(int i = 0; i < MENU_BUTTON_CNT; i++)
 	{
 		if(i==1) i = 2; // REMOVE : when Continue is implemented
-		if(buttons[i].checkOn(_x,_y,3)) {
+		if(buttons[i].checkOn((float)_x,(float)_y,3)) {
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
 			// check for mouse click AND GO TO CORRECT STATE
 			if(input->check_mouse_button(0)){

@@ -21,7 +21,7 @@ void Town::init()
 	player.setScale(1.0f, 1.0f, 1.0f);
 	player.setHandle("grem");
 	player.set3D(true);
-	player.setTranslate(-37,0,-7.7);
+	player.setTranslate(-37.0f,0.0f,-7.7f);
 	player.setRotate(player.getRotate().x, 270.0f, player.getRotate().z );
 
 	town.init();
@@ -41,7 +41,7 @@ void Town::init()
 	mBox.setTranslate(600,300,0);
 
 	cam.init(800,600);
-	cam.setEyePos(-42,10,-22.7);
+	cam.setEyePos(-42.0f,10.0f,-22.7f);
 	cam.setLookAt(player.getTranslate().x, -3.75f, player.getTranslate().z);
 	cam.setProj();
 
@@ -62,7 +62,7 @@ int Town::update()
 
 	if(input->push_button(DIK_W))
 	{		
-		int _x = player.getTranslate().x;
+		int _x = (int)player.getTranslate().x;
 
 		if (_x > -32 && _x < -26){ //INN 
 			return INN;
@@ -80,7 +80,7 @@ int Town::update()
 		player.setTranslate(player.getTranslate().x - Engine::Timer::instance()->getDT()*20 , 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 90.0f, player.getRotate().z );
 		if(player.getTranslate().x < -40)
-			player.setTranslate(-40,0,-7.7);
+			player.setTranslate(-40.0f,0.0f,-7.7f);
 		else 
 			cam.setEyePos(cam.getEyePos().x - Engine::Timer::instance()->getDT()*18, cam.getEyePos().y, cam.getEyePos().z );
 	}
@@ -90,7 +90,7 @@ int Town::update()
 		player.setTranslate(player.getTranslate().x + Engine::Timer::instance()->getDT()*20, 0.0f, player.getTranslate().z );
 		player.setRotate(player.getRotate().x, 270.0f, player.getRotate().z );
 		if(player.getTranslate().x > 49)
-			player.setTranslate(49,0,-7.7);
+			player.setTranslate(49.0f,0.0f,-7.7f);
 		else
 			cam.setEyePos(cam.getEyePos().x + Engine::Timer::instance()->getDT()*18, cam.getEyePos().y, cam.getEyePos().z );
 
@@ -160,7 +160,7 @@ void Town::render()
 				/////////////////////////////////////////
 				// 2D objects
 				/////////////////////////////////////////
-				int _x = player.getTranslate().x;
+				int _x = (int)player.getTranslate().x;
 				//if(     _x < -39 //end of town
 				//	|| (_x > -32 && _x < -28)//INN 
 				//	|| (_x > -3 && _x < 1)//Shop 
@@ -180,7 +180,7 @@ void Town::render()
 				RECT rect;
 				rect.left = 200;
 				rect.top = 200;
-				wchar_t tbuffer[64];
+				//wchar_t tbuffer[64];
 
 				Engine::Cursor* c = Engine::Cursor::instance();
 				//debug code player position

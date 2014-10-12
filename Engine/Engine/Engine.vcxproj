@@ -81,6 +81,8 @@
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="BattleCommand.cpp" />
+    <ClCompile Include="Corridor.cpp" />
+    <ClCompile Include="CorridorFactory.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Dagger.cpp" />
@@ -90,8 +92,9 @@
     <ClCompile Include="Equippable.cpp" />
     <ClCompile Include="EquipScreen.cpp" />
     <ClCompile Include="Fight.cpp" />
-    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="FloorCorridor.cpp" />
     <ClCompile Include="FloorGenerator.cpp" />
+    <ClCompile Include="FloorRoom.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -110,7 +113,7 @@
     <ClCompile Include="NewGame.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RawInput.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="Run.cpp" />
     <ClCompile Include="Rune.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -137,6 +140,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="BattleCommand.h" />
     <ClInclude Include="CommandList.h" />
+    <ClInclude Include="Corridor.h" />
+    <ClInclude Include="CorridorFactory.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Dagger.h" />
@@ -148,8 +153,9 @@
     <ClInclude Include="Equippable.h" />
     <ClInclude Include="EquipScreen.h" />
     <ClInclude Include="Fight.h" />
-    <ClInclude Include="Floor.h" />
+    <ClInclude Include="FloorCorridor.h" />
     <ClInclude Include="FloorGenerator.h" />
+    <ClInclude Include="FloorRoom.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
@@ -170,7 +176,8 @@
     <ClInclude Include="NewGame.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="RawInput.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="Roomtype.h" />
     <ClInclude Include="Run.h" />
     <ClInclude Include="Rune.h" />
     <ClInclude Include="Shop.h" />
@@ -195,7 +202,6 @@
     <Text Include="Armor.txt" />
     <Text Include="BGM.txt" />
     <Text Include="Dagger.txt" />
-    <Text Include="DMap.txt" />
     <Text Include="Item.txt" />
     <Text Include="Meshes.txt" />
     <Text Include="SoundEffects.txt" />

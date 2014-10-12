@@ -6,8 +6,12 @@ skybox.x skybox
 test.x test
 testbox.x testbox
 testbox2.x testbox2
-1Room.x 1room
-4Room.x 4room
 Town.x town
 battlePlatform.x bPlat
 Slime.x slime
+Cor1.x cor1
+Cor2UDLR.x cor2
+Cor2VH.x cor2vh
+Cor3.x cor3
+Cor4.x cor4
+RoomBase.x room

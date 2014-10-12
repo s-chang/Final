@@ -12,6 +12,7 @@ private:
 	Drawable bg,
 			 buttons[MENU_BUTTON_CNT];
 	StartMenu(void);
+
 public:
 	static StartMenu* instance();
 	~StartMenu(void);

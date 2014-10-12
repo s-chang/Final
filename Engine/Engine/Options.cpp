@@ -20,12 +20,12 @@ Options* Options::instance()
 void Options::init()
 {
 	bg.setHandle("options");
-	bg.setTranslate(300,180,0);
-	bg.setScale(.7,.5,0);
+	bg.setTranslate(300.0f,180.0f,0.0f);
+	bg.setScale(.7f,.5f,0.0f);
 
 	box.setHandle("blueBox");
-	box.setTranslate(160,460,0);
-	box.setScale(.7,.7,0);
+	box.setTranslate(160.0f,460.0f,0.0f);
+	box.setScale(.7f,.7f,0.0f);
 	
 	RData uiData[] = {
 		{0, 0, 30, 200, 165, 70},		// credits
@@ -51,7 +51,7 @@ void Options::init()
 		buttons[i]= temp;
 		buttons[i].setHandle("opButtons");
 		//buttons[i].setTranslate(300,180,0);
-		buttons[i].setScale(.4,.8,0);
+		buttons[i].setScale(.4f,.8f,0.0f);
 	}
 }
 
@@ -64,13 +64,13 @@ int Options::update()
 	Engine::Cursor* c = Engine::Cursor::instance();
 	Engine::Input* input = Engine::Input::instance();
 	
-	int _x = c->cursorPos.x;
-	int _y = c->cursorPos.y;
+	int _x = (int)c->cursorPos.x;
+	int _y = (int)c->cursorPos.y;
 
 	for(int i = 0; i < OPBUTTONS; i++)
 	{
 		if(i>2) i = 7; // REMOVE : when Continue is implemented
-		if(buttons[i].checkOn(_x,_y,4,1)) {
+		if(buttons[i].checkOn((float)_x,(float)_y,4,1)) {
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
 			if(input->check_mouse_button(0)){
 				if(!input->check_button_down(DIK_9)){
