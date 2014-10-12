@@ -22,6 +22,11 @@ void Entity::adjustHealth(int amount)
 	if(stats.health <=0){
 		stats.health = 0;
 		alive = false;
+		mesh.setRotate(90,mesh.getRotate().y,mesh.getRotate().z);
+	}
+	else{
+		alive = true;
+		mesh.setRotate(0,mesh.getRotate().y,mesh.getRotate().z);
 	}
 }
 Drawable * Entity::getMesh() 

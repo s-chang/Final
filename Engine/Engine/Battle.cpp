@@ -122,7 +122,8 @@ void Battle::shutdown()
 int Battle::update()
 {
 	//check win/loss
-	checkWinLoss();
+	if(whosTurn != Turn::WIN)
+		checkWinLoss();
 
 	renderNames = true;
 	if(whosTurn == Turn::PLAYER_TURN){
@@ -208,8 +209,8 @@ void Battle::render()
 
 				if(dmg >=0 && whosTurn == Turn::PLAYER_TURN){
 					RECT rect;
-					rect.left = 320;
-					rect.top = 500;
+					rect.left = 200;
+					rect.top = 470;
 					wchar_t tbuffer[64]; 
 					swprintf_s(tbuffer, 64,L"%d",dmg);
 					Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
@@ -398,24 +399,24 @@ void Battle::renderEnemyTurn()
 	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
 		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	rect.left = 550;
+	rect.left = 470;
 	wchar_t tbuffer[64]; 
 	swprintf_s(tbuffer, 64,L"%d",dmg);
 
 	switch( randAI )
 	{
 	case 0:
-		rect.top = 450;
+		rect.top = 470;
 		t->font->DrawText(0, tbuffer, -1, &rect, 
 			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
 		break;
 	case 1:
-		rect.top = 495;
+		rect.top = 515;
 		t->font->DrawText(0, tbuffer, -1, &rect, 
 			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
 		break;
 	case 2:
-		rect.top = 540;
+		rect.top = 560;
 		t->font->DrawText(0, tbuffer, -1, &rect, 
 			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 0, 0));
 		break;
@@ -513,21 +514,26 @@ void Battle::BattleOver()
 			timer = 0.0f;
 			returnable = RETURN;
 		}
-		return;
+		//return;
 	}
 
 	switch(whosTurn)
 	{
 	case Turn::WIN:
-		turnOrder.COUNTER++;
 		for(auto &enemy: enemies)
 			totalxp += enemy.getStats()->xp;
-		Grem::instance()->addXP(totalxp);
-		Lenn::instance()->addXP(totalxp);
-		Laz::instance()->addXP(totalxp);
-		swprintf_s(tbuffer, 64,L"You are victorious earning %d XP",totalxp);
+		//static bool idkLevel = true;
+		if(turnOrder.COUNTER == 0){
+			Grem::instance()->addXP(totalxp);
+			Lenn::instance()->addXP(totalxp);
+			Laz::instance()->addXP(totalxp);
+			Player::instance()->adjustGold(totalxp);
+		}
+		
+		swprintf_s(tbuffer, 64,L"You are victorious earning %d XP and %d gold",totalxp,totalxp);
 		t->font->DrawText(0, tbuffer, -1, &rect, 
 			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+		turnOrder.COUNTER++;
 		break;
 	case Turn::LOSE:
 		turnOrder.COUNTER++;
@@ -560,8 +566,10 @@ void Battle::checkWinLoss()
 		if(enemies[i].isAlive())
 			allEnemiesDead = false;
 
-	if(allEnemiesDead)
+	if(allEnemiesDead){
 		whosTurn = Turn::WIN;
+		turnOrder.COUNTER = 0;
+	}
 	if(allAlliesDead)
 		whosTurn = Turn::LOSE;
 	if(escape)
