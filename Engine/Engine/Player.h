@@ -38,5 +38,6 @@ public:
 	bool hasCompletedtenth();
 
 	bool checkDeath();
+	void restoreCharacters();
 };
 

@@ -71,6 +71,11 @@ void Engine::Text::render(long top, long left, std::string word, dColor color)
 	font->DrawText(0, tempWS.c_str() , -1, &rect, DT_TOP|DT_LEFT|DT_NOCLIP, color);
 }
 
+void Engine::Text::render(Drawable &word)
+{
+	font->DrawText(0, word.getPlainText(), -1, &word.getRect(), DT_TOP|DT_LEFT|DT_NOCLIP, word.getColor());
+}
+
 void Engine::Text::setColor(dColor color)
 {
 	this->color = color;

@@ -2,7 +2,8 @@
 #include "Floor.h"
 #include <stdlib.h>
 #include "Player.h"
-
+#include "Text.h"
+#include <stdio.h>
 
 Tower::Tower(void)
 {
@@ -11,6 +12,12 @@ Tower::Tower(void)
 	bossLevel5 = bossLevel10 = bossLevel15 = false;
 	towerstate = 0;
 	enterFromTown = true;
+
+	RECT tempR;
+	tempR.top = 50;
+	tempR.left = 700;
+	floortext.setRect(tempR);
+	
 	
 	//set player position
 	playerX = player.getTranslate().x;
@@ -38,8 +45,7 @@ Tower* Tower::instance()
 
 void Tower::init()
 {
-	stepCounter = rand() % 5 + 15;				
-	
+	stepCounter = rand() % 5 + 15;		
 }
 
 void Tower::shutdown()
@@ -57,7 +63,7 @@ int Tower::update()
 	const float speed = 0.1f;
 	static int slowcount = 0;
 	const int limiter =  25;
-
+			
 	switch(towerstate)
 	{
 	case ENTER:
@@ -86,6 +92,12 @@ int Tower::update()
 			cam.setLookAt(playerX, 0.0f, playerZ);
 			cam.setEyePos(playerX, 20.0f, playerZ - 10.0f);
 			cam.setProj();
+
+			
+			//change text for current floor
+			
+			swprintf_s(tempText, 20, L"Floor %d", currentFloor); 
+			floortext.setText(tempText);
 
 			towerstate = MOVE;
 			break;
@@ -187,6 +199,8 @@ int Tower::update()
 		}
 	case DEATH:
 		{
+			//restore player health
+			Player::instance()->restoreCharacters();
 			towerstate = ENTER;
 			enterFromTown = true;
 			stepCounter = rand() % 5 + 15;
@@ -235,6 +249,16 @@ void Tower::render()
 
 			//draw player
 			graphics->render(player, &cam);
+
+			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
+			{
+				
+
+				Engine::DX::instance()->getSprite()->End();
+				//render floor text
+			Engine::Text::instance()->render(floortext);
+			}
+			
 		}
 		directX->getDevice()->EndScene();
 	}
