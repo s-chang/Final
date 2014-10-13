@@ -24,6 +24,7 @@ private:
 public:
 	std::vector<BattleCommand*> availableCommands;
 	std::vector<BattleCommand*> skills;
+	bool jumping;
 
 	static Grem* instance();
 	~Grem(void);

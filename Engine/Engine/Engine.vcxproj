@@ -107,6 +107,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemCMD.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
+    <ClCompile Include="Jump.cpp" />
     <ClCompile Include="Laz.cpp" />
     <ClCompile Include="Lenn.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemCMD.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="Jump.h" />
     <ClInclude Include="Laz.h" />
     <ClInclude Include="Lenn.h" />
     <ClInclude Include="Light.h" />

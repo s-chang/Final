@@ -112,9 +112,9 @@ int Tower::update()
 		
 			if(input->push_button(DIK_W))
 			{
-				playerZ += speed;
+				playerZ += speed/*Engine::Timer::instance()->getDT()*20*/;
 				player.setRotate(0.0f, 180.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z + speed);
+				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z + speed/*Engine::Timer::instance()->getDT()*20*/);
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -125,9 +125,9 @@ int Tower::update()
 
 			if(input->push_button(DIK_S))
 			{
-				playerZ -= speed;
+				playerZ -= speed/*Engine::Timer::instance()->getDT()*20*/;
 				player.setRotate(0.0f, 0.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z - speed);
+				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z - speed/*Engine::Timer::instance()->getDT()*20*/);
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -139,9 +139,9 @@ int Tower::update()
 
 			if(input->push_button(DIK_A))
 			{
-				playerX -= speed;
+				playerX -= speed/*Engine::Timer::instance()->getDT()*20*/;
 				player.setRotate(0.0f, 90.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x - speed, cam.getEyePos().y, cam.getEyePos().z );
+				cam.setEyePos(cam.getEyePos().x - speed/*Engine::Timer::instance()->getDT()*20*/, cam.getEyePos().y, cam.getEyePos().z );
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -152,9 +152,9 @@ int Tower::update()
 			}
 			if(input->push_button(DIK_D))
 			{
-				playerX += speed;
+				playerX += speed/*Engine::Timer::instance()->getDT()*20*/;
 				player.setRotate(0.0f, 270.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x + speed, cam.getEyePos().y, cam.getEyePos().z);
+				cam.setEyePos(cam.getEyePos().x + speed/*Engine::Timer::instance()->getDT()*20*/, cam.getEyePos().y, cam.getEyePos().z);
 				++slowcount;
 				if(slowcount == limiter)
 				{
@@ -213,7 +213,7 @@ void Tower::render()
 	Engine::Graphics * graphics = Engine::Graphics::instance();
 	Engine::DX* directX = Engine::DX::instance();
 
-	if(SUCCEEDED(directX->getDevice()->Clear(0,0, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 1.0f, 0)))
+	if(SUCCEEDED(directX->getDevice()->Clear(0,0, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f), 1.0f, 0)))
 	{
 		if(SUCCEEDED(directX->getDevice()->BeginScene()))
 		{

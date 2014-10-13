@@ -178,6 +178,8 @@
     <ClCompile Include="Elemental.cpp">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClCompile>
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Jump.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -378,6 +380,8 @@
     <ClInclude Include="Elemental.h">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClInclude>
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Jump.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="BGM.txt">

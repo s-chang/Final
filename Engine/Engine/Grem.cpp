@@ -73,6 +73,7 @@ void Grem::init()
 	rune1 = NULL;
 	rune2 = NULL;
 
+	jumping = false;
 }
 
 void Grem::levelUp()
