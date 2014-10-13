@@ -9,7 +9,7 @@ FloorRoom::~FloorRoom()
 void FloorRoom::init(std::string handle)
 {
 	setHandle("room");
-	name = handle;
+	setName(handle);
 	set3D(true);
 }
 
@@ -43,12 +43,3 @@ bool FloorRoom::getStairs()
 	return stairs;
 }
 
-void FloorRoom::setName(std::string name)
-{
-	this->name = name;
-}
-
-std::string FloorRoom::getName()
-{
-	return name;
-}

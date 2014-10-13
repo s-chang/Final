@@ -63,9 +63,10 @@ int Tower::update()
 
 	const int ENTER = 0, MOVE = 1, FIGHT = 2, DEATH = 3, EXIT = 4;
 
-	const float speed = 1.0f;
+	const float speed = 0.1f;
 	static int slowcount = 0;
 	const int limiter =  25;
+	stepCounter = limiter;
 				
 	switch(towerstate)
 	{
@@ -129,7 +130,6 @@ int Tower::update()
 			{
 				playerZ += speed;
 				player.setRotate(0.0f, 180.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z + speed);
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -142,7 +142,6 @@ int Tower::update()
 			{
 				playerZ -= speed;
 				player.setRotate(0.0f, 0.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x, cam.getEyePos().y, cam.getEyePos().z - speed);
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -156,7 +155,6 @@ int Tower::update()
 			{
 				playerX -= speed;
 				player.setRotate(0.0f, 90.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x - speed, cam.getEyePos().y, cam.getEyePos().z );
 				++slowcount;
 				if(slowcount == limiter)
 					{
@@ -169,7 +167,6 @@ int Tower::update()
 			{
 				playerX += speed;
 				player.setRotate(0.0f, 270.0f, 0.0f);
-				cam.setEyePos(cam.getEyePos().x + speed, cam.getEyePos().y, cam.getEyePos().z);
 				++slowcount;
 				if(slowcount == limiter)
 				{
@@ -179,14 +176,18 @@ int Tower::update()
 			}
 
 			
+			Floor::instance()->checkCollision(playerX, playerZ);
+			
 			//if the stepCounter is true, set battle to true, switch to battle state
 			if(stepCounter == 0)
 			{
 				towerstate = FIGHT;
 			}
 
+		
 			player.setTranslate(playerX, 0.0f, playerZ);
 			cam.setLookAt(player.getTranslate().x, 5.0f, player.getTranslate().z);
+			cam.setEyePos(player.getTranslate().x, cam.getEyePos().y, player.getTranslate().z - 20.0f);
 			cam.setProj();
 
 			break;

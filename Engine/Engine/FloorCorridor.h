@@ -6,7 +6,9 @@ class FloorCorridor
 {
 private:
 	Drawable info;
-	
+	int x, y;
+	bool playerOn;
+	std::string name;
 
 public:
 	FloorCorridor();
@@ -22,6 +24,18 @@ public:
 	void set3D(bool arg);
 	void setHandle(std::string name);
 
+	void setX(int x);
+	void setY(int y);
+
+	int getX();
+	int getY();
+
+	bool getOn();
+	void setOn(bool arg);
+
 	Drawable getInfo();
+
+	void setName(std::string name);
+	std::string getName();
 
 };

@@ -19,13 +19,13 @@ FloorCorridor *CorridorFactory::getCor(std::string handle)
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor1");
-		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor1D")
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor1");
-		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor1R")
 	{
@@ -54,32 +54,32 @@ FloorCorridor *CorridorFactory::getCor(std::string handle)
 	}else if(handle == "cor2UR")
 	{
 		FloorCorridor *temp = new FloorCorridor();
-		temp->setRotate(D3DXVECTOR3(0.0f, 90.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		temp->init("cor2");
 		return temp;
 	}else if(handle == "cor2DR")
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor2");
-		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 90.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor2DL")
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor2");
-		temp->setRotate(D3DXVECTOR3(0.0f, 270.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor2UL")
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor2");
-		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 270.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor3U")
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor3");
-		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor3R")
 	{
@@ -91,7 +91,7 @@ FloorCorridor *CorridorFactory::getCor(std::string handle)
 	{
 		FloorCorridor *temp = new FloorCorridor();
 		temp->init("cor3");
-		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
 		return temp;
 	}else if(handle == "cor3L")
 	{

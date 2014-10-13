@@ -1,7 +1,9 @@
 #include "FloorCorridor.h"
 
 FloorCorridor::FloorCorridor()
-{}
+{
+	playerOn = false;
+}
 
 FloorCorridor::~FloorCorridor()
 {}
@@ -11,6 +13,7 @@ void FloorCorridor::init(std::string handle)
 	info.setHandle(handle);
 	info.set3D(true);
 	info.setHasTexture(true);
+	
 }
 
 void FloorCorridor::set3D(bool arg)
@@ -47,4 +50,44 @@ Drawable FloorCorridor::getInfo()
 void FloorCorridor::setHandle(std::string name)
 {
 	info.setHandle(name);
+}
+
+void FloorCorridor::setX(int x)
+{
+	this->x = x;
+}
+
+void FloorCorridor::setY(int y)
+{
+	this->y = y;
+}
+
+int FloorCorridor::getX()
+{
+	return x;
+}
+
+int FloorCorridor::getY()
+{
+	return y;
+}
+
+void FloorCorridor::setOn(bool arg)
+{
+	playerOn = arg;
+}
+
+bool FloorCorridor::getOn()
+{
+	return playerOn;
+}
+
+void FloorCorridor::setName(std::string name)
+{
+	this->name = name;
+}
+
+std::string FloorCorridor::getName()
+{
+	return name;
 }
