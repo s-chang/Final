@@ -53,7 +53,7 @@ void Floor::createFloor(int floorNum)
 		theRoom->setArrival(tempRoom[i].getArrival());
 		theRoom->setTreasure(tempRoom[i].getTreasure());
 		theRoom->setStairs(tempRoom[i].getStairs());
-		theRoom->setTranslate(D3DXVECTOR3((float)tempRoom[i].getX() * 30.0f, 0.0f, (float)tempRoom[i].getY() * 30.0f));
+		theRoom->setTranslate(D3DXVECTOR3((float)tempRoom[i].getY() * 30.0f, 0.0f, (float)tempRoom[i].getX() * 30.0f));
 		theRoom->setName(name);
 
 		rooms.push_back(theRoom);
@@ -85,9 +85,11 @@ void Floor::createFloor(int floorNum)
 		default:
 			cor = new FloorCorridor(); break;
 		}
-		cor->setTranslate(D3DXVECTOR3((float)tempCor[i].getX() * 30.0f, 0.0f, (float)tempCor[i].getY() * 30.0f));
+		cor->setTranslate(D3DXVECTOR3((float)tempCor[i].getY() * 30.0f, 0.0f, (float)tempCor[i].getX() * 30.0f));
 		cors.push_back(cor);
 	}	
+
+
 }
 
 std::vector<FloorRoom*> Floor::getRooms()

@@ -178,8 +178,14 @@
     <ClCompile Include="Elemental.cpp">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Jump.cpp" />
+=======
+    <ClCompile Include="Floor.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClCompile>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -380,8 +386,14 @@
     <ClInclude Include="Elemental.h">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Jump.h" />
+=======
+    <ClInclude Include="Floor.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClInclude>
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Text Include="BGM.txt">

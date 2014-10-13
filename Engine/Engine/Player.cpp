@@ -139,3 +139,11 @@ bool Player::checkDeath()
 		return false;
 	return true;
 }
+
+void Player::restoreCharacters()
+{
+	grem->adjustHealth(9999);
+	lenn->adjustHealth(9999);
+	laz->adjustHealth(9999);
+	laz->adjustResource(9999);
+}

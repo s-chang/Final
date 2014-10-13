@@ -6,6 +6,7 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 #include <string>
+#include "Drawable.h"
 
 #define MAX_BUFFER 256
 
@@ -62,6 +63,7 @@ namespace Engine
 		*/
 		void render(long top, long left, wchar_t* word, dColor color);
 		void render(long top, long left, std::string word, dColor color);
+		void render(Drawable &word);
 
 		/**
 		Name:		setColor

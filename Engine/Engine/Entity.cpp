@@ -19,6 +19,11 @@ void Entity::setLevel(int num)
 void Entity::adjustHealth(int amount)
 {
 	stats.health += amount;
+	if(stats.health >= stats.maxHealth)
+	{
+		stats.health = stats.maxHealth;
+		alive = true;
+	}
 	if(stats.health <=0){
 		stats.health = 0;
 		alive = false;
