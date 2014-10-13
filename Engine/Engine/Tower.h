@@ -16,6 +16,7 @@ private:
 
 	Drawable player;
 	Drawable floortext;
+	Drawable textBackground;
 	wchar_t tempText[20];
 
 	Camera cam;

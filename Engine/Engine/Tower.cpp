@@ -17,7 +17,10 @@ Tower::Tower(void)
 	tempR.top = 50;
 	tempR.left = 700;
 	floortext.setRect(tempR);
-	
+
+	textBackground.setHandle("blueBox");
+	textBackground.setTranslate(725.0f, 62.5f, 0.0f);
+	textBackground.setScale(0.9f,0.7f,0.0f);
 	
 	//set player position
 	playerX = player.getTranslate().x;
@@ -60,10 +63,10 @@ int Tower::update()
 
 	const int ENTER = 0, MOVE = 1, FIGHT = 2, DEATH = 3, EXIT = 4;
 
-	const float speed = 0.1f;
+	const float speed = 1.0f;
 	static int slowcount = 0;
 	const int limiter =  25;
-			
+				
 	switch(towerstate)
 	{
 	case ENTER:
@@ -227,7 +230,7 @@ void Tower::render()
 	Engine::Graphics * graphics = Engine::Graphics::instance();
 	Engine::DX* directX = Engine::DX::instance();
 
-	if(SUCCEEDED(directX->getDevice()->Clear(0,0, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), 1.0f, 0)))
+	if(SUCCEEDED(directX->getDevice()->Clear(0,0, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f), 1.0f, 0)))
 	{
 		if(SUCCEEDED(directX->getDevice()->BeginScene()))
 		{
@@ -253,7 +256,7 @@ void Tower::render()
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
 				
-
+				graphics->render(textBackground, &cam);
 				Engine::DX::instance()->getSprite()->End();
 				//render floor text
 			Engine::Text::instance()->render(floortext);

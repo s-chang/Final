@@ -178,6 +178,9 @@
     <ClCompile Include="Elemental.cpp">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
     </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -377,6 +380,9 @@
     </ClInclude>
     <ClInclude Include="Elemental.h">
       <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
