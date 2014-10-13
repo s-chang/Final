@@ -5,6 +5,7 @@ class Elemental :
 {
 private:
 	std::vector<BattleCommand*> skillList;
+	bool selection;
 public:
 	Elemental(void);
 	~Elemental(void);

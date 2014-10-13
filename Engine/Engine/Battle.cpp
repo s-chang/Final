@@ -113,6 +113,8 @@ void Battle::init()
 	turnOrder.ENEMY_COUNT = enemies.size();
 	whosTurn = Turn::PLAYER_TURN;
 	turnStatus = TURN_STATUS::START;
+
+	onlyOnce = true;
 }
 
 void Battle::shutdown()
@@ -127,8 +129,32 @@ int Battle::update()
 
 	renderNames = true;
 	if(whosTurn == Turn::PLAYER_TURN){
-		if(turnOrder.COUNTER < 3)
-			updatePlayerTurn(all[turnOrder.COUNTER]);
+		if(turnOrder.COUNTER < 3){
+			switch(turnOrder.COUNTER)
+			{
+			case 0:
+				if(Grem::instance()->isJumping()){
+					BattleCommand* tempCMDjump = Grem::instance()->getJumpCMD();
+					if(tempCMDjump){
+						activeCMD = tempCMDjump;
+						turnStatus = TURN_STATUS::CMD;
+					}
+				}
+				updatePlayerTurn(Grem::instance());
+				onlyOnce = true;
+				break;
+			case 1:
+				if(onlyOnce){
+					Lenn::instance()->adjustResource(20);
+					onlyOnce = false;
+				}
+				updatePlayerTurn(Lenn::instance());
+				break;
+			case 2:
+				updatePlayerTurn(Laz::instance());
+				break;
+			}
+		}
 		else{
 			turnOrder.COUNTER = 0;
 			whosTurn = Turn::ENEMY_TURN;
@@ -155,7 +181,8 @@ void Battle::render()
 			/////////////////////////////////////////
 			g->render(platform,&cam);
 			//g->render(player,&cam);
-			g->render(*Grem::instance()->getMesh(),&cam);
+			if(!Grem::instance()->isJumping())
+				g->render(*Grem::instance()->getMesh(),&cam);
 			g->render(*Lenn::instance()->getMesh(),&cam);
 			g->render(*Laz::instance()->getMesh(),&cam);
 
@@ -308,11 +335,23 @@ void Battle::updateEnemyTurn()
 	{
 	case TURN_STATUS::START:
 
+		// no one to Attack
+		if(Grem::instance()->isJumping() 
+			&& !Lenn::instance()->isAlive() 
+			&& !Laz::instance()->isAlive()){
+				turnStatus = TURN_STATUS::END;
+		}
+
 		randAI = rand()%3;
+		if(Grem::instance()->isJumping())
+			randAI = rand()%2+1;
+
 		player = all[randAI];
 
 		while(!player->isAlive()){
 			randAI = rand()%3;
+			if(Grem::instance()->isJumping())
+				randAI = rand()%2+1;
 			player = all[randAI];
 		}
 
@@ -365,21 +404,30 @@ void Battle::renderPlayerTurn(Entity* e)
 				t->font->DrawText(0, tempWS.c_str(), -1, &tempCMD->getRect(), 
 					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
 
-				// help text
-				rect.left = 50;
-				rect.top = 7;
-				tempString = tempCMD->helpText();
-				tempWS = std::wstring(tempString.begin(),tempString.end());
-				t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+				if(turnStatus!=TURN_STATUS::CMD){
+					// help text
+					rect.left = 50;
+					rect.top = 7;
+					tempString = tempCMD->helpText();
+					tempWS = std::wstring(tempString.begin(),tempString.end());
+					t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+						DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+				}
 			}
 			else
 				t->font->DrawText(0, tempWS.c_str(), -1, &tempCMD->getRect(), 
 				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
 	}
-	if(turnStatus == TURN_STATUS::CMD)
+	if(turnStatus == TURN_STATUS::CMD){
 		activeCMD->text();
+		rect.left = 50;
+		rect.top = 7;
+		tempString = activeCMD->helpText();
+		tempWS = std::wstring(tempString.begin(),tempString.end());
+		t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+			DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 }
 void Battle::renderEnemyTurn()
 {

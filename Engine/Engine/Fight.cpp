@@ -65,6 +65,8 @@ void Fight::update()
 								dmg = 0;
 							enemy->adjustHealth(-dmg);
 
+							if(player->getName() == "Grem")
+								player->adjustResource(20);
 							b->dmg = dmg;
 							b->turnStatus = TURN_STATUS::END;
 

@@ -32,6 +32,7 @@ private:
 	Drawable bWindow;
 	int returnable;
 	float timer;
+	bool onlyOnce;
 
 	void updatePlayerTurn(Entity*);
 	void updateEnemyTurn();

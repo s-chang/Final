@@ -5,6 +5,7 @@ class Subtlety :
 {
 private:
 	std::vector<BattleCommand*> skillList;
+	bool selection;
 public:
 	Subtlety(void);
 	~Subtlety(void);

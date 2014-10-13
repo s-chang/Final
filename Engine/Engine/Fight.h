@@ -7,8 +7,8 @@ class Fight :
 	std::vector<Drawable> enemyList;
 
 	// old
-	int top,left;
-	RECT r2;
+	//int top,left;
+	//RECT r2;
 public:
 	Fight(void);
 	~Fight(void);

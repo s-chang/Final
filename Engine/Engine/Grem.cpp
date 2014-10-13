@@ -1,5 +1,5 @@
 #include "Grem.h"
-#include "Skill.h"
+#include "RageSkills.h"
 
 Grem::Grem(void) : Entity()
 {
@@ -49,6 +49,10 @@ void Grem::init()
 	};
 	stats = temp;
 
+	/////////////////////////////////////////////////////////////////////////
+	// Commands
+	/////////////////////////////////////////////////////////////////////////
+
 	BattleCommand* newCommand = new BattleCommand();
 	availableCommands.push_back(newCommand);
 	newCommand = new Fight();
@@ -65,6 +69,16 @@ void Grem::init()
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
+	/////////////////////////////////////////////////////////////////////////
+	// Skills
+	/////////////////////////////////////////////////////////////////////////
+	newCommand = new Jump();
+	skills.push_back(newCommand);
+
+	/////////////////////////////////////////////////////////////////////////
+	// Equipment
+	/////////////////////////////////////////////////////////////////////////
+
 	weapon = (Spear*)ItemFactory::instance()->getItem("Weathered Spear");
 	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 
@@ -73,6 +87,17 @@ void Grem::init()
 	rune1 = NULL;
 	rune2 = NULL;
 
+	jumping = false;
+}
+
+void Grem::setJump(bool j){ jumping = j;}
+bool Grem::isJumping(){ return jumping;}
+BattleCommand* Grem::getJumpCMD()
+{
+	for(int i = 0; i<skills.size();i++)
+		if(skills[i]->getName() == "Jump")
+			return skills[i];
+	return NULL;
 }
 
 void Grem::levelUp()

@@ -10,6 +10,7 @@ private:
 
 	int rage, rageMax;
 	int xpToLevel;
+	bool jumping;
 	
 	Spear* weapon;
 	Armor* armor;
@@ -40,5 +41,9 @@ public:
 	void addXP(int amount);
 	void adjustResource(int amount);
 	void getSkills(std::vector<BattleCommand*>& skillList, int type);
+
+	void setJump(bool j);
+	bool isJumping();
+	BattleCommand* getJumpCMD();
 };
 

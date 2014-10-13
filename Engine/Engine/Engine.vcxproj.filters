@@ -390,6 +390,9 @@
     <ClInclude Include="Jump.h">
       <Filter>Game\Commands and skills\Skills\Rage\Jump</Filter>
     </ClInclude>
+    <ClInclude Include="RageSkills.h">
+      <Filter>Game\Commands and skills\Skills\Rage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Armor.txt">

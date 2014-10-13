@@ -185,6 +185,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RageCMD.h" />
+    <ClInclude Include="RageSkills.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Roomtype.h" />
     <ClInclude Include="Run.h" />

@@ -5,6 +5,7 @@ class RageCMD :
 {
 private:
 	std::vector<BattleCommand*> skillList;
+	bool selection;
 public:
 	RageCMD(void);
 	~RageCMD(void);

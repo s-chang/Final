@@ -18,7 +18,7 @@ void StartMenu::init()
 {
 	bg.setHandle("startMenu");
 	bg.setTranslate(300.0f,180.0f,0.0f);
-	bg.setScale(.77f,.55f,0.0f);
+	bg.setScale(.8f,.6f,0.0f);
 	RData uiData[] = {
 		{0, 0, 120, 500, 150, 280},
 		{245, 0, 340, 500, 150, 350},
@@ -39,6 +39,7 @@ void StartMenu::init()
 		buttons[i].setHandle("menuButtons");
 		//buttons[i].setTranslate(300,180,0);
 		buttons[i].setScale(.5,.5,0);
+		buttons[i].setColor(D3DCOLOR_ARGB(255,0,0,0));
 	}
 
 	// TODO: if we are initing the start menu or reiniting it we also need to reset entire game
@@ -83,7 +84,7 @@ int StartMenu::update()
 			} else input->set_button(DIK_9,false);
 		}
 		else
-			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+			buttons[i].setColor(D3DCOLOR_ARGB(255,0,0,0));
 	}
 
 
@@ -110,7 +111,7 @@ void StartMenu::render()
 				g->Draw2DObject(bg);
 
 				for(int i = 0; i < MENU_BUTTON_CNT; i++){
-					if(i==1) i = 2; // REMOVE : when Continue is implemented
+					//if(i==1) i = 2; // REMOVE : when Continue is implemented
 					g->Draw2DObject(buttons[i]);
 				}
 
