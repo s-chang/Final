@@ -169,6 +169,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					//determine next room and set to On
 					determineOn( tempRC[i], tempDirection);
 				}
+				break;
 			}
 
 			if(tempRC[i]->getName() == "room1D")
@@ -178,6 +179,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 
 			if(tempRC[i]->getName() == "room1R")
@@ -187,6 +189,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 
 			if(tempRC[i]->getName() == "room1L")
@@ -196,6 +199,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room2V")
 			{
@@ -204,6 +208,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room2H")
 			{
@@ -212,6 +217,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room2UR")
 			{
@@ -220,6 +226,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room2DR")
 			{
@@ -228,6 +235,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+				break;
 			}
 			if(tempRC[i]->getName() == "room2UL")
 			{
@@ -236,6 +244,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room2DL")
 			{
@@ -244,6 +253,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room3U")
 			{
@@ -252,6 +262,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+					break;
 			}
 			if(tempRC[i]->getName() == "room3R")
 			{
@@ -260,6 +271,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
 				}
+				break;
 			}
 			if(tempRC[i]->getName() == "room3D")
 			{
@@ -267,7 +279,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "room3L")
 			{
@@ -275,7 +287,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "room4")
 			{
@@ -283,7 +295,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn(tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 
 			if(tempRC[i]->getName() == "cor1U")
@@ -292,7 +304,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor1D")
 			{
@@ -300,7 +312,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor1R")
 			{
@@ -308,7 +320,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor1L")
 			{
@@ -316,7 +328,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor2V")
 			{
@@ -324,7 +336,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 
 			if(tempRC[i]->getName() == "cor2H")
@@ -333,7 +345,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 
 			if(tempRC[i]->getName() == "cor2UR")
@@ -342,7 +354,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor2DR")
 			{
@@ -350,7 +362,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor2UL")
 			{
@@ -358,7 +370,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor2DL")
 			{
@@ -366,7 +378,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor3U")
 			{
@@ -374,7 +386,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor3D")
 			{
@@ -382,7 +394,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor3R")
 			{
@@ -390,7 +402,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor3L")
 			{
@@ -398,7 +410,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 			if(tempRC[i]->getName() == "cor4")
 			{
@@ -406,7 +418,7 @@ void Floor::checkCollision(float &playerX, float &playerZ)
 				{
 					tempRC[i]->setOn(false);
 					determineOn( tempRC[i], tempDirection);
-				}
+				}	break;
 			}
 		}
 	}
@@ -873,17 +885,156 @@ bool Floor::leaveRoom4(FloorCorridor* rc, float &playerX, float &playerZ, int &d
 }
 
 bool Floor::leaveCor1D(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check top
+	if(playerZ > ( (roomY*PIXELS) - (CENTEROFFSET - SIDEOFFSET) ) )
+	{
+		playerZ = (roomY * PIXELS) - (CENTEROFFSET - SIDEOFFSET);
+	}
+	//check left
+	if(playerX < ((roomX*PIXELS ) - (CENTEROFFSET - SIDEOFFSET  )))
+	{
+		playerX = (roomX*PIXELS ) - (CENTEROFFSET - SIDEOFFSET  );
+	}
+	//check right
+	if(playerX > ((roomX*PIXELS) + (CENTEROFFSET - SIDEOFFSET)))
+	{
+		playerX = (roomX*PIXELS) + (CENTEROFFSET -SIDEOFFSET);
+	}
+
+	//check bottom
+	if(playerZ < ( (roomY*PIXELS) - CENTEROFFSET))
+	{
+		//check left
+		if(playerX < ((roomX*PIXELS) - (CENTEROFFSET - SIDEOFFSET)))
+			playerZ = roomY * PIXELS - CENTEROFFSET;
+		//check right
+		else if(playerX > ((roomX * PIXELS) + (CENTEROFFSET - SIDEOFFSET)))
+			playerZ = roomY * PIXELS - CENTEROFFSET;
+		else
+		{
+			direction = DOWN; return true;
+		}
+	}
+	return false;
+}
 bool Floor::leaveCor1U(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check left
+	if(playerX < ((roomX*PIXELS ) - (CENTEROFFSET - SIDEOFFSET  )))
+	{
+		playerX = (roomX*PIXELS ) - (CENTEROFFSET - SIDEOFFSET  );
+	}
+	//check right
+	if(playerX > ((roomX*PIXELS) + (CENTEROFFSET - SIDEOFFSET)))
+	{
+		playerX = (roomX*PIXELS) + (CENTEROFFSET -SIDEOFFSET);
+	}
+	//check bottom
+	if(playerZ < ((roomY*PIXELS) + (CENTEROFFSET - SIDEOFFSET)))
+	{
+		playerZ = (roomY*PIXELS) + (CENTEROFFSET - SIDEOFFSET);
+	}
+
+	//check up
+	if(playerZ > ((roomY*PIXELS) + CENTEROFFSET))
+	{
+		//check left
+		if(playerX < ((roomX*PIXELS) - (CENTEROFFSET - SIDEOFFSET)))
+			playerZ = roomY*PIXELS + CENTEROFFSET;
+		//check right
+		else if(playerX > ((roomX*PIXELS) + (CENTEROFFSET - SIDEOFFSET)))
+			playerZ = roomY*PIXELS + CENTEROFFSET;
+		else
+		{
+			direction = UP; return true;
+		}
+	}
+	
+	return false;
+
+}
 bool Floor::leaveCor1L(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check top
+	if(playerZ > roomY*PIXELS + ENTRANCEOFFSET)
+		playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+	//check bottom
+	if(playerZ < roomY * PIXELS - ENTRANCEOFFSET)
+		playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+	//check right
+	if(playerX > roomX * PIXELS - ENTRANCEOFFSET)
+		playerX = roomX * PIXELS - ENTRANCEOFFSET;
+	//check left
+	if(playerX < roomX* PIXELS - CENTEROFFSET)
+	{
+		direction = LEFT; return true;
+	}
+	
+
+
+	return false;
+
+}
 bool Floor::leaveCor1R(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	
+	//check top
+	if(playerZ > roomY*PIXELS + ENTRANCEOFFSET)
+		playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+	//check bottom
+	if(playerZ < roomY * PIXELS - ENTRANCEOFFSET)
+		playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+	//check right
+	if(playerX > roomX * PIXELS + CENTEROFFSET)
+	{
+		direction = RIGHT; return true;
+	}		
+	//check left
+	if(playerX < roomX* PIXELS + ENTRANCEOFFSET)
+		playerX = roomX*PIXELS + ENTRANCEOFFSET;
+		
+	return false;
+}
 
 bool Floor::leaveCor2H(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
-
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+	//check top
+	if(playerZ > ((roomY*PIXELS) + ENTRANCEOFFSET))
+		playerZ = roomY*PIXELS + ENTRANCEOFFSET;
+	//check bottom
+	if(playerZ < ((roomY*PIXELS) - ENTRANCEOFFSET))
+		playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+	//check right
+	if(playerX > (roomX *PIXELS + CENTEROFFSET))
+	{
+		direction = RIGHT;
+		return true;
+	}
+	//check left
+	if(playerX < (roomX * PIXELS - CENTEROFFSET))
+	{
+		direction = LEFT;
+		return true;
+	}
+		
+		
+	return false;
+}
 
 bool Floor::leaveCor2V(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
 {
@@ -914,25 +1065,526 @@ bool Floor::leaveCor2V(FloorCorridor* rc, float &playerX, float &playerZ, int &d
 }
 
 bool Floor::leaveCor3D(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//top
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+		playerZ = roomY *PIXELS + ENTRANCEOFFSET;
+
+	//left
+	if(playerX < (roomX * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS - CENTEROFFSET))
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+
+	//right
+	if(playerX > (roomX * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX > (roomX * PIXELS + CENTEROFFSET))
+			{
+				direction = RIGHT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+
+	//bottom
+	if(playerZ < (roomY * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX * PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS - CENTEROFFSET))
+			{
+				direction = DOWN; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+
+	return false;
+
+}
 bool Floor::leaveCor3U(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check bottom
+	if(playerZ < (roomY * PIXELS - ENTRANCEOFFSET))
+		playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+
+	//left
+	if(playerX < (roomX * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS - CENTEROFFSET))
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+
+	//right
+	if(playerX > (roomX * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX > (roomX * PIXELS + CENTEROFFSET))
+			{
+				direction = RIGHT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+
+	//top
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX*PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS + CENTEROFFSET))
+			{
+				direction = UP; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+		}
+	}
+	
+	return false;
+}
 bool Floor::leaveCor3L(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check right
+	if(playerX > (roomX*PIXELS + ENTRANCEOFFSET))
+	{
+		playerX = roomX*PIXELS + ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check UP
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX*PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS + CENTEROFFSET))
+			{
+				direction = UP; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//bottom
+	if(playerZ < (roomY * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX * PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS - CENTEROFFSET))
+			{
+				direction = DOWN; return true;
+			}
+		}else
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+	}
+
+	//left
+	if(playerX < (roomX * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS - CENTEROFFSET))
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+
+	return false;
+}
 bool Floor::leaveCor3R(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check left
+	if(playerX < roomX*PIXELS - ENTRANCEOFFSET)
+	{
+		playerX = roomX*PIXELS - ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check UP
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX*PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS + CENTEROFFSET))
+			{
+				direction = UP; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//bottom
+	if(playerZ < (roomY * PIXELS - ENTRANCEOFFSET))
+	{
+		if((playerX > (roomX * PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS - CENTEROFFSET))
+			{
+				direction = DOWN; return true;
+			}
+		}else
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+	}
+
+	//right
+	if(playerX > (roomX * PIXELS + ENTRANCEOFFSET))
+	{
+		if((playerZ > (roomY * PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX > (roomX * PIXELS + CENTEROFFSET))
+			{
+				direction = RIGHT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET;		
+			return false;
+		}
+	}
+	return false;
+}
 
 bool Floor::leaveCor2UR(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+	//check left
+	if(playerX < (roomX*PIXELS - ENTRANCEOFFSET))
+	{
+		playerX = roomX*PIXELS - ENTRANCEOFFSET;
+		return false;
+	}
+	//check bottom
+	if(playerZ < (roomY*PIXELS - ENTRANCEOFFSET))
+	{
+		playerZ = roomY*PIXELS - ENTRANCEOFFSET;
+		return false;
+	}
+	//check top
+	if( (playerZ >  (roomX*PIXELS + ENTRANCEOFFSET)) )
+	{
+		//check right
+		if((playerX > (roomX * PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX * PIXELS + ENTRANCEOFFSET) ))
+		{
+			if(playerZ > (roomX * PIXELS + CENTEROFFSET))
+			{
+				direction = UP; return true;
+			}
+			
+		}else
+		{
+			playerZ = roomX *PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+		
+	}
+	//check right
+	if(playerX > roomX*PIXELS + ENTRANCEOFFSET)
+	{
+		//check top
+		if(playerZ < roomY*PIXELS + ENTRANCEOFFSET)			
+		{
+			//check the far right
+			if((playerX > (roomX * PIXELS + CENTEROFFSET)) && (playerX < (roomX * PIXELS - CENTEROFFSET)))
+			{
+				direction = RIGHT; return true;
+			}
+		}else if(playerZ > roomY*PIXELS + ENTRANCEOFFSET)
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	return false;
+}
 bool Floor::leaveCor2DR(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check top
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+		playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+	//check left
+	if(playerX < (roomX * PIXELS - ENTRANCEOFFSET))
+		playerX = roomX * PIXELS - ENTRANCEOFFSET;
+
+	//check down
+	if(playerZ < (roomY * PIXELS - ENTRANCEOFFSET))
+	{
+		//check right
+		if(playerX < roomX * PIXELS + ENTRANCEOFFSET)
+		{
+			if(playerZ < (roomY * PIXELS - CENTEROFFSET))
+			{
+				direction = DOWN; return true;
+			}
+		}else if(playerX > roomX * PIXELS + ENTRANCEOFFSET)
+		{
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check right
+	if(playerX > (roomX * PIXELS + ENTRANCEOFFSET))
+	{
+		//check down
+		if(playerZ > roomY * PIXELS - ENTRANCEOFFSET)
+		{
+			if(playerX > (roomX * PIXELS + CENTEROFFSET))
+			{
+				direction = RIGHT; return true;
+			}
+		}else if(playerZ < roomY * PIXELS - ENTRANCEOFFSET)
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET; 
+			return false;
+		}
+	}
+	return false;
+}
 bool Floor::leaveCor2UL(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check down
+	if(playerZ < roomY*PIXELS - ENTRANCEOFFSET)
+	{
+		playerZ = roomY*PIXELS - ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check right
+	if(playerX > roomX*PIXELS + ENTRANCEOFFSET)
+	{
+		playerX = roomX*PIXELS + ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check left
+	if(playerX < (roomX * PIXELS) - ENTRANCEOFFSET)
+	{
+		if((playerZ > (roomY*PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS) - CENTEROFFSET)
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check top
+	if(playerZ > (roomY * PIXELS) + ENTRANCEOFFSET)
+	{
+		if((playerX > (roomX *PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX *PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS) + CENTEROFFSET)
+			{
+				direction = UP; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	return false;
+
+}
 bool Floor::leaveCor2DL(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check right
+	if(playerX > roomX*PIXELS + ENTRANCEOFFSET)
+	{
+		playerX = roomX*PIXELS + ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check top
+	if(playerZ > (roomY * PIXELS + ENTRANCEOFFSET))
+	{
+		playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+		return false;
+	}
+
+	//check bottom
+	if(playerZ < (roomY * PIXELS) - ENTRANCEOFFSET)
+	{
+		if((playerX > (roomX *PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX *PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ < (roomY * PIXELS) - CENTEROFFSET)
+			{
+				direction = DOWN; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check left
+	if(playerX < (roomX * PIXELS) - ENTRANCEOFFSET)
+	{
+		if((playerZ > (roomY*PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS) - CENTEROFFSET)
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+
+
+
+	
+	return false;
+}
 
 bool Floor::leaveCor4(FloorCorridor* rc, float &playerX, float &playerZ, int &direction)
-{return false;}
+{
+	float roomX = (float)rc->getX();
+	float roomY = (float)rc->getY();
+
+	//check top
+	if(playerZ > (roomY * PIXELS) + ENTRANCEOFFSET)
+	{
+		if((playerX > (roomX *PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX *PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ > (roomY * PIXELS) + CENTEROFFSET)
+			{
+				direction = UP; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check bottom
+	if(playerZ < (roomY * PIXELS) - ENTRANCEOFFSET)
+	{
+		if((playerX > (roomX *PIXELS - ENTRANCEOFFSET)) && (playerX < (roomX *PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerZ < (roomY * PIXELS) - CENTEROFFSET)
+			{
+				direction = DOWN; return true;
+			}
+		}else
+		{
+			playerZ = roomY * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check left
+	if(playerX < (roomX * PIXELS) - ENTRANCEOFFSET)
+	{
+		if((playerZ > (roomY*PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX < (roomX * PIXELS) - CENTEROFFSET)
+			{
+				direction = LEFT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS - ENTRANCEOFFSET;
+			return false;
+		}
+	}
+
+	//check right
+	if(playerX > (roomX * PIXELS) + ENTRANCEOFFSET)
+	{
+		if((playerZ > (roomY*PIXELS - ENTRANCEOFFSET)) && (playerZ < (roomY * PIXELS + ENTRANCEOFFSET)))
+		{
+			if(playerX > (roomX * PIXELS) + CENTEROFFSET)
+			{
+				direction = RIGHT; return true;
+			}
+		}else
+		{
+			playerX = roomX * PIXELS + ENTRANCEOFFSET;
+			return false;
+		}
+	}
+	
+	return false;
+}
 
 
 void Floor::determineOn( FloorCorridor* previous, int direction)
