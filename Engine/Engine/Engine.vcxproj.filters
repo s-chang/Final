@@ -1,53 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Battle.cpp">
+      <Filter>Game\GameStates\Tower\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleCommand.cpp">
+      <Filter>Game\Commands and skills\Commands</Filter>
+    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Engine\Graphics\Camera</Filter>
+      <Filter>Engine\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>Engine\Input\Cursor</Filter>
+      <Filter>Engine\Cursor</Filter>
     </ClCompile>
     <ClCompile Include="CWindow.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawable.cpp">
-      <Filter>Engine\Graphics\Drawable</Filter>
-    </ClCompile>
-    <ClCompile Include="DX.cpp">
-      <Filter>Engine\DX</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Engine\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Engine\Graphics\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Engine\Timer</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game\Items</Filter>
     </ClCompile>
     <ClCompile Include="GameStateManager.cpp">
       <Filter>Game\GameStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="BattleCommand.cpp">
-      <Filter>Game\Commands/Skills\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Skill.cpp">
-      <Filter>Game\Commands/Skills\skills</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Game\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Battle.cpp">
-      <Filter>Game\GameStates\Tower\Battle</Filter>
-    </ClCompile>
     <ClCompile Include="Town.cpp">
       <Filter>Game\GameStates\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Game\GameStates\Tower</Filter>
+    </ClCompile>
+    <ClCompile Include="NewGame.cpp">
+      <Filter>Game\GameStates\New Game</Filter>
     </ClCompile>
     <ClCompile Include="Shop.cpp">
       <Filter>Game\GameStates\Town\Shop</Filter>
@@ -58,20 +40,56 @@
     <ClCompile Include="Inn.cpp">
       <Filter>Game\GameStates\Town\Inn</Filter>
     </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
-      <Filter>Game\GameStates\Menus\StartMenu</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Options.cpp">
-      <Filter>Game\GameStates\Menus\Options</Filter>
+    <ClCompile Include="Grem.cpp">
+      <Filter>Game\Player\Characters\Grem</Filter>
     </ClCompile>
-    <ClCompile Include="NewGame.cpp">
-      <Filter>Game\GameStates\NewGame</Filter>
+    <ClCompile Include="Laz.cpp">
+      <Filter>Game\Player\Characters\Laz</Filter>
     </ClCompile>
-    <ClCompile Include="Tower.cpp">
-      <Filter>Game\GameStates\Tower</Filter>
+    <ClCompile Include="Lenn.cpp">
+      <Filter>Game\Player\Characters\Lenn</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Engine\Input\DirectInput</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Game\Entity\Enemies\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Game\Entity\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Corridor.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="CorridorFactory.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorCorridor.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorGenerator.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="FloorRoom.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Engine\Graphics\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Engine\Graphics\Light</Filter>
@@ -79,144 +97,118 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine\Graphics\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="DX.cpp">
+      <Filter>Engine\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Engine\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>Game\Enemies\Slime</Filter>
+    <ClCompile Include="Text.cpp">
+      <Filter>Engine\Text</Filter>
     </ClCompile>
-    <ClCompile Include="Grem.cpp">
-      <Filter>Game\Player\Characters\Grem</Filter>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Engine\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="Laz.cpp">
-      <Filter>Game\Player\Characters\Lazarus</Filter>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Game\GameStates\Menus\StartMenu</Filter>
     </ClCompile>
-    <ClCompile Include="Lenn.cpp">
-      <Filter>Game\Player\Characters\Lenn</Filter>
+    <ClCompile Include="EquipScreen.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\EquipScreen</Filter>
     </ClCompile>
-    <ClCompile Include="FloorGenerator.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClCompile Include="InventoryScreen.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\InventoryScreen</Filter>
     </ClCompile>
-    <ClCompile Include="Fight.cpp">
-      <Filter>Game\Commands/Skills\Commands\Fight</Filter>
+    <ClCompile Include="Options.cpp">
+      <Filter>Game\GameStates\Menus\Options</Filter>
     </ClCompile>
-    <ClCompile Include="ItemCMD.cpp">
-      <Filter>Game\Commands/Skills\Commands\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Run.cpp">
-      <Filter>Game\Commands/Skills\Commands\Run</Filter>
-    </ClCompile>
-    <ClCompile Include="Accessory.cpp">
-      <Filter>Game\Items\Equippable\Accessory</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor.cpp">
-      <Filter>Game\Items\Equippable\Armor</Filter>
-    </ClCompile>
-    <ClCompile Include="Dagger.cpp">
-      <Filter>Game\Items\Equippable\Dagger</Filter>
-    </ClCompile>
-    <ClCompile Include="Rune.cpp">
-      <Filter>Game\Items\Equippable\Rune</Filter>
-    </ClCompile>
-    <ClCompile Include="Spear.cpp">
-      <Filter>Game\Items\Equippable\Spear</Filter>
-    </ClCompile>
-    <ClCompile Include="Staff.cpp">
-      <Filter>Game\Items\Equippable\Staff</Filter>
-    </ClCompile>
-    <ClCompile Include="Equippable.cpp">
-      <Filter>Game\Items\Equippable</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Game\Items\Base Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemFactory.cpp">
-      <Filter>Game\Items\ItemFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="StatusMain.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
+    <ClCompile Include="SkillsMenu.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\SkillMenu</Filter>
     </ClCompile>
     <ClCompile Include="StatMenuManager.cpp">
       <Filter>Game\GameStates\Menus\StatusMenu</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryScreen.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu\Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="EquipScreen.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu\Equip</Filter>
-    </ClCompile>
-    <ClCompile Include="SkillsMenu.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu\Skills</Filter>
+    <ClCompile Include="StatusMain.cpp">
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
     </ClCompile>
     <ClCompile Include="StatusScreen.cpp">
-      <Filter>Game\GameStates\Menus\StatusMenu\Status</Filter>
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusScreen</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game\Player</Filter>
+    <ClCompile Include="Accessory.cpp">
+      <Filter>Game\Items\Accessory</Filter>
     </ClCompile>
-    <ClCompile Include="Corridor.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Game\Items\Armor</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClCompile Include="Dagger.cpp">
+      <Filter>Game\Items\Dagger</Filter>
     </ClCompile>
-    <ClCompile Include="FloorCorridor.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClCompile Include="Equippable.cpp">
+      <Filter>Game\Items\Equippable</Filter>
     </ClCompile>
-    <ClCompile Include="FloorRoom.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Game\Items\ItemFactory</Filter>
     </ClCompile>
-    <ClCompile Include="CorridorFactory.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClCompile Include="Rune.cpp">
+      <Filter>Game\Items\Rune</Filter>
+    </ClCompile>
+    <ClCompile Include="Spear.cpp">
+      <Filter>Game\Items\Spear</Filter>
+    </ClCompile>
+    <ClCompile Include="Staff.cpp">
+      <Filter>Game\Items\Staff</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Game\Commands and skills\Skills</Filter>
     </ClCompile>
     <ClCompile Include="RageCMD.cpp">
-      <Filter>Game\Commands/Skills\Commands\Rage</Filter>
+      <Filter>Game\Commands and skills\Commands\Rage</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight.cpp">
+      <Filter>Game\Commands and skills\Commands\Fight</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemCMD.cpp">
+      <Filter>Game\Commands and skills\Commands\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Run.cpp">
+      <Filter>Game\Commands and skills\Commands\Run</Filter>
     </ClCompile>
     <ClCompile Include="Subtlety.cpp">
-      <Filter>Game\Commands/Skills\Commands\Subtlety</Filter>
+      <Filter>Game\Commands and skills\Commands\Subtlety</Filter>
     </ClCompile>
     <ClCompile Include="Elemental.cpp">
-      <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
+      <Filter>Game\Commands and skills\Commands\Elemental</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="Jump.cpp" />
-=======
-    <ClCompile Include="Floor.cpp">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClCompile Include="Jump.cpp">
+      <Filter>Game\Commands and skills\Skills\Rage\Jump</Filter>
     </ClCompile>
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Battle.h">
+      <Filter>Game\GameStates\Tower\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleCommand.h">
+      <Filter>Game\Commands and skills\Commands</Filter>
+    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Engine\Graphics\Camera</Filter>
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandList.h">
+      <Filter>Game\Commands and skills\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Cursor.h">
-      <Filter>Engine\Input\Cursor</Filter>
+      <Filter>Engine\Cursor</Filter>
     </ClInclude>
     <ClInclude Include="CWindow.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Game\Items</Filter>
+    </ClInclude>
     <ClInclude Include="EngineHeaders.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Engine\Graphics\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="DX.h">
-      <Filter>Engine\DX</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Engine\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Engine\Graphics\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Engine\Timer</Filter>
     </ClInclude>
     <ClInclude Include="GameStateManager.h">
       <Filter>Game\GameStateManager</Filter>
@@ -224,32 +216,17 @@
     <ClInclude Include="GameState.h">
       <Filter>Game\GameStateManager</Filter>
     </ClInclude>
-    <ClInclude Include="BattleCommand.h">
-      <Filter>Game\Commands/Skills\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandList.h">
-      <Filter>Game\Commands/Skills\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Skill.h">
-      <Filter>Game\Commands/Skills\skills</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities.h">
-      <Filter>Game\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Game\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Macros.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="gamestates.h">
       <Filter>Game\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="Battle.h">
-      <Filter>Game\GameStates\Tower\Battle</Filter>
-    </ClInclude>
     <ClInclude Include="Town.h">
       <Filter>Game\GameStates\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="Tower.h">
+      <Filter>Game\GameStates\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="NewGame.h">
+      <Filter>Game\GameStates\New Game</Filter>
     </ClInclude>
     <ClInclude Include="Shop.h">
       <Filter>Game\GameStates\Town\Shop</Filter>
@@ -260,20 +237,62 @@
     <ClInclude Include="Inn.h">
       <Filter>Game\GameStates\Town\Inn</Filter>
     </ClInclude>
-    <ClInclude Include="StartMenu.h">
-      <Filter>Game\GameStates\Menus\StartMenu</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Options.h">
-      <Filter>Game\GameStates\Menus\Options</Filter>
+    <ClInclude Include="Grem.h">
+      <Filter>Game\Player\Characters\Grem</Filter>
     </ClInclude>
-    <ClInclude Include="NewGame.h">
-      <Filter>Game\GameStates\NewGame</Filter>
+    <ClInclude Include="Laz.h">
+      <Filter>Game\Player\Characters\Laz</Filter>
     </ClInclude>
-    <ClInclude Include="Tower.h">
-      <Filter>Game\GameStates\Tower</Filter>
+    <ClInclude Include="Lenn.h">
+      <Filter>Game\Player\Characters\Lenn</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Engine\Input\DirectInput</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Game\Entity\Enemies\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Game\Entity\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities.h">
+      <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Corridor.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="CorridorFactory.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorCorridor.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGenerator.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorRoom.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="Roomtype.h">
+      <Filter>Game\GameStates\Tower\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Engine\Graphics\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Engine\Graphics\Light</Filter>
@@ -281,62 +300,35 @@
     <ClInclude Include="Mesh.h">
       <Filter>Engine\Graphics\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="DX.h">
+      <Filter>Engine\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Engine\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>Game\Enemies\Slime</Filter>
+    <ClInclude Include="Text.h">
+      <Filter>Engine\Text</Filter>
     </ClInclude>
-    <ClInclude Include="Laz.h">
-      <Filter>Game\Player\Characters\Lazarus</Filter>
+    <ClInclude Include="Timer.h">
+      <Filter>Engine\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="Lenn.h">
-      <Filter>Game\Player\Characters\Lenn</Filter>
+    <ClInclude Include="StartMenu.h">
+      <Filter>Game\GameStates\Menus\StartMenu</Filter>
     </ClInclude>
-    <ClInclude Include="Grem.h">
-      <Filter>Game\Player\Characters\Grem</Filter>
+    <ClInclude Include="EquipScreen.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\EquipScreen</Filter>
     </ClInclude>
-    <ClInclude Include="FloorGenerator.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClInclude Include="InventoryScreen.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\InventoryScreen</Filter>
     </ClInclude>
-    <ClInclude Include="Fight.h">
-      <Filter>Game\Commands/Skills\Commands\Fight</Filter>
+    <ClInclude Include="Options.h">
+      <Filter>Game\GameStates\Menus\Options</Filter>
     </ClInclude>
-    <ClInclude Include="ItemCMD.h">
-      <Filter>Game\Commands/Skills\Commands\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Run.h">
-      <Filter>Game\Commands/Skills\Commands\Run</Filter>
-    </ClInclude>
-    <ClInclude Include="Accessory.h">
-      <Filter>Game\Items\Equippable\Accessory</Filter>
-    </ClInclude>
-    <ClInclude Include="Armor.h">
-      <Filter>Game\Items\Equippable\Armor</Filter>
-    </ClInclude>
-    <ClInclude Include="Dagger.h">
-      <Filter>Game\Items\Equippable\Dagger</Filter>
-    </ClInclude>
-    <ClInclude Include="Rune.h">
-      <Filter>Game\Items\Equippable\Rune</Filter>
-    </ClInclude>
-    <ClInclude Include="Spear.h">
-      <Filter>Game\Items\Equippable\Spear</Filter>
-    </ClInclude>
-    <ClInclude Include="Staff.h">
-      <Filter>Game\Items\Equippable\Staff</Filter>
-    </ClInclude>
-    <ClInclude Include="Equippable.h">
-      <Filter>Game\Items\Equippable</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Game\Items\Base Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemFactory.h">
-      <Filter>Game\Items\ItemFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="StatusMain.h">
-      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
+    <ClInclude Include="SkillsMenu.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\SkillMenu</Filter>
     </ClInclude>
     <ClInclude Include="StatMenuManager.h">
       <Filter>Game\GameStates\Menus\StatusMenu</Filter>
@@ -344,62 +336,72 @@
     <ClInclude Include="statusStates.h">
       <Filter>Game\GameStates\Menus\StatusMenu</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryScreen.h">
-      <Filter>Game\GameStates\Menus\StatusMenu\Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="EquipScreen.h">
-      <Filter>Game\GameStates\Menus\StatusMenu\Equip</Filter>
-    </ClInclude>
-    <ClInclude Include="SkillsMenu.h">
-      <Filter>Game\GameStates\Menus\StatusMenu\Skills</Filter>
+    <ClInclude Include="StatusMain.h">
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusMain</Filter>
     </ClInclude>
     <ClInclude Include="StatusScreen.h">
-      <Filter>Game\GameStates\Menus\StatusMenu\Status</Filter>
+      <Filter>Game\GameStates\Menus\StatusMenu\StatusScreen</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Game\Player</Filter>
+    <ClInclude Include="Accessory.h">
+      <Filter>Game\Items\Accessory</Filter>
     </ClInclude>
-    <ClInclude Include="Roomtype.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClInclude Include="Armor.h">
+      <Filter>Game\Items\Armor</Filter>
     </ClInclude>
-    <ClInclude Include="Corridor.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClInclude Include="Dagger.h">
+      <Filter>Game\Items\Dagger</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\FloorGenerator</Filter>
+    <ClInclude Include="Equippable.h">
+      <Filter>Game\Items\Equippable</Filter>
     </ClInclude>
-    <ClInclude Include="FloorCorridor.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Game\Items\ItemFactory</Filter>
     </ClInclude>
-    <ClInclude Include="FloorRoom.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClInclude Include="Rune.h">
+      <Filter>Game\Items\Rune</Filter>
     </ClInclude>
-    <ClInclude Include="CorridorFactory.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClInclude Include="Spear.h">
+      <Filter>Game\Items\Spear</Filter>
+    </ClInclude>
+    <ClInclude Include="Staff.h">
+      <Filter>Game\Items\Staff</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Game\Commands and skills\Skills</Filter>
     </ClInclude>
     <ClInclude Include="RageCMD.h">
-      <Filter>Game\Commands/Skills\Commands\Rage</Filter>
+      <Filter>Game\Commands and skills\Commands\Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="Fight.h">
+      <Filter>Game\Commands and skills\Commands\Fight</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCMD.h">
+      <Filter>Game\Commands and skills\Commands\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Run.h">
+      <Filter>Game\Commands and skills\Commands\Run</Filter>
     </ClInclude>
     <ClInclude Include="Subtlety.h">
-      <Filter>Game\Commands/Skills\Commands\Subtlety</Filter>
+      <Filter>Game\Commands and skills\Commands\Subtlety</Filter>
     </ClInclude>
     <ClInclude Include="Elemental.h">
-      <Filter>Game\Commands/Skills\Commands\Elemental</Filter>
+      <Filter>Game\Commands and skills\Commands\Elemental</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Floor.h" />
-    <ClInclude Include="Jump.h" />
-=======
-    <ClInclude Include="Floor.h">
-      <Filter>Game\GameStates\Tower\Floorstuff\Floor</Filter>
+    <ClInclude Include="Jump.h">
+      <Filter>Game\Commands and skills\Skills\Rage\Jump</Filter>
     </ClInclude>
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Armor.txt">
+      <Filter>Assets</Filter>
+    </Text>
     <Text Include="BGM.txt">
       <Filter>Assets</Filter>
     </Text>
     <Text Include="Dagger.txt">
+      <Filter>Assets</Filter>
+    </Text>
+    <Text Include="Item.txt">
       <Filter>Assets</Filter>
     </Text>
     <Text Include="Meshes.txt">
@@ -417,232 +419,202 @@
     <Text Include="Textures2D.txt">
       <Filter>Assets</Filter>
     </Text>
-    <Text Include="Item.txt">
-      <Filter>Assets</Filter>
-    </Text>
-    <Text Include="Armor.txt">
-      <Filter>Assets</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Game">
-      <UniqueIdentifier>{1175366a-9957-465b-912d-314f6ff58c73}</UniqueIdentifier>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{37310338-b30c-4a76-a2ea-d9cad2919700}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine">
-      <UniqueIdentifier>{545a9cd2-3d42-47d1-971a-fcc4ac8f3be0}</UniqueIdentifier>
+      <UniqueIdentifier>{b1669069-6dbb-4753-85ba-6d804971de8f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Main">
-      <UniqueIdentifier>{be1b0a9d-c762-406f-9ad2-51373d0f10a3}</UniqueIdentifier>
+      <UniqueIdentifier>{0ef860d7-2dc0-4ade-9e18-83be07e3ad32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>{b873ee55-2bf0-43bf-8e58-47790c6f8dcc}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{f7147289-e1af-49ef-b3d2-d29c234e5117}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\DX">
-      <UniqueIdentifier>{aaae8164-9d08-45a1-b88e-4e0e50ebb7b6}</UniqueIdentifier>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{9b0a4f9a-489f-4a9a-8a86-4c3a543b3cc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics">
-      <UniqueIdentifier>{3347cb37-fcc5-45ac-9855-c80c7c14479f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Input">
-      <UniqueIdentifier>{1d2127b7-8be8-42fd-9043-287bb93c8cf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Timer">
-      <UniqueIdentifier>{b88d5d1b-730f-4428-ac77-ab0be8fdcc09}</UniqueIdentifier>
+    <Filter Include="Engine\Cursor">
+      <UniqueIdentifier>{1aded106-4b11-4832-98e9-36df19eeae4d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStateManager">
-      <UniqueIdentifier>{0a94c1a4-1cf2-4a40-92dd-ca1a149a44ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items">
-      <UniqueIdentifier>{07dcb269-0b41-4d53-8768-a3a05df4c031}</UniqueIdentifier>
+      <UniqueIdentifier>{706ec1a3-29d2-490d-a13e-86b1a7b1193d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStates">
-      <UniqueIdentifier>{6d47178d-f3c0-490f-91d4-971fd34c86c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Commands/Skills">
-      <UniqueIdentifier>{788cd21e-23ba-4be9-a689-e43869dcc3d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Commands/Skills\Commands">
-      <UniqueIdentifier>{4e134f8c-af95-4e9c-b3d6-ff6d075b98ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Commands/Skills\skills">
-      <UniqueIdentifier>{97f3b92d-02a8-40e4-b01e-504edca8468b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Player">
-      <UniqueIdentifier>{0ffbba95-c6d3-446b-afb5-18e8d921d8d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Entity">
-      <UniqueIdentifier>{c22029ea-e71e-4af0-beb7-1ec0a0fc530e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Enemies">
-      <UniqueIdentifier>{2ffca5b7-1892-40f7-812f-d8dd4b9b7f1b}</UniqueIdentifier>
+      <UniqueIdentifier>{8bb2ca1f-a2f7-429f-89e8-2eabc39eb111}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStates\Town">
-      <UniqueIdentifier>{b3eaa233-41f3-4660-a80c-db73bc678f6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Town\Shop">
-      <UniqueIdentifier>{bbc2b682-675c-4762-a0b2-6ea7f285292c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Town\Tavern">
-      <UniqueIdentifier>{c21d5887-b259-4839-b4a5-fd319d48c01b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Town\Inn">
-      <UniqueIdentifier>{636b37af-47b7-449b-959b-e69d02a26eb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus">
-      <UniqueIdentifier>{78446a7d-13f7-4863-8fcd-8a8ce346436b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\Options">
-      <UniqueIdentifier>{ea7c690e-5631-4a9b-b51f-59ed445458bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StatusMenu">
-      <UniqueIdentifier>{90bca1e7-5567-4065-9667-f9ab515980b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StartMenu">
-      <UniqueIdentifier>{04736aa4-ce82-415d-a9ef-aab590672f7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\NewGame">
-      <UniqueIdentifier>{ed55dfb8-24f0-4304-b347-8855e2c9188f}</UniqueIdentifier>
+      <UniqueIdentifier>{77568829-b4ea-445f-af9d-205b71f3cc67}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStates\Tower">
-      <UniqueIdentifier>{0efaa94d-d6d0-4d4d-896c-89a4b9e37f0c}</UniqueIdentifier>
+      <UniqueIdentifier>{b208557b-9e1c-4478-b9d3-8fc63471cd6d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStates\Tower\Battle">
-      <UniqueIdentifier>{c1494a42-a927-442a-a545-774578316068}</UniqueIdentifier>
+      <UniqueIdentifier>{26bf8490-47ee-4c59-a477-931f9ee6b3e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Input\Cursor">
-      <UniqueIdentifier>{f3b85cd8-2e82-49a8-b8f2-5cee64916a52}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\New Game">
+      <UniqueIdentifier>{686e4495-31ed-45f4-a3af-15b11ab40eac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Input\DirectInput">
-      <UniqueIdentifier>{d7a455b3-00bc-4cfd-8586-8e1079a82faf}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Town\Shop">
+      <UniqueIdentifier>{a1c3601b-fab5-4f44-988e-4a2cf2d0d48c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Sound">
-      <UniqueIdentifier>{7acd2bc2-917d-440f-b25d-5250226f1342}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Town\Inn">
+      <UniqueIdentifier>{c2b33383-0276-44fd-8319-d3f152db0d44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics\Mesh">
-      <UniqueIdentifier>{5055ff29-4068-4eb2-9998-47d89ab0e3a6}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Town\Tavern">
+      <UniqueIdentifier>{49412f01-a0d7-4cf2-a7f9-94a208617c4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics\Light">
-      <UniqueIdentifier>{f0bafae8-ce28-4838-a619-be6dba22c074}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus">
+      <UniqueIdentifier>{2fe87126-d14e-454d-a077-36af82277e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates\Tower\Floor">
+      <UniqueIdentifier>{510c9d59-29c2-42c0-9b54-f763369e06de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{a86780fb-e500-495b-bc93-3043e4e2b332}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Graphics\Drawable">
-      <UniqueIdentifier>{a07c742a-e27e-474e-848f-48670551ba25}</UniqueIdentifier>
+      <UniqueIdentifier>{dc5eebd1-00b7-452d-8fce-7578eea76893}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics\Camera">
-      <UniqueIdentifier>{77ff39f0-8f4a-4f10-bc73-52550a31abbf}</UniqueIdentifier>
+    <Filter Include="Engine\Graphics\Light">
+      <UniqueIdentifier>{4da566fe-429e-4863-ae55-af725c6ac06c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Graphics\Text">
-      <UniqueIdentifier>{70d211b0-35f5-48bb-809d-dc1e507b567e}</UniqueIdentifier>
+    <Filter Include="Engine\Graphics\Mesh">
+      <UniqueIdentifier>{3bb1f1d8-147e-4344-b5db-e0addadf14fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Enemies\Slime">
-      <UniqueIdentifier>{b0a772ae-1fb3-4e73-8047-741a17c82548}</UniqueIdentifier>
+    <Filter Include="Engine\DX">
+      <UniqueIdentifier>{cd20cbf5-a3fe-4b86-ac4b-5bf683ba2899}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Player\Characters">
-      <UniqueIdentifier>{605aa245-6e2e-4c40-9e54-7d3d2c4eef68}</UniqueIdentifier>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{008e47e6-ab6b-4cdf-9ecb-d723a488e4d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Player\Characters\Grem">
-      <UniqueIdentifier>{36eb43a3-3fab-403c-9107-925d1f772d39}</UniqueIdentifier>
+    <Filter Include="Engine\Sound">
+      <UniqueIdentifier>{16f623eb-eaed-437f-b4d0-bd42de934a4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Player\Characters\Lenn">
-      <UniqueIdentifier>{3d4409d3-de33-4fd2-9c21-552dbce7bd85}</UniqueIdentifier>
+    <Filter Include="Engine\Text">
+      <UniqueIdentifier>{5e2b242e-fab7-4c1c-9b37-eb7b01435d3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Player\Characters\Lazarus">
-      <UniqueIdentifier>{c670e170-6477-441b-8947-3a08f467314d}</UniqueIdentifier>
+    <Filter Include="Engine\Timer">
+      <UniqueIdentifier>{3c981e58-e196-4666-8b0b-4a14a34b2cbe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Fight">
-      <UniqueIdentifier>{3dee60bb-7ae3-4eac-9206-bea1d06e01c7}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StartMenu">
+      <UniqueIdentifier>{9e999b0b-d461-4bc3-8c99-e28cef1afea6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Item">
-      <UniqueIdentifier>{70e7e2ee-b8df-42de-b9e1-2e643286b3ab}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\Options">
+      <UniqueIdentifier>{f39104a5-097b-4a5e-aa3f-564d5d527745}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Run">
-      <UniqueIdentifier>{9fd187e4-4b9d-45bb-a696-15defcaaa438}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StatusMenu">
+      <UniqueIdentifier>{65aaf512-63eb-4d6b-a2d1-3996f38b211d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Items\Equippable">
-      <UniqueIdentifier>{ec804951-2a69-4c0c-b72f-faccf84dd052}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\EquipScreen">
+      <UniqueIdentifier>{e748cfe0-ec56-4c9b-a97f-82e3cd0666e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Items\Equippable\Accessory">
-      <UniqueIdentifier>{77b57387-6b61-422d-88a6-1b8a146f3c95}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\InventoryScreen">
+      <UniqueIdentifier>{22483103-2542-49b5-a2a8-115a445dfd74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Items\Equippable\Armor">
-      <UniqueIdentifier>{0b2c7662-96e1-4aad-ac08-04eb767ede89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\Equippable\Dagger">
-      <UniqueIdentifier>{92544720-3b09-4f83-87fb-03a7b4b3de00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\Equippable\Rune">
-      <UniqueIdentifier>{dcf014ba-4b63-4a5e-985a-b0f088b27614}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\Equippable\Spear">
-      <UniqueIdentifier>{29c1e068-4abb-4872-8b4d-3d190c87b71c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\Equippable\Staff">
-      <UniqueIdentifier>{cca82ce9-7048-47c5-8f6a-3844b9a27c32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\Base Item">
-      <UniqueIdentifier>{632911b6-b294-4a5e-bd9f-46ea2ad07f91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Items\ItemFactory">
-      <UniqueIdentifier>{bdf317ef-9866-44fb-a486-84f23fba37c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StatusMenu\Inventory">
-      <UniqueIdentifier>{30a3a921-4c8f-43d6-85c9-fa56cdba66be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StatusMenu\Equip">
-      <UniqueIdentifier>{a0dc6ab0-0ff5-44df-92b3-e156093fc9e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StatusMenu\Status">
-      <UniqueIdentifier>{a0b2aa83-5ddc-4c36-a749-7185e5e5b993}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameStates\Menus\StatusMenu\Skills">
-      <UniqueIdentifier>{cbb5a3d2-8147-44cc-a0b4-a8f878ebc3a8}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\StatusScreen">
+      <UniqueIdentifier>{67c39f84-f2d5-4314-9a91-bf2fb160ac54}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameStates\Menus\StatusMenu\StatusMain">
-      <UniqueIdentifier>{1524d660-d397-4958-b7d9-d57c005d407f}</UniqueIdentifier>
+      <UniqueIdentifier>{8f3ebc59-1118-49e9-bdee-f43efeccc3fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameStates\Tower\Floorstuff">
-      <UniqueIdentifier>{08b26178-a913-4e87-8a9e-3980df689a2a}</UniqueIdentifier>
+    <Filter Include="Game\GameStates\Menus\StatusMenu\SkillMenu">
+      <UniqueIdentifier>{b5ab8a8c-c045-4938-974b-4ec94ddd4e03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameStates\Tower\Floorstuff\Floor">
-      <UniqueIdentifier>{58e59aec-7771-47a7-8950-421b272425bf}</UniqueIdentifier>
+    <Filter Include="Game\Items">
+      <UniqueIdentifier>{6676f44c-6b9a-4046-b964-acb1cf5276a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\GameStates\Tower\Floorstuff\FloorGenerator">
-      <UniqueIdentifier>{2ffe381e-f0a0-420f-b7e1-c6f406815ff0}</UniqueIdentifier>
+    <Filter Include="Game\Items\Accessory">
+      <UniqueIdentifier>{ecaa0c3a-44a9-4c12-a3b7-6e57bd93532a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Rage">
-      <UniqueIdentifier>{cebb9893-2dab-4b10-b7fe-dcc0325734c4}</UniqueIdentifier>
+    <Filter Include="Game\Items\Armor">
+      <UniqueIdentifier>{74663322-f218-4e6e-80d4-13657ea00956}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Subtlety">
-      <UniqueIdentifier>{2466ef58-de42-4aab-96a2-9525b8d88649}</UniqueIdentifier>
+    <Filter Include="Game\Items\Dagger">
+      <UniqueIdentifier>{f3bc5557-ede6-41f1-8318-26e4942aaf65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\Commands\Elemental">
-      <UniqueIdentifier>{6b8f9c87-fe95-4249-a016-4e497f7ea08a}</UniqueIdentifier>
+    <Filter Include="Game\Items\Equippable">
+      <UniqueIdentifier>{84cf7e65-eeb5-4cd9-8364-b3f88860c18a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Rage">
-      <UniqueIdentifier>{3df6a591-af85-49f5-8f6d-d0e0b204ccd9}</UniqueIdentifier>
+    <Filter Include="Game\Items\ItemFactory">
+      <UniqueIdentifier>{45c9929d-c3c4-4f18-87d4-f597c5c4b826}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Elemental">
-      <UniqueIdentifier>{e3848eeb-f1e3-4cf9-ae63-c8a380febd91}</UniqueIdentifier>
+    <Filter Include="Game\Items\Rune">
+      <UniqueIdentifier>{14592ae5-4078-4b2d-aeb4-11fa73aa82e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Subtlety">
-      <UniqueIdentifier>{711a1cf4-23cf-4c58-a8ee-1d4d62a1c7a0}</UniqueIdentifier>
+    <Filter Include="Game\Items\Spear">
+      <UniqueIdentifier>{e2bea172-586e-46a8-a52d-958a3af791a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Rage\Jump">
-      <UniqueIdentifier>{1b57ee97-ec30-4c97-9279-d94f83c7cf99}</UniqueIdentifier>
+    <Filter Include="Game\Items\Staff">
+      <UniqueIdentifier>{c208d850-635e-44db-9553-fe5d27200fa8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Subtlety\Steal">
-      <UniqueIdentifier>{03a85386-cd9c-4c6d-b704-8509749c1f23}</UniqueIdentifier>
+    <Filter Include="Game\Commands and skills">
+      <UniqueIdentifier>{c96642b4-4ee4-4697-8746-cf8b13fd4074}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Elemental\Wind">
-      <UniqueIdentifier>{9ba810ad-40f1-4d16-8d13-2564930847e3}</UniqueIdentifier>
+    <Filter Include="Game\Commands and skills\Commands">
+      <UniqueIdentifier>{de6b5a0c-d11a-4634-9dd3-4729ec9e010d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Elemental\Fire">
-      <UniqueIdentifier>{0892c0ae-8e3c-4ef9-9bb7-64720fddc337}</UniqueIdentifier>
+    <Filter Include="Game\Commands and skills\Commands\Rage">
+      <UniqueIdentifier>{6d887800-d0c1-4807-b1dc-8513969026b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Rage\Charge">
-      <UniqueIdentifier>{3ed848e3-b7ff-414b-9302-eadd90f98c2d}</UniqueIdentifier>
+    <Filter Include="Game\Commands and skills\Commands\Fight">
+      <UniqueIdentifier>{360dca85-2c42-41ee-933c-f073958d85ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Commands/Skills\skills\Subtlety\Mug">
-      <UniqueIdentifier>{2763e0d7-2016-44ab-80da-4425a811e278}</UniqueIdentifier>
+    <Filter Include="Game\Commands and skills\Commands\Item">
+      <UniqueIdentifier>{0f51636d-b2c4-49e9-a538-cdecac7fe708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Commands\Subtlety">
+      <UniqueIdentifier>{f4a40159-5510-4cfd-aa0c-d1ea49a43a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Commands\Elemental">
+      <UniqueIdentifier>{deea76c8-4c9d-4e0f-a080-661b35be3136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Commands\Run">
+      <UniqueIdentifier>{fde38fe1-2e82-45f6-876f-a970f679930a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills">
+      <UniqueIdentifier>{bfc8a87f-107f-4d1a-abd2-301ec1c9d637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Rage">
+      <UniqueIdentifier>{e890c321-241c-444c-8e3d-f33d4f8a5947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Rage\Jump">
+      <UniqueIdentifier>{ac2f55d5-80f0-4e89-8efd-eedd73525b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Elemental">
+      <UniqueIdentifier>{25005c4f-de15-47cd-b0da-3559dc18ac57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Subtlety">
+      <UniqueIdentifier>{c89b6805-ee1a-4708-8178-92b3af72d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity">
+      <UniqueIdentifier>{bfa5676f-c5fe-40ca-b171-d3232e9c38cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Enemies">
+      <UniqueIdentifier>{a438b834-854f-4250-b1a9-ddbc2e75a7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Enemies\Slime">
+      <UniqueIdentifier>{e9bd5e16-fa1a-4080-9c17-70a185a29e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Entity">
+      <UniqueIdentifier>{c6f47942-9fd4-4980-883f-fd5085e8aa52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{3c9838e7-c661-463e-9824-210e9de738a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\Characters">
+      <UniqueIdentifier>{cbf331af-9e52-4a1f-b715-4800b1137316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\Characters\Grem">
+      <UniqueIdentifier>{e0357200-1388-4331-809b-88126569f946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\Characters\Lenn">
+      <UniqueIdentifier>{172afd4e-7766-45de-b0ec-98b8c6473f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player\Characters\Laz">
+      <UniqueIdentifier>{08d1c448-7abf-4687-9fd5-61f061a932f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

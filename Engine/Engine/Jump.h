@@ -1,5 +1,6 @@
 #pragma once
 #include "skill.h"
+
 //
 //class Jump :
 //	public Skill
