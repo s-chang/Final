@@ -79,6 +79,9 @@ void Shop::init()
 	help = false;
 	insufficientFunds = false;
 	helpText = "";
+	page = 0;
+	
+	items.clear();
 }
 
 void Shop::shutdown()
@@ -93,6 +96,7 @@ int Shop::update()
 		state = SHOP_STATE::BUY;
 		break;
 	case 1: //SELL
+		sellList();
 		state = SHOP_STATE::SELL;
 		break;
 	case 2: //BACK
@@ -100,7 +104,8 @@ int Shop::update()
 		return GameStates::RETURN;
 		break;
 	}
-
+	if(state == SHOP_STATE::SELL)
+		sellItems();
 	if(state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS){
 		switch(checkList(tabs))
 		{
@@ -188,6 +193,31 @@ void Shop::render()
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
 					buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
 
+				if(state == SHOP_STATE::SELL){
+					// render next button
+					if(page + 8 < items.size()){
+						Engine::Text::instance()->render(items[0].getRect().top, 
+							items[0].getRect().left, items[0].getPlainText(), items[0].getColor());
+					}
+					if(page)
+						Engine::Text::instance()->render(items[1].getRect().top, 
+							items[1].getRect().left, items[1].getPlainText(), items[1].getColor());
+
+					// check for which page
+					int start = page + 2;
+					for(unsigned int i = start; i < items.size() && i<start+8; i++) {
+						Engine::Text::instance()->render(items[i].getRect().top, 
+							items[i].getRect().left, items[i].getHandle(), items[i].getColor());
+						RECT tempR = items[i].getRect();
+						tempR.left += 170;
+						Item* item = ItemFactory::instance()->getItem(items[i].getHandle());
+						swprintf_s(tbuffer, 64,L"%d",item->getStats().price/2);
+						delete item;
+						Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &tempR, 
+							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+					}
+				}
+
 				if(state != SHOP_STATE::SELL && (state == SHOP_STATE::BUY || state == SHOP_STATE::DISPLAY_ITEMS)){
 					for(unsigned int i = 0; i < tabs.size(); i++)
 						Engine::Text::instance()->render(tabs[i].getRect().top, 
@@ -271,6 +301,113 @@ int Shop::checkList(std::vector<Drawable>& list)
 	return returnable;
 }
 
+
+void Shop::sellItems()
+{
+	
+	bool idkHelp = false;
+	for(unsigned int i = 0; i < items.size() && i < 2; i++){
+		if(items[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				items[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						if(i) {// back
+							page -= 4;
+							if(page < 0)
+								page = 0;
+						}
+						else { //next
+							if(page + 8 < items.size())
+								page += 4;
+						}
+					}
+				}
+				else Engine::Input::instance()->set_button(DIK_9, false);
+		}
+		else {
+			items[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+		}
+	}
+
+	// check for which page
+	int start = page + 2;
+
+	for(unsigned int i = start; i < items.size() && i < start+8; i++){
+		if(items[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+			Engine::Cursor::instance()->cursorPos.y, 3)){
+				items[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+				idkHelp = true;
+				helpText = items[i].getHandle();
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+					if(!Engine::Input::instance()->check_button_down(DIK_9)){
+						Engine::Input::instance()->set_button(DIK_9, true);
+
+						Item* item = ItemFactory::instance()->getItem(items[i].getHandle());
+						Player::instance()->adjustGold(item->getStats().price/2);
+						Player::instance()->removeItem(*item);
+						delete item;
+
+						sellList();
+					}
+				}
+				else Engine::Input::instance()->set_button(DIK_9, false);
+		}
+		else {
+			items[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+		}
+	}
+	help = idkHelp;
+}
+
+void Shop::sellList()
+{
+	items.clear();
+	Drawable tempCommands;
+	RECT tempR;
+	SCDATA nextData = {70.0f, 180.0f, 155,20,195,200,L"Next Page"};
+
+	tempCommands.setTranslate(nextData.x,nextData.y+=40,0.0f);
+	tempR.left = nextData.l;
+	tempR.right = nextData.r;
+	tempR.top = nextData.t+=40;
+	tempR.bottom = nextData.b+=40;
+	tempCommands.init();
+	tempCommands.setText(nextData.name);
+	tempCommands.setRect(tempR);
+	items.push_back(tempCommands);
+
+	tempCommands.setTranslate(nextData.x,nextData.y+=40,0.0f);
+	tempR.left = nextData.l;
+	tempR.right = nextData.r;
+	tempR.top = nextData.t+=40;
+	tempR.bottom = nextData.b+=40;
+	tempCommands.init();
+	tempCommands.setText(L"Back");
+	tempCommands.setRect(tempR);
+	items.push_back(tempCommands);
+
+	SCDATA scData = {270.0f, 180.0f, 155,220,195,370,L"Handle"};
+	std::vector<Item*>* tempInventory = Player::instance()->getInventory(); 
+	
+	for(int i = 0; i < tempInventory->size(); i++){
+		if(i%8 == 0){
+			scData.y = 180.0f;
+			scData.t = 155;
+			scData.b = 195;
+		}
+		tempCommands.setTranslate(scData.x,scData.y+=40,0.0f);
+		tempR.left = scData.l;
+		tempR.right = scData.r;
+		tempR.top = scData.t+=40;
+		tempR.bottom = scData.b+=40;
+		tempCommands.init();
+		tempCommands.setText(scData.name);
+		tempCommands.setHandle(tempInventory->at(i)->getStats().name);
+		tempCommands.setRect(tempR);
+		items.push_back(tempCommands);
+	}
+}
 
 void Shop::Spears()
 {

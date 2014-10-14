@@ -19,6 +19,7 @@ private:
 	bool help,
 		insufficientFunds;
 	std::string helpText;
+	int page;
 
 	Drawable bg;
 	Drawable openWindow;
@@ -28,6 +29,8 @@ private:
 	std::vector<Drawable> tabs;
 	std::vector<Drawable> items;
 
+	void sellList();
+	void sellItems();
 	void Spears();
 	void Daggers();
 	void Staves();

@@ -4,5 +4,5 @@ Sting,Dagger,A light and easy to use dagger.,6,0,20,10,0,0,0,400,0,
 Needle,Dagger,A dagger used for piercing enemies.,9,0,40,15,0,0,0,800,0,
 Dagger,Dagger,A dagger.,12,0,50,15,0,0,0,1600,0,
 Night's Bane,Dagger,Camouflaged blade of an ancient thief.,15,0,60,20,0,0,0,3200,0,
-Shiv of Titans,Dagger,A primaeval weapon.,18,0,80,50,0,0,30,0,0,
-Death and Deceit,Dagger,Name says it all.,20,0,60,40,0,0,0,0,0
+Shiv of Titans,Dagger,A primaeval weapon.,18,0,80,50,0,0,30,5000,0,
+Death and Deceit,Dagger,Name says it all.,20,0,60,40,0,0,0,5000,0
