@@ -1,5 +1,16 @@
 #pragma once
 #include "gamestate.h"
+#include "Item.h"
+#include "Entity.h"
+
+struct INV_STATES{
+	static const int
+		START = 0,
+		USE = 1,
+		SELECT_CHAR = 2,
+		SORT = 3;
+};
+
 class InventoryScreen :
 	public GameState
 {
@@ -8,6 +19,13 @@ private:
 	std::vector<Drawable> buttons;
 	std::vector<Drawable> items;
 
+	int state;
+	Item * useThis;
+
+	void useItem(Entity* onThisGuy);
+	void checkItems();
+
+	void displayHPandResource();
 	InventoryScreen(void);
 public:
 	static InventoryScreen* instance();

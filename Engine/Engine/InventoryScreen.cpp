@@ -3,6 +3,7 @@
 
 InventoryScreen::InventoryScreen(void)
 {
+	useThis = NULL;
 }
 
 
@@ -26,7 +27,10 @@ void InventoryScreen::init()
 	SCDATA scdata[] = {
 		{100.0f, 580.0f, 555,50,595,200,L"Back"},
 		{300.0f, 80.0f, 55,250,95,400,L"Use"},
-		{500.0f, 80.0f, 55,450,95,600,L"Sort"}
+		{500.0f, 80.0f, 55,450,95,600,L"Sort"},
+		{100.0f, 180.0f, 155,50,195,200,L"Grem"},
+		{100.0f, 280.0f, 255,50,295,200,L"Lenn"},
+		{100.0f, 380.0f, 355,50,395,200,L"Lazarus"},
 	};
 	Drawable tempCommands;
 	RECT tempR;
@@ -42,7 +46,11 @@ void InventoryScreen::init()
 		tempCommands.setRect(tempR);
 		buttons.push_back(tempCommands);
 	}
-
+	state = INV_STATES::START;
+	if(useThis){
+		delete useThis;
+		useThis = NULL;
+	}
 }
 
 void InventoryScreen::shutdown()
@@ -59,9 +67,10 @@ int InventoryScreen::update()
 	{
 		if(buttons[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
 			Engine::Cursor::instance()->cursorPos.y, 3)){
-			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+				if(i<3 || state == INV_STATES::SELECT_CHAR)
+					buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
 
-			if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+				if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
 				if(!Engine::Input::instance()->check_button_down(DIK_9)){
 					Engine::Input::instance()->set_button(DIK_9, true);
 
@@ -69,6 +78,27 @@ int InventoryScreen::update()
 					{
 					case 0: //back
 						return GameStates::RETURN;
+					case 1:
+						state = INV_STATES::USE;
+						break;
+					case 2:
+						//state = INV_STATES::SORT;
+						break;
+					case 3://Grem
+						if(state == INV_STATES::SELECT_CHAR){
+							useItem(Grem::instance());
+						}
+						break;
+					case 4://Lenn
+						if(state == INV_STATES::SELECT_CHAR){
+							useItem(Lenn::instance());
+						}
+						break;
+					case 5://Laz
+						if(state == INV_STATES::SELECT_CHAR){
+							useItem(Lenn::instance());
+						}
+						break;
 					}
 				}
 			}
@@ -78,6 +108,8 @@ int InventoryScreen::update()
 			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
 	}
 
+	if(state == INV_STATES::USE)
+		checkItems();
 	return 0;
 }
 
@@ -115,6 +147,7 @@ void InventoryScreen::render()
 					Engine::Text::instance()->render(buttons[i].getRect().top, 
 						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
 				}
+				displayHPandResource();
 				for(unsigned int i = 0; i < items.size(); i++)
 				{
 					if( items[i].getPlainText() == L"Handle"){
@@ -203,4 +236,113 @@ void InventoryScreen::displayItem(int index)
 		Engine::Text::instance()->font->DrawText(0,tbuffer, -1, &rect, 
 			DT_TOP | DT_LEFT | DT_NOCLIP, items[index].getColor());
 	}
+}
+
+void InventoryScreen::useItem(Entity * who)
+{
+	if(!useThis){
+		state = INV_STATES::START;
+		return;
+	}
+
+	if(useThis->getStats().name == "Potion")
+	{
+		if(who->isAlive()){
+			who->adjustHealth(useThis->getStats().health);
+			Player::instance()->removeItem(*useThis);
+		}
+	}
+	if(useThis->getStats().name == "Ether")
+	{
+		who->adjustResource(useThis->getStats().health);
+			Player::instance()->removeItem(*useThis);
+	}
+	if(useThis->getStats().name == "Revive")
+	{
+		if(!who->isAlive()){
+			who->adjustHealth(useThis->getStats().health);
+			Player::instance()->removeItem(*useThis);
+		}
+	}
+
+	state = INV_STATES::START;
+	delete useThis;
+	useThis = NULL;
+	setList();
+}
+void InventoryScreen::checkItems()
+{
+	for(unsigned int i = 0; i < items.size(); i++){
+		Item* tempItem = ItemFactory::instance()->getItem(items[i].getHandle());
+		if(tempItem->getStats().type == "Item"){
+			if(items[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+				Engine::Cursor::instance()->cursorPos.y, 3)){
+					items[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+						if(!Engine::Input::instance()->check_button_down(DIK_9)){
+							Engine::Input::instance()->set_button(DIK_9, true);
+							if(useThis){
+								delete useThis;
+								useThis = NULL;
+							}
+							useThis = ItemFactory::instance()->getItem(items[i].getHandle());
+							state = INV_STATES::SELECT_CHAR;
+						}
+					}
+					else Engine::Input::instance()->set_button(DIK_9, false);
+			}
+			else {
+				items[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+			}
+		}
+		delete tempItem;
+	}
+}
+
+void InventoryScreen::displayHPandResource()
+{
+	Engine::Text* t = Engine::Text::instance();
+	wchar_t tbuffer[64];
+	RECT tempR;
+	
+	//////////////////////////////////////////////////
+	// Grem
+	//////////////////////////////////////////////////
+	tempR = buttons[3].getRect();
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"HP %d/%d",Grem::instance()->getStats()->health,Grem::instance()->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"Rage %d/%d",Grem::instance()->getResource(),Grem::instance()->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+
+	//////////////////////////////////////////////////
+	// Lenn
+	//////////////////////////////////////////////////
+	tempR = buttons[4].getRect();
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"HP %d/%d",Lenn::instance()->getStats()->health,Lenn::instance()->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"Sta %d/%d",Lenn::instance()->getResource(),Lenn::instance()->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	
+	//////////////////////////////////////////////////
+	// Laz
+	//////////////////////////////////////////////////
+	tempR = buttons[5].getRect();
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"HP %d/%d",Laz::instance()->getStats()->health,Laz::instance()->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	tempR.top+=25;
+	swprintf_s(tbuffer, 64,L"Mana %d/%d",Laz::instance()->getResource(),Laz::instance()->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &tempR, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
