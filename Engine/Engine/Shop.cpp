@@ -94,6 +94,7 @@ int Shop::update()
 	{
 	case 0: //BUY
 		state = SHOP_STATE::BUY;
+		items.clear();
 		break;
 	case 1: //SELL
 		sellList();
