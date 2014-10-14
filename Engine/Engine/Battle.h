@@ -57,6 +57,7 @@ public:
 	int dmg;
 	int randAI;
 	bool escape;
+	std::vector<bool> stolenFrom;
 
 	static Battle* instance();
 	~Battle(void);

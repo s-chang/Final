@@ -1,5 +1,5 @@
 #include "Laz.h"
-#include "Skill.h"
+#include "ElementalSkills.h"
 
 Laz::Laz(void) : Entity()
 {
@@ -49,6 +49,10 @@ void Laz::init()
 	};
 	stats = temp;
 
+	/////////////////////////////////////////////////////////////////////////
+	// Commands
+	/////////////////////////////////////////////////////////////////////////
+
 	BattleCommand* newCommand = new BattleCommand();
 	availableCommands.push_back(newCommand);
 	newCommand = new Fight();
@@ -65,6 +69,17 @@ void Laz::init()
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
+	/////////////////////////////////////////////////////////////////////////
+	// Skills
+	/////////////////////////////////////////////////////////////////////////
+	newCommand = new Wind();
+	skills.push_back(newCommand);
+	newCommand = new Earth();
+	skills.push_back(newCommand);
+
+	/////////////////////////////////////////////////////////////////////////
+	// Equipment
+	/////////////////////////////////////////////////////////////////////////
 	weapon = (Staff*)ItemFactory::instance()->getItem("Splintered Staff");
 	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 
@@ -163,3 +178,28 @@ void Laz::getSkills(std::vector<BattleCommand*>& skillList, int type)
 		}
 	}
 };
+
+void Laz::equipItem(Item* item, int slot)
+{
+	switch(slot)
+	{
+	case SLOT::WEAPON:
+		weapon = (Staff*)item;	
+		break;
+	case SLOT::ARMOR:
+		armor = (Armor*)item;		
+		break;
+	case SLOT::ACC1:
+		acc1 = (Accessory*)item;		
+		break;	
+	case SLOT::ACC2:
+		acc2 = (Accessory*)item;		
+		break;
+	case SLOT::RUNE1:
+		rune1 = (Rune*)item;		
+		break;
+	case SLOT::RUNE2:
+		rune2 = (Rune*)item;		
+		break;
+	}
+}

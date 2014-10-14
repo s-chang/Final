@@ -30,6 +30,16 @@ void EquipScreen::init()
 	background.setTranslate(310,180,0);
 	background.setScale(0.8f, 0.6f, 0.0f);
 
+	background2.init();
+	background2.setHandle("ES2");
+	background2.setTranslate(310,180,0);
+	background2.setScale(0.8f, 0.6f, 0.0f);
+
+	background3.init();
+	background3.setHandle("ES3");
+	background3.setTranslate(310,180,0);
+	background3.setScale(0.8f, 0.6f, 0.0f);
+
 	// init names as buttons
 	SCDATA scdata[] = {
 		{100.0f, 580.0f, 555,50,595,200,L"Back"},
@@ -116,11 +126,8 @@ int EquipScreen::update()
 					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
 						if(!Engine::Input::instance()->check_button_down(DIK_9)){
 							Engine::Input::instance()->set_button(DIK_9, true);
-
-							switch(i)
-							{
-
-							}
+							setAvailable(who,i);
+							state = EQUIPSTATE::SHOW_AVAILABLE;
 						}
 					}
 					else Engine::Input::instance()->set_button(DIK_9, false);
@@ -132,7 +139,46 @@ int EquipScreen::update()
 	////////////////////////////////////////////////////////////////////////////////////////
 	// Available List
 	////////////////////////////////////////////////////////////////////////////////////////
-
+	if(state == EQUIPSTATE::SHOW_AVAILABLE) {
+		for(unsigned int i = 0; i < available.size(); i++){
+			if(available[i].checkOn(Engine::Cursor::instance()->cursorPos.x,
+				Engine::Cursor::instance()->cursorPos.y, 3)){
+					available[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
+					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON)){
+						if(!Engine::Input::instance()->check_button_down(DIK_9)){
+							if(available[i].getPlainText() == L"Handle"){
+								//swap out equipment
+								Item* newItem = NULL;
+								newItem = ItemFactory::instance()->getItem(available[i].getHandle());
+								switch(who)
+								{
+								case 0:
+									Player::instance()->addItem(Grem::instance()->getItem(slot));
+									Player::instance()->removeItem(*newItem);
+									Grem::instance()->equipItem(newItem,slot);
+									setItems(who);
+									break;
+								case 1:
+									Player::instance()->addItem(Lenn::instance()->getItem(slot));
+									Player::instance()->removeItem(*newItem);
+									Lenn::instance()->equipItem(newItem,slot);
+									setItems(who);
+									break;
+								case 2:
+									Player::instance()->addItem(Laz::instance()->getItem(slot));
+									Player::instance()->removeItem(*newItem);
+									Laz::instance()->equipItem(newItem,slot);
+									setItems(who);
+									break;
+								}
+							}
+						}
+					}
+					else Engine::Input::instance()->set_button(DIK_9, false);
+			}
+			else available[i].setColor(D3DCOLOR_ARGB(255,255,255,255));
+		}
+	}
 
 
 	return 0;
@@ -160,6 +206,10 @@ void EquipScreen::render()
 				/////////////////////////////////////////
 
 				g->Draw2DObject(background);
+				if(state > EQUIPSTATE::START)
+					g->Draw2DObject(background2);
+				if(state == EQUIPSTATE::SHOW_AVAILABLE)
+					g->Draw2DObject(background3);
 
 				Engine::DX::instance()->getSprite()->End();
 
@@ -172,21 +222,51 @@ void EquipScreen::render()
 						buttons[i].getRect().left, buttons[i].getPlainText(), buttons[i].getColor());
 				}
 
-				if(state == EQUIPSTATE::SHOW_ITEMS)
+				if(state > EQUIPSTATE::START){
 					for(unsigned int i = 0; i < equipped.size(); i++){
 						if( equipped[i].getPlainText() == L"Handle"){
 							Engine::Text::instance()->render(equipped[i].getRect().top, 
 								equipped[i].getRect().left, equipped[i].getHandle(), equipped[i].getColor());
 							if(equipped[i].getColor() == D3DCOLOR_ARGB(255,255,255,0)){
-								displayItemStats(true);
-								//displayItemStats(false); // for testing
+								Item* item = NULL;
+								switch(who)
+								{
+								case 0:
+									item = Grem::instance()->getItem(slot);
+									break;
+								case 1:
+									item = Lenn::instance()->getItem(slot);
+									break;
+								case 2:
+									item = Laz::instance()->getItem(slot);
+									break;
+								}
+								displayItemStats(true,item);
 							}
 						}
 						else
 							Engine::Text::instance()->render(equipped[i].getRect().top, 
 							equipped[i].getRect().left, equipped[i].getPlainText(), equipped[i].getColor());
 					}
+				}
 
+				if(state == EQUIPSTATE::SHOW_AVAILABLE){
+					for(unsigned int i = 0; i < available.size(); i++){
+						if( available[i].getPlainText() == L"Handle"){
+							Engine::Text::instance()->render(available[i].getRect().top, 
+								available[i].getRect().left, available[i].getHandle(), available[i].getColor());
+							if(available[i].getColor() == D3DCOLOR_ARGB(255,255,255,0)){
+								Item* item = NULL;
+								item = ItemFactory::instance()->getItem(available[i].getHandle());
+								displayItemStats(false,item);
+								delete item;
+							}
+						}
+						else
+							Engine::Text::instance()->render(available[i].getRect().top, 
+							available[i].getRect().left, available[i].getPlainText(), available[i].getColor());
+					}
+				}
 			}
 
 			//////////////////////////////////////////////////
@@ -280,6 +360,65 @@ void EquipScreen::setItems(int who)
 }
 void EquipScreen::setAvailable(int who, int slot)
 {
+	available.clear();
+	SCDATA scdata = {600.0f, 205.0f, 180,550,220,700,L"NONE"};
+	Drawable tempCommands;
+	RECT tempR;
+	std::vector<Item*> itemList;
+	std::string tempString;
+
+	switch(slot)
+	{
+	case 0:
+		switch(who)
+		{
+		case 0:
+			Player::instance()->getItemsOfType(itemList,"Spear");
+			break;
+		case 1:
+			Player::instance()->getItemsOfType(itemList,"Dagger");
+			break;
+		case 2:
+			Player::instance()->getItemsOfType(itemList,"Staff");
+			break;
+		}
+		break;
+	case 1:
+		Player::instance()->getItemsOfType(itemList,"Armor");
+		break;
+	case 2:
+	case 3:
+		Player::instance()->getItemsOfType(itemList,"Rune");
+		break;
+	case 4:
+	case 5:
+		Player::instance()->getItemsOfType(itemList,"Accessory");
+		break;
+	}
+	for(int i = 0; i< itemList.size(); i++){
+		tempCommands.setTranslate(scdata.x,scdata.y+=25,0.0f);
+		tempR.left = scdata.l;
+		tempR.right = scdata.r;
+		tempR.top = scdata.t+=25;
+		tempR.bottom = scdata.b+=25;
+		tempCommands.init();
+		tempCommands.setText(L"Handle");
+		tempCommands.setHandle(itemList[i]->getStats().name);
+		tempCommands.setRect(tempR);
+		available.push_back(tempCommands);
+	}
+
+	if(itemList.empty()){
+		tempCommands.setTranslate(scdata.x,scdata.y+=25,0.0f);
+		tempR.left = scdata.l;
+		tempR.right = scdata.r;
+		tempR.top = scdata.t+=25;
+		tempR.bottom = scdata.b+=25;
+		tempCommands.init();
+		tempCommands.setText(scdata.name);
+		tempCommands.setRect(tempR);
+		available.push_back(tempCommands);
+	}
 
 }
 
@@ -289,7 +428,7 @@ void EquipScreen::setState(int state)
 	slot = 99;
 }
 
-void EquipScreen::displayItemStats(bool top)
+void EquipScreen::displayItemStats(bool top, Item* item)
 {
 	Engine::Text* t = Engine::Text::instance();
 	RECT tempR;
@@ -301,20 +440,6 @@ void EquipScreen::displayItemStats(bool top)
 
 	if(top) tempR.top = 55; 
 	else	tempR.top = 440; 
-
-	Item* item = NULL;
-	switch(who)
-	{
-	case 0:
-		item = Grem::instance()->getItem(slot);
-		break;
-	case 1:
-		item = Lenn::instance()->getItem(slot);
-		break;
-	case 2:
-		item = Laz::instance()->getItem(slot);
-		break;
-	}
 
 	// write name and description and any stat thats not 0;
 
@@ -384,17 +509,5 @@ void EquipScreen::displayItemStats(bool top)
 		}
 		///////
 	}
-	/* draw text as string or wchar_t*
 
-	tempWS = std::wstring(tempString.begin(),tempString.end());
-
-	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
-	DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	swprintf_s(tbuffer, 64,L"%d/%d",enemy.getStats()->health,enemy.getStats()->maxHealth);
-
-	t->font->DrawText(0, tbuffer, -1, &rect, 
-	DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	*/
 }

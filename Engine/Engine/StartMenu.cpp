@@ -1,5 +1,8 @@
 #include "StartMenu.h"
 
+#define WHITE D3DCOLOR_ARGB(255,255,255,255)
+#define BLACK D3DCOLOR_ARGB(255,0,0,0)
+
 StartMenu::StartMenu(void) : GameState()
 {
 }
@@ -19,6 +22,11 @@ void StartMenu::init()
 	bg.setHandle("startMenu");
 	bg.setTranslate(300.0f,180.0f,0.0f);
 	bg.setScale(.8f,.6f,0.0f);
+
+	logo.setHandle("logo");
+	logo.setTranslate(330.0f,240.0f,0.0f);
+	logo.setScale(1,1,1);
+
 	RData uiData[] = {
 		{0, 0, 120, 500, 150, 280},
 		{245, 0, 340, 500, 150, 350},
@@ -39,11 +47,13 @@ void StartMenu::init()
 		buttons[i].setHandle("menuButtons");
 		//buttons[i].setTranslate(300,180,0);
 		buttons[i].setScale(.5,.5,0);
-		buttons[i].setColor(D3DCOLOR_ARGB(255,0,0,0));
+		buttons[i].setColor(BLACK);
 	}
 
+	drawLogo = true;
+	logoCounter = 0;
 	// TODO: if we are initing the start menu or reiniting it we also need to reset entire game
-	
+
 }
 
 void StartMenu::shutdown()
@@ -52,48 +62,64 @@ void StartMenu::shutdown()
 
 int StartMenu::update()
 {
-	Engine::Cursor* c = Engine::Cursor::instance();
-	Engine::Input* input = Engine::Input::instance();
-
-	int _x = (int)c->cursorPos.x;
-	int _y = (int)c->cursorPos.y;
-
-	for(int i = 0; i < MENU_BUTTON_CNT; i++)
-	{
-		if(i==1) i = 2; // REMOVE : when Continue is implemented
-		if(buttons[i].checkOn((float)_x,(float)_y,3)) {
-			buttons[i].setColor(D3DCOLOR_ARGB(255,255,255,0));
-			// check for mouse click AND GO TO CORRECT STATE
-			if(input->check_mouse_button(0)){
-				if(!input->check_button_down(DIK_9)){
-					input->set_button(DIK_9,true);
-					switch(i)
-					{
-					case 0: // newgame
-						return NEWGAME;
-					case 1: //continue
-						return CONTINUE;
-					case 2: // Options
-						return OPTIONS;
-					case 3: // Quit
-						exit(1); // change exit method
-					default:
-						break;
-					}
+	if(drawLogo){
+		if(Engine::Timer::instance()->getDT() < 1){
+			if(Engine::Input::instance()->check_mouse_button(0)){
+				if(!Engine::Input::instance()->check_button_down(DIK_9)){
+					Engine::Input::instance()->set_button(DIK_9,true);
+					drawLogo = false;
 				}
-			} else input->set_button(DIK_9,false);
+			} else Engine::Input::instance()->set_button(DIK_9,false);
+			logoCounter+=Engine::Timer::instance()->getDT();
+			if(logoCounter>=3){
+				drawLogo = false;
+			}
 		}
-		else
-			buttons[i].setColor(D3DCOLOR_ARGB(255,0,0,0));
 	}
+	else{
+		Engine::Cursor* c = Engine::Cursor::instance();
+		Engine::Input* input = Engine::Input::instance();
+		Engine::Timer* timer = Engine::Timer::instance();
+
+		int _x = (int)c->cursorPos.x;
+		int _y = (int)c->cursorPos.y;
+
+		for(int i = 0; i < MENU_BUTTON_CNT; i++)
+		{
+			if(i==1) i = 2; // REMOVE : when Continue is implemented
+			if(buttons[i].checkOn((float)_x,(float)_y,3)) {
+				buttons[i].setColor(WHITE);
+				// check for mouse click AND GO TO CORRECT STATE
+				if(input->check_mouse_button(0)){
+					if(!input->check_button_down(DIK_9)){
+						input->set_button(DIK_9,true);
+						switch(i)
+						{
+						case 0: // newgame
+							return NEWGAME;
+						case 1: //continue
+							return CONTINUE;
+						case 2: // Options
+							return OPTIONS;
+						case 3: // Quit
+							exit(1); // change exit method
+						default:
+							break;
+						}
+					}
+				} else input->set_button(DIK_9,false);
+			}
+			else
+				buttons[i].setColor(BLACK);
+		}
 
 
-	///////////////////////////////////////////////
-	// debug instaswitch to battle
-	///////////////////////////////////////////////
-	if(input->push_button(DIK_B))
-		return BATTLE;
-
+		///////////////////////////////////////////////
+		// debug instaswitch to battle
+		///////////////////////////////////////////////
+		if(input->push_button(DIK_B))
+			return BATTLE;
+	}
 	return 0;
 }
 void StartMenu::render()
@@ -108,17 +134,21 @@ void StartMenu::render()
 		{
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
 			{
-				g->Draw2DObject(bg);
+				if(drawLogo)
+					g->Draw2DObject(logo);
+				else
+				{
+					g->Draw2DObject(bg);
 
-				for(int i = 0; i < MENU_BUTTON_CNT; i++){
-					//if(i==1) i = 2; // REMOVE : when Continue is implemented
-					g->Draw2DObject(buttons[i]);
+					for(int i = 0; i < MENU_BUTTON_CNT; i++){
+						//if(i==1) i = 2; // REMOVE : when Continue is implemented
+						g->Draw2DObject(buttons[i]);
+					}
+
+					// draw cursor last
+					g->drawCursor();
 				}
-
-				// draw cursor last
-				g->drawCursor();
 				Engine::DX::instance()->getSprite()->End();
-
 				//Engine::Text::instance()->render(0,0);
 			}
 		}

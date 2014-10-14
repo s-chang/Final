@@ -6,7 +6,6 @@ Item::Item()
 	stats.description = "Nothing";
 	stats.type = "Nothing";
 	stats.health = stats.atk = stats.mag = stats.def = stats.res = stats.spd = stats.level = stats.price = stats.xp = 0;
-	
 }
 
 Item::~Item()

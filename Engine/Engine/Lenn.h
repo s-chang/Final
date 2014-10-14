@@ -33,9 +33,13 @@ public:
 	int getResource() { return stamina; }
 	int getMaxResource() { return staminaMax; }
 	int getXpToLevel(){ return xpToLevel; }
+
 	BattleCommand* getCommand(int index){ return commands[index]; };
+
 	ItemStats* getItemStatsForSlot(int whatSlot);
 	Item* getItem(int slot);
+	void equipItem(Item* item, int slot);
+
 	void addXP(int amount);
 	void adjustResource(int amount);
 	void getSkills(std::vector<BattleCommand*>& skillList, int type);
