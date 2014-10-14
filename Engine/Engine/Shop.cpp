@@ -232,7 +232,7 @@ void Shop::checkItems()
 						Item* item = ItemFactory::instance()->getItem(items[i].getHandle());
 						if(Player::instance()->getGold() >= item->getStats().price){
 							insufficientFunds = false;
-							item->setAmount(1);
+							//item->setAmount(1);
 							Player::instance()->addItem(item);
 							Player::instance()->adjustGold(-item->getStats().price);
 						} //else helpText = 

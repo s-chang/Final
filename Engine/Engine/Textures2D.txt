@@ -27,3 +27,4 @@ commandScreen.png commandWindow
 ShopOpen.png shopWindow
 TavernOpen.png tavernWindow
 ShopWindow.png secondWindow
+Mongoose.png logo

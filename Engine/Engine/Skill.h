@@ -17,6 +17,7 @@ class Skill:
 {
 protected:
 	int type;
+	int cost;
 public:
 	Skill(void);
 	~Skill(void);
@@ -28,5 +29,6 @@ public:
 	virtual std::string helpText();
 
 	int getType();
+	int getCost();
 };
 

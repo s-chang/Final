@@ -76,6 +76,7 @@ void Battle::init()
 	}
 
 	enemies.clear();
+	stolenFrom.clear();
 
 	Slime temp;
 	struct Pos{
@@ -104,6 +105,7 @@ void Battle::init()
 		d->setRotate(0.0f,315.0f,0.0f);
 
 		enemies.push_back(temp);
+		stolenFrom.push_back(false);
 	}
 	for(int i = 0; i < num_enemies; i++){
 		all.push_back(&enemies[i]);
@@ -115,6 +117,7 @@ void Battle::init()
 	turnStatus = TURN_STATUS::START;
 
 	onlyOnce = true;
+	
 }
 
 void Battle::shutdown()

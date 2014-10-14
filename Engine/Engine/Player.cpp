@@ -59,17 +59,21 @@ void Player::addItem(Item* item)
 	if(inventory.empty())
 		inventory.push_back(item);
 	else {
-		for(unsigned int i = 0; i < inventory.size(); i++) {
-			if(item->getStats().name == inventory[i]->getStats().name){
-				if(inventory[i]->getAmount() +item->getAmount() < 100){
-					inventory[i]->setAmount(inventory[i]->getAmount() +item->getAmount());
-					return;
+		if(item->getStats().type == "Item"){
+			for(unsigned int i = 0; i < inventory.size(); i++) {
+				if(item->getStats().name == inventory[i]->getStats().name){
+					if(inventory[i]->getAmount() +item->getAmount() < 100){
+						inventory[i]->setAmount(inventory[i]->getAmount() +item->getAmount());
+						return;
+					}
 				}
 			}
 		}
 	}
 	if(inventory.size() < INVENTORY_CAP)
 		inventory.push_back(item);
+	else
+		delete item;
 }
 
 void Player::removeItem(Item item)

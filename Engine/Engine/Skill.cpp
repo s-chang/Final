@@ -4,6 +4,7 @@
 Skill::Skill(void) : BattleCommand()
 {
 	type = SKILL_TYPES::NONE;
+	cost = 0;
 }
 
 
@@ -32,4 +33,9 @@ std::string Skill::helpText()
 int Skill::getType()
 {
 	return type;
+}
+
+int Skill::getCost()
+{
+	return cost;
 }

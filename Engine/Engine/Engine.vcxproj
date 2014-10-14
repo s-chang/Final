@@ -88,6 +88,7 @@
     <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DX.cpp" />
+    <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Elemental.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Equippable.cpp" />
@@ -131,12 +132,14 @@
     <ClCompile Include="StatusMain.cpp" />
     <ClCompile Include="StatMenuManager.cpp" />
     <ClCompile Include="StatusScreen.cpp" />
+    <ClCompile Include="Steal.cpp" />
     <ClCompile Include="Subtlety.cpp" />
     <ClCompile Include="Tavern.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Town.cpp" />
+    <ClCompile Include="Wind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Accessory.h" />
@@ -152,7 +155,9 @@
     <ClInclude Include="Dagger.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DX.h" />
+    <ClInclude Include="Earth.h" />
     <ClInclude Include="Elemental.h" />
+    <ClInclude Include="ElementalSkills.h" />
     <ClInclude Include="EngineHeaders.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Entity.h" />
@@ -202,12 +207,15 @@
     <ClInclude Include="StatMenuManager.h" />
     <ClInclude Include="StatusScreen.h" />
     <ClInclude Include="statusStates.h" />
+    <ClInclude Include="Steal.h" />
     <ClInclude Include="Subtlety.h" />
+    <ClInclude Include="SubtletySkills.h" />
     <ClInclude Include="Tavern.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Town.h" />
+    <ClInclude Include="Wind.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Armor.txt" />

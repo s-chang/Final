@@ -9,10 +9,13 @@ class StartMenu :
 	public GameState
 {
 private:
-	Drawable bg,
+	Drawable bg, logo,
 			 buttons[MENU_BUTTON_CNT];
-	StartMenu(void);
+	
+	bool drawLogo;
+	float logoCounter;
 
+	StartMenu(void);
 public:
 	static StartMenu* instance();
 	~StartMenu(void);

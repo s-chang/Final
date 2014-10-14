@@ -1,5 +1,5 @@
 #include "Lenn.h"
-#include "Skill.h"
+#include "SubtletySkills.h"
 
 Lenn::Lenn(void) : Entity()
 {
@@ -49,6 +49,10 @@ void Lenn::init()
 	};
 	stats = temp;
 
+	/////////////////////////////////////////////////////////////////////////
+	// Commands
+	/////////////////////////////////////////////////////////////////////////
+
 	BattleCommand* newCommand = new BattleCommand();
 	availableCommands.push_back(newCommand);
 	newCommand = new Fight();
@@ -65,6 +69,15 @@ void Lenn::init()
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
+	/////////////////////////////////////////////////////////////////////////
+	// Skills
+	/////////////////////////////////////////////////////////////////////////
+	newCommand = new Steal();
+	skills.push_back(newCommand);
+
+	/////////////////////////////////////////////////////////////////////////
+	// Equipment
+	/////////////////////////////////////////////////////////////////////////
 	weapon = (Dagger*)ItemFactory::instance()->getItem("Chipped Dagger");
 	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 	acc1 = NULL;

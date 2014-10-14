@@ -184,6 +184,15 @@
     <ClCompile Include="Jump.cpp">
       <Filter>Game\Commands and skills\Skills\Rage\Jump</Filter>
     </ClCompile>
+    <ClCompile Include="Wind.cpp">
+      <Filter>Game\Commands and skills\Skills\Elemental\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="Earth.cpp">
+      <Filter>Game\Commands and skills\Skills\Elemental\Earth</Filter>
+    </ClCompile>
+    <ClCompile Include="Steal.cpp">
+      <Filter>Game\Commands and skills\Skills\Subtlety\Steal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h">
@@ -392,6 +401,21 @@
     </ClInclude>
     <ClInclude Include="RageSkills.h">
       <Filter>Game\Commands and skills\Skills\Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="SubtletySkills.h">
+      <Filter>Game\Commands and skills\Skills\Subtlety</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementalSkills.h">
+      <Filter>Game\Commands and skills\Skills\Elemental</Filter>
+    </ClInclude>
+    <ClInclude Include="Wind.h">
+      <Filter>Game\Commands and skills\Skills\Elemental\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="Earth.h">
+      <Filter>Game\Commands and skills\Skills\Elemental\Earth</Filter>
+    </ClInclude>
+    <ClInclude Include="Steal.h">
+      <Filter>Game\Commands and skills\Skills\Subtlety\Steal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +642,15 @@
     </Filter>
     <Filter Include="Game\Player\Characters\Laz">
       <UniqueIdentifier>{08d1c448-7abf-4687-9fd5-61f061a932f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Elemental\Earth">
+      <UniqueIdentifier>{af7e61ba-eb1f-40c5-ba71-1351977bab57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Elemental\Wind">
+      <UniqueIdentifier>{1b092523-ac0b-4fe9-bdaa-e8cd1a5fdbd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Commands and skills\Skills\Subtlety\Steal">
+      <UniqueIdentifier>{d1ff81a1-1090-4751-ac62-f43199fee4a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

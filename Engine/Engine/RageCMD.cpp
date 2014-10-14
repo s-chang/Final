@@ -58,6 +58,7 @@ void RageCMD::update()
 			b->activeCMD = skillList[i];
 			b->activeCMD->init();
 			b->turnStatus = TURN_STATUS::CMD;
+
 			break;
 		}
 	}
@@ -69,31 +70,32 @@ void RageCMD::render()
 
 void RageCMD::text()
 {
+	bool hovering = true;
 	for(unsigned int i = 0; i < skillList.size(); i++){
 		//BattleCommand* tempCMD = e->getCommand(i);
 		std::string tempString = skillList[i]->getName();
-			std::wstring tempWS = std::wstring(tempString.begin(),tempString.end());
-			if(skillList[i]->isOn()){
-				help = "";
-				Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &skillList[i]->getRect(), 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
+		std::wstring tempWS = std::wstring(tempString.begin(),tempString.end());
+		if(skillList[i]->isOn()){
+			hovering = false;
+			help = "";
+			Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &skillList[i]->getRect(), 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 0));
 
-				// help text
-				RECT tempRect;
-				tempRect.left = 50;
-				tempRect.top = 7;
-				tempString = skillList[i]->helpText();
-				tempWS = std::wstring(tempString.begin(),tempString.end());
-				Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &tempRect, 
-					DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-			}
-			else{
-				Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &skillList[i]->getRect(), 
+			// help text
+			RECT tempRect;
+			tempRect.left = 50;
+			tempRect.top = 7;
+			tempString = skillList[i]->helpText();
+			tempWS = std::wstring(tempString.begin(),tempString.end());
+			Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &tempRect, 
 				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
-				selection = true;
-			}
-		
+		}
+		else{
+			Engine::Text::instance()->font->DrawText(0, tempWS.c_str(), -1, &skillList[i]->getRect(), 
+				DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
 	}
+	selection = hovering;
 }
 
 std::string RageCMD::helpText()

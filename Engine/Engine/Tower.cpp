@@ -63,7 +63,7 @@ int Tower::update()
 
 	const int ENTER = 0, MOVE = 1, FIGHT = 2, DEATH = 3, EXIT = 4;
 
-	const float speed = 0.1f;
+	const float speed = 15.0f * Engine::Timer::instance()->getDT();
 	static int slowcount = 0;
 	const int limiter =  25;
 	stepCounter = limiter;

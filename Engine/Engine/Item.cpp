@@ -6,7 +6,7 @@ Item::Item()
 	stats.description = "Nothing";
 	stats.type = "Nothing";
 	stats.health = stats.atk = stats.mag = stats.def = stats.res = stats.spd = stats.level = stats.price = stats.xp = 0;
-
+	amount = 1;
 }
 
 Item::~Item()
@@ -15,6 +15,7 @@ Item::~Item()
 Item::Item(ItemStats stats)
 {
 	setStats(stats);
+	amount = 1;
 }
 
 void Item::use()

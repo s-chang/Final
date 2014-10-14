@@ -1,5 +1,5 @@
 #include "Laz.h"
-#include "Skill.h"
+#include "ElementalSkills.h"
 
 Laz::Laz(void) : Entity()
 {
@@ -49,6 +49,10 @@ void Laz::init()
 	};
 	stats = temp;
 
+	/////////////////////////////////////////////////////////////////////////
+	// Commands
+	/////////////////////////////////////////////////////////////////////////
+
 	BattleCommand* newCommand = new BattleCommand();
 	availableCommands.push_back(newCommand);
 	newCommand = new Fight();
@@ -65,6 +69,17 @@ void Laz::init()
 	commands[2] = availableCommands[2];
 	commands[3] = availableCommands[3];
 
+	/////////////////////////////////////////////////////////////////////////
+	// Skills
+	/////////////////////////////////////////////////////////////////////////
+	newCommand = new Wind();
+	skills.push_back(newCommand);
+	newCommand = new Earth();
+	skills.push_back(newCommand);
+
+	/////////////////////////////////////////////////////////////////////////
+	// Equipment
+	/////////////////////////////////////////////////////////////////////////
 	weapon = (Staff*)ItemFactory::instance()->getItem("Splintered Staff");
 	armor = (Armor*)ItemFactory::instance()->getItem("Clothes");
 
