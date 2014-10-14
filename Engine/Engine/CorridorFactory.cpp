@@ -78,7 +78,7 @@ FloorRoom *CorridorFactory::getRoom(std::string handle)
 	{
 		FloorRoom *temp = new FloorRoom();
 		temp->init("room3");
-		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 		return temp;
 	}else if(handle == "room3R")
 	{
@@ -90,7 +90,7 @@ FloorRoom *CorridorFactory::getRoom(std::string handle)
 	{
 		FloorRoom *temp = new FloorRoom();
 		temp->init("room3");
-		temp->setRotate(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		temp->setRotate(D3DXVECTOR3(0.0f, 180.0f, 0.0f));
 		return temp;
 	}else if(handle == "room3L")
 	{

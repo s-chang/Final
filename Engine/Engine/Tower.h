@@ -16,16 +16,30 @@ private:
 
 	Drawable player;
 	Drawable floortext;
+	
 	Drawable textBackground;
+	Drawable itemGetBackground;
+
 	wchar_t tempText[20];
+	wchar_t confirm[3];
+	wchar_t ItemText[128];
+
+	bool loop;
+	bool chestHelp;
 
 	Camera cam;
 
 	unsigned int stepCounter;
+	float miniTimer;
 
 	bool bossLevel5;
 	bool bossLevel10;
 	bool bossLevel15;
+
+	void getItem();
+	void getLowItem();
+	void getMidItem();
+	void getHighItem();
 
 	Tower(void);
 public:
@@ -37,6 +51,8 @@ public:
 
 	virtual int update(); 
 	virtual void render();
+
+
 
 	int getFloor() { return currentFloor; };
 };

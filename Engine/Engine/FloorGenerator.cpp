@@ -43,6 +43,10 @@ void FloorGenerator::resetMap()
 		for(int j = 0; j < LIMIT; j++)
 			map[i][j] = ' ';
 	}
+
+	emptyCor();
+	emptyRoom();
+	emptyQueue();
 }
 
 void FloorGenerator::shutdown()

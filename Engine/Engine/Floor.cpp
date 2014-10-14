@@ -3,7 +3,13 @@
 #include "Roomtype.h"
 
 Floor::Floor()
-{}
+{
+	stairs.setHandle("stairs");
+	stairs.set3D(true);
+	stairs.setHasTexture(true);
+	stairs.setScale(0.5f, 0.5f, 0.5f);
+	
+}
 
 Floor::~Floor()
 {}
@@ -17,6 +23,12 @@ Floor *Floor::instance()
 
 void Floor::createFloor(int floorNum)
 {
+	//clear out containers
+	rooms.clear();
+	cors.clear();
+	tempRC.clear();
+	chest.clear();
+
 	//generate map
 	FloorGenerator::instance()->generateMap(floorNum);
 
@@ -57,6 +69,7 @@ void Floor::createFloor(int floorNum)
 		{
 			theRoom->setOn(true);
 		}
+
 		theRoom->setTreasure(tempRoom[i].getTreasure());
 		theRoom->setStairs(tempRoom[i].getStairs());
 		theRoom->setTranslate(D3DXVECTOR3((float)tempRoom[i].getY() * PIXELS, 0.0f, -(float)tempRoom[i].getX() * PIXELS));
@@ -105,6 +118,24 @@ void Floor::createFloor(int floorNum)
 	for(unsigned int i = 0; i < rooms.size(); i++)
 	{
 		tempRC.push_back(rooms[i]);
+
+		if(rooms[i]->getStairs())
+		{
+			stairs.setTranslate(rooms[i]->getX() *PIXELS, 0.0f, rooms[i]->getY() *PIXELS);
+		}
+		Drawable temp;
+		temp.setHandle("chest");
+		temp.set3D(true);
+		temp.setHasTexture(true);
+		temp.setScale(0.5f, 0.5f, 0.5f);
+		//temp.setRotate(0.0f, 180.0f, 0.0f);
+
+		if(rooms[i]->getTreasure())
+		{
+			temp.setTranslate(rooms[i]->getX() *PIXELS, 0.0f, rooms[i]->getY() *PIXELS);
+			chest.push_back(temp);
+		}
+
 	}
 
 	for(unsigned int i = 0; i < cors.size(); i++)
@@ -1609,3 +1640,120 @@ void Floor::determineOn( FloorCorridor* previous, int direction)
 	}
 }
 
+
+void Floor::checkChest(float &playerX, float &playerZ)
+{
+	FloorRoom* temp = NULL;
+	//check for on
+	for(unsigned int i = 0; i < rooms.size(); i++)
+	{
+		if(rooms[i]->getOn())
+		{
+			//check for chest
+			if(rooms[i]->getTreasure())
+			{
+				//set temp pointer
+				temp = rooms[i];
+			}
+			break;
+		}
+	}
+
+	//Check chests if temp isn't null
+	if(temp)
+	{
+		for(unsigned int i = 0; i < chest.size(); i++)
+		{
+			//compare positions
+			if( (temp->getX() * PIXELS == chest[i].getTranslate().x) && ((temp->getY() * PIXELS) == chest[i].getTranslate().z)
+				)				
+			{
+				
+			}
+		}
+	}
+}
+
+
+bool Floor::checkStairs(float &playerX, float &playerZ)
+{
+	//check for on
+	for(unsigned int i = 0; i < rooms.size(); i++)
+	{
+		if(rooms[i]->getOn())
+		{
+			if(playerX < stairs.getTranslate().x + 2.0f &&
+				playerX > stairs.getTranslate().x - 2.0f &&
+				playerZ < stairs.getTranslate().z + 2.0f &&
+				playerZ > stairs.getTranslate().z - 2.0f)
+				return true;
+		}
+	}
+	
+	return false;
+}
+
+bool Floor::rangeChest(float &playerX, float &playerZ)
+{
+	FloorRoom *temp = NULL;
+	//check for on
+	for(unsigned int i = 0; i < rooms.size(); i++)
+	{
+		if(rooms[i]->getOn())
+		{
+			
+			temp = rooms[i];			
+		}
+	}
+
+	if(temp)
+	{
+		//determine the chest to check
+		float x = 0.0f, y = 0.0f;
+
+		for(unsigned int i = 0; i < chest.size(); i++)
+		{
+			if( ((chest[i].getTranslate().x) == (temp->getX() * PIXELS)) &&	
+				((chest[i].getTranslate().z) == (temp->getY() * PIXELS)) )
+			{
+				x = chest[i].getTranslate().x;
+				y = chest[i].getTranslate().z;
+			}
+		}
+
+		//determine location of the chest
+			if(playerX < x + 2.0f &&
+				playerX > x - 2.0f &&
+				playerZ < y + 2.0f &&
+				playerZ > y - 2.0f)
+				return true;
+	}
+
+	return false;
+}
+
+void Floor::removeChest(int X, int Y)
+{
+	std::vector<Drawable> temp;
+	for(unsigned int i = 0; i < chest.size(); i++)
+	{
+		if(chest[i].getTranslate().x == X * PIXELS &&
+			chest[i].getTranslate().z == Y * PIXELS)
+		{
+			//reconstruct vector without this chest
+			continue;
+		}
+		temp.push_back(chest[i]);
+	}
+	chest = temp;
+}
+
+Drawable Floor::getStairs()
+{
+	return stairs;
+}
+
+std::vector<Drawable> Floor::getChests()
+{
+	return chest;
+}

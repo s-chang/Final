@@ -67,6 +67,9 @@ private:
 
 	//bool leaveCor4(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
 	
+	Drawable stairs;
+	std::vector<Drawable> chest;
+
 public:
 	~Floor();
 	static Floor *instance();
@@ -77,6 +80,14 @@ public:
 
 
 	void checkCollision(float &playerX, float &playerZ);
+	void checkChest(float &playerX, float &playerZ);
+	bool rangeChest(float &playerX, float &playerZ);
+	bool checkStairs(float &playerX, float &playerZ);
+
+	void removeChest(int X, int Y);
+
+	Drawable getStairs();
+	std::vector<Drawable> getChests();
 
 	void shutdown();
 };
