@@ -27,6 +27,7 @@ public:
 	void addItem(Item*);
 	void removeItem(Item);
 	std::vector<Item*>* getInventory();
+	void getItemsOfType(std::vector<Item*>& itemList, std::string type);
 
 	void adjustGold(int amount);
 	int getGold();

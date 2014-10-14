@@ -3,6 +3,6 @@ Short Spear,Spear,A handy but short spear.,3,0,10,5,0,0,0,200,0,
 Spear,Spear,A spear.,6,0,20,10,0,0,0,400,0,
 Harpoon,Spear,An easy to use and throwable spear.,9,0,40,15,0,0,0,800,0,
 Lance,Spear,A long heavy spear.,12,0,50,15,0,0,0,1600,0,
-Gae Bolg,Spear,An ancient spear capable of inflicting mortal wounds.,15,0,60,20,0,0,0,3200,0,
+Gae Bolg,Spear,An ancient Dragoon spear.,15,0,60,20,0,0,0,3200,0,
 Luin of Celtchar,Spear,A legendary spear of fire.,18,0,80,80,0,0,0,0,0,
-Gungnir,Spear,A legendary spear said to have never missed its target.,20,0,100,40,0,0,0,0,0
+Gungnir,Spear,A legendary spear once weilded by Odin.,20,0,100,40,0,0,0,0,0

@@ -28,3 +28,5 @@ ShopOpen.png shopWindow
 TavernOpen.png tavernWindow
 ShopWindow.png secondWindow
 Mongoose.png logo
+ES2.png ES2
+ES3.png ES3

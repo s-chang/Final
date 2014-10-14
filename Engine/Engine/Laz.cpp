@@ -178,3 +178,28 @@ void Laz::getSkills(std::vector<BattleCommand*>& skillList, int type)
 		}
 	}
 };
+
+void Laz::equipItem(Item* item, int slot)
+{
+	switch(slot)
+	{
+	case SLOT::WEAPON:
+		weapon = (Staff*)item;	
+		break;
+	case SLOT::ARMOR:
+		armor = (Armor*)item;		
+		break;
+	case SLOT::ACC1:
+		acc1 = (Accessory*)item;		
+		break;	
+	case SLOT::ACC2:
+		acc2 = (Accessory*)item;		
+		break;
+	case SLOT::RUNE1:
+		rune1 = (Rune*)item;		
+		break;
+	case SLOT::RUNE2:
+		rune2 = (Rune*)item;		
+		break;
+	}
+}
