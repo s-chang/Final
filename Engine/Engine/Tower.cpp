@@ -63,7 +63,7 @@ int Tower::update()
 
 	const int ENTER = 0, MOVE = 1, FIGHT = 2, DEATH = 3, EXIT = 4;
 
-	const float speed = 0.1f;
+	const float speed = 15.0f * Engine::Timer::instance()->getDT();
 	static int slowcount = 0;
 	const int limiter =  25;
 	stepCounter = limiter;
@@ -242,6 +242,8 @@ void Tower::render()
 			}
 
 			//draw rooms
+
+			
 			for(unsigned int i = 0; i < Floor::instance()->getRooms().size(); i++)
 			{
 				graphics->render(Floor::instance()->getRooms()[i]->getInfo(), &cam);
@@ -255,8 +257,7 @@ void Tower::render()
 			graphics->render(player, &cam);
 
 			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK)))
-			{
-				
+			{				
 				graphics->render(textBackground, &cam);
 				Engine::DX::instance()->getSprite()->End();
 				//render floor text

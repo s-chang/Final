@@ -10,8 +10,12 @@ Town.x town
 battlePlatform.x bPlat
 Slime.x slime
 Cor1.x cor1
-Cor2UDLR.x cor2
+Cor2.x cor2
 Cor2VH.x cor2VH
 Cor3.x cor3
 Cor4.x cor4
-RoomBase.x room
+Room1.x room
+Room2.x room2
+Room2VH.x room2vh
+Room3.x room3
+Room4.x room4

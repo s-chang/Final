@@ -14,7 +14,7 @@ public:
 	FloorCorridor();
 	~FloorCorridor();
 
-	virtual void init(std::string handle);
+	void init(std::string handle);
 	
 	void setScale(D3DXVECTOR3 scale);
 	void setTranslate(D3DXVECTOR3 translate);

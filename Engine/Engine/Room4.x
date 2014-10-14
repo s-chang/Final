@@ -122,7 +122,7 @@ Frame Root {
             7.843137;
            0.000000; 0.000000; 0.000000;;
            0.000000; 0.000000; 0.000000;;
-          TextureFilename {"Cor4.png";}
+          TextureFilename {"Room4.png";}
         }
       } // End of Box001 material list
     } // End of Box001 mesh

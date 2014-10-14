@@ -14,8 +14,6 @@ public:
 	FloorRoom();
 	~FloorRoom();
 
-	virtual void init(std::string handle);
-
 	void setTreasure(bool arg);
 	void setArrival(bool arg);
 	void setStairs(bool arg);

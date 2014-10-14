@@ -14,4 +14,5 @@ public:
 	~CorridorFactory();
 
 	FloorCorridor *getCor(std::string handle);
+	FloorRoom *getRoom(std::string handle);
 };

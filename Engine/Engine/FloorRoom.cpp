@@ -6,12 +6,6 @@ FloorRoom::FloorRoom()
 FloorRoom::~FloorRoom()
 {}
 
-void FloorRoom::init(std::string handle)
-{
-	setHandle("room");
-	setName(handle);
-	set3D(true);
-}
 
 void FloorRoom::setArrival(bool arg)
 {
