@@ -43,7 +43,7 @@ void Slime::levelUp()
 		stats.defense += 4;
 		stats.resist += 5;
 		stats.speed += 3;
-		stats.xp = 0;
+		stats.xp += (stats.xp * 0.3f);
 	}
 
 }
