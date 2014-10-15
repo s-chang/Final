@@ -105,18 +105,21 @@ int Town::update()
 			if(c->cursorPos.x > 551 && c->cursorPos.x <650
 				&& c->cursorPos.y > 347 && c->cursorPos.y < 367){
 					goToFloor = 1;
+					player.setTranslate(-37.0f,0.0f,-7.7f);
 					return TOWER;
 			}
 			if(c->cursorPos.x > 551 && c->cursorPos.x <650
 				&& c->cursorPos.y > 390 && c->cursorPos.y < 410
 				/*&& player.clearedFifth()*/){
 					goToFloor = 5;
+					player.setTranslate(-37.0f,0.0f,-7.7f);
 					return TOWER;
 			}
 			if(c->cursorPos.x > 551 && c->cursorPos.x <660
 				&& c->cursorPos.y > 427 && c->cursorPos.y < 447
 				/*&& player.clearedTenth()*/){
 					goToFloor = 10;
+					player.setTranslate(-37.0f,0.0f,-7.7f);
 					return TOWER;
 			}
 		}
