@@ -15,6 +15,8 @@ private:
 	
 	Camera cam;
 	Town(void);
+
+	void resetCam();
 public:
 	static Town* instance();
 	~Town(void);

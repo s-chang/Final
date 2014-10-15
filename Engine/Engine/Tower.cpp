@@ -13,6 +13,9 @@ Tower::Tower(void)
 	towerstate = 0;
 	enterFromTown = true;
 	chestHelp = false;
+	exitNow = false;
+	itemName = "Nothing";
+	convertItemName = L"Nothing";
 
 	RECT tempR;
 	tempR.top = 50;
@@ -29,8 +32,28 @@ Tower::Tower(void)
 	itemGetBackground.setTranslate(200.0f, 62.5f, 0.0f);
 	itemGetBackground.setScale(3.0f, 2.0f, 0.0f);
 
-	miniTimer = 0.0f;
+	RECT r;
+	r.left = 100;
+	r.top = 30;
+	exitText.setText(L"Do you want to exit?");
+	exitText.setRect(r);
 	
+	r.left = 170;
+	r.right = 260;
+	r.top = 60;
+	r.bottom = 90;
+	exitYes.setText(L"Yes");
+	exitYes.setTranslate(215.0f, 85.0f, 0.0f);
+	exitYes.setRect(r);
+
+	r.top = 90;
+	r.bottom = 120;
+	exitNo.setText(L"No");
+	exitNo.setTranslate(215.0f, 115.0f, 0.0f);
+	exitNo.setRect(r);
+
+	miniTimer = 0.0f;
+
 
 	//set player position
 	playerX = player.getTranslate().x;
@@ -72,7 +95,7 @@ void Tower::shutdown()
 int Tower::update()
 {
 	Engine::Input* input = Engine::Input::instance();
-
+	
 	const int ENTER = 0, MOVE = 1, FIGHT = 2, DEATH = 3, EXIT = 4;
 
 	const float speed = 15.0f * Engine::Timer::instance()->getDT();
@@ -111,7 +134,6 @@ int Tower::update()
 
 
 			//change text for current floor
-
 			swprintf_s(tempText, 20, L"Floor %d", currentFloor); 
 			floortext.setText(tempText);
 
@@ -120,172 +142,215 @@ int Tower::update()
 		}
 	case MOVE:
 		{
-			if(loop)
-				miniTimer -= Engine::Timer::instance()->getDT();
-			
-			if(miniTimer < 0.0f)
+			if(exitNow)
 			{
-				loop = false;
-				miniTimer = 0.0f;
-			}
-
-			//check player defeat
-			if(Player::instance()->checkDeath())
-			{
-				towerstate = DEATH;
-				break;
-			}
-
-			//push the statusMenu state if G is pressed
-			if(input->push_button(DIK_G))
-			{
-				if(!input->check_button_down(DIK_G))
+				if( exitYes.checkOn(Engine::Cursor::instance()->cursorPos.x, Engine::Cursor::instance()->cursorPos.y, 3))
 				{
-					input->set_button(DIK_G,true);
-					return STATUSMENU;
-				}
-			} else input->set_button(DIK_G,false);
-
-
-			if(input->push_button(DIK_W))
-			{
-				playerZ += speed;
-				player.setRotate(0.0f, 180.0f, 0.0f);
-				++slowcount;
-				if(slowcount == limiter)
-				{
-					slowcount = 0;
-					--stepCounter;
-				}
-			}
-
-			if(input->push_button(DIK_S))
-			{
-				playerZ -= speed;
-				player.setRotate(0.0f, 0.0f, 0.0f);
-				++slowcount;
-				if(slowcount == limiter)
-				{
-					slowcount = 0;
-					--stepCounter;
-				}
-
-			}
-
-			if(input->push_button(DIK_A))
-			{
-				playerX -= speed;
-				player.setRotate(0.0f, 90.0f, 0.0f);
-				++slowcount;
-				if(slowcount == limiter)
-				{
-					slowcount = 0;
-					--stepCounter;
-				}
-
-			}
-			if(input->push_button(DIK_D))
-			{
-				playerX += speed;
-				player.setRotate(0.0f, 270.0f, 0.0f);
-				++slowcount;
-				if(slowcount == limiter)
-				{
-					slowcount = 0;
-					--stepCounter;
-				}
-			}
-
-
-			Floor::instance()->checkCollision(playerX, playerZ);
-
-			//check for collision with chest
-			Floor::instance()->checkChest(playerX, playerZ);
-
-			if(Floor::instance()->rangeChest(playerX, playerZ))
-			{
-				chestHelp = true;
-				//check for On and set to temp variable
-				FloorRoom* temp = NULL;
-
-				for(unsigned int i = 0; i < Floor::instance()->getRooms().size(); i++)
-				{
-					if(Floor::instance()->getRooms()[i]->getOn())
-						temp = Floor::instance()->getRooms()[i];
-				}
-
-			
-				if(input->check_mouse_button(LEFT_MOUSE_BUTTON))
-				{
-					if(!input->check_button_down(DIK_F))
+					exitYes.setColor(D3DCOLOR_ARGB(255,255,255,0));
+					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON))
 					{
-						input->set_button(DIK_F,true);
-						
-						//check if the room has a chest
-						if(temp->getTreasure())
-						{
-							//set chest to false
-							temp->setTreasure(false);
-							Floor::instance()->removeChest(temp->getX(), temp->getY());
-							loop = true;
-							miniTimer = 3.0f;
-							getItem();	
-							
-						}
+						exitNow = false;
+						towerstate = EXIT;
 					}
 				}else
 				{
-					input->set_button(DIK_F, false);
-					chestHelp = false;
+					exitYes.setColor(D3DCOLOR_ARGB(255,255,255,255));
 				}
 
-			}
+				if(exitNo.checkOn(Engine::Cursor::instance()->cursorPos.x, Engine::Cursor::instance()->cursorPos.y, 3))
+				{
+					exitNo.setColor(D3DCOLOR_ARGB(255,255,255,0));
+					if(Engine::Input::instance()->check_mouse_button(LEFT_MOUSE_BUTTON))
+					{
+						exitNow = false;						
+					}
+				}else
+				{
+					exitNo.setColor(D3DCOLOR_ARGB(255,255,255,255));
+				}
 
-			//check for collision with stairs
-			if(Floor::instance()->checkStairs(playerX, playerZ))
+				break;
+			}else
 			{
-				++currentFloor;
-				towerstate = ENTER;
-				stepCounter = rand() % 5 + 15;
+				if(loop)
+					miniTimer -= Engine::Timer::instance()->getDT();
 
-				if(currentFloor > 5)
+				if(miniTimer < 0.0f)
 				{
-					Player::instance()->fifthComplete();
+					loop = false;
+					miniTimer = 0.0f;
 				}
 
-				if(currentFloor > 10)
+				//check player defeat
+				if(Player::instance()->checkDeath())
 				{
-					Player::instance()->tenthComplete();
+					towerstate = DEATH;
+					break;
 				}
 
-				if(currentFloor > 15)
+
+				//push the statusMenu state if G is pressed
+				if(input->push_button(DIK_G))
 				{
-					currentFloor = 1;
+					if(!input->check_button_down(DIK_G))
+					{
+						input->set_button(DIK_G,true);
+						return STATUSMENU;
+					}
+				} else input->set_button(DIK_G,false);
+
+
+				if(input->push_button(DIK_W))
+				{
+					playerZ += speed;
+					player.setRotate(0.0f, 180.0f, 0.0f);
+					++slowcount;
+					if(slowcount == limiter)
+					{
+						slowcount = 0;
+						--stepCounter;
+					}
+				}
+
+				if(input->push_button(DIK_S))
+				{
+					playerZ -= speed;
+					player.setRotate(0.0f, 0.0f, 0.0f);
+					++slowcount;
+					if(slowcount == limiter)
+					{
+						slowcount = 0;
+						--stepCounter;
+					}
+
+				}
+
+				if(input->push_button(DIK_A))
+				{
+					playerX -= speed;
+					player.setRotate(0.0f, 90.0f, 0.0f);
+					++slowcount;
+					if(slowcount == limiter)
+					{
+						slowcount = 0;
+						--stepCounter;
+					}
+
+				}
+				if(input->push_button(DIK_D))
+				{
+					playerX += speed;
+					player.setRotate(0.0f, 270.0f, 0.0f);
+					++slowcount;
+					if(slowcount == limiter)
+					{
+						slowcount = 0;
+						--stepCounter;
+					}
+				}
+
+
+				Floor::instance()->checkCollision(playerX, playerZ);
+
+				//check for collision with chest
+				Floor::instance()->checkChest(playerX, playerZ);
+
+				if(Floor::instance()->rangeChest(playerX, playerZ))
+				{
+					chestHelp = true;
+					//check for On and set to temp variable
+					FloorRoom* temp = NULL;
+
+					for(unsigned int i = 0; i < Floor::instance()->getRooms().size(); i++)
+					{
+						if(Floor::instance()->getRooms()[i]->getOn())
+							temp = Floor::instance()->getRooms()[i];
+					}
+
+
+					if(input->push_button(DIK_F))
+					{
+						if(!input->check_button_down(DIK_F))
+						{
+							input->set_button(DIK_F,true);
+
+							//check if the room has a chest
+							if(temp->getTreasure())
+							{
+								//set chest to false
+								temp->setTreasure(false);
+								Floor::instance()->removeChest(temp->getX(), temp->getY());
+								loop = true;
+								miniTimer = 3.0f;
+								getItem();	
+
+							}
+						}
+					}else
+					{
+						input->set_button(DIK_F, false);
+						chestHelp = false;
+					}
+
+				}
+
+				//check for collision with exit
+				if(Floor::instance()->checkExit(playerX, playerZ) )
+				{
+					if( input->push_button(DIK_F))
+					{
+						if(!input->check_button_down(DIK_F))
+						{
+							input->set_button(DIK_F, true);
+							exitNow = true;
+							break;
+						}
+					}else
+							input->set_button(DIK_F, false);
+				}
+
+				//check for collision with stairs
+				if(Floor::instance()->checkStairs(playerX, playerZ))
+				{
+					++currentFloor;
 					towerstate = ENTER;
 					stepCounter = rand() % 5 + 15;
-					return TOWN;
+
+					if(currentFloor > 5)
+					{
+						Player::instance()->fifthComplete();
+					}
+
+					if(currentFloor > 10)
+					{
+						Player::instance()->tenthComplete();
+					}
+
+					if(currentFloor > 15)
+					{
+						currentFloor = 1;
+						towerstate = ENTER;
+						stepCounter = rand() % 5 + 15;
+						return TOWN;
+					}
+					break;
+
 				}
+
+				//if the stepCounter is true, set battle to true, switch to battle state
+				if(stepCounter == 0)
+				{
+					towerstate = FIGHT;
+				}
+
+				player.setTranslate(playerX, 0.0f, playerZ);
+				cam.setLookAt(player.getTranslate().x, 5.0f, player.getTranslate().z);
+				cam.setEyePos(player.getTranslate().x, cam.getEyePos().y, player.getTranslate().z - 20.0f);
+				cam.setProj();
+
 				break;
-
 			}
-
-
-			//if the stepCounter is true, set battle to true, switch to battle state
-			if(stepCounter == 0)
-			{
-				towerstate = FIGHT;
-			}
-
-
-			player.setTranslate(playerX, 0.0f, playerZ);
-			cam.setLookAt(player.getTranslate().x, 5.0f, player.getTranslate().z);
-			cam.setEyePos(player.getTranslate().x, cam.getEyePos().y, player.getTranslate().z - 20.0f);
-			cam.setProj();
-
-			break;
 		}
-
-
 	case FIGHT:
 		{
 			towerstate = MOVE;
@@ -305,6 +370,7 @@ int Tower::update()
 		}
 	case EXIT:
 		{
+			Player::instance()->restoreCharacters();
 			towerstate = ENTER;
 			enterFromTown = true;
 			stepCounter = rand() % 5 + 15;
@@ -334,16 +400,17 @@ void Tower::render()
 			}
 
 			//draw rooms
-
-
 			for(unsigned int i = 0; i < Floor::instance()->getRooms().size(); i++)
 			{
 				graphics->render(Floor::instance()->getRooms()[i]->getInfo(), &cam);
-			
+
 			}
 
 			//Draw stairs
 			graphics->render(Floor::instance()->getStairs(), &cam);
+
+			//Draw exit
+			graphics->render(Floor::instance()->getExit(), &cam);
 
 			//draw treasure chests
 			for(unsigned int i = 0; i < Floor::instance()->getChests().size(); i++)
@@ -358,23 +425,33 @@ void Tower::render()
 			{				
 				graphics->render(textBackground, &cam);
 
-				if(loop)
+				if(loop || exitNow)
 				{
-				//draw background for confirm
+					//draw background for confirm
 					graphics->render(itemGetBackground, &cam);
 				}
 
-			
 				Engine::DX::instance()->getSprite()->End();
 				//render floor text
 				Engine::Text::instance()->render(floortext);
-				
+
 				//render item get text
 				if(loop)
 				{
 					Engine::Text::instance()->render((long)(itemGetBackground.getTranslate().y-12.5f), (long)(itemGetBackground.getTranslate().x-100), ItemText, D3DCOLOR_ARGB(255,255,255,255));
 				}
-							
+
+				if(exitNow)
+				{
+					Engine::Text::instance()->render(exitText);
+					Engine::Text::instance()->render(exitYes);
+					Engine::Text::instance()->render(exitNo);
+				}
+
+			}
+			if(SUCCEEDED(Engine::DX::instance()->getSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK))){
+				Engine::Graphics::instance()->drawCursor();
+				Engine::DX::instance()->getSprite()->End();
 			}
 
 		}
@@ -401,259 +478,127 @@ void Tower::getItem()
 			getMidItem();
 			break;
 		}
-	 case 13: case 14:
+	case 13: case 14:
 		{
 			getHighItem();
 			break;
 		}
 	default:
-		break;								
-
+		break;				
 	}
 }
 
 void Tower::getLowItem()
 {
 	int temp = rand() % 25;
+	bool gold = false;
 	switch(temp)
 	{
-	case 0 : 
-		{
-			swprintf_s(ItemText, 128, L"You received Clothes.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Clothes"));
-			break;
-		}
-
-	case 1: 
-		{
-			swprintf_s(ItemText, 128, L"You received Leather Armor.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Leather Armor"));
-			break;
-		}
-	case 2: 
-		{
-			swprintf_s(ItemText, 128, L"You received Splintered Staff.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Splintered Staff"));
-			break;
-		}
-	case 3: 
-		{
-			swprintf_s(ItemText, 128, L"You received Rod.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Rod"));
-			break;
-		}
-	case 4: 
-		{
-			swprintf_s(ItemText, 128, L"You received Weathered Spear.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Weathered Spear"));
-			break;
-		}
-	case 5:
-		{
-			swprintf_s(ItemText, 128, L"You received Short Spear.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Short Spear"));
-			break;
-		}
-	case 6:
-		{
-			swprintf_s(ItemText, 128, L"You received Chipped Dagger.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Chipped Dagger"));
-			break;
-		}
-	case 7:
-		{
-			swprintf_s(ItemText, 128, L"You received Knife.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Knife"));
-			break;
-		}
+	case 0: {	itemName = "Clothes";			break;	}
+	case 1: {	itemName = "Leather Armor";		break;	}
+	case 2: {	itemName = "Splintered Staff";  break;  }
+	case 3: {	itemName = "Rod";				break;  }
+	case 4: {	itemName = "Weathered Spear";	break;  }
+	case 5: {	itemName = "Short Spear";		break;  }
+	case 6: {	itemName = "Chipped Dagger";    break;  }
+	case 7: {	itemName = "Knife";				break;  }
 	case 8: case 9: case 10: case 11:
-		{
-			swprintf_s(ItemText, 128, L"You received Potion.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Potion"));
-			break;
-		}
+		{	itemName = "Potion";			break;  } 		
 	case 12: case 13: case 14: case 15:
-		{
-			swprintf_s(ItemText, 128, L"You received Ether.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Ether"));
-			break;
-		}
+		{	itemName = "Ether";				break;	}			
 	case 16: case 17: case 18: case 19:
-		{
-			swprintf_s(ItemText, 128, L"You received Revive.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Revive"));
-			break;
-		}
+		{	itemName = "Revive";			break;  }
 	default:
 		{
+			gold = true;
 			int gold = rand() % 50 + 50;
 			swprintf_s(ItemText, 128, L"You received %d gold.", gold);
 			Player::instance()->adjustGold(gold);
 			break;
 		}
 	}
+
+	if(!gold)
+	{
+		convertItemName = std::wstring(itemName.begin(), itemName.end());
+		swprintf_s(ItemText, 128, L"You received %s.", convertItemName.c_str());
+		Player::instance()->addItem(ItemFactory::instance()->getItem(itemName));
+	}
+
 }
 
 void Tower::getMidItem()
 {
 	int temp = rand() % 25;
+	bool gold = false;
 	switch(temp)
 	{
-	case 0 : 
-		{
-			swprintf_s(ItemText, 128, L"You received Chain Mail.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Chain Mail"));
-			break;
-		}
-
-	case 1: 
-		{
-			swprintf_s(ItemText, 128, L"You received Enchanted Robe.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Enchanted Robe"));
-			break;
-		}
-	case 2: 
-		{
-			swprintf_s(ItemText, 128, L"You received Staff.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Staff"));
-			break;
-		}
-	case 3: 
-		{
-			swprintf_s(ItemText, 128, L"You received Rod of Light.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Rod of Light"));
-			break;
-		}
-	case 4: 
-		{
-			swprintf_s(ItemText, 128, L"You received Harpoon.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Harpoon"));
-			break;
-		}
-	case 5:
-		{
-			swprintf_s(ItemText, 128, L"You received Spear.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Spear"));
-			break;
-		}
-	case 6:
-		{
-			swprintf_s(ItemText, 128, L"You received Sting.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Sting"));
-			break;
-		}
-	case 7:
-		{
-			swprintf_s(ItemText, 128, L"You received Needle.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Needle"));
-			break;
-		}
+	case 0: {	itemName = "Chain Mail";			break;	}
+	case 1: {	itemName = "Enchanted Robe";		break;	}
+	case 2: {	itemName = "Staff";					break;  }
+	case 3: {	itemName = "Rod of Light";			break;  }
+	case 4: {	itemName = "Harpoon";				break;  }
+	case 5: {	itemName = "Spear";					break;  }
+	case 6: {	itemName = "Sting";					break;  }
+	case 7: {	itemName = "Needle";				break;  }
 	case 8: case 9: case 10: case 11:
-		{
-			swprintf_s(ItemText, 128, L"You received Potion.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Potion"));
-			break;
-		}
+		{	itemName = "Potion";				break;  } 		
 	case 12: case 13: case 14: case 15:
-		{
-			swprintf_s(ItemText, 128, L"You received Ether.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Ether"));
-			break;
-		}
+		{	itemName = "Ether";					break;	}			
 	case 16: case 17: case 18: case 19:
-		{
-			swprintf_s(ItemText, 128, L"You received Revive.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Revive"));
-			break;
-		}
+		{	itemName = "Revive";				break;  }
 	default:
 		{
+			gold = true;
 			int gold = rand() % 100 + 100;
 			swprintf_s(ItemText, 128, L"You received %d gold.", gold);
 			Player::instance()->adjustGold(gold);
 			break;
 		}
 	}
+
+	if(!gold)
+	{
+		convertItemName = std::wstring(itemName.begin(), itemName.end());
+		swprintf_s(ItemText, 128, L"You received %s.", convertItemName.c_str());
+		Player::instance()->addItem(ItemFactory::instance()->getItem(itemName));
+	}
 }
 
 void Tower::getHighItem()
 {
 	int temp = rand() % 25;
+	bool gold = false;
 	switch(temp)
 	{
-	case 0 : 
-		{
-			swprintf_s(ItemText, 128, L"You received Plate Armor.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Plate Armor"));
-			break;
-		}
-
-	case 1: 
-		{
-			swprintf_s(ItemText, 128, L"You received Dragon Armor.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Dragon Armor"));
-			break;
-		}
-	case 2: 
-		{
-			swprintf_s(ItemText, 128, L"You received Staff of Wisdom.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Staff of Wisdom"));
-			break;
-		}
-	case 3: 
-		{
-			swprintf_s(ItemText, 128, L"You received Iron Staff.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Iron Staff"));
-			break;
-		}
-	case 4: 
-		{
-			swprintf_s(ItemText, 128, L"You received Lance.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Lance"));
-			break;
-		}
-	case 5:
-		{
-			swprintf_s(ItemText, 128, L"You received Gae Bolg.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Gae Bolg"));
-			break;
-		}
-	case 6:
-		{
-			swprintf_s(ItemText, 128, L"You received Dagger.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Dagger"));
-			break;
-		}
-	case 7:
-		{
-			swprintf_s(ItemText, 128, L"You received Night's Bane.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Night's Bane"));
-			break;
-		}
+	case 0: {	itemName = "Plate Armor";			break;	}
+	case 1: {	itemName = "Dragon Armor";			break;	}
+	case 2: {	itemName = "Staff of Wisdom";		break;  }
+	case 3: {	itemName = "Iron Staff";			break;  }
+	case 4: {	itemName = "Lance";					break;  }
+	case 5: {	itemName = "Gae Bolg";				break;  }
+	case 6: {	itemName = "Dagger";				break;  }
+	case 7: {	itemName = "Night's Bane";			break;  }
 	case 8: case 9: case 10: case 11:
-		{
-			swprintf_s(ItemText, 128, L"You received Potion.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Potion"));
-			break;
-		}
+		{	itemName = "Potion";				break;  } 		
 	case 12: case 13: case 14: case 15:
-		{
-			swprintf_s(ItemText, 128, L"You received Ether.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Ether"));
-			break;
-		}
+		{	itemName = "Ether";					break;	}			
 	case 16: case 17: case 18: case 19:
-		{
-			swprintf_s(ItemText, 128, L"You received Revive.");
-			Player::instance()->addItem(ItemFactory::instance()->getItem("Revive"));
-			break;
-		}
+		{	itemName = "Revive";				break;  }
 	default:
 		{
+			gold = true;
 			int gold = rand() % 200 + 200;
 			swprintf_s(ItemText, 128, L"You received %d gold.", gold);
 			Player::instance()->adjustGold(gold);
 			break;
 		}
+	}
+
+	if(!gold)
+	{
+		convertItemName = std::wstring(itemName.begin(), itemName.end());
+		swprintf_s(ItemText, 128, L"You received %s.", convertItemName.c_str());
+		Player::instance()->addItem(ItemFactory::instance()->getItem(itemName));
 	}
 }

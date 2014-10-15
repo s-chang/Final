@@ -12,10 +12,18 @@ private:
 	float playerX, playerZ;
 
 	bool enterFromTown;
+	bool exitNow;
+
+	std::string itemName;
+	std::wstring convertItemName;
 	int towerstate;
 
 	Drawable player;
 	Drawable floortext;
+
+	Drawable exitText;
+	Drawable exitYes;
+	Drawable exitNo;
 	
 	Drawable textBackground;
 	Drawable itemGetBackground;

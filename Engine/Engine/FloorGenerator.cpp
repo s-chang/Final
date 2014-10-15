@@ -284,26 +284,10 @@ void FloorGenerator::generateMap(int floornum)
 	//Determine how many rooms the floor will have.
 	switch(floornum)
 	{
-	case 1: case 2: case 3: case 4:
-		{
-			room_num = rand() % 2 + 5;
-			break;
-		}	
-	case 6: case 7: case 8: case 9:
-		{
-			room_num = rand() % 2 + 7;
-			break;
-		}	
-	case 11: case 12: case 13: case 14:
-		{
-			room_num = rand() % 2 + 9;
-			break;
-		}
-	case 5: case 10: case 15:
-		{
-			room_num = 2;
-			break;
-		}
+	case 1: case 2: case 3: case 4:	{ room_num = rand() % 2 + 5; 	break;	}	
+	case 6: case 7: case 8: case 9:	{ room_num = rand() % 2 + 7;	break;	}	
+	case 11: case 12: case 13: case 14: { room_num = rand() % 2 + 9;	break;	}
+	case 5: case 10: case 15:       { room_num = 2;     			break;	}
 	}
 
 	//Determine the starting point of the first room.
@@ -318,7 +302,6 @@ void FloorGenerator::generateMap(int floornum)
 	//decrement the amount of rooms
 	room_max = room_num;
 	--room_num;
-
 
 	unsigned char begin = ' ';
 
@@ -570,114 +553,27 @@ void FloorGenerator::addRC(int floornum)
 			//Check the start queue to determine what to add next
 			switch(icon)
 			{
-			case oneD: case roomoneD:
-				{
-					checkAvailableD(posX, posY, type);
-					start.pop();
-					break;
-				}//end oneD
-			case oneU: case roomoneU:
-				{
-					checkAvailableU(posX, posY, type);
-					start.pop();
-					break;
-				}//end oneU
-			case oneL: case roomoneL:
-				{
-					checkAvailableL(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case oneR: case roomoneR:
-				{
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoH: case roomtwoH:
-				{
-					checkAvailableL(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoV: case roomtwoV:
-				{
-					checkAvailableU(posX, posY, type);
-					checkAvailableD(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoUR: case roomtwoUR:
-				{
-					checkAvailableU(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoDR: case roomtwoDR:
-				{
-					checkAvailableD(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoDL: case roomtwoDL:
-				{
-					checkAvailableD(posX, posY, type);
-					checkAvailableL(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case twoUL: case roomtwoUL:
-				{
-					checkAvailableU(posX, posY, type);
-					checkAvailableL(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case threeU: case roomthreeU:
-				{
-					checkAvailableU(posX, posY, type);
-					checkAvailableL(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case threeD: case roomthreeD:
-				{
-					checkAvailableD(posX, posY, type);
-					checkAvailableL(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case threeL: case roomthreeL:
-				{
-					checkAvailableL(posX, posY, type);
-					checkAvailableD(posX, posY, type);
-					checkAvailableU(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case threeR: case roomthreeR:
-				{
-					checkAvailableR(posX, posY, type);
-					checkAvailableD(posX, posY, type);
-					checkAvailableU(posX, posY, type);
-					start.pop();
-					break;
-				}
-			case four: case roomfour:
-				{
-					checkAvailableL(posX, posY, type);
-					checkAvailableR(posX, posY, type);
-					checkAvailableD(posX, posY, type);
-					checkAvailableU(posX, posY, type);
-					start.pop();
-					break;
-				}
-
+			case oneD: case roomoneD: { checkAvailableD(posX, posY, type);	start.pop();	break;	}//end oneD
+			case oneU: case roomoneU: {	checkAvailableU(posX, posY, type);	start.pop();	break;	}//end oneU
+			case oneL: case roomoneL: {	checkAvailableL(posX, posY, type);	start.pop();	break;	}
+			case oneR: case roomoneR: {	checkAvailableR(posX, posY, type);	start.pop();	break;	}
+			case twoH: case roomtwoH: {	checkAvailableL(posX, posY, type);	checkAvailableR(posX, posY, type);	start.pop(); break;	}
+			case twoV: case roomtwoV: {	checkAvailableU(posX, posY, type);	checkAvailableD(posX, posY, type);	start.pop(); break;	}
+			case twoUR: case roomtwoUR:	{ checkAvailableU(posX, posY, type); checkAvailableR(posX, posY, type);	start.pop(); break;	}
+			case twoDR: case roomtwoDR: { checkAvailableD(posX, posY, type); checkAvailableR(posX, posY, type);	start.pop(); break;	}
+			case twoDL: case roomtwoDL:	{ checkAvailableD(posX, posY, type); checkAvailableL(posX, posY, type); start.pop(); break;	}
+			case twoUL: case roomtwoUL:	{ checkAvailableU(posX, posY, type); checkAvailableL(posX, posY, type);	start.pop(); break;	}
+			case threeU: case roomthreeU: { checkAvailableU(posX, posY, type); checkAvailableL(posX, posY, type);
+											checkAvailableR(posX, posY, type);	start.pop(); break;         		}
+			case threeD: case roomthreeD: { checkAvailableD(posX, posY, type); checkAvailableL(posX, posY, type);
+											checkAvailableR(posX, posY, type);	start.pop(); break;					}
+			case threeL: case roomthreeL: {	checkAvailableL(posX, posY, type); checkAvailableD(posX, posY, type);
+											checkAvailableU(posX, posY, type);	start.pop(); break;					}
+			case threeR: case roomthreeR: {	checkAvailableR(posX, posY, type); checkAvailableD(posX, posY, type);
+											checkAvailableU(posX, posY, type); start.pop(); break;					}
+			case four: case roomfour: {	checkAvailableL(posX, posY, type); checkAvailableR(posX, posY, type);
+										checkAvailableD(posX, posY, type); checkAvailableU(posX, posY, type);
+										start.pop(); break;															}
 			}//end switch
 		}//end while
 	}//end else

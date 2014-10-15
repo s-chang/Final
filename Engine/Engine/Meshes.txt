@@ -21,3 +21,4 @@ Room3.x room3
 Room4.x room4
 stairs.x stairs
 chest.x chest
+exit.x exit

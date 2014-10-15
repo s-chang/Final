@@ -14,7 +14,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPTSTR lpCmdLin
 {
 
 	//_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	srand(time(NULL));
+	srand(unsigned (time(NULL)));
 	HWND myhWnd = NULL;
 	HINSTANCE myInstance = hInstance;
 	bool window = true;

@@ -47,27 +47,9 @@ private:
 
 	bool leaveRoom4(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
 
-	//bool leaveCor1D(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor1U(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor1L(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor1R(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-
-	//bool leaveCor2H(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor2V(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-
-	//bool leaveCor3D(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor3U(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor3L(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor3R(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-
-	//bool leaveCor2UR(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor2DR(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor2UL(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-	//bool leaveCor2DL(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
-
-	//bool leaveCor4(FloorCorridor* rc, float &playerX, float &playerZ, int &direction);
 	
 	Drawable stairs;
+	Drawable exit;
 	std::vector<Drawable> chest;
 
 public:
@@ -84,9 +66,11 @@ public:
 	bool rangeChest(float &playerX, float &playerZ);
 	bool checkStairs(float &playerX, float &playerZ);
 
+	bool checkExit(float &playerX, float &playerZ);
 	void removeChest(int X, int Y);
 
 	Drawable getStairs();
+	Drawable getExit();
 	std::vector<Drawable> getChests();
 
 	void shutdown();

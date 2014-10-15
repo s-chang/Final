@@ -50,6 +50,11 @@ void Town::init()
 	tutorial = true;
 }
 
+void Town::resetCam()
+{
+	cam.setEyePos(-42.0f, cam.getEyePos().y, cam.getEyePos().z);
+}
+
 void Town::shutdown()
 {
 }
@@ -106,6 +111,7 @@ int Town::update()
 				&& c->cursorPos.y > 347 && c->cursorPos.y < 367){
 					goToFloor = 1;
 					player.setTranslate(-37.0f,0.0f,-7.7f);
+					resetCam();
 					return TOWER;
 			}
 			if(c->cursorPos.x > 551 && c->cursorPos.x <650
@@ -113,6 +119,7 @@ int Town::update()
 				/*&& player.clearedFifth()*/){
 					goToFloor = 5;
 					player.setTranslate(-37.0f,0.0f,-7.7f);
+					resetCam();
 					return TOWER;
 			}
 			if(c->cursorPos.x > 551 && c->cursorPos.x <660
@@ -120,6 +127,7 @@ int Town::update()
 				/*&& player.clearedTenth()*/){
 					goToFloor = 10;
 					player.setTranslate(-37.0f,0.0f,-7.7f);
+					resetCam();
 					return TOWER;
 			}
 		}
