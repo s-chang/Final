@@ -38,21 +38,21 @@ void StatusMain::init()
 	temp.setTranslate(80.0f, 470.0f, 0.0f);
 	portraits.push_back(temp);
 
-	//Init character names and location
-	Drawable tempNames;
-	tempNames.init();
-	tempNames.setTranslate(180.0f, 105.0f, 0.0f);
-	tempNames.setText(L"Grem");
+	////Init character names and location
+	//Drawable tempNames;
+	//tempNames.init();
+	//tempNames.setTranslate(180.0f, 105.0f, 0.0f);
+	//tempNames.setText(L"Grem");
 
-	names.push_back(tempNames);
+	//names.push_back(tempNames);
 
-	tempNames.setTranslate(180.0f, 285.0f, 0.0f);
-	tempNames.setText(L"Lenn");
-	names.push_back(tempNames);
+	//tempNames.setTranslate(180.0f, 285.0f, 0.0f);
+	//tempNames.setText(L"Lenn");
+	//names.push_back(tempNames);
 
-	tempNames.setTranslate(180.0f, 465.0f, 0.0f);
-	tempNames.setText(L"Lazarus");
-	names.push_back(tempNames);
+	//tempNames.setTranslate(180.0f, 465.0f, 0.0f);
+	//tempNames.setText(L"Lazarus");
+	//names.push_back(tempNames);
 
 	//Init character HP, resource, and location
 
@@ -182,10 +182,12 @@ void StatusMain::render()
 
 
 			//Draw Text
-			for(int i = 0; i < MAX_CHARACTERS; i++)
+			/*for(int i = 0; i < MAX_CHARACTERS; i++)
 			{
 				Engine::Text::instance()->render((long)names[i].getTranslate().y, (long)names[i].getTranslate().x, names[i].getPlainText(), names[i].getColor());
-			}
+			}*/
+
+			renderNamesAndStats();
 
 			//Draw Status Commands
 			for(unsigned int i = 0; i < status_commands.size(); i++)
@@ -193,13 +195,7 @@ void StatusMain::render()
 				Engine::Text::instance()->render(status_commands[i].getRect().top, status_commands[i].getRect().left, status_commands[i].getPlainText(), status_commands[i].getColor());
 			}
 
-			RECT rect;
-			rect.left = 650;
-			rect.top = 355;
-			wchar_t tbuffer[64];
-			swprintf_s(tbuffer, 64,L"Gold \n   %d",Player::instance()->getGold());
-			Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
-							DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+			
 
 			//////////////////////////////////////////////
 			// Cursor
@@ -235,4 +231,109 @@ void StatusMain::resetMatrices(D3DXMATRIX &translate, D3DXMATRIX &scale, D3DXMAT
 	D3DXMatrixIdentity(&scale);
 	D3DXMatrixIdentity(&rotate);
 	D3DXMatrixIdentity(&world);
+}
+
+void StatusMain::renderNamesAndStats()
+{
+	Engine::Text* t = Engine::Text::instance();
+
+	RECT rect;
+	rect.top = 70;
+	rect.left = 170;
+	wchar_t tbuffer[64];
+
+	// draw names, health, resource
+	///////////////////////////////////////////////////////////////////////////////// Grem 
+	Grem* grem = Grem::instance();
+	std::string tempString = grem->getName();
+	std::wstring tempWS = L"";
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top += 40;
+	rect.left += 30;
+	swprintf_s(tbuffer, 64,L"Level %d",grem->getStats()->level);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top -= 10;
+	rect.left += 120;
+	swprintf_s(tbuffer, 64,L"Health %d/%d",grem->getStats()->health,grem->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top += 40;
+	swprintf_s(tbuffer, 64,L"Rage %d/%d",grem->getResource(),grem->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	///////////////////////////////////////////////////////////////////////////////////
+	rect.top = 250;
+	rect.left = 170;
+	//////////////////////////////////////////////////////////////////////////////////Lenn
+	Lenn* lenn = Lenn::instance();
+	tempString = lenn->getName();
+	//tempWS = L"";
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top += 40;
+	rect.left += 30;
+	swprintf_s(tbuffer, 64,L"Level %d",lenn->getStats()->level);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top -= 10;
+	rect.left += 120;
+	swprintf_s(tbuffer, 64,L"Health %d/%d",lenn->getStats()->health,lenn->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top += 40;
+	swprintf_s(tbuffer, 64,L"Stamina %d/%d",lenn->getResource(),lenn->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//////////////////////////////////////////////////////////////////////////////////////
+	rect.top = 430;
+	rect.left = 170;
+	//////////////////////////////////////////////////////////////////////////////////Laz
+	Laz* laz = Laz::instance();
+	tempString = laz->getName();
+	//tempWS = L"";
+
+
+	tempWS = std::wstring(tempString.begin(),tempString.end());
+	t->font->DrawText(0, tempWS.c_str(), -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top += 40;
+	rect.left += 30;
+	swprintf_s(tbuffer, 64,L"Level %d",laz->getStats()->level);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	rect.top -= 10;
+	rect.left += 120;
+	swprintf_s(tbuffer, 64,L"Health %d/%d",laz->getStats()->health,laz->getStats()->maxHealth);
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	
+	rect.top += 40;
+	swprintf_s(tbuffer, 64,L"Mana %d/%d",laz->getResource(),laz->getMaxResource());
+	t->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//////////////////////////////////////////////////////////////////////////////////////
+
+	//////////////////////////////////////////////////////////////////////////////////////
+	// Gold
+	//////////////////////////////////////////////////////////////////////////////////////
+	rect.left = 650;
+	rect.top = 355;
+	swprintf_s(tbuffer, 64,L"Gold \n   %d",Player::instance()->getGold());
+	Engine::Text::instance()->font->DrawText(0, tbuffer, -1, &rect, 
+		DT_TOP | DT_LEFT | DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
