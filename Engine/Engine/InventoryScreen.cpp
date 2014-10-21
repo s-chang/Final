@@ -96,7 +96,7 @@ int InventoryScreen::update()
 						break;
 					case 5://Laz
 						if(state == INV_STATES::SELECT_CHAR){
-							useItem(Lenn::instance());
+							useItem(Laz::instance());
 						}
 						break;
 					}
