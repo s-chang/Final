@@ -1,8 +1,3 @@
-/**
-Written by:  Smyth Chang
-Description:  The DX class initializes DirectX for use
-
-*/
 #pragma once
 
 #pragma comment(lib, "winmm.lib")

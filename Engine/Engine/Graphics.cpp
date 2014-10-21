@@ -30,7 +30,7 @@ Engine::Graphics* Engine::Graphics::instance()
 
 void Engine::Graphics::init()
 {
-	load();
+	loadImages();
 	loadMesh();
 
 	light.defaultInit();
@@ -143,16 +143,15 @@ void Engine::Graphics::render(Drawable object, Camera *cam)
 
 void Engine::Graphics::shutdown()
 {
-	for(unsigned int i = 0; i < storage.size(); i++)
+	for(auto& image: imageStorage)
 	{
-		SAFE_RELEASE(storage[i].texture);
-
+		SAFE_RELEASE(image.second.texture);
 	}
-	storage.clear();
+	imageStorage.clear();
 
-	for(unsigned int i = 0; i < meshStorage.size(); i++)
+	for(auto& mesh: meshStorage)
 	{
-		meshStorage[i].mesh.shutdown();
+		mesh.second.shutdown();
 	}
 	meshStorage.clear();
 
@@ -163,9 +162,9 @@ void Engine::Graphics::shutdown()
 
 }
 
-void Engine::Graphics::load()
+void Engine::Graphics::loadImages()
 {
-	Storage temp_storage;
+	ImageValue temp_storage;
 
 	std::string temp_file_name;
 	std::string temp_handle;
@@ -218,9 +217,9 @@ void Engine::Graphics::load()
 			tempStorageData[i].temp_file_name.c_str(), 0, 0, 0, 0,
 			D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT,
 			D3DCOLOR_XRGB(255,255,255), &temp_storage.info, 0, &temp_storage.texture);
-		temp_storage.handle = tempStorageData[i].temp_handle;
+		//temp_storage.handle = tempStorageData[i].temp_handle;
 
-		storage.push_back( temp_storage );
+		imageStorage[tempStorageData[i].temp_handle] = temp_storage;
 		//set pointer to nullptr before reusing
 		temp_storage.texture = nullptr;
 	}
@@ -278,15 +277,15 @@ void Engine::Graphics::loadMesh()
 	for(unsigned int i = 0; i < temp_data_storage.size(); i++)
 	{
 		//Temp storage used to load data needed
-		MeshStorage temp_storage;
+		std::string tempString;
+		Mesh tempMesh;
 
 
 		//temp_storage = new MeshStorage;
-		temp_storage.handle = temp_data_storage[i].temp_data_handle;
-		temp_storage.mesh.loadTexturedMesh(temp_data_storage[i].temp_data_filename.c_str(), adjBuffer);
+		tempString = temp_data_storage[i].temp_data_handle;
+		tempMesh.loadTexturedMesh(temp_data_storage[i].temp_data_filename.c_str(), adjBuffer);
 
-		meshStorage.push_back(temp_storage);
-
+		meshStorage[tempString] = tempMesh;
 		//clear temp storage mesh before reuse
 		//TODO: FIX MEMORY LEAK
 		//temp_storage.mesh.shutdown();	
@@ -299,39 +298,26 @@ void Engine::Graphics::loadMesh()
 
 pDirectTexture Engine::Graphics::getTexture(const std::string handle)
 {
-	//TODO: use search algorithm
-	for(unsigned int i = 0; i < storage.size(); i++)
-	{
-		if(handle == storage[i].handle)
-			return storage[i].texture;
-	}
-
-	return error;
-	//TODO: Throw error exception if no texture is found
+	if (imageStorage.find(handle) != imageStorage.end())
+		return imageStorage[handle].texture;
+	else
+		return error;
 }
 
 iInfo Engine::Graphics::getInfo(const std::string handle)
 {
-	//TODO: use search algorithm
-	for(unsigned int i = 0; i < storage.size(); i++)
-	{
-		if(handle == storage[i].handle)
-			return storage[i].info;
-	}
-	//TODO: Throw error exception if no image information is found.
-	return errorinfo;
+	if (imageStorage.find(handle) != imageStorage.end())
+		return imageStorage[handle].info;
+	else
+		return errorinfo;
 }
 
 Mesh* Engine::Graphics::getMesh(const std::string handle)
 {
-	//TODO: use search algorithm
-	for(unsigned int i = 0; i < meshStorage.size(); i++)
-	{
-		if(handle == meshStorage[i].handle)
-			return &meshStorage[i].mesh;
-	}
-
-	//TODO: return error mesh if no mesh is found.
+	if (meshStorage.find(handle) != meshStorage.end())
+		return &meshStorage[handle];
+	else
+		return NULL;
 }
 
 void Engine::Graphics::Draw2DObject(Drawable & object){
@@ -377,7 +363,7 @@ void Engine::Graphics::drawCursor(){
 	Engine::DX::instance()->getSprite()->SetTransform(&worldMat);
 
 	Engine::DX::instance()->getSprite()->Draw(
-		getTexture(c->handle), 0,
-		&dVec3(getInfo(c->handle).Width *0.5f, getInfo(c->handle).Height *0.5f, 0.0f), 0,
+		getTexture(c->getHandle()), 0,
+		&dVec3(getInfo(c->getHandle()).Width *0.5f, getInfo(c->getHandle()).Height *0.5f, 0.0f), 0,
 		D3DCOLOR_ARGB(255,255,255,255));
 }

@@ -78,14 +78,13 @@ int Options::update()
 					switch(i)
 					{
 					case 0: // credits TODO: run credits
-						break;
 					case 1: // - TODO: lower volume
 					case 2: // + TODO: raise volume
-						break;
 					case 3: // TODO: Fullscreen
 					case 4: // TODO: window
 					case 5: // TODO: keyboard
 					case 6: // TODO: controller
+						break;
 					case 7: // back
 						return RETURN;
 					default:

@@ -1,8 +1,3 @@
-/**
-Written by:  Smyth Chang
-Description:  The Drawable class holds all of the information needed for the Graphics class to use
-*/
-
 #pragma once
 
 #include <d3d9.h>

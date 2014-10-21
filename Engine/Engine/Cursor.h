@@ -5,7 +5,6 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
-//directInput libraries
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #pragma comment (lib, "dinput8.lib")
@@ -18,12 +17,13 @@ namespace Engine
 	class Cursor 
 	{
 	private:
+		std::string handle;
 		Cursor();	
 	public:
 		~Cursor();
 		static Cursor* instance();
 		void update(long x, long y);
-		D3DXVECTOR2		cursorPos;
-		std::string handle;
+		std::string getHandle();
+		D3DXVECTOR2	cursorPos;
 	};
 };

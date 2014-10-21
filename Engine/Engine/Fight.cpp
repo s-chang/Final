@@ -5,11 +5,13 @@ Fight::Fight(void) : BattleCommand()
 {
 	name = "Fight";
 	help = "Use basic attack on an enemy";
+	enemyList.clear();
 }
 
 
 Fight::~Fight(void)
 {
+	enemyList.clear();
 }
 
 void Fight::init()

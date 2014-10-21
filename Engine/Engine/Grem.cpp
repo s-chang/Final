@@ -12,6 +12,11 @@ Grem::~Grem(void)
 		delete availableCommands.back();
 		availableCommands.pop_back();
 	}
+	while(!skills.empty()){
+		delete skills.back();
+		skills.pop_back();
+	}
+	
 	delete weapon;
 	delete armor;
 	delete acc1;
@@ -111,7 +116,9 @@ void Grem::levelUp()
 	stats.defense += 6;
 	stats.resist += 4;
 	stats.speed += 3;
-	stats.xp = 0;
+	stats.xp -= xpToLevel;
+	if(stats.xp <0)
+		stats.xp =0;
 	xpToLevel += (int)((float) xpToLevel * 0.3f);
 	if(stats.level == 20)
 		xpToLevel = 0;
@@ -164,7 +171,7 @@ Item* Grem::getItem(int slot)
 void Grem::addXP(int amount)
 {
 	stats.xp += amount;
-	if(stats.xp >= xpToLevel)
+	while(stats.xp >= xpToLevel)
 		levelUp();
 };
 void Grem::adjustResource(int amount)

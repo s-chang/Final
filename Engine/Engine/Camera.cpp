@@ -39,8 +39,6 @@ void Camera::setProj()
 								(float)width / (float) height,
 								m_near,
 								m_far);
-								
-							
 
 	//Transform
 	Engine::DX::instance()->getDevice()->SetTransform(D3DTS_PROJECTION, &m_projMat);

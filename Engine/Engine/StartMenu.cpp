@@ -117,8 +117,8 @@ int StartMenu::update()
 		///////////////////////////////////////////////
 		// debug instaswitch to battle
 		///////////////////////////////////////////////
-		if(input->push_button(DIK_B))
-			return BATTLE;
+		/*if(input->push_button(DIK_B))
+			return BATTLE;*/
 	}
 	return 0;
 }

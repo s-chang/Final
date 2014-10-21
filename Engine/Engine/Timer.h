@@ -1,8 +1,3 @@
-/**
-Written by:  Smyth Chang
-Description: The Timer class returns the change in time between the previous loop and the current one.
-*/
-
 #pragma once
 #include <Windows.h>
 

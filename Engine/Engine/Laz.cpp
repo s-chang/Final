@@ -12,6 +12,11 @@ Laz::~Laz(void)
 		delete availableCommands.back();
 		availableCommands.pop_back();
 	}
+	while(!skills.empty()){
+		delete skills.back();
+		skills.pop_back();
+	}
+	
 	delete weapon;
 	delete armor;
 	delete acc1;
@@ -101,7 +106,9 @@ void Laz::levelUp()
 	stats.defense += 3;
 	stats.resist += 7;
 	stats.speed += 2;
-	stats.xp = 0;
+	stats.xp -= xpToLevel;
+	if(stats.xp <0)
+		stats.xp =0;
 	manaMax += 10;
 	mana = manaMax; 
 	xpToLevel += (int)((float) xpToLevel * 0.3f);
@@ -157,7 +164,7 @@ Item* Laz::getItem(int slot)
 void Laz::addXP(int amount)
 {
 	stats.xp += amount;
-	if(stats.xp >= xpToLevel)
+	while(stats.xp >= xpToLevel)
 		levelUp();
 };
 void Laz::adjustResource(int amount)

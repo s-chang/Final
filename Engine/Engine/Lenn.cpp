@@ -12,6 +12,11 @@ Lenn::~Lenn(void)
 		delete availableCommands.back();
 		availableCommands.pop_back();
 	}
+	while(!skills.empty()){
+		delete skills.back();
+		skills.pop_back();
+	}
+	
 	delete weapon;
 	delete armor;
 	delete acc1;
@@ -98,7 +103,9 @@ void Lenn::levelUp()
 	stats.defense +=4;
 	stats.resist +=5;
 	stats.speed += 4;
-	stats.xp = 0;
+	stats.xp -= xpToLevel;
+	if(stats.xp < 0)
+		stats.xp = 0;
 	xpToLevel += (int)((float) xpToLevel * 0.3f);
 	if(stats.level == 20)
 		xpToLevel = 0;
@@ -153,7 +160,7 @@ Item* Lenn::getItem(int slot)
 void Lenn::addXP(int amount)
 {
 	stats.xp += amount;
-	if(stats.xp >= xpToLevel)
+	while(stats.xp >= xpToLevel)
 		levelUp();
 };
 void Lenn::adjustResource(int amount)

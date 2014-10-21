@@ -1,14 +1,8 @@
-/**
-Written by:  Smyth Chang
-Description:  The graphics class handles all of the drawing to the screen.
-
-*/
 #pragma once
 #include "Drawable.h"
 
-#include <vector>
 #include <string>
-#include <hash_map>
+#include <map>
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -30,78 +24,40 @@ namespace Engine
 	private:
 		Camera cam;
 		Light light;
-
-		struct Storage
-		{
-			pDirectTexture texture;
-			iInfo	info;
-			std::string handle;		
-		};
-		
-		pDirectTexture error;
-		iInfo errorinfo;
-
-		std::vector<Storage> storage;	
-		
-		void load();		
-
-
-		struct MeshStorage
-		{
-			Mesh mesh;
-			std::string handle;
-		};
-
-		std::vector<MeshStorage> meshStorage;
-		Mesh* getMesh(const std::string handle);
-		void loadMesh();
-		pBuffer adjBuffer;
-		
-				
 		ID3DXBuffer*	m_EffectError;
 		ID3DXEffect*	m_Effect;
 		D3DXHANDLE		m_tech;
+		pBuffer			adjBuffer;
+
+		pDirectTexture error;
+		iInfo errorinfo;
+
+		struct ImageValue
+		{
+			pDirectTexture texture;
+			iInfo	info;
+		};
+
+		std::map<std::string, ImageValue> imageStorage;
+		std::map<std::string, Mesh> meshStorage;
+
+		void loadImages();
+		void loadMesh();
 
 		Graphics();
 	public:
+		static Graphics* instance();
 		~Graphics();
 
-		/**
-		Name:		instance
-		Parameters: none
-		Return:		Graphics
-		Description: Returns the only instance of Graphics
-		*/
-		static Graphics* instance();
-
-		/**
-		Name:		init
-		Parameters:	none
-		Return:		void
-		Description: initializes the graphics class
-		*/
 		void init();
-
-		/**
-		Name:		render
-		parameters:	Drawable object
-		Return:		void
-		Description: Renders the Drawable object to the screen
-		*/
-		void render(Drawable object, Camera *cam);
-
-		/**
-		Name:		shutdown
-		Parameters: none
-		Return:		void
-		Description: Release pointer objects from memory.
-		*/
 		void shutdown();
 
+		void render(Drawable object, Camera *cam);
 		void Draw2DObject(Drawable & object);
 		void drawCursor();
 
 		pDirectTexture getTexture(const std::string handle);
 		iInfo getInfo(const std::string handle);
+		Mesh* getMesh(const std::string handle);
 	};
 };

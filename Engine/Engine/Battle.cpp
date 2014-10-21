@@ -18,6 +18,8 @@ Battle* Battle::instance()
 
 void Battle::init()
 {
+
+	Grem::instance()->setJump(false);
 	int floor = Tower::instance()->getFloor();
 	activeCMD = NULL;
 	renderNames = true;
@@ -343,6 +345,7 @@ void Battle::updateEnemyTurn()
 			&& !Lenn::instance()->isAlive() 
 			&& !Laz::instance()->isAlive()){
 				turnStatus = TURN_STATUS::END;
+				return;
 		}
 
 		randAI = rand()%3;

@@ -28,3 +28,8 @@ void Engine::Cursor::update(long x, long y)
 	if(cursorPos.x > 800) cursorPos.x = 800;
 	if(cursorPos.y > 600) cursorPos.y = 600;
 }
+
+std::string Engine::Cursor::getHandle()
+{
+	return handle;
+}

@@ -131,6 +131,7 @@ bool Engine::DX::DeviceIsLost()
 void Engine::DX::OnResetDevice()
 {
 	HRESULT hr = pD3DDevice->Reset(&D3Dpp);
+
 	if(FAILED(hr))
 	{
 		//TODO: Post fail message

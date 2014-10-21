@@ -8,6 +8,7 @@ Player::Player(void)
 
 Player::~Player(void)
 {
+	shutdown();
 }
 
 Player* Player::instance()
@@ -52,6 +53,8 @@ void Player::init()
 }
 void Player::shutdown()
 {
+	for(int i = 0; i<inventory.size(); i++)
+		delete inventory[i];
 }
 
 void Player::addItem(Item* item)
